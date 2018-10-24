@@ -12,6 +12,8 @@ cd primacy_demo
 
 # Install dependencies
 npm install
+npm install --save electron-tabs
+
 # Run the app
 npm start
 ```
