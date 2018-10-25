@@ -11,8 +11,7 @@ git clone https://github.com/PathLabs/primacy_demo
 cd primacy_demo
 
 # Install dependencies
-npm install
-npm install --save electron-tabs
+npm install electron --save-dev --verbose
 
 # Run the app
 npm start
