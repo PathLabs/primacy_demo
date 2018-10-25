@@ -1,5 +1,5 @@
 const electron = require('electron')
-// const tabGroup = require("electron-tabs");
+// const TabGroup = require("electron-tabs");
 const app = electron.app
 
 const BrowserWindow = electron.BrowserWindow
