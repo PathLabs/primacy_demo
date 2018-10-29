@@ -49,15 +49,38 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   border: 5px solid black;
 }
 
-
-/* .box3 {
+/* Example Different Sizes */
+.box3 {
   flex-grow:5;
 }
 
 .box4 {
   flex-basis:100px;
-} */
+}
 
+
+/* Tabs */
+
+.tab_container {
+  display:flex;
+  flex-wrap:nowrap;
+  flex-direction:row;
+  height:10vh;
+}
+
+.tab {
+  flex:1;
+  justify-content: space-between;
+  color:white;
+  border: 1px solid #262626;
+  font-size: 30px;
+  text-align: center;
+  text-shadow:4px 4px 0 rgba(0,0,0,0.1);
+}
+
+.tab:hover{
+    background-color:gray;
+}
 
 
 h1 {
