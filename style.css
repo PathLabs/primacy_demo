@@ -70,6 +70,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 }
 
 .tab {
+  background-color: black;
   flex:1;
   justify-content: space-between;
   color:white;
