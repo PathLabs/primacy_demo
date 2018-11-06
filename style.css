@@ -79,6 +79,10 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
 }
 
+.tab1 {
+  background-color: (0,0,0,0.7);
+}
+
 .tab:hover{
     background-color:gray;
 }
