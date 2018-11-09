@@ -2,11 +2,11 @@
   "name": "primacy_demo",
   "version": "0.0.1",
   "description": "This is a demo for the Primacy GUI which will be later implemented with complete functionality. The goal of this demo is to showcase the capabilities of Electron JS and also give our client a good idea of how the completed product might look. ",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "author": "Turan Naimey",
+  "author": "Turan Naimey, Austin Kelly, Chance Nelson, Alex Lacy",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "electron": "^3.0.6"
