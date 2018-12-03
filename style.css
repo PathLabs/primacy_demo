@@ -17,6 +17,10 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   padding:10px;
 }
 
+.input{
+  font-size: 50%;
+}
+
 /* Colours for each box */
 .box1 { background:#1abc9c;}
 .box2 { background:#3498db;}
