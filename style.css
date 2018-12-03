@@ -8,6 +8,8 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 /* Some default styles to make each box visible */
 .box {
+  overflow-y: scroll;
+  overflow-x: hidden;
   color:white;
   font-size: 30px;
   text-align: center;
