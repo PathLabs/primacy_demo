@@ -8,11 +8,17 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 /* Some default styles to make each box visible */
 .box {
+  overflow-y: scroll;
+  overflow-x: hidden;
   color:white;
   font-size: 30px;
   text-align: center;
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
   padding:10px;
+}
+
+.input{
+  font-size: 50%;
 }
 
 /* Colours for each box */
@@ -82,6 +88,11 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 .tab:hover{
     background-color:gray;
+}
+
+
+.labels {
+  font-size: 25px;
 }
 
 h1 {
