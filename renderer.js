@@ -45,17 +45,24 @@ function pipelineExecute(cmd, arg){
    * Returns:
    *      -
    */
+
    sendMessage(EXECUTE,'DONE');
 }
 
 
 submitButton.addEventListener('click', function () {
 try {
-  startString = validate.parseTemperature(startRange.value.toString());
-  endString = validate.parseTemperature(endRange.value.toString());
+  if (startString&&endString){
+    json_array = []
+    startString = validate.parseTemperature(startRange.value.toString());
+    endString = validate.parseTemperature(endRange.value.toString());
 
-  if (startString||endString){
-    sendMessage('EXECUTE', "TEST");
+    json_array.append(startString)
+    json_array.append(endRange)
+
+    json_string = JSON.stringify(json_array)
+
+    sendMessage('EXECUTE', json_string);
     console.log("message sent")
   }
 } catch(e) {console.log(e)}
