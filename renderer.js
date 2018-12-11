@@ -15,7 +15,7 @@ const shell = require('electron').shell;
 //gets users home directory
 const os = require('os');
 
-var validate = require('./lib/input_validation.js');
+var validate = require('(file:///'+ __dirname + '/lib/input_validation.js');
 
 const {ipcRenderer} = require('electron');
 
@@ -51,8 +51,10 @@ function pipelineExecute(cmd, arg){
 
 submitButton.addEventListener('click', function () {
 try {
-  if (validate.parseTemperature(startRange.value.toString())||
-      validate.parseTemperature(endRange.value.toString())){
+  startString = validate.parseTemperature(startRange.value.toString());
+  endString = validate.parseTemperature(endRange.value.toString());
+
+  if (startString||endString){
     sendMessage('EXECUTE', "TEST");
     console.log("message sent")
   } else {

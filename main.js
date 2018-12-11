@@ -50,7 +50,7 @@ function goToModule(module_number) {
     /**
      * Desc: Load and render a module page
      *
-     * Args: 
+     * Args:
      *      module_number (int): module number to load. Also affects which html file is loaded.
      *
      * Returns:
@@ -61,7 +61,7 @@ function goToModule(module_number) {
     if(pipeline_args.length < module_number) {
         return false;
     }
-    
+
     // Load the html
     win.loadURL('file:///' + __dirname + '/module' + Integer.toString(module_number));
 
@@ -83,7 +83,7 @@ function execPipeline(cmd, args, callback) {
      *      - Else, return null
      */
     args_json = JSON.parse(args);
-   
+
     pipeline_args[current_module] = args_json;
 
     fs.writeFile(__dirname + 'args.json', args_json.toString());
