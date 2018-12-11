@@ -30,7 +30,8 @@ function sendMessage(channel, message){
 
 function populate(json_string){
   console.log(json_string);
-  result_json = JSON.parse(json_string)
+  console.log(json_string['range-lower'])
+  result_json = json_string;
   startRange.value = result_json['range-lower'];
   endRange.value = result_json['range-upper'];
 }
