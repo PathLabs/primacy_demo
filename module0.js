@@ -9,7 +9,7 @@
 const module1 = document.getElementById("module1")
 const module2 = document.getElementById("module2")
 const submitButton = document.getElementById("submitButton");
-var startRange = document.getElementById("startRange");
+var lowerRange = document.getElementById("startRange");
 var endRange = document.getElementById("endRange");
 
 console.log(submitButton, startRange, endRange);
@@ -39,7 +39,8 @@ function sendMessage(channel, message){
 
 function populate(json_string){
   result_json = json.parse(json_string)
-  startRange.value = result_json[0]
+  startRange.value = result_json."range-lower"
+  endRange.value = result_json."range-upper"
 }
 
 //listening
@@ -53,14 +54,14 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
 })
 
 ipcRenderer.on('NEW', (event, arg) =>{
-  pupulateField(arg)
+  pupulate(arg)
 })
 
 
 //loads tab on click
-module1.addEventListener('click', function ()
-result_json = json.parse(arg)
-startRange.value = result_json[0]
+module1.addEventListener('click', function (){
+  result_json = json.parse(arg)
+  startRange.value = result_json[0]
   sendMessage('LOADMODULE', 1)
 }
 
