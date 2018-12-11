@@ -4,32 +4,46 @@
  *
  * Authors:
  *      - Austin Kelly <ak678@nau.edu>
+ *      - Chance Nelson <chance-nelson@nau.edu>
  */
-
-const module0 = document.getElementById("module0");
-const module2 = document.getElementById("module2");
-const submitButton = document.getElementById("submitButton");
-var lowerRange = document.getElementById("startRange");
-var endRange = document.getElementById("endRange");
-
-//gets users home directory
-const os = require('os');
-
-var validate = require('./lib/input_validation.js');
-
+const os            = require('os');
+const validate      = require('./lib/input_validation.js');
 const {ipcRenderer} = require('electron');
 
-//sending
+
+const module0       = document.getElementById("module0");
+const module2       = document.getElementById("module2");
+
+const submit_button = document.getElementById("submitButton");
+const module_0_sum  = document.getElementById('result');
+const slider        = document.getElementById('slider');
+const slider_value  = document.getElementById('sliderValue');
+
+
+var last_module_results = {};
+var current_module_args = {};
+
+
 function sendMessage(channel, message){
   ipcRenderer.send(channel, message);
 }
 
-function populate(json_string){
-  console.log(json_string);
-  result_json = JSON.parse(json_string)
-  startRange.value = result_json['range-lower'];
-  endRange.value = result_json['range-upper'];
+
+function init(json) {
+    console.log(json);
+    current_module_args = json[0];
+    last_module_results = json[1];
+
+    if(current_module_args) {
+        slider.value = current_module_args['temperature'];
+    } else {
+        current_module_args = {'temperature': parseInt(slider.value)};
+    }
+
+    module_0_sum.innerHTML = last_module_results['range-diff'];
+    slider_value.innerHTML = slider.value;
 }
+
 
 //listening
 ipcRenderer.on('EXECUTE', (event, arg) =>{
@@ -43,8 +57,8 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
 })
 
 ipcRenderer.on('NEW', (event, arg) =>{
-  console.log("NEW received")
-  populate(arg)
+    console.log("NEW received")
+    init(arg)
 })
 
 ipcRenderer.on('LOADMODULE', (event, arg) =>{
@@ -63,21 +77,18 @@ module2.addEventListener('click', function (){
   sendMessage('LOADMODULE', 2);
 });
 
+slider.addEventListener('input', function() {
+    slider_value.innerHTML = slider.value;
+    current_module_args['temperature'] = parseInt(slider.value);
+});
 
 submitButton.addEventListener('click', function () {
 try {
-  if (startRange && endRange){
-    var startString = validate.parseTemperature(startRange.value.toString());
-    var endString = validate.parseTemperature(endRange.value.toString());
-
-    json_string = {'range-lower': startString, 'range-upper': endString};
-
-    json_string = JSON.stringify(json_string)
-
-    sendMessage('EXECUTE', ['primacy.py', json_string]);
+    
+    json_string = JSON.stringify(current_module_args);
+    sendMessage('EXECUTE', ['primacy2.py', json_string]);
 
     console.log("message sent")
-  }
 } catch(e) {
     console.log(e)
 }

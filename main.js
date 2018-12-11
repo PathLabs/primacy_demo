@@ -148,10 +148,9 @@ ipcMain.on('LOADMODULE', (event, module_number) =>  {
 
 // Attempt to execute pipeline with args
 ipcMain.on('EXECUTE', (event, data) => {
-    console.log('execute', data);
+    console.log('execute with args:', data);
     execPipeline(data[0], data[1], (result) => {
-        console.log("exec: new results:", pipeline_results);
-        console.log("exec: new args:", pipeline_args);
+        console.log("results:", pipeline_results);
         event.sender.send('EXECUTE', result);
     });
 })
