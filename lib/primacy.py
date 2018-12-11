@@ -16,7 +16,7 @@ import json
 if __name__ == '__main__':
     json_obj = json.loads(sys.argv[1])
 
-    if 'range-lower' in json_obj and 'range_upper' in json_obj:
+    if 'range-lower' in json_obj and 'range-upper' in json_obj:
         json_obj['range-diff'] = json_obj['range-upper'] - json_obj['range-lower']
 
     if 'temperature' in json_obj:
