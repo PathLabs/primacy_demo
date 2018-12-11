@@ -6,16 +6,16 @@
  *      - Austin Kelly <ak678@nau.edu>
  */
 
-const module1 = document.getElementById("module1")
-const module2 = document.getElementById("module2")
+const module0 = document.getElementById("module0");
+const module1 = document.getElementById("module1");
 const submitButton = document.getElementById("submitButton");
 var lowerRange = document.getElementById("startRange");
 var endRange = document.getElementById("endRange");
 
+
+
 console.log(submitButton, startRange, endRange);
 
-//spawns shell
-const shell = require('electron').shell;
 //gets users home directory
 const os = require('os');
 
@@ -49,20 +49,25 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
     console.log("error received")
   }
   else{
+    console.log("sending load message")
     sendMessage('LOADMODULE', 1)
   }
 })
 
 ipcRenderer.on('NEW', (event, arg) =>{
+  console.log("NEW received")
   pupulate(arg)
+})
+
+ipcRenderer.on('DENIED', (event, arg) =>{
+  print("DENIED")
 })
 
 
 //loads tab on click
 module1.addEventListener('click', function (){
-  result_json = json.parse(arg)
-  startRange.value = result_json[0]
-  sendMessage('LOADMODULE', 1)
+  console.log("click");
+  sendMessage('LOADMODULE', 1);
 }
 
 
