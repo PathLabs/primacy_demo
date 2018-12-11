@@ -57,12 +57,6 @@ try {
   if (startString||endString){
     sendMessage('EXECUTE', "TEST");
     console.log("message sent")
-  } else {
-    let python = spawn('python primacy.py', {'range-lower': startRange, 'range-upper': endRange}.toString());
-
-    python.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`);
-    });
   }
 } catch(e) {console.log(e)}
 });
