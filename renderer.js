@@ -58,13 +58,13 @@ try {
     var startString = validate.parseTemperature(startRange.value.toString());
     var endString = validate.parseTemperature(endRange.value.toString());
 
-    json_string = {start_string: startString, end_string: endString};
+    json_string = {'range-lower': startString, 'range-upper': endString};
 
     json_string = JSON.stringify(json_string)
 
     sendMessage('EXECUTE', ['primacy.py', json_string]);
     
-    console.log("message sent")
+    console.log("message sent");
   }
 } catch(e) {
     while(true) {

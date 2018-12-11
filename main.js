@@ -20,7 +20,6 @@ let win;
 var pipeline_args    = [{}];
 var pipeline_results = [];
 var current_module   = 0;
-var pipeline_current = 0;
 
 
 function initial() {
@@ -83,30 +82,25 @@ function execPipeline(cmd, args, callback) {
      *      - If pipeline returns an error string, return the error string
      *      - Else, return null
      */
-    
-    console.log(args)
-
     args_json = JSON.parse(args);
 
     pipeline_args[current_module] = args_json;
 
-    fs.writeFile(__dirname + 'args.json', args_json.toString());
+    fs.writeFileSync(__dirname + '/args.json', args);
 
-    child_process.exec(__dirname + '/lib/pipeline/' + cmd + 'args.json', (error, stdout, stderr) => {
-        if(!stdout || stdout == '') {
+    child_process.exec('python ' + __dirname + '/lib/pipeline/' + cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
+        console.log(stdout);
+        
+        if(stdout) {
+            console.log("Encountered error:", stdout);
             callback(stdout);
 
         } else {
             // Read back in file
-            fs.readFile(__dirname + 'args.json', 'utf-8', (err, data) => {
-                if(err) {
-                    console.log('Error reading json args file:', err);
-                    callback('Error reading json args file');
-                }
+            data = fs.readFileSync(__dirname + '/args.json', 'utf-8');
 
-                pipeline_results[current_module] = JSON.parse(result);
-                callback(null);
-            });
+            pipeline_results[current_module] = JSON.parse(data.toString());
+            callback(null);
         }
     });
 }
@@ -149,9 +143,9 @@ ipcMain.on('LOADPAGE', (event, module_number) =>  {
 // Attempt to execute pipeline with args
 ipcMain.on('EXECUTE', (event, data) => {
     console.log('execute', data);
-    result = execPipeline(data[0], data[1], (result) => {
-        pipeline_results[pipeline_current] = result;
-        console.log(result);
+    execPipeline(data[0], data[1], (result) => {
+        console.log("exec: new results:", pipeline_results);
+        console.log("exec: new args:", pipeline_args);
         event.sender.send('EXECUTE', result);
     });
 })
