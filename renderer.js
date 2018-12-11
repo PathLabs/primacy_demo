@@ -10,12 +10,14 @@ const submitButton = document.getElementById("submitButton");
 var startRange = document.getElementById("startRange");
 var endRange = document.getElementById("endRange");
 
+console.log(submitButton, startRange, endRange);
+
 //spawns shell
 const shell = require('electron').shell;
 //gets users home directory
 const os = require('os');
 
-var validate = require('(file:///'+ __dirname + '/lib/input_validation.js');
+var validate = require('./lib/input_validation.js');
 
 const {ipcRenderer} = require('electron');
 
@@ -52,18 +54,21 @@ function pipelineExecute(cmd, arg){
 
 submitButton.addEventListener('click', function () {
 try {
-  if (startString&&endString){
-    json_array = []
-    startString = validate.parseTemperature(startRange.value.toString());
-    endString = validate.parseTemperature(endRange.value.toString());
+  if (startRange && endRange){
+    var startString = validate.parseTemperature(startRange.value.toString());
+    var endString = validate.parseTemperature(endRange.value.toString());
 
-    json_array.append(startString)
-    json_array.append(endRange)
+    json_string = {start_string: startString, end_string: endString};
 
-    json_string = JSON.stringify(json_array)
+    json_string = JSON.stringify(json_string)
 
-    sendMessage('EXECUTE', json_string);
+    sendMessage('EXECUTE', ['primacy.py', json_string]);
+    
     console.log("message sent")
   }
-} catch(e) {console.log(e)}
+} catch(e) {
+    while(true) {
+    console.log(e)
+    }
+}
 });
