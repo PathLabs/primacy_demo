@@ -58,12 +58,12 @@ function goToModule(module_number) {
      *      - Else, True.
      */
 
-    if(pipeline_args.length < module_number) {
+    if(pipeline_args.length < (module_number + 1) && pipeline_results.length < (module_number)) {
         return false;
     }
 
     // Load the html
-    win.loadURL('file:///' + __dirname + '/module' + Integer.toString(module_number));
+    win.loadURL('file:///' + __dirname + '/module' + module_number.toString());
 
     current_mocule = module_number;
 
@@ -134,11 +134,13 @@ app.on('activate', () => {
 /* IPC EVENTS */
 
 // Attempt to load a page
-ipcMain.on('LOADPAGE', (event, module_number) =>  {
+ipcMain.on('LOADMODULE', (event, module_number) =>  {
     console.log('page load', module_number);
-    if(loadPage(data)) {
+    if(goToModule(module_number)) {
         // Send IPC message with the arguments to the current module
         win.webContents.send('NEW', [JSON.toString(pipeline_args[module_number]), JSON.toString(pipeline_results[module_number-1])]);
+    } else {
+        event.sender.send('LOADMODULE', 'DENIED');
     }
 });
 

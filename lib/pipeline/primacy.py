@@ -23,7 +23,4 @@ if __name__ == '__main__':
     if 'range-lower' in json_obj and 'range-upper' in json_obj:
         json_obj['range-diff'] = json_obj['range-upper'] - json_obj['range-lower']
 
-    if 'temperature' in json_obj:
-        json_obj['temperature-50'] = json_obj['temperature'] + 50
-
     open(sys.argv[1], 'w').write((json.dumps(json_obj)))
