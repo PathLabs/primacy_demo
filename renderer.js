@@ -49,26 +49,12 @@ function pipelineExecute(cmd, arg){
 }
 
 
-//Events on Reply Section
-
-
-
-function LOADMODULE(int module){
-
-}
-
-// NEW, ARGS
-// //create new page
-// listen for DENIED
-//
-// POPULATE PAGE
-
-
 submitButton.addEventListener('click', function () {
 try {
   if (validate.parseTemperature(startRange.value.toString())||
       validate.parseTemperature(endRange.value.toString())){
-    console.log("test");
+    sendMessage('EXECUTE', "TEST");
+    console.log("message sent")
   } else {
     let python = spawn('python primacy.py', {'range-lower': startRange, 'range-upper': endRange}.toString());
 
