@@ -7,7 +7,7 @@
 
 
 const { app, BrowserWindow } = require('electron');
-const { exec }               = require('child_process');
+const child_process               = require('child_process');
 
 const ipcMain = require('electron').ipcMain;
 
@@ -20,6 +20,7 @@ let win;
 var pipeline_args    = [{}];
 var pipeline_results = [];
 var current_module   = 0;
+var pipeline_current = 0;
 
 
 function initial() {
@@ -82,13 +83,14 @@ function execPipeline(cmd, args, callback) {
      *      - If pipeline returns an error string, return the error string
      *      - Else, return null
      */
+    
+    console.log(args)
+
     args_json = JSON.parse(args);
 
     pipeline_args[current_module] = args_json;
 
     fs.writeFile(__dirname + 'args.json', args_json.toString());
-
-    result = pipeline.pipeline(cmd, __dirname + 'args.json');
 
     child_process.exec(__dirname + '/lib/pipeline/' + cmd + 'args.json', (error, stdout, stderr) => {
         if(!stdout || stdout == '') {
@@ -137,6 +139,7 @@ app.on('activate', () => {
 
 // Attempt to load a page
 ipcMain.on('LOADPAGE', (event, module_number) =>  {
+    console.log('page load', module_number);
     if(loadPage(data)) {
         // Send IPC message with the arguments to the current module
         win.webContents.send('NEW', JSON.toString(pipeline_args[module_number]));
@@ -145,8 +148,10 @@ ipcMain.on('LOADPAGE', (event, module_number) =>  {
 
 // Attempt to execute pipeline with args
 ipcMain.on('EXECUTE', (event, data) => {
+    console.log('execute', data);
     result = execPipeline(data[0], data[1], (result) => {
         pipeline_results[pipeline_current] = result;
+        console.log(result);
         event.sender.send('EXECUTE', result);
     });
 })
