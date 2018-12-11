@@ -63,7 +63,7 @@ function goToModule(module_number) {
     }
 
     // Load the html
-    win.loadURL('file:///' + __dirname + '/module' + module_number.toString());
+    win.loadURL('file:///' + __dirname + '/module' + module_number.toString() + '.html');
 
     current_mocule = module_number;
 
@@ -92,7 +92,7 @@ function execPipeline(cmd, args, callback) {
 
     child_process.exec('python ' + __dirname + '/lib/pipeline/' + cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
         console.log(stdout);
-        
+
         if(stdout) {
             console.log("Encountered error:", stdout);
             callback(stdout);
@@ -135,9 +135,9 @@ app.on('activate', () => {
 
 // Attempt to load a page
 ipcMain.on('LOADMODULE', (event, module_number) =>  {
-    console.log('page load', module_number);
     if(goToModule(module_number)) {
         // Send IPC message with the arguments to the current module
+        console.log('page load', module_number);
         win.webContents.send('NEW', [JSON.toString(pipeline_args[module_number]), JSON.toString(pipeline_results[module_number-1])]);
     } else {
         event.sender.send('LOADMODULE', 'DENIED');

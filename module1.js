@@ -7,14 +7,10 @@
  */
 
 const module0 = document.getElementById("module0");
-const module1 = document.getElementById("module1");
+const module2 = document.getElementById("module2");
 const submitButton = document.getElementById("submitButton");
 var lowerRange = document.getElementById("startRange");
 var endRange = document.getElementById("endRange");
-
-
-
-console.log(submitButton, startRange, endRange);
 
 //gets users home directory
 const os = require('os');
@@ -42,13 +38,13 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
   }
   else{
     console.log("sending load message")
-    sendMessage('LOADMODULE', 1)
+    sendMessage('LOADMODULE', 2)
   }
 })
 
 ipcRenderer.on('NEW', (event, arg) =>{
   console.log("NEW received")
-  populate(arg[0])
+  populate(arg)
 })
 
 ipcRenderer.on('LOADMODULE', (event, arg) =>{
@@ -57,9 +53,14 @@ ipcRenderer.on('LOADMODULE', (event, arg) =>{
 
 
 //loads tab on click
-module1.addEventListener('click', function (){
+module0.addEventListener('click', function (){
   console.log("click");
-  sendMessage('LOADMODULE', 1);
+  sendMessage('LOADMODULE', 0);
+});
+
+module2.addEventListener('click', function (){
+  console.log("click");
+  sendMessage('LOADMODULE', 2);
 });
 
 
