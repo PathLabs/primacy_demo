@@ -7,8 +7,9 @@
 
 
 const { app, BrowserWindow } = require('electron');
-const {ipc}                  = require('electron');
 const { exec }               = require('child_process');
+
+const ipcMain = require('electron').ipcMain;
 
 var fs = require('fs');
 
@@ -135,7 +136,7 @@ app.on('activate', () => {
 /* IPC EVENTS */
 
 // Attempt to load a page
-ipc.on('LOADPAGE', (event, module_number) =>  {
+ipcMain.on('LOADPAGE', (event, module_number) =>  {
     if(loadPage(data)) {
         // Send IPC message with the arguments to the current module
         win.webContents.send('NEW', JSON.toString(pipeline_args[module_number]));
@@ -143,7 +144,7 @@ ipc.on('LOADPAGE', (event, module_number) =>  {
 });
 
 // Attempt to execute pipeline with args
-ipc.on('EXECUTE', (event, data) => {
+ipcMain.on('EXECUTE', (event, data) => {
     result = execPipeline(data[0], data[1], (result) => {
         pipeline_results[pipeline_current] = result;
         event.sender.send('EXECUTE', result);
