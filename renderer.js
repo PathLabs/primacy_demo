@@ -30,26 +30,21 @@ ipcRenderer.on('asynchronous-reply', (event, arg) =>{
 })
 
 
-//Send Section
-
+//sending
 function sendMessage(channel, message){
   ipcRenderer.send(channel, message);
 }
 
-function pipelineExecute(cmd, arg){
-  /**
-   * Desc: takes in a file path and executes helper function with it
-   *
-   * Args:
-   *      function to be called (json str)
-   *
-   *
-   * Returns:
-   *      -
-   */
 
-   sendMessage(EXECUTE,'DONE');
-}
+//listening
+ipcRenderer.on('EXECUTE', (event, arg) =>{
+  if(arg != null){
+    console.log("error received")
+  }
+  else{
+    sendMessage(LOADMODULE,"No errors, load module")
+  }
+})
 
 
 submitButton.addEventListener('click', function () {
@@ -63,7 +58,7 @@ try {
     json_string = JSON.stringify(json_string)
 
     sendMessage('EXECUTE', ['primacy.py', json_string]);
-    
+
     console.log("message sent")
   }
 } catch(e) {

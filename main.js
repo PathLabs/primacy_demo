@@ -83,7 +83,7 @@ function execPipeline(cmd, args, callback) {
      *      - If pipeline returns an error string, return the error string
      *      - Else, return null
      */
-    
+
     console.log(args)
 
     args_json = JSON.parse(args);
