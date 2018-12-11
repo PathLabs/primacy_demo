@@ -1,4 +1,9 @@
-const { app, BrowserWindow } = require('electron')
+const electron = require('electron')
+//Module to control application life
+const app = electron.app
+//Module to create native browser window
+const BrowserWindow = electron.BrowserWindow
+const ipcMain = electron.ipcMain
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected
@@ -11,6 +16,12 @@ function createWindow () {
   // and load the index.html of the app.
   win.loadURL('file:///'+ __dirname + '/index.html')
   console.log('file:///'+ __dirname + '/index.html')
+
+//listens to renderer process
+  ipcMain.on('asynchronous-message', (event, args) => {
+    console.log(args)
+    event.sender.send('asynchronous-reply', 'world')
+  })
 
   // Open the DevTools.
   //win.webContents.openDevTools()
