@@ -138,7 +138,7 @@ ipcMain.on('LOADPAGE', (event, module_number) =>  {
     console.log('page load', module_number);
     if(loadPage(data)) {
         // Send IPC message with the arguments to the current module
-        win.webContents.send('NEW', [JSON.toString(pipeline_args[module_number], JSON.toString(pipeline_results[module_number-1])]));
+        win.webContents.send('NEW', [JSON.toString(pipeline_args[module_number]), JSON.toString(pipeline_results[module_number-1])]);
     }
 });
 
