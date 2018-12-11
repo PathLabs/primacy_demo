@@ -9,6 +9,7 @@
 const module0 = document.getElementById("module0");
 const module1 = document.getElementById("module1");
 const submitButton = document.getElementById("submitButton");
+const fileSelect = document.getElementById("file_select");
 var lowerRange = document.getElementById("startRange");
 var endRange = document.getElementById("endRange");
 
@@ -49,6 +50,7 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
 
 ipcRenderer.on('NEW', (event, arg) =>{
   console.log("NEW received")
+  console.log(fileSelect.value)
   populate(arg[0])
 })
 
@@ -70,8 +72,7 @@ try {
     var startString = validate.parseTemperature(startRange.value.toString());
     var endString = validate.parseTemperature(endRange.value.toString());
 
-    json_string = {'range-lower': startString, 'range-upper': endString};
-
+    json_string = {'range-lower': startString, 'range-upper': endString, 'file': '"'+file_select.input +'"'};
     json_string = JSON.stringify(json_string)
 
     sendMessage('EXECUTE', ['primacy.py', json_string]);
