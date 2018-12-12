@@ -28,7 +28,6 @@ function sendMessage(channel, message){
   ipcRenderer.send(channel, message);
 }
 
-
 function init(json) {
     console.log(json);
     current_module_args = json[0];
@@ -84,7 +83,7 @@ slider.addEventListener('input', function() {
 
 submitButton.addEventListener('click', function () {
 try {
-    
+
     json_string = JSON.stringify(current_module_args);
     sendMessage('EXECUTE', ['primacy2.py', json_string]);
 
