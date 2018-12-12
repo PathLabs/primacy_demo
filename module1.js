@@ -52,7 +52,7 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
         console.log("sending load message");
         sendMessage('LOADMODULE', 2);
     }
-})l
+});
 
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
