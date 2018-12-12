@@ -76,10 +76,6 @@ module1.addEventListener('click', function (){
   sendMessage('LOADMODULE', 1);
 });
 
-slider.addEventListener('input', function() {
-    slider_value.innerHTML = slider.value;
-    current_module_args['temperature'] = parseInt(slider.value);
-});
 
 submitButton.addEventListener('click', function () {
 try {
