@@ -15,9 +15,7 @@ const module0       = document.getElementById("module0");
 const module1       = document.getElementById("module1");
 const module2       = document.getElementById("module2")
 const submit_button = document.getElementById("submitButton");
-const module_0_sum  = document.getElementById('result');
-const slider        = document.getElementById('slider');
-const slider_value  = document.getElementById('sliderValue');
+const module_1_sum  = document.getElementById('result');
 
 
 var last_module_results = {};
@@ -34,14 +32,7 @@ function init(json) {
     current_module_args = json[0];
     last_module_results = json[1];
 
-    if(current_module_args) {
-        slider.value = current_module_args['temperature'];
-    } else {
-        current_module_args = {'temperature': parseInt(slider.value)};
-    }
-
-    module_0_sum.innerHTML = last_module_results['range-diff'];
-    slider_value.innerHTML = slider.value;
+    module_1_sum.innerHTML = last_module_results['temperature'];
 }
 
 
