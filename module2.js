@@ -23,7 +23,7 @@ var current_module_args = {};
 
 
 function sendMessage(channel, message){
-  ipcRenderer.send(channel, message);
+    ipcRenderer.send(channel, message);
 }
 
 
@@ -38,44 +38,42 @@ function init(json) {
 
 //listening
 ipcRenderer.on('EXECUTE', (event, arg) =>{
-  if(arg != null){
-    console.log("error received")
-  }
-  else{
-    console.log("sending load message")
-    sendMessage('LOADMODULE', 2)
-  }
-})
+    if(arg != null){
+        console.log("error received");
+    } else {
+        console.log("sending load message");
+        sendMessage('LOADMODULE', 2);
+    }
+})l
 
 ipcRenderer.on('NEW', (event, arg) =>{
-    console.log("NEW received")
-    init(arg)
-})
+    console.log("NEW received");
+    init(arg);
+});
 
 ipcRenderer.on('LOADMODULE', (event, arg) =>{
-  console.log("DENIED");
-})
+    console.log("DENIED");
+});
 
 //loads tab on click
 module0.addEventListener('click', function (){
-  console.log("click");
-  sendMessage('LOADMODULE', 0);
+    console.log("click");
+    sendMessage('LOADMODULE', 0);
 });
 
 module1.addEventListener('click', function (){
-  console.log("click");
-  sendMessage('LOADMODULE', 1);
+    console.log("click");
+    sendMessage('LOADMODULE', 1);
 });
 
 
 submitButton.addEventListener('click', function () {
-try {
+    try {
+        json_string = JSON.stringify(current_module_args);
+        sendMessage('EXECUTE', ['primacy2.py', json_string]);
 
-    json_string = JSON.stringify(current_module_args);
-    sendMessage('EXECUTE', ['primacy2.py', json_string]);
-
-    console.log("message sent")
-} catch(e) {
-    console.log(e)
-}
+        console.log("message sent");
+    } catch(e) {
+        console.log(e);
+    }
 });
