@@ -4,34 +4,33 @@
   <meta charset="UTF-8">
   <title>Primacy Demo</title>
   <link rel="stylesheet" href="style.css">
-  <script src="main.js"></script>
 </head>
 
 <body>
   <div class="container">
     <div class="box box1">Box 1
       <hr>
-      <label for="file_select" class="labels">Enter CSV file: </label>
+      <label for="file_select" class="labels" id="fileSelect">Enter CSV file: </label>
       </br></br>
       <input type="file" id="file_select" class="input" accept="">
     </div>
     <div class="box box2">Box 2
       <hr>
       <div class="input_box">
-        <form action="/input_validation.js" class="input">
+        <div class="input">
           <table class="input_table">
             <tr>
               <td>Please enter start of range: </td>
-              <td><input type="text" size = 2></td>
+              <td><input type="text" id="startRange" size = 2></td>
             </tr>
             <tr>
               <td>Please enter end of range: </td>
-              <td><input type="text" size = 2></td>
+              <td><input type="text" id="endRange" size = 2></td>
             </tr>
           </table>
           </br>
-          <input type="submit" value="Submit">
-        </form>
+          <input type="submit" id="submitButton" value="Submit">
+        </div>
       </div>
     </div>
     <!-- <div class="box box2">Box 3
@@ -40,11 +39,11 @@
   </div>
 
   <div class="tab_container">
-    <div class="tab tab1" style="background-color: rgb(25,25,25);">Tab 1</div>
-    <a class="tab tab2" href=tab2.html>Tab 2</a>
-    <div class="tab tab3">Tab 3</div>
+    <button class="tab tab1" id="module0" style="background-color: rgb(25,25,25);">Tab 1</button>
+    <button class="tab tab2" id="module1">Tab 2</button>
+    <button class="tab tab3" id="module2">Tab 3</button>
   </div>
 
 </body>
-
+<script src="module0.js"></script>
 </html>

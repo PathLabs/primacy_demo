@@ -4,50 +4,47 @@
   <meta charset="UTF-8">
   <title>Primacy Demo</title>
   <link rel="stylesheet" href="style.css">
-  <script src="index.js"></script>
 </head>
 
 <body>
   <div class="container">
     <div class="box box1">Box 1
       <hr>
-      <form action="/input_validation.js" class="input">
+      <div class="input">
         <table class="input_table">
           <tr>
             <td>Start - End values from previous tab: </td>
-            <td><input type="text" size = 2></td>
-          </tr>
-          <tr>
-            <td>(Start - End = 0)</td>
+            <td id="result"></td>
           </tr>
         </table>
         </br>
-      </form>
+      </div>
     </div>
     <div class="box box2">Box 2
       <hr>
       <div class="input_box">
-        <form action="/input_validation.js" class="input">
+        <div class="input">
           <table class="input_table">
             <tr>
               <td>Temperature Max: </td>
-              <td><input type="range" min="0" max="100" value = 50
+              <td><input id="slider" type="range" min="0" max="100" value = 50
                 class = "slider"></td>
+              <td id="sliderValue"></td>
             </tr>
           </table>
           </br>
-          <input type="submit" value="Submit">
-        </form>
+          <input id="submitButton" type="submit" value="Submit">
+        </div>
       </div>
     </div>
   </div>
 
   <div class="tab_container">
-    <a class="tab tab1" href=index.html>Tab 1</a>
-    <div class="tab tab2" style="background-color: rgb(25,25,25);">Tab 2</div>
-    <a class="tab tab3" href=tab3.html>Tab 3</a>
+    <button class="tab tab1" id="module0">Tab 1</button>
+    <button class="tab tab2" id="module1" style="background-color: rgb(25,25,25);">Tab 2</button>
+    <button class="tab tab3" id="module2">Tab 3</button>
   </div>
 
 </body>
-
+  <script src="module1.js"></script>
 </html>

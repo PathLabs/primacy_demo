@@ -4,45 +4,44 @@
   <meta charset="UTF-8">
   <title>Primacy Demo</title>
   <link rel="stylesheet" href="style.css">
-  <script src="index.js"></script>
+  <script src="chart.js"></script>
 </head>
 
 <body>
   <div class="container">
     <div class="box box1">Box 1
       <hr>
-      <form action="/input_validation.js" class="input">
+      <div class="input">
         <table class="input_table">
           <tr>
             <td>Graph of original file: </td>
-            <td><input type="button" value="view"></td>
+            <td><input type="button" value="view" onclick="openWin()"></td>
           </tr>
         </table>
         </br>
-      </form>
+      </div>
     </div>
     <div class="box box2">Box 2
       <hr>
       <div class="input_box">
-        <form action="/input_validation.js" class="input">
+        <div class="input">
           <table class="input_table">
             <tr>
-              <td>Temperature + 50: </td>
+                <td>Temperature + 50: </td><td id="result"></td>
             </tr>
           </table>
           </br>
-          <input type="submit" value="EXIT">
-        </form>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="tab_container">
-    <a class="tab tab1" href=index.html>Tab 1</a>
-    <a class="tab tab2" href=tab2.html>Tab 2</a>
-    <div class="tab tab3" style="background-color: rgb(25,25,25);">Tab 3</div>
+    <button class="tab tab1" id=module0>Tab 1</button>
+    <button class="tab tab2" id="module1">Tab 2</button>
+    <button class="tab tab3" id="module2" style="background-color: rgb(25,25,25);">Tab 3</button>
   </div>
 
 </body>
-
+  <script src="module2.js"></script>
 </html>
