@@ -13,7 +13,7 @@ const {ipcRenderer} = require('electron');
 
 const module0       = document.getElementById("module0");
 const module1       = document.getElementById("module1");
-const module2       = document.getElementById("module2")
+const module2       = document.getElementById("module2");
 const submit_button = document.getElementById("submitButton");
 const module_1_sum  = document.getElementById('result');
 
