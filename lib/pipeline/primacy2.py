@@ -20,6 +20,7 @@ if __name__ == '__main__':
         print("bad JSON object")
 
     if 'temperature' in json_obj:
-        json_obj['temperature'] += 10
+        json_obj['temperature'] += 50
 
     open(sys.argv[1], 'w').write((json.dumps(json_obj)))
+        
