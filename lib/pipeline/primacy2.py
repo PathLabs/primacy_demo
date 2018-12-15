@@ -23,4 +23,4 @@ if __name__ == '__main__':
         json_obj['temperature'] += 50
 
     open(sys.argv[1], 'w').write((json.dumps(json_obj)))
-        
+    
