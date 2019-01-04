@@ -1,0 +1,34 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Primacy Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="box box1">
+      <p id="bio_text">
+        TESTTESTTESTTESTTESTTEST
+      </p>
+      <script>
+        running = true
+        var bio_text = document.getElementById("bio_text")
+        const options = ["ATGC","AGCT","CTAG","TAGC","GTCA","CCAA","AAAA","CTCC","TGAT","GTAA"]
+        if(running == true){
+          document.write(options[Math.floor(Math.random() * 9)]);
+        }
+      </script>
+    </div>
+  </div>
+
+  <div class="tab_container">
+    <button class="tab tab1" id="module0" style="background-color: rgb(25,25,25);">Tab 1</button>
+    <button class="tab tab2" id="module1">Tab 2</button>
+    <button class="tab tab3" id="module2">Tab 3</button>
+  </div>
+
+</body>
+<script src="module0.js"></script>
+</html>
