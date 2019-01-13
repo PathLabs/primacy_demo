@@ -10,7 +10,8 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 .box {
   overflow-y: scroll;
   overflow-x: hidden;
-  color:white;
+  color:#9bcae5;
+  background: #001a2d;
   font-size: 30px;
   text-align: center;
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
@@ -21,8 +22,8 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   font-size: 50%;
 }
 
-/* Colours for each box */
-.box1 { background:#1abc9c;}
+/* Colors for each box */
+/* .box1 { background:#1abc9c;}
 .box2 { background:#3498db;}
 .box3 { background:#9b59b6;}
 .box4 { background:#34495e;}
@@ -31,7 +32,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 .box7 { background:#e74c3c;}
 .box8 { background:#bdc3c7;}
 .box9 { background:#2ecc71;}
-.box10 { background:#16a085;}
+.box10 { background:#16a085;} */
 
 
 /* Header */
@@ -45,7 +46,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   display:flex;
   flex-wrap:wrap;
   flex-direction:column;
-  border:10px solid #F38F8F;
+  border:2px solid black;
   height:90vh;
   flex:1;
 }
@@ -53,7 +54,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 .box {
   flex-basis:250px;
   flex-grow:1;
-  border: 5px solid black;
+  border: 2px solid #014056;
 }
 
 /* Example Different Sizes */
