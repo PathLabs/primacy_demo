@@ -8,11 +8,30 @@
 
 <body>
   <div class="container">
-    <div class="box box1">Box 1
+    <div class="box box1">Neucleotide Sequence
+      
+      <!--
+      A string of nucleotide sequence (in 5' to 3' orientation) for each desired amplicon (can include IUPAC ambiguous base codes). 
+      The sequence should include the target region and flanking upstream and downstream primer regions. 
+      The length of the sequence will generally range from 100-2000 characters.
+      -->
+        
       <hr>
-      <label for="file_select" class="labels" id="fileSelect">Enter CSV file: </label>
-      </br></br>
-      <input type="file" id="file_select" class="input" accept="">
+      </br>
+      <table class="input_table" >
+        <tr>
+          <td>
+            <label for="file_select" class="labels">FASTA file: </label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <textarea size="10" id="fastaTextInput"> </textarea> 
+          </td>
+        </tr>
+      </table>
+      </br>
+      <input type="file" id="fastaFileSelect" class="input" accept="">
     </div>
     <div class="box box2">Box 2
       <hr>
