@@ -3,7 +3,6 @@
  *
  * Authors:
  *      - Chance Nelson <chance-nelson@nau.edu>
- *		- Alex Lacy <al2428@nau.edu>
  *
  */
 
