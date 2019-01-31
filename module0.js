@@ -22,19 +22,6 @@ var validate = require('./lib/input_validation.js');
 
 const {ipcRenderer} = require('electron');
 
-//set up tooltips
-const tt = require('electron-tooltip')
-tt({
-  // config properties
-  position: 'bottom',
-  width: 200,
-  style: {
-    backgroundColor: '#f2f3f4',
-    borderRadius: '4px'
-  }
-})
-
-
 
 //sending
 function sendMessage(channel, message){
