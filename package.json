@@ -9,7 +9,7 @@
   "author": "Turan Naimey, Austin Kelly, Chance Nelson, Alex Lacy",
   "license": "BSD-3-Clause",
   "devDependencies": {
-    "electron": "^3.0.6"
+    "electron": "^3.1.2"
   },
   "dependencies": {
     "electron-tabs": "^0.9.4"
