@@ -5,6 +5,7 @@
  * Authors:
  *      - Austin Kelly <ak678@nau.edu>
  *      - Chance Nelson <chance-nelson@nau.edu>
+ *		- Alex Lacy <al2428@nau.edu>
  */
 const os            = require('os');
 const validate      = require('./lib/input_validation.js');
@@ -16,8 +17,11 @@ const module2       = document.getElementById("module2");
 
 const submit_button = document.getElementById("submitButton");
 const module_0_sum  = document.getElementById('result');
-const slider        = document.getElementById('slider');
-const slider_value  = document.getElementById('sliderValue');
+const gcc_min_slider = document.getElementById('gccMinSlider');
+const gcc_max_slider = document.getElementById('gccMaxSlider');
+const gcc_min_val  = document.getElementById('gccMin');
+const gcc_max_val  = document.getElementById('gccMax');
+
 
 
 var last_module_results = {};
@@ -34,13 +38,16 @@ function init(json) {
     last_module_results = json[1];
 
     if(current_module_args) {
-        slider.value = current_module_args['temperature'];
+        gcc_min_slider.value = current_module_args['gcc_min_val'];
+		gcc_max_slider.value = current_module_args['gcc_max_val'];
     } else {
-        current_module_args = {'temperature': parseInt(slider.value)};
+        current_module_args = {'gcc_min_val': parseInt(gcc_min_slider.value),
+								'gcc_max_val': parseInt(gcc_max_slider.value)};
     }
 
-    module_0_sum.innerHTML = last_module_results['range-diff'];
-    slider_value.innerHTML = slider.value;
+    //module_0_sum.innerHTML = last_module_results['range-diff'];
+    gcc_min_val.innerHTML = gcc_min_slider.value;
+	gcc_max_val.innerHTML = gcc_max_slider.value;
 }
 
 
@@ -75,9 +82,14 @@ module2.addEventListener('click', function (){
     sendMessage('LOADMODULE', 2);
 });
 
-slider.addEventListener('input', function() {
-    slider_value.innerHTML = slider.value;
-    current_module_args['temperature'] = parseInt(slider.value);
+gcc_min_slider.addEventListener('input', function() {
+    gcc_min_val.innerHTML = gcc_min_slider.value;
+    current_module_args['gcc_min_val'] = parseInt(gcc_min_slider.value);
+});
+
+gcc_max_slider.addEventListener('input', function() {
+    gcc_max_val.innerHTML = gcc_max_slider.value;
+    current_module_args['gcc_max_val'] = parseInt(gcc_max_slider.value);
 });
 
 submitButton.addEventListener('click', function () {
