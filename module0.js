@@ -13,9 +13,11 @@ const submit_button                = document.getElementById("submitButton");
 const fasta_file_select            = document.getElementById("fastaFileSelect");
 const fasta_file_textarea          = document.getElementById("fastaTextInput");
 const region_picker_table          = document.getElementById("regionPicker");
-const region_avoid_highlight_table = document.getElementById("regionPicker");
+const region_avoid_highlight_table = document.getElementById("regionAvoidHighlighter");
 const lower_range                  = document.getElementById("startRange");
 const end_range                    = document.getElementById("endRange");
+const sequence_identifier_textarea = document.getElementById("sequenceIdentifier");
+
 
 var ranges = [];
 
@@ -90,11 +92,28 @@ function updateFastaSequenceTable() {
 }
 
 function updateRegionAvoidHighlightTable() {
-    
+    region_avoid_highlight_table.deleteRow(0);  // Remove current sequence
+
+    let row = region_avoid_highlight_table.insertRow(0);
 
     for(i = 0; i < sequence_end_range - sequence_start_range; i++) {
-        
+        let cell = row.insertCell(i);
+        cell.id = i.toString();
+
+        let sequence_index = sequence_start_range + i;
+
+        if(fasta_nucleotide_sequence[sequence_index] == "X") {
+            cell.innerHTML = "<span style='color: red;'>" + 
+                             fasta_nucleotide_sequence[sequence_index]  + 
+                             "</span>";
+        } else {
+            cell.innerHTML = fasta_nucleotide_sequence[sequence_index];
+        }
     }
+}
+
+function updateSequenceIdentifierTextarea() {
+    sequence_identifier_textarea.value = fasta_header;
 }
 
 
@@ -185,4 +204,5 @@ fasta_file_textarea.addEventListener('change', function() {
 
     // Update the nucleotide sequence picker table
     updateFastaSequenceTable();
+    updateSequenceIdentifierTextarea();
 });
