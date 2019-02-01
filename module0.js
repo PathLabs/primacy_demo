@@ -7,16 +7,24 @@
  *      - Chance Nelson <chance-nelson@nau.edu>
  */
 
-const module0             = document.getElementById("module0");
-const module1             = document.getElementById("module1");
-const submit_button       = document.getElementById("submitButton");
-const fasta_file_select   = document.getElementById("fastaFileSelect");
-const fasta_file_textarea = document.getElementById("fastaTextInput");
-const region_picker_table = document.getElementById("regionPicker");
-var lowerRange            = document.getElementById("startRange");
-var endRange              = document.getElementById("endRange");
+const module0                      = document.getElementById("module0");
+const module1                      = document.getElementById("module1");
+const submit_button                = document.getElementById("submitButton");
+const fasta_file_select            = document.getElementById("fastaFileSelect");
+const fasta_file_textarea          = document.getElementById("fastaTextInput");
+const region_picker_table          = document.getElementById("regionPicker");
+const region_avoid_highlight_table = document.getElementById("regionPicker");
+const lower_range                  = document.getElementById("startRange");
+const end_range                    = document.getElementById("endRange");
 
-var fasta_file_sequence = "";
+var ranges = [];
+
+var fasta_raw_string          = "";
+var fasta_nucleotide_sequence = "";
+var fasta_header              = "";
+
+var sequence_start_range = null;
+var sequence_end_range   = null;
 
 //gets users home directory
 const os = require('os');
@@ -44,12 +52,49 @@ function updateFastaSequenceTable() {
     region_picker_table.deleteRow(0);  // Remove current sequence
 
     let row = region_picker_table.insertRow(0);
-    for(i = 0; i < fasta_file_sequence.length; i++) {
+    for(i = 0; i < fasta_nucleotide_sequence.length; i++) {
         let cell = row.insertCell(i);
         cell.id = i.toString();
-        cell.innerHTML = fasta_file_sequence[i];
-    }
+        cell.innerHTML = fasta_nucleotide_sequence[i];
+        cell.addEventListener('click', function() {
+            console.log('you clicked', this.id);
+            
+            ranges.push(this.id);
 
+            if(ranges.length == 2) {
+                let temp  = ranges.shift();
+                let temp2 = ranges.shift();
+                
+                temp  = parseInt(temp);
+                temp2 = parseInt(temp2);
+
+                if(temp > temp2) {
+                    console.log('1');
+                    lower_range.value    = temp2;
+                    end_range.value      = temp;
+                    sequence_start_range = temp2;
+                    sequence_end_range   = temp;
+                } else {
+                    console.log('2');
+                    lower_range.value = temp;
+                    end_range.value   = temp2;
+                    sequence_start_range = temp;
+                    sequence_end_range   = temp2;
+                }
+
+                ranges = [];
+                updateRegionAvoidHighlightTable();
+            }
+        });
+    }
+}
+
+function updateRegionAvoidHighlightTable() {
+    
+
+    for(i = 0; i < sequence_end_range - sequence_start_range; i++) {
+        
+    }
 }
 
 
@@ -128,7 +173,15 @@ fasta_file_textarea.addEventListener('change', function() {
 
     // TODO: Validate current fasta sequence. If not valid do not continue
 
-    fasta_file_sequence = fasta_file_textarea.value.toString();
+    fasta_raw_string = fasta_file_textarea.value.toString();
+
+    // If there is a header, split it from the string
+    if('>' == fasta_raw_string[0]) {
+        console.log("Found header in FASTA file");
+        fasta_nucleotide_sequence = fasta_raw_string.split(/\n/);
+        fasta_header              = fasta_nucleotide_sequence.shift();
+        fasta_nucleotide_sequence = fasta_nucleotide_sequence.join("");
+    }
 
     // Update the nucleotide sequence picker table
     updateFastaSequenceTable();
