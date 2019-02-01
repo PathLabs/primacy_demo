@@ -9,7 +9,7 @@
 
 <body>
   <div class="container">
-    <div class="box box1">Box 1
+    <div class="box box1"> Primer Settings
       <hr>
       <div class="input">
         <table class="input_table">
@@ -18,25 +18,74 @@
             <td><td><input type="text" id="iterations" size=2 value=100></td></td>
           </tr>
           <tr>
-            <td></td>
+            <td>Optimum Amplicon Size Range: </td>
+            <td><td><input id="slider" type="range" min="0" max="100" value = 50
+              class = "slider"></td></td>
+            <td id="sliderValue"></td>
+          </tr>
+          <tr>
+            <td>Max Distance of Target from Primer: </td>
+            <td>
+              <td>
+                <select class="form-control" id="StudentGender" name="StudentGender">
+                  <option>None</option>
+                  <option>Distance from forward primer</option>
+                  <option>Distance from reverse primer</option>
+                  <option>Distance from at least one primer</option>
+                  <option>Distance from both primers</option>
+                </select>
+              </td>
+            </td>
+          </tr>
+          <tr>
+            <td>Background Primers: </td>
+            <td><td><input type="file" id="file_select" class="input" accept=""></td></td>
+          </tr>
+          <tr>
+            <td>Percentage of Primers to Move Forward: </td>
+            <td><td><input type="text" id="iterations" size=1 value=0>%</td></td>
           </tr>
         </table>
         </br>
       </div>
     </div>
-    <div class="box box2">Box 2
+
+    <div class="box box1"> Importance of Features
       <hr>
-      <div class="input_box">
-        <div class="input">
-          <table class="input_table">
-            <tr>
-                <td>Temperature + 50: </td><td id="result"></td>
-            </tr>
-          </table>
-          </br>
-        </div>
-      </div>
+      <table class="input_table">
+        <tr>
+          <td>Similar Melting Temperatures</td>
+          <td><td><input id="slider" type="range" min="0" max="100" value = 1
+            class = "slider"></td></td>
+          <td id="sliderValue"></td>
+        </tr>
+        <tr>
+          <td>Primer Scores</td>
+          <td><td><input id="slider" type="range" min="0" max="100" value = 1
+            class = "slider"></td></td>
+          <td id="sliderValue"></td>
+        </tr>
+        <tr>
+          <td>Cross Dimerization</td>
+          <td><td><input id="slider" type="range" min="0" max="100" value = 1
+            class = "slider"></td></td>
+          <td id="sliderValue"></td>
+        </tr>
+        <tr>
+          <td>Amplicon Size</td>
+          <td><td><input id="slider" type="range" min="0" max="100" value = 0
+            class = "slider"></td></td>
+          <td id="sliderValue"></td>
+        </tr>
+        <tr>
+          <td>Target Distance From Primer</td>
+          <td><td><input id="slider" type="range" min="0" max="100" value = 0
+            class = "slider"></td></td>
+          <td id="sliderValue"></td>
+        </tr>
+      </table>
     </div>
+
   </div>
 
   <div class="tab_container">

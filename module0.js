@@ -22,7 +22,6 @@ var validate = require('./lib/input_validation.js');
 
 const {ipcRenderer} = require('electron');
 
-
 //sending
 function sendMessage(channel, message){
     ipcRenderer.send(channel, message);
@@ -35,7 +34,6 @@ function init(json_string){
     startRange.value = result_json['range-lower'];
     endRange.value = result_json['range-upper'];
 }
-
 
 //listening
 ipcRenderer.on('EXECUTE', (event, arg) =>{
