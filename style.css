@@ -8,7 +8,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 /* Some default styles to make each box visible */
 .box {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   color:#9bcae5;
   background: #001a2d;
@@ -40,12 +40,20 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   height: 7vh
 }
 
-
 /* Flexbox Start */
 .container {
   display:flex;
   flex-wrap:wrap;
   flex-direction:column;
+  border:2px solid black;
+  height:90vh;
+  flex:1;
+}
+
+.container_mod2 {
+  display:flex;
+  flex-wrap:wrap;
+  flex-direction:row;
   border:2px solid black;
   height:90vh;
   flex:1;
@@ -66,6 +74,10 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   flex-basis:100px;
 }
 
+#importance {
+  flex-direction: column;
+  flex-basis: 10vh;
+}
 
 /* Tabs */
 
