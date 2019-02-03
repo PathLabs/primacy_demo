@@ -82,7 +82,7 @@ h1 {
 
 table, th, td {
   padding: 2%;
-  border-color: white;
+  color: #9bcae5;
 }
 
 tr:nth-child(odd) {
@@ -93,8 +93,12 @@ tr:nth-child(even) {
   background: rgb(0, 36, 56);
 }
 
+input{
+  background-color: #001a2d;
+  color: #9bcae5;
+}
+
 #importance {
-  flex-direction: column;
   flex-basis: 5vh;
 }
 
