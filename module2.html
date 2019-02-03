@@ -2,15 +2,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Primacy Demo</title>
+  <title>Primacy</title>
   <link rel="stylesheet" href="style.css">
   <script src="chart.js"></script>
 </head>
 
 <body>
   <div class="container_mod2">
-    <div class="box box1" id="primer_settings"> Primer Settings
-      <hr>
+    <div class="box box1" id="primer_settings"> <h1>Primer Settings</h1>
       <div class="input">
         <table class="input_table">
           <tr>
@@ -27,7 +26,7 @@
             <td>Max Distance of Target from Primer: </td>
             <td>
               <td>
-                <select class="form-control" id="StudentGender" name="StudentGender">
+                <select class="form-control">
                   <option>None</option>
                   <option>Distance from forward primer</option>
                   <option>Distance from reverse primer</option>
@@ -38,20 +37,19 @@
             </td>
           </tr>
           <tr>
-            <td>Background Primers: </td>
-            <td><td><input type="file" id="file_select" class="input" accept=""></td></td>
-          </tr>
-          <tr>
             <td>Percentage of Primers to Move Forward: </td>
             <td><td><input type="text" id="iterations" size=1 value=0>%</td></td>
+          </tr>
+          <tr>
+            <td>Background Primers: </td>
+            <td><td><input type="file" id="file_select" class="input" accept=""></td></td>
           </tr>
         </table>
         </br>
       </div>
     </div>
 
-    <div class="box box1" id="importance"> Importance of Features
-      <hr>
+    <div class="box box1" id="importance"> <h1>Importance of Features</h1>
       <table class="input_table">
         <tr>
           <td>Similar Melting Temperatures</td>

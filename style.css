@@ -74,9 +74,28 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   flex-basis:100px;
 }
 
+h1 {
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: normal;
+}
+
+table, th, td {
+  padding: 2%;
+  border-color: white;
+}
+
+tr:nth-child(odd) {
+  background: rgb(1, 32, 53);
+}
+
+tr:nth-child(even) {
+  background: rgb(0, 36, 56);
+}
+
 #importance {
   flex-direction: column;
-  flex-basis: 10vh;
+  flex-basis: 5vh;
 }
 
 /* Tabs */
