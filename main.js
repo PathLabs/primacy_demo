@@ -168,7 +168,10 @@ const template = [
       { role: 'copy' },
       { role: 'paste' },
       { role: 'delete' },
-      { role: 'selectall' }
+      { role: 'selectall' },
+      { type: 'separator' },
+      { label: 'Restore Defaults', role: 'reload'}
+
     ]
   },
   {
@@ -200,7 +203,7 @@ const template = [
         click () { require('electron').shell.openExternal('https://github.com/PathLabs/primacy_demo/blob/master/README.md') }
       },
       {
-        label: 'Project Website',
+        label: 'Website',
         click () { require('electron').shell.openExternal('https://www.cefns.nau.edu/capstone/projects/CS/2019/PathLab-S19/index.html') }
       }
     ]
