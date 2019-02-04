@@ -10,8 +10,8 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 .box {
   overflow-y: auto;
   overflow-x: hidden;
-  color:#9bcae5;
-  background: #001a2d;
+  color:#b2e2ff;
+  background: #242d3d;
   font-size: 30px;
   text-align: center;
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
@@ -81,8 +81,27 @@ h1 {
 }
 
 table, th, td {
-  padding: 2%;
-  color: #9bcae5;
+  color: #b2e2ff;
+}
+
+table tr:first-child td:first-child {
+    border-top-left-radius: 10px;
+}
+
+table tr:first-child td:last-child {
+    border-top-right-radius: 10px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+th, td {
+  padding: 10px;
 }
 
 tr:nth-child(odd) {
@@ -95,7 +114,7 @@ tr:nth-child(even) {
 
 input{
   background-color: #001a2d;
-  color: #9bcae5;
+  color: #b2e2ff;
 }
 
 #importance {
