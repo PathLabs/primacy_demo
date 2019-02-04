@@ -92,6 +92,10 @@ th, td {
   padding: 12px;
 }
 
+table tr:hover {
+  background: rgb(0, 38, 60);
+}
+
 tr:nth-child(odd) {
   background: rgb(1, 32, 53);
 }
