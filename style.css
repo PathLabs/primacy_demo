@@ -10,7 +10,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 .box {
   overflow-y: auto;
   overflow-x: hidden;
-  color:#b2e2ff;
+  color:#ffe8e1;
   background: #2f475f;
   font-size: 30px;
   text-align: center;
@@ -50,6 +50,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   flex-basis:250px;
   flex-grow:1;
   border: 1px solid #35506b;
+  overflow-x:auto;
 }
 
 /* Example Different Sizes */
@@ -64,12 +65,13 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 h1 {
   font-size: 15px;
   font-family: sans-serif;
-  font-weight: normal;
+  font-weight: bold;
 }
 
 table, th, td {
-  color: #b2e2ff;
+  color: #ffe8e1;
   font-size: 14px;
+  font-weight:normal;
 }
 
 table tr:first-child td:first-child {
@@ -106,8 +108,19 @@ tr:nth-child(even) {
 
 input{
   background-color: #000010;
-  color: #b2e2ff;
+  color: #ffe8e1;
   border: 1px solid #35506b;
+  border-radius: 3px;
+}
+
+input[type=file]{
+  font-size: 12px;
+  color:#ffe8e1;
+}
+
+.form-control {
+  color: #ffe8e1;
+  background-color: black;
 }
 
 #importance.box {
@@ -128,15 +141,17 @@ input{
   background-color: #000010;
   flex:1;
   justify-content: space-between;
-  color:white;
+  color:#fff4f4;
   border:1px solid #262626;
   font-size:18px;
   text-align:center;
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
+  transition: all .2s ease-in-out;
 }
 
 .tab:hover{
     background-color:gray;
+    transform: scale(1.00);
 }
 
 .labels {
