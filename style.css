@@ -11,7 +11,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   overflow-y: auto;
   overflow-x: hidden;
   color:#b2e2ff;
-  background: #242d3d;
+  background: #2f475f;
   font-size: 30px;
   text-align: center;
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
@@ -21,19 +21,6 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 .input{
   font-size: 50%;
 }
-
-/* Colors for each box */
-/* .box1 { background:#1abc9c;}
-.box2 { background:#3498db;}
-.box3 { background:#9b59b6;}
-.box4 { background:#34495e;}
-.box5 { background:#f1c40f;}
-.box6 { background:#e67e22;}
-.box7 { background:#e74c3c;}
-.box8 { background:#bdc3c7;}
-.box9 { background:#2ecc71;}
-.box10 { background:#16a085;} */
-
 
 /* Header */
 .header {
@@ -45,16 +32,16 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   display:flex;
   flex-wrap:wrap;
   flex-direction:column;
-  border:2px solid black;
+  border:2px solid #000010;
   height:90vh;
   flex:1;
 }
 
 .container_mod2 {
   display:flex;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
   flex-direction:row;
-  border:2px solid black;
+  border:2px solid #000010;
   height:90vh;
   flex:1;
 }
@@ -62,7 +49,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 .box {
   flex-basis:250px;
   flex-grow:1;
-  border: 2px solid #014056;
+  border: 1px solid #35506b;
 }
 
 /* Example Different Sizes */
@@ -75,13 +62,14 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 }
 
 h1 {
-  font-size: 20px;
+  font-size: 15px;
   font-family: sans-serif;
   font-weight: normal;
 }
 
 table, th, td {
   color: #b2e2ff;
+  font-size: 14px;
 }
 
 table tr:first-child td:first-child {
@@ -101,7 +89,7 @@ table tr:last-child td:last-child {
 }
 
 th, td {
-  padding: 10px;
+  padding: 12px;
 }
 
 tr:nth-child(odd) {
@@ -113,12 +101,14 @@ tr:nth-child(even) {
 }
 
 input{
-  background-color: #001a2d;
+  background-color: #000010;
   color: #b2e2ff;
+  border: 1px solid #35506b;
 }
 
-#importance {
-  flex-basis: 5vh;
+#importance.box {
+  /* flex-basis: 30vw;
+  flex-grow: 0; */
 }
 
 /* Tabs */
@@ -131,13 +121,13 @@ input{
 }
 
 .tab {
-  background-color: black;
+  background-color: #000010;
   flex:1;
   justify-content: space-between;
   color:white;
-  border: 1px solid #262626;
-  font-size: 20px;
-  text-align: center;
+  border:1px solid #262626;
+  font-size:18px;
+  text-align:center;
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
 }
 
@@ -145,9 +135,8 @@ input{
     background-color:gray;
 }
 
-
 .labels {
-  font-size: 25px;
+  font-size:18px;
 }
 
 .input_table {

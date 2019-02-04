@@ -4,23 +4,28 @@
   <meta charset="UTF-8">
   <title>Primacy</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <script src="chart.js"></script>
 </head>
 
 <body>
   <div class="container_mod2">
-    <div class="box box1" id="primer_settings"> <h1>Primer Settings</h1>
+    <div class="box box1" id="primer_settings"> <h1>PRIMER SETTINGS</h1>
       <div class="input">
         <table class="input_table">
           <tr>
             <td>Max Iterations: </td>
             <td><td><input type="text" id="iterations" size=2 value=100></td></td>
+            <td><i class="material-icons">help</i></td>
           </tr>
           <tr>
             <td>Optimum Amplicon Size Range: </td>
-            <td><td><input id="slider" type="range" min="0" max="100" value = 50
-              class = "slider"></td></td>
-            <td id="sliderValue"></td>
+            <td>
+              <td><input id="slider" type="range" min="0" max="100" value = 50
+                class = "slider">
+              </td>
+            </td>
+            <td id="sliderValue"><i class="material-icons">help</i></td>
           </tr>
           <tr>
             <td>Max Distance of Target from Primer: </td>
@@ -33,23 +38,26 @@
                   <option>Distance from at least one primer</option>
                   <option>Distance from both primers</option>
                 </select>
+                <td><i class="material-icons">help</i></td>
               </td>
             </td>
           </tr>
           <tr>
             <td>Percentage of Primers to Move Forward: </td>
             <td><td><input type="text" id="iterations" size=1 value=0>%</td></td>
+            <td><i class="material-icons">help</i></td>
           </tr>
           <tr>
             <td>Background Primers: </td>
             <td><td><input type="file" id="file_select" class="input" accept=""></td></td>
+            <td><i class="material-icons">help</i></td>
           </tr>
         </table>
         </br>
       </div>
     </div>
 
-    <div class="box box1" id="importance"> <h1>Importance of Features</h1>
+    <div class="box box1" id="importance"> <h1>IMPORTANCE OF FEATURES</h1>
       <table class="input_table">
         <tr>
           <td>Similar Melting Temperatures</td>
@@ -87,9 +95,9 @@
   </div>
 
   <div class="tab_container">
-    <button class="tab tab1" id=module0>Primer Collection</button>
-    <button class="tab tab2" id="module1">Primer Scoring</button>
-    <button class="tab tab3" id="module2" style="background-color: rgb(25,25,25);">Optimization</button>
+    <button class="tab tab1" id=module0>PRIMER COLLECTION</button>
+    <button class="tab tab2" id="module1">PRIMER SCORING</button>
+    <button class="tab tab3" id="module2" style="background-color: #012035;">OPTIMIZATION</button>
   </div>
 
 </body>
