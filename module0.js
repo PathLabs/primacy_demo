@@ -115,8 +115,6 @@ function updateSequenceIdentifierTextarea() {
     sequence_identifier_textarea.value = fasta_header;
 }
 
-
->>>>>>> 29eeed07ff9514230b7a64fd81fb5eeecf7ac99c
 //listening
 ipcRenderer.on('EXECUTE', (event, arg) =>{
     if(arg != null){
