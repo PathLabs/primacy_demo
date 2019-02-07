@@ -36,7 +36,6 @@ var validate = require('./lib/input_validation.js');
 
 const {ipcRenderer} = require('electron');
 
-
 //sending
 function sendMessage(channel, message){
     ipcRenderer.send(channel, message);
@@ -60,13 +59,13 @@ function updateFastaSequenceTable() {
         cell.innerHTML = fasta_nucleotide_sequence[i];
         cell.addEventListener('click', function() {
             console.log('you clicked', this.id);
-            
+
             ranges.push(this.id);
 
             if(ranges.length == 2) {
                 let temp  = ranges.shift();
                 let temp2 = ranges.shift();
-                
+
                 temp  = parseInt(temp);
                 temp2 = parseInt(temp2);
 
@@ -103,8 +102,8 @@ function updateRegionAvoidHighlightTable() {
         let sequence_index = sequence_start_range + i;
 
         if(fasta_nucleotide_sequence[sequence_index] == "X") {
-            cell.innerHTML = "<span style='color: red;'>" + 
-                             fasta_nucleotide_sequence[sequence_index]  + 
+            cell.innerHTML = "<span style='color: red;'>" +
+                             fasta_nucleotide_sequence[sequence_index]  +
                              "</span>";
         } else {
             cell.innerHTML = fasta_nucleotide_sequence[sequence_index];
@@ -115,7 +114,6 @@ function updateRegionAvoidHighlightTable() {
 function updateSequenceIdentifierTextarea() {
     sequence_identifier_textarea.value = fasta_header;
 }
-
 
 //listening
 ipcRenderer.on('EXECUTE', (event, arg) =>{
@@ -173,7 +171,7 @@ fasta_file_select.addEventListener('change', function() {
         if(err) {
             console.log("FASTA file read error");
         }
-        
+
         fasta_file_textarea.value = data.toString();
 
         // Force the text area's change event to fire
