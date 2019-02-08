@@ -70,15 +70,34 @@ function updateFastaSequenceTable() {
 
     let row = region_picker_table.insertRow(0);
     for(i = 0; i < fasta_nucleotide_sequence.length; i++) {
+        var click_count = 0;
         let cell = row.insertCell(i);
         cell.id = i.toString();
         cell.innerHTML = fasta_nucleotide_sequence[i];
+        if(cell.innerHTML == "A"){
+          cell.style.color="rgb(255,130,130)";
+        }
+        if(cell.innerHTML == "G"){
+          cell.style.color="rgb(130,130,255)";
+        }
+        if(cell.innerHTML == "C"){
+          cell.style.color="rgb(130,255,130)";
+        }
+        if(cell.innerHTML == "T"){
+          cell.style.color="rgb(255,130,255)";
+        }
+
         cell.addEventListener('click', function() {
             console.log('you clicked', this.id);
+            click_count++;
+            console.log(click_count);
+            cell.style.backgroundColor = "green";
+            cell.style.color = "white";
 
             ranges.push(this.id);
 
             if(ranges.length == 2) {
+                click_count = 0;
                 let temp  = ranges.shift();
                 let temp2 = ranges.shift();
 
@@ -91,10 +110,11 @@ function updateFastaSequenceTable() {
                     sequence_start_range = temp2;
                     sequence_end_range   = temp;
                 } else {
-                    lower_range.value = temp;
-                    end_range.value   = temp2;
+                    lower_range.value    = temp;
+                    end_range.value      = temp2;
                     sequence_start_range = temp;
                     sequence_end_range   = temp2;
+
                 }
 
                 ranges = [];
@@ -119,7 +139,7 @@ function updateRegionAvoidHighlightTable() {
                              fasta_nucleotide_sequence[sequence_index]  +
                              "</span>";
         } else {
-            cell.innerHTML = "<span style='color: green;'>" + 
+            cell.innerHTML = "<span style='color: green;'>" +
                              fasta_nucleotide_sequence[sequence_index] +
                              "</span>";
         }
@@ -146,7 +166,7 @@ function updateBackgroundSequences() {
                     background_sequences.splice(i, 1);
                 }
             }
-            
+
             updateBackgroundSequences();
         });
     }
@@ -212,7 +232,7 @@ fasta_file_select.addEventListener('change', function() {
 
         fasta_raw_string = data.toString();
 
-    
+
         // If there is a header, split it from the string
         if('>' == fasta_raw_string[0]) {
             console.log("Found header in FASTA file");
@@ -233,7 +253,7 @@ background_sequence_filepicker.addEventListener('change', function() {
      * Desc: If a file has been added to the background sequence list,
      *       add a new file picker, and set up this event listener
      */
-    
+
     path = background_sequence_filepicker.files[0].path;
 
     // TODO: Validate fasta file
