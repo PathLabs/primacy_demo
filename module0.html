@@ -8,15 +8,68 @@
 
 <body>
   <div class="container">
+    <!-- Background Sequences -->
+    <div class="box box2">Background Sequences
+      <div>
+        <input type="file" id="backgroundseqfilepicker" class="input" accept="">
+      </div>
+
+      <table id="backgroundseqtable" class="input_table">
+      </table>
+    </div>
+
+    <!-- PCR salts -->
+    <div class="box box2">PCR Salts
+      <table class="input_table">
+        <tr>
+          <td>
+            Na:
+          </td>
+          <td>
+            <input id="pcrsodium" type="text" size="1">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            K:
+          </td>
+          <td>
+            <input id="pcrpotassium" type="text" size="1">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Tris:
+          </td>
+          <td>
+            <input id="pcrtromethamine" type="text" size="1">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Mg:
+          </td>
+          <td>
+            <input id="pcrmagnesium" type="text" size="1">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            dNTPS:
+          </td>
+          <td>
+            <input id="pcrdntp" type="text" size="1">
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="container" id="input0">
     <div class="box box1">Neucleotide Sequence
 
-      <!--
-      A string of nucleotide sequence (in 5' to 3' orientation) for each desired amplicon (can include IUPAC ambiguous base codes).
-      The sequence should include the target region and flanking upstream and downstream primer regions.
-      The length of the sequence will generally range from 100-2000 characters.
-      -->
-
-      <hr>
+    <!-- FASTA input -->
+    <hr>
       </br>
       <table class="input_table" >
         <tr>
@@ -34,7 +87,7 @@
       <input type="file" id="fastaFileSelect" class="input" accept="">
     </div>
 
-
+    <!-- Target Region Selector -->
     <div class="box box2">Target Region Identification
       <hr>
       <div class="input_box">
@@ -61,6 +114,7 @@
       </div>
     </div>
 
+    <!-- Avoided Zones Identifier -->
     <div class="box box2">Primer Avoidance Zones
      <hr>
      <div class="input_box">
@@ -76,6 +130,7 @@
      </div>
     </div>
 
+    <!-- Sequence identifier name -->
     <div class="box box2">Sequence Identifier
      <hr>
      <div class="input_box">
@@ -92,6 +147,7 @@
      </div>
     </div>
 
+    <!-- Primer size range identifier -->
     <div class="box box2">Primer Size Range
      <hr>
      <div class="input_box">
@@ -107,8 +163,6 @@
        </div>
      </div>
     </div>
-
-
 
   </div>
 
