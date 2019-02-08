@@ -18,6 +18,16 @@ const lower_range                  = document.getElementById("startRange");
 const end_range                    = document.getElementById("endRange");
 const sequence_identifier_textarea = document.getElementById("sequenceIdentifier");
 
+const pcr_sodium       = document.getElementById("pcrsodium");
+const pcr_potassium    = document.getElementById("pcrpotassium");
+const pcr_tromethamine = document.getElementById("pcrtromethanime");
+const pcr_magnesium    = document.getElementById("pcrmagnesium");
+
+const background_sequence_filepicker = document.getElementById("backgroundseqfilepicker");
+const background_sequence_table      = document.getElementById("backgroundseqtable");
+
+
+var background_sequences = [];
 
 var ranges = [];
 
@@ -43,10 +53,17 @@ function sendMessage(channel, message){
 
 function init(json_string){
     console.log(json_string);
-    console.log(json_string['range-lower']);
     result_json = json_string;
-    startRange.value = result_json['range-lower'];
-    endRange.value = result_json['range-upper'];
+    if(result_json) {
+        startRange.value = result_json['range-lower'];
+        endRange.value = result_json['range-upper'];
+    } else {
+        pcr_sodium.value       = "50";
+        pcr_magnesium.value    = "0";
+        pcr_tromethamine.value = "0";
+        pcr_potassium.value    = "0";
+    }
+    init_run = true;
 }
 
 function updateFastaSequenceTable() {
@@ -114,6 +131,29 @@ function updateRegionAvoidHighlightTable() {
 function updateSequenceIdentifierTextarea() {
     sequence_identifier_textarea.value = fasta_header;
 }
+
+function updateBackgroundSequences() {
+    table = background_sequence_table;
+
+    table.innerHTML = "";
+
+    for(i = 0; i < background_sequences.length; i++) {
+        let row  = table.insertRow(i);
+        let cell = row.insertCell(0);
+
+        cell.innerHTML = background_sequences[i];
+        cell.addEventListener("click", function() {
+            for(i = 0; i < background_sequences.length; i++) {
+                if(this.innerHTML == background_sequences[i]) {
+                    background_sequences.splice(i, 1);
+                }
+            }
+            
+            updateBackgroundSequences();
+        });
+    }
+}
+
 
 //listening
 ipcRenderer.on('EXECUTE', (event, arg) =>{
@@ -204,3 +244,24 @@ fasta_file_textarea.addEventListener('change', function() {
     updateFastaSequenceTable();
     updateSequenceIdentifierTextarea();
 });
+
+
+background_sequence_filepicker.addEventListener('change', function() {
+    /**
+     * Desc: If a file has been added to the background sequence list,
+     *       add a new file picker, and set up this event listener
+     */
+    
+    path = background_sequence_filepicker.files[0].path;
+
+    // TODO: Validate fasta file
+
+    background_sequences.push(path);
+
+    background_sequence_filepicker.value = "";
+
+    updateBackgroundSequences();
+});
+
+
+init('{}');
