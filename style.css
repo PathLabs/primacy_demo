@@ -32,7 +32,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   display:flex;
   flex-wrap:wrap;
   flex-direction:column;
-  border:2px solid #000010;
+  border:1px solid #000010;
   height:90vh;
   flex:1;
 }
@@ -41,7 +41,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   display:flex;
   flex-wrap:nowrap;
   flex-direction:row;
-  border:2px solid #000010;
+  border:1px solid #000010;
   height:90vh;
   flex:1;
 }
@@ -118,6 +118,11 @@ input[type=file]{
   color:#ffe8e1;
 }
 
+input[type=submit]{
+  font-size: 14px;
+  color:#ffe8e1;
+}
+
 .form-control {
   color: #ffe8e1;
   background-color: black;
@@ -126,6 +131,14 @@ input[type=file]{
 #importance.box {
   /* flex-basis: 30vw;
   flex-grow: 0; */
+}
+
+#background_settings{
+  height:25vh;
+}
+
+#neucleotide_input{
+  height: 65vh;
 }
 
 /* Tabs */

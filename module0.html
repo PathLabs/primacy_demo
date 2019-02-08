@@ -7,9 +7,9 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" id="background_settings">
     <!-- Background Sequences -->
-    <div class="box box2">Background Sequences
+    <div class="box box2"><h1>Background Sequences</h1>
       <div>
         <input type="file" id="backgroundseqfilepicker" class="input" accept="">
       </div>
@@ -18,7 +18,7 @@
       </table>
     </div>
 
-    <div class="box box1">PCR Salts
+    <div class="box box1"><h1>PCR Salts</h1>
       <!-- PCR salts -->
       <table class="input_table">
         <tr>
@@ -77,11 +77,11 @@
                     </table>
                     </br>
                 </div>
-    
+
             <table class="input_table" >
                 <tr>
                     <td>
-                        <label for="file_select" class="labels">FASTA sequence: </label>
+                        <label for="file_select" class="labels"><h1>FASTA sequence: </h1></label>
                     </td>
                 </tr>
                 <tr>
@@ -91,7 +91,7 @@
                 </tr>
             </table>
             </br>
-   
+
           <table class="input_table">
             <tr>
               <td>Please enter start of range: </td>
@@ -102,22 +102,20 @@
               <td><input type="text" id="endRange" size=2></td>
             </tr>
           </table>
+          </br>
           <div style="align: center; justify-content: center; max-width: 100%; overflow-x: auto; overflow-y: hidden; background-color: white;">
             <table style="text-align: center; align: center; justify-content: center;"id="regionPicker" >
               <tr>
               <tr>
             </table>
           </div>
-          </br>
+
           <input type="submit" id="submitButton" value="Submit" data-tooltip="test">
 
     </div>
 
+</div>
 
-      
-      
-</div>     
-     
   <div class="tab_container">
     <button class="tab tab1" id="module0" style="background-color: #012035;">PRIMER COLLECTION</button>
     <button class="tab tab2" id="module1">PRIMER SCORING</button>
