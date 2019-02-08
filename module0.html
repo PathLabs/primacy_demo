@@ -18,15 +18,15 @@
       </table>
     </div>
 
-    <!-- PCR salts -->
-    <div class="box box2">PCR Salts
+    <div class="box box1">PCR Salts
+      <!-- PCR salts -->
       <table class="input_table">
         <tr>
           <td>
             Na:
           </td>
           <td>
-            <input id="pcrsodium" type="text" size="1">
+            <input id="pcrsodium" type="text" size="2">
           </td>
         </tr>
         <tr>
@@ -34,7 +34,7 @@
             K:
           </td>
           <td>
-            <input id="pcrpotassium" type="text" size="1">
+            <input id="pcrpotassium" type="text" size="2">
           </td>
         </tr>
         <tr>
@@ -42,7 +42,7 @@
             Tris:
           </td>
           <td>
-            <input id="pcrtromethamine" type="text" size="1">
+            <input id="pcrtromethamine" type="text" size="2">
           </td>
         </tr>
         <tr>
@@ -50,7 +50,7 @@
             Mg:
           </td>
           <td>
-            <input id="pcrmagnesium" type="text" size="1">
+            <input id="pcrmagnesium" type="text" size="2">
           </td>
         </tr>
         <tr>
@@ -58,40 +58,40 @@
             dNTPS:
           </td>
           <td>
-            <input id="pcrdntp" type="text" size="1">
+            <input id="pcrdntp" type="text" size="2">
           </td>
         </tr>
       </table>
     </div>
   </div>
 
-  <div class="container" id="input0">
-    <div class="box box1">Neucleotide Sequence
-
-    <!-- FASTA input -->
-    <hr>
-      </br>
-      <table class="input_table" >
-        <tr>
-          <td>
-            <label for="file_select" class="labels">FASTA file: </label>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <textarea size="10" id="fastaTextInput"> </textarea>
-          </td>
-        </tr>
-      </table>
-      </br>
-      <input type="file" id="fastaFileSelect" class="input" accept="">
-    </div>
-
-    <!-- Target Region Selector -->
-    <div class="box box2">Target Region Identification
-      <hr>
-      <div class="input_box">
-        <div class="input">
+<div class="container" id="neucleotide_input">
+    <div class="box box1" id="input0">
+                <div class="input">
+                    <table>
+                        <tr>
+                            <td>
+                                <textarea id="sequenceIdentifier" size="20"></textarea>
+                            </td>
+                        <tr>
+                    </table>
+                    </br>
+                </div>
+    
+            <table class="input_table" >
+                <tr>
+                    <td>
+                        <label for="file_select" class="labels">FASTA sequence: </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="file" id="fastaFileSelect" class="input" accept="">
+                    </td>
+                </tr>
+            </table>
+            </br>
+   
           <table class="input_table">
             <tr>
               <td>Please enter start of range: </td>
@@ -102,7 +102,7 @@
               <td><input type="text" id="endRange" size=2></td>
             </tr>
           </table>
-          <div style="align: center; justify-content: center; max-width: 500px; overflow-x: auto; overflow-y: hidden; background-color: white;">
+          <div style="align: center; justify-content: center; max-width: 100%; overflow-x: auto; overflow-y: hidden; background-color: white;">
             <table style="text-align: center; align: center; justify-content: center;"id="regionPicker" >
               <tr>
               <tr>
@@ -110,62 +110,14 @@
           </div>
           </br>
           <input type="submit" id="submitButton" value="Submit" data-tooltip="test">
-        </div>
-      </div>
+
     </div>
 
-    <!-- Avoided Zones Identifier -->
-    <div class="box box2">Primer Avoidance Zones
-     <hr>
-     <div class="input_box">
-       <div class="input">
-         <div style="overflow-x: scroll; overflow-y: hidden; background-color: white;">
-           <table id="regionAvoidHighlighter" >
-             <tr>
-             <tr>
-           </table>
-         </div>
-         </br>
-       </div>
-     </div>
-    </div>
 
-    <!-- Sequence identifier name -->
-    <div class="box box2">Sequence Identifier
-     <hr>
-     <div class="input_box">
-       <div class="input">
-         <table>
-           <tr>
-             <td>
-               <textarea id="sequenceIdentifier" size="20"></textarea>
-             </td>
-           <tr>
-         </table>
-         </br>
-       </div>
-     </div>
-    </div>
-
-    <!-- Primer size range identifier -->
-    <div class="box box2">Primer Size Range
-     <hr>
-     <div class="input_box">
-       <div class="input">
-         <table>
-           <tr>
-             <td>
-               <textarea id="sequenceIdentifier" size="20"></textarea>
-             </td>
-           <tr>
-         </table>
-         </br>
-       </div>
-     </div>
-    </div>
-
-  </div>
-
+      
+      
+</div>     
+     
   <div class="tab_container">
     <button class="tab tab1" id="module0" style="background-color: #012035;">PRIMER COLLECTION</button>
     <button class="tab tab2" id="module1">PRIMER SCORING</button>

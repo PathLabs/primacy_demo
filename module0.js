@@ -13,7 +13,6 @@ const submit_button                = document.getElementById("submitButton");
 const fasta_file_select            = document.getElementById("fastaFileSelect");
 const fasta_file_textarea          = document.getElementById("fastaTextInput");
 const region_picker_table          = document.getElementById("regionPicker");
-const region_avoid_highlight_table = document.getElementById("regionAvoidHighlighter");
 const lower_range                  = document.getElementById("startRange");
 const end_range                    = document.getElementById("endRange");
 const sequence_identifier_textarea = document.getElementById("sequenceIdentifier");
@@ -87,13 +86,11 @@ function updateFastaSequenceTable() {
                 temp2 = parseInt(temp2);
 
                 if(temp > temp2) {
-                    console.log('1');
                     lower_range.value    = temp2;
                     end_range.value      = temp;
                     sequence_start_range = temp2;
                     sequence_end_range   = temp;
                 } else {
-                    console.log('2');
                     lower_range.value = temp;
                     end_range.value   = temp2;
                     sequence_start_range = temp;
@@ -108,12 +105,11 @@ function updateFastaSequenceTable() {
 }
 
 function updateRegionAvoidHighlightTable() {
-    region_avoid_highlight_table.deleteRow(0);  // Remove current sequence
-
-    let row = region_avoid_highlight_table.insertRow(0);
+    let row = region_picker_table[0];
 
     for(i = 0; i < sequence_end_range - sequence_start_range; i++) {
-        let cell = row.insertCell(i);
+        console.log(row);
+        let cell = row[i]
         cell.id = i.toString();
 
         let sequence_index = sequence_start_range + i;
@@ -123,7 +119,9 @@ function updateRegionAvoidHighlightTable() {
                              fasta_nucleotide_sequence[sequence_index]  +
                              "</span>";
         } else {
-            cell.innerHTML = fasta_nucleotide_sequence[sequence_index];
+            cell.innerHTML = "<span style='color: green;'>" + 
+                             fasta_nucleotide_sequence[sequence_index] +
+                             "</span>";
         }
     }
 }
@@ -212,39 +210,23 @@ fasta_file_select.addEventListener('change', function() {
             console.log("FASTA file read error");
         }
 
-        fasta_file_textarea.value = data.toString();
+        fasta_raw_string = data.toString();
 
-        // Force the text area's change event to fire
-        let change_event = new Event("change");
-        fasta_file_textarea.dispatchEvent(change_event);
+    
+        // If there is a header, split it from the string
+        if('>' == fasta_raw_string[0]) {
+            console.log("Found header in FASTA file");
+            fasta_nucleotide_sequence = fasta_raw_string.split(/\n/);
+            fasta_header              = fasta_nucleotide_sequence.shift();
+            fasta_nucleotide_sequence = fasta_nucleotide_sequence.join("");
+        }
+
+        // Update the nucleotide sequence picker table
+        updateFastaSequenceTable();
+        updateSequenceIdentifierTextarea();
     });
 
 });
-
-fasta_file_textarea.addEventListener('change', function() {
-    /**
-     * Desc: Handles fasta sequence changes. Validates the input
-     *       and then sets the fasta_sequence variable
-     */
-    console.log("FASTA sequence textbox change");
-
-    // TODO: Validate current fasta sequence. If not valid do not continue
-
-    fasta_raw_string = fasta_file_textarea.value.toString();
-
-    // If there is a header, split it from the string
-    if('>' == fasta_raw_string[0]) {
-        console.log("Found header in FASTA file");
-        fasta_nucleotide_sequence = fasta_raw_string.split(/\n/);
-        fasta_header              = fasta_nucleotide_sequence.shift();
-        fasta_nucleotide_sequence = fasta_nucleotide_sequence.join("");
-    }
-
-    // Update the nucleotide sequence picker table
-    updateFastaSequenceTable();
-    updateSequenceIdentifierTextarea();
-});
-
 
 background_sequence_filepicker.addEventListener('change', function() {
     /**
