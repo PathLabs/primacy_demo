@@ -73,6 +73,7 @@ function updateFastaSequenceTable() {
         var click_count = 0;
         let cell = row.insertCell(i);
         cell.id = i.toString();
+        cell.classList.add('sequence_item');
         cell.innerHTML = fasta_nucleotide_sequence[i];
         if(cell.innerHTML == "A"){
           cell.style.color="rgb(255,130,130)";

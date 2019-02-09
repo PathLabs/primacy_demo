@@ -133,12 +133,27 @@ input[type=submit]{
   flex-grow: 0; */
 }
 
+#sequenceIdentifier{
+  border-bottom-right-radius: 10px;
+}
+
 #background_settings{
   height:25vh;
 }
 
 #neucleotide_input{
   height: 65vh;
+}
+
+#regionPicker td{
+  padding: 3px;
+}
+
+.sequence_item:hover{
+  transform:scale(1.8);
+  transform-style: preserve-3d;
+  transition: all .4s ease;
+  cursor:pointer;
 }
 
 /* Tabs */
@@ -164,7 +179,7 @@ input[type=submit]{
 
 .tab:hover{
     background-color:gray;
-    transform: scale(1.00);
+    font-size: 19px;
 }
 
 .labels {
