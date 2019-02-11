@@ -53,6 +53,10 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   overflow-x:auto;
 }
 
+hr{
+  border: 1px solid #35506b;
+}
+
 .tooltip {
   position: static;
   display: inline-block;
