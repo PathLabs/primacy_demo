@@ -177,7 +177,7 @@ input[type=submit]{
   transform:scale(1.8);
   transform-style: preserve-3d;
   transition: all .4s ease;
-  cursor:pointer;
+  cursor:crosshair;
 }
 
 /* Tabs */

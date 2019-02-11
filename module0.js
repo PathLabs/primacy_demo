@@ -200,6 +200,7 @@ module1.addEventListener('click', function (){
 });
 
 submitButton.addEventListener('click', function () {
+
     try {
         if (startRange && endRange){
             var startString = validate.parseTemperature(startRange.value.toString());
