@@ -54,9 +54,9 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 }
 
 .tooltip {
-  position: relative;
+  position: static;
   display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  cursor:default;
 }
 
 .tooltip .tooltiptext {
@@ -66,18 +66,15 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   color: #fff;
   text-align: center;
   padding: 5px 0;
-  border-radius: 6px;
+  border-radius: 5px;
   font-size: 11px;
   position: absolute;
-  z-index: 100;
+  z-index: 1;
+  overflow: visible;
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
-
-i:hover{
-  cursor: pointer;
 }
 
 /* Example Different Sizes */
