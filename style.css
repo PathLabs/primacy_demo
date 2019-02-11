@@ -206,8 +206,8 @@ input[type=submit]{
 }
 
 .tab:hover{
-    background-color:gray;
-    font-size: 19px;
+  background-color:gray;
+  font-size: 19px;
 }
 
 .labels {
@@ -217,4 +217,25 @@ input[type=submit]{
 .input_table {
   color: white;
   margin: 0 auto;
+}
+
+ #loading_logo {
+  height:250px;
+  width:250px;
+  position:sticky;
+  -webkit-animation:spin 2s infinite;
+  animation:spin 2s infinite;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid #000010;
+  padding: 10px;
+}
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+
+.progress_bar {
+  margin: auto;
+  height:10vh;
+  width:50vw;
+  border: 1px solid #000010;
+  background-color: #35506b;
 }
