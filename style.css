@@ -53,6 +53,33 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   overflow-x:auto;
 }
 
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 100px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  font-size: 11px;
+  position: absolute;
+  z-index: 100;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+i:hover{
+  cursor: pointer;
+}
+
 /* Example Different Sizes */
 .box3 {
   flex-grow:5;

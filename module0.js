@@ -115,7 +115,6 @@ function updateFastaSequenceTable() {
                     end_range.value      = temp2;
                     sequence_start_range = temp;
                     sequence_end_range   = temp2;
-
                 }
 
                 ranges = [];
