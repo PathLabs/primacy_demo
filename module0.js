@@ -10,19 +10,19 @@
 const module0                      = document.getElementById("module0");
 const module1                      = document.getElementById("module1");
 const submit_button                = document.getElementById("submitButton");
-const fasta_file_select            = document.getElementById("fastaFileSelect");
-const fasta_file_textarea          = document.getElementById("fastaTextInput");
+const fasta_file_select             = document.getElementById("fastaFileSelect");
+const fasta_file_textarea           = document.getElementById("fastaTextInput");
 const region_picker_table          = document.getElementById("regionPicker");
 const lower_range                  = document.getElementById("startRange");
 const end_range                    = document.getElementById("endRange");
-const sequence_identifier_textarea = document.getElementById("sequenceIdentifier");
+const sequence_identifier_textarea  = document.getElementById("sequenceIdentifier");
 
 const pcr_sodium       = document.getElementById("pcrsodium");
 const pcr_potassium    = document.getElementById("pcrpotassium");
 const pcr_tromethamine = document.getElementById("pcrtromethanime");
 const pcr_magnesium    = document.getElementById("pcrmagnesium");
 
-const background_sequence_filepicker = document.getElementById("backgroundseqfilepicker");
+const background_sequence_filepicker  = document.getElementById("backgroundseqfilepicker");
 const background_sequence_table      = document.getElementById("backgroundseqtable");
 
 
@@ -52,10 +52,12 @@ function sendMessage(channel, message){
 
 function init(json_string){
     console.log(json_string);
+    
     result_json = json_string;
+    
     if(result_json) {
         startRange.value = result_json['range-lower'];
-        endRange.value = result_json['range-upper'];
+        endRange.value   = result_json['range-upper'];
     } else {
         pcr_sodium.value       = "50";
         pcr_magnesium.value    = "0";
@@ -71,10 +73,13 @@ function updateFastaSequenceTable() {
     let row = region_picker_table.insertRow(0);
     for(i = 0; i < fasta_nucleotide_sequence.length; i++) {
         var click_count = 0;
-        let cell = row.insertCell(i);
-        cell.id = i.toString();
+        let cell        = row.insertCell(i);
+        cell.id         = i.toString();
+        
         cell.classList.add('sequence_item');
+        
         cell.innerHTML = fasta_nucleotide_sequence[i];
+        
         if(cell.innerHTML == "A"){
           cell.style.color="rgb(255,130,130)";
         }
@@ -92,8 +97,9 @@ function updateFastaSequenceTable() {
             console.log('you clicked', this.id);
             click_count++;
             console.log(click_count);
+            
             cell.style.backgroundColor = "green";
-            cell.style.color = "white";
+            cell.style.color           = "white";
 
             ranges.push(this.id);
 
@@ -130,7 +136,7 @@ function updateRegionAvoidHighlightTable() {
     for(i = 0; i < sequence_end_range - sequence_start_range; i++) {
         console.log(row);
         let cell = row[i]
-        cell.id = i.toString();
+        cell.id  = i.toString();
 
         let sequence_index = sequence_start_range + i;
 
@@ -204,7 +210,7 @@ submitButton.addEventListener('click', function () {
     try {
         if (startRange && endRange){
             var startString = validate.parseTemperature(startRange.value.toString());
-            var endString = validate.parseTemperature(endRange.value.toString());
+            var endString   = validate.parseTemperature(endRange.value.toString());
 
             json_string = {'range-lower': startString, 'range-upper': endString, 'file': '"'+file_select.input +'"'};
             json_string = JSON.stringify(json_string);
