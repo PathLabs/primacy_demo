@@ -90,6 +90,10 @@ hr{
   flex-basis:100px;
 }
 
+.input_table td {
+  text-align: center;
+}
+
 h1 {
   font-size: 15px;
   font-family: sans-serif;
@@ -103,19 +107,19 @@ table, th, td {
 }
 
 table tr:first-child td:first-child {
-    border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 table tr:first-child td:last-child {
-    border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 table tr:last-child td:first-child {
-    border-bottom-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 table tr:last-child td:last-child {
-    border-bottom-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 th, td {
@@ -154,11 +158,6 @@ input[type=submit]{
 .form-control {
   color: #ffe8e1;
   background-color: black;
-}
-
-#importance.box {
-  /* flex-basis: 30vw;
-  flex-grow: 0; */
 }
 
 #sequenceIdentifier{
@@ -216,25 +215,25 @@ input[type=submit]{
 
 /* width */
 ::-webkit-scrollbar {
- width: 8px;
- height:8px;
+  width: 8px;
+  height:8px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
- box-shadow: inset 0 0 5px gray;
- border-radius: 10px;
+  box-shadow: inset 0 0 5px gray;
+  border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
- background: rgb(1, 32, 53);
- border-radius: 10px;
+  background: rgb(1, 32, 53);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
- background:rgb(0, 36, 56);
- border-radius: 0px;
+  background:rgb(0, 36, 56);
+  border-radius: 0px;
 }
 
 .input_table {
