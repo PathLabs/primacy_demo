@@ -52,9 +52,9 @@ function sendMessage(channel, message){
 
 function init(json_string){
     console.log(json_string);
-    
+
     result_json = json_string;
-    
+
     if(result_json) {
         startRange.value = result_json['range-lower'];
         endRange.value   = result_json['range-upper'];
@@ -75,11 +75,11 @@ function updateFastaSequenceTable() {
         var click_count = 0;
         let cell        = row.insertCell(i);
         cell.id         = i.toString();
-        
+
         cell.classList.add('sequence_item');
-        
+
         cell.innerHTML = fasta_nucleotide_sequence[i];
-        
+
         if(cell.innerHTML == "A"){
           cell.style.color="rgb(255,130,130)";
         }
@@ -97,7 +97,7 @@ function updateFastaSequenceTable() {
             console.log('you clicked', this.id);
             click_count++;
             console.log(click_count);
-            
+
             cell.style.backgroundColor = "green";
             cell.style.color           = "white";
 

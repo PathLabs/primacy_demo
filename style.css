@@ -66,7 +66,7 @@ hr{
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 100px;
-  background-color: black;
+  background-color: rgb(1, 32, 53);
   color: #fff;
   text-align: center;
   padding: 5px 0;
@@ -199,7 +199,7 @@ input[type=submit]{
   justify-content: space-between;
   color:#fff4f4;
   border:1px solid #262626;
-  font-size:18px;
+  font-size:16px;
   text-align:center;
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
   transition: all .2s ease-in-out;
@@ -212,6 +212,29 @@ input[type=submit]{
 
 .labels {
   font-size:18px;
+}
+
+/* width */
+::-webkit-scrollbar {
+ width: 8px;
+ height:8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+ box-shadow: inset 0 0 5px gray;
+ border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+ background: rgb(1, 32, 53);
+ border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+ background:rgb(0, 36, 56);
+ border-radius: 0px;
 }
 
 .input_table {
