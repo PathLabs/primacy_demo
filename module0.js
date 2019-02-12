@@ -10,6 +10,7 @@
 const module0                      = document.getElementById("module0");
 const module1                      = document.getElementById("module1");
 const submit_button                = document.getElementById("submitButton");
+const reset_button                = document.getElementById("resetButton");
 const fasta_file_select             = document.getElementById("fastaFileSelect");
 const fasta_file_textarea           = document.getElementById("fastaTextInput");
 const region_picker_table          = document.getElementById("regionPicker");
@@ -81,22 +82,21 @@ function updateFastaSequenceTable() {
         cell.innerHTML = fasta_nucleotide_sequence[i];
 
         if(cell.innerHTML == "A"){
-          cell.style.color="rgb(255,130,130)";
+            cell.style.color="rgb(255,130,130)";
         }
         if(cell.innerHTML == "G"){
-          cell.style.color="rgb(130,130,255)";
+            cell.style.color="rgb(130,130,255)";
         }
         if(cell.innerHTML == "C"){
-          cell.style.color="rgb(130,255,130)";
+            cell.style.color="rgb(130,255,130)";
         }
         if(cell.innerHTML == "T"){
-          cell.style.color="rgb(255,130,255)";
+            cell.style.color="rgb(255,130,255)";
         }
 
         cell.addEventListener('click', function() {
             console.log('you clicked', this.id);
             click_count++;
-            console.log(click_count);
 
             cell.style.backgroundColor = "green";
             cell.style.color           = "white";
@@ -104,7 +104,6 @@ function updateFastaSequenceTable() {
             ranges.push(this.id);
 
             if(ranges.length == 2) {
-                click_count = 0;
                 let temp  = ranges.shift();
                 let temp2 = ranges.shift();
 
@@ -124,33 +123,42 @@ function updateFastaSequenceTable() {
                 }
 
                 ranges = [];
-                updateRegionAvoidHighlightTable();
+                //updateRegionAvoidHighlightTable();
+            }
+            if(click_count>2){
+                resetTable();
             }
         });
     }
 }
 
-function updateRegionAvoidHighlightTable() {
-    let row = region_picker_table[0];
-
-    for(i = 0; i < sequence_end_range - sequence_start_range; i++) {
-        console.log(row);
-        let cell = row[i]
-        cell.id  = i.toString();
-
-        let sequence_index = sequence_start_range + i;
-
-        if(fasta_nucleotide_sequence[sequence_index] == "X") {
-            cell.innerHTML = "<span style='color: red;'>" +
-                             fasta_nucleotide_sequence[sequence_index]  +
-                             "</span>";
-        } else {
-            cell.innerHTML = "<span style='color: green;'>" +
-                             fasta_nucleotide_sequence[sequence_index] +
-                             "</span>";
-        }
-    }
+function resetTable() {
+    updateFastaSequenceTable();
+    lower_range.value="";
+    end_range.value="";
+    ranges.length=0;
 }
+
+// function updateRegionAvoidHighlightTable() {
+//     let row = region_picker_table[0];
+//
+//     for(i = 0; i < sequence_end_range - sequence_start_range; i++) {
+//         let cell = row[i]
+//         cell.id  = i.toString();
+//
+//         let sequence_index = sequence_start_range + i;
+//
+//         if(fasta_nucleotide_sequence[sequence_index] == "X") {
+//             cell.innerHTML = "<span style='color: red;'>" +
+//                              fasta_nucleotide_sequence[sequence_index]  +
+//                              "</span>";
+//         } else {
+//             cell.innerHTML = "<span style='color: green;'>" +
+//                              fasta_nucleotide_sequence[sequence_index] +
+//                              "</span>";
+//         }
+//     }
+// }
 
 function updateSequenceIdentifierTextarea() {
     sequence_identifier_textarea.value = fasta_header;
@@ -203,6 +211,10 @@ ipcRenderer.on('LOADMODULE', (event, arg) =>{
 module1.addEventListener('click', function (){
     console.log("click");
     sendMessage('LOADMODULE', 1);
+});
+
+resetButton.addEventListener('click', function() {
+    resetTable();
 });
 
 submitButton.addEventListener('click', function () {
