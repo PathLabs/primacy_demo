@@ -14,21 +14,34 @@
       <div class="input">
         <table class="input_table">
           <tr>
-            <td>Max Iterations: </td>
+            <td>
+              <div class="tooltip">
+                Max Iterations:
+                <span class="tooltiptext">test test test test test test</span>
+              </div>
+            </td>
             <td><td><input type="text" id="iterations" size=2 value=100></td></td>
-            <td><i class="material-icons">help</i></td>
           </tr>
           <tr>
-            <td>Optimum Amplicon Size Range: </td>
+            <td>
+              <div class="tooltip">
+                Optimum Amplicon Size Range:
+                <span class="tooltiptext">test test test test test test</span>
+              </div>
+            </td>
             <td>
               <td><input id="slider" type="range" min="0" max="100" value = 50
                 class = "slider">
               </td>
             </td>
-            <td id="sliderValue"><i class="material-icons">help</i></td>
           </tr>
           <tr>
-            <td>Max Distance of Target from Primer: </td>
+            <td>
+              <div class="tooltip">
+                Max Distance of Target from Primer:
+                <span class="tooltiptext">test test test test test test</span>
+              </div>
+            </td>
             <td>
               <td>
                 <select class="form-control">
@@ -38,19 +51,26 @@
                   <option>Distance from at least one primer</option>
                   <option>Distance from both primers</option>
                 </select>
-                <td><i class="material-icons">help</i></td>
               </td>
             </td>
           </tr>
           <tr>
-            <td>Percentage of Primers to Move Forward: </td>
+            <td>
+              <div class="tooltip">
+                Percentage of Primers to Move Forward:
+                <span class="tooltiptext">test test test test test test</span>
+              </div>
+            </td>
             <td><td><input type="text" id="iterations" size=1 value=0>%</td></td>
-            <td><i class="material-icons">help</i></td>
           </tr>
           <tr>
-            <td>Background Primers: </td>
+            <td>
+              <div class="tooltip">
+                Background Primers:
+                <span class="tooltiptext">test test test test test test</span>
+              </div>
+            </td>
             <td><td><input type="file" id="file_select" class="input" accept=""></td></td>
-            <td><i class="material-icons">help</i></td>
           </tr>
         </table>
         </br>
@@ -60,39 +80,59 @@
     <div class="box box1" id="importance"> <h1>IMPORTANCE OF FEATURES</h1>
       <table class="input_table">
         <tr>
-          <td>Similar Melting Temperatures</td>
+          <td>
+            <div class="tooltip">
+              Similar Melting Temperatures:
+              <span class="tooltiptext">test test test test test test</span>
+            </div>
+          </td>
           <td><td><input id="slider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
           <td id="sliderValue"></td>
-          <td><i class="material-icons">help</i></td>
         </tr>
         <tr>
-          <td>Primer Scores</td>
+          <td>
+            <div class="tooltip">
+              Primer Scores:
+              <span class="tooltiptext">test test test test test test</span>
+            </div>
+          </td>
           <td><td><input id="slider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
           <td id="sliderValue"></td>
-          <td><i class="material-icons">help</i></td>
         </tr>
         <tr>
-          <td>Cross Dimerization</td>
+          <td>
+            <div class="tooltip">
+              Cross Dimerization:
+              <span class="tooltiptext">test test test test test test</span>
+            </div>
+          </td>
           <td><td><input id="slider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
           <td id="sliderValue"></td>
-          <td><i class="material-icons">help</i></td>
         </tr>
         <tr>
-          <td>Amplicon Size</td>
+          <td>
+            <div class="tooltip">
+              Amplicon Size:
+              <span class="tooltiptext">test test test test test test</span>
+            </div>
+          </td>
           <td><td><input id="slider" type="range" min="0" max="100" value = 0
             class = "slider"></td></td>
           <td id="sliderValue"></td>
-          <td><i class="material-icons">help</i></td>
         </tr>
         <tr>
-          <td>Target Distance From Primer</td>
+          <td>
+            <div class="tooltip">
+              Target Distance From Primer:
+              <span class="tooltiptext">test test test test test test</span>
+            </div>
+          </td>
           <td><td><input id="slider" type="range" min="0" max="100" value = 0
             class = "slider"></td></td>
           <td id="sliderValue"></td>
-          <td><i class="material-icons">help</i></td>
         </tr>
       </table>
     </div>
@@ -103,6 +143,7 @@
     <button class="tab tab1" id=module0>PRIMER COLLECTION</button>
     <button class="tab tab2" id="module1">PRIMER SCORING</button>
     <button class="tab tab3" id="module2" style="background-color: #012035;">OPTIMIZATION</button>
+    <button class="tab tab4" id="module3">OVERVIEW</button>
   </div>
 
 </body>
