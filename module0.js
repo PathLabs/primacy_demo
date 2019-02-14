@@ -10,20 +10,20 @@
 const module0                      = document.getElementById("module0");
 const module1                      = document.getElementById("module1");
 const submit_button                = document.getElementById("submitButton");
-const reset_button                = document.getElementById("resetButton");
-const fasta_file_select             = document.getElementById("fastaFileSelect");
-const fasta_file_textarea           = document.getElementById("fastaTextInput");
+const reset_button                 = document.getElementById("resetButton");
+const fasta_file_select            = document.getElementById("fastaFileSelect");
+const fasta_file_textarea          = document.getElementById("fastaTextInput");
 const region_picker_table          = document.getElementById("regionPicker");
 const lower_range                  = document.getElementById("startRange");
 const end_range                    = document.getElementById("endRange");
-const sequence_identifier_textarea  = document.getElementById("sequenceIdentifier");
+const sequence_identifier_textarea = document.getElementById("sequenceIdentifier");
 
 const pcr_sodium       = document.getElementById("pcrsodium");
 const pcr_potassium    = document.getElementById("pcrpotassium");
 const pcr_tromethamine = document.getElementById("pcrtromethanime");
 const pcr_magnesium    = document.getElementById("pcrmagnesium");
 
-const background_sequence_filepicker  = document.getElementById("backgroundseqfilepicker");
+const background_sequence_filepicker = document.getElementById("backgroundseqfilepicker");
 const background_sequence_table      = document.getElementById("backgroundseqtable");
 
 
@@ -46,7 +46,6 @@ var validate = require('./lib/input_validation.js');
 
 const {ipcRenderer} = require('electron');
 
-//sending
 function sendMessage(channel, message){
     ipcRenderer.send(channel, message);
 }
@@ -123,7 +122,13 @@ function updateFastaSequenceTable() {
                 }
 
                 ranges = [];
-                //updateRegionAvoidHighlightTable();
+                
+                // Highlight every cell between the lower and upp range
+                for(cell = parseInt(lower_range.value); cell < parseInt(end_range.value); cell++) {
+                    let curr_cell = document.getElementById(cell);
+                    curr_cell.style.backgroundColor = "green";
+                    curr_cell.style.color           = "white";
+                }
             }
             if(click_count>2){
                 resetTable();
