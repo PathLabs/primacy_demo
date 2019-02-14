@@ -19,7 +19,7 @@ let win;
 
 var pipeline_args    = [{}];
 var pipeline_results = [];
-var current_module   = 0;
+var current_module   = 1;
 
 
 function initial() {
@@ -30,7 +30,8 @@ function initial() {
     win = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
 
     // and load the index.html of the app.
-    win.loadURL('file:///'+ __dirname + '/module1.html');
+    win.loadURL('file:///'+ __dirname + '/src/html/module1.html');
+    console.log(__dirname);
     console.log('loading module1.html');
 
     // Open the DevTools.
@@ -63,7 +64,7 @@ function goToModule(module_number) {
     }
 
     // Load the html
-    win.loadURL('file:///' + __dirname + '/module' + module_number.toString() + '.html');
+    win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
 
     current_module = module_number;
 
@@ -90,7 +91,7 @@ function execPipeline(cmd, args, callback) {
 
     fs.writeFileSync(__dirname + '/args.json', args);
 
-    child_process.exec('python ' + __dirname + '/lib/pipeline/' + cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
+    child_process.exec('python ' + __dirname + '/src/pipeline/' + cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
         console.log(stdout);
 
         if(stdout) {

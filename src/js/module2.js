@@ -7,15 +7,17 @@
  *      - Chance Nelson <chance-nelson@nau.edu>
  */
 const os            = require('os');
-const validate      = require('./lib/input_validation.js');
+const validate      = require('input_validation.js');
 const {ipcRenderer} = require('electron');
 
 
 const module1       = document.getElementById("module1");
-const module2       = document.getElementById("module2");
 const module3       = document.getElementById("module3");
+
 const submit_button = document.getElementById("submitButton");
-const module_1_sum  = document.getElementById('result');
+const module_0_sum  = document.getElementById('result');
+const slider        = document.getElementById('slider');
+const slider_value  = document.getElementById('sliderValue');
 
 
 var last_module_results = {};
@@ -23,16 +25,22 @@ var current_module_args = {};
 
 
 function sendMessage(channel, message){
-    ipcRenderer.send(channel, message);
+  ipcRenderer.send(channel, message);
 }
-
 
 function init(json) {
     console.log(json);
     current_module_args = json[0];
     last_module_results = json[1];
 
-    module_1_sum.innerHTML = last_module_results['temperature'];
+    if(current_module_args) {
+        slider.value = current_module_args['temperature'];
+    } else {
+        current_module_args = {'temperature': parseInt(slider.value)};
+    }
+
+    module_0_sum.innerHTML = last_module_results['range-diff'];
+    slider_value.innerHTML = slider.value;
 }
 
 
@@ -49,11 +57,12 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
     init(arg);
-});
+})
 
 ipcRenderer.on('LOADMODULE', (event, arg) =>{
     console.log("DENIED");
-});
+})
+
 
 //loads tab on click
 module1.addEventListener('click', function (){
@@ -61,11 +70,15 @@ module1.addEventListener('click', function (){
     sendMessage('LOADMODULE', 0);
 });
 
-module2.addEventListener('click', function (){
+module3.addEventListener('click', function (){
     console.log("click");
-    sendMessage('LOADMODULE', 1);
+    sendMessage('LOADMODULE', 2);
 });
 
+slider.addEventListener('input', function() {
+    slider_value.innerHTML = slider.value;
+    current_module_args['temperature'] = parseInt(slider.value);
+});
 
 submitButton.addEventListener('click', function () {
     try {

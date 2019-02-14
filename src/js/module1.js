@@ -7,8 +7,8 @@
  *      - Chance Nelson <chance-nelson@nau.edu>
  */
 
-const module0                      = document.getElementById("module0");
 const module1                      = document.getElementById("module1");
+const module2                      = document.getElementById("module2");
 const submit_button                = document.getElementById("submitButton");
 const reset_button                 = document.getElementById("resetButton");
 const fasta_file_select            = document.getElementById("fastaFileSelect");
@@ -42,7 +42,7 @@ var sequence_end_range   = null;
 const os = require('os');
 const fs = require('fs');
 
-var validate = require('./lib/input_validation.js');
+var validate = require('input_validation.js');
 
 const {ipcRenderer} = require('electron');
 
@@ -104,7 +104,7 @@ function updateFastaSequenceTable() {
             if(ranges.length == 2) {
                 highlightFastaSequence();
             }
-            
+
             if(click_count > 2){
                 resetTable();
             }
@@ -211,7 +211,7 @@ function rangeUpdate() {
             document.getElementById(this.value).style.backgroundColor = "green";
             highlightFastaSequence();
             break;
-        
+
         default:
             resetTable();
     }
@@ -244,7 +244,7 @@ ipcRenderer.on('LOADMODULE', (event, arg) =>{
 })
 
 //loads tab on click
-module1.addEventListener('click', function (){
+module2.addEventListener('click', function (){
     console.log("click");
     sendMessage('LOADMODULE', 1);
 });
