@@ -122,7 +122,7 @@ function updateFastaSequenceTable() {
 
                 ranges = [];
                 
-                // Highlight every cell between the lower and upp range
+                // Highlight every cell between the lower and upper range
                 for(cell = parseInt(lower_range.value); cell < parseInt(end_range.value); cell++) {
                     let curr_cell = document.getElementById(cell);
                     curr_cell.style.backgroundColor = "green";
