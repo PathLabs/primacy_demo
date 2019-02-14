@@ -30,8 +30,8 @@ function initial() {
     win = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
 
     // and load the index.html of the app.
-    win.loadURL('file:///'+ __dirname + '/module0.html');
-    console.log('loading module0.html');
+    win.loadURL('file:///'+ __dirname + '/module1.html');
+    console.log('loading module1.html');
 
     // Open the DevTools.
     //win.webContents.openDevTools()
