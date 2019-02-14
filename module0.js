@@ -94,7 +94,6 @@ function updateFastaSequenceTable() {
         }
 
         cell.addEventListener('click', function() {
-            console.log('you clicked', this.id);
             click_count++;
 
             cell.style.backgroundColor = "green";
@@ -130,7 +129,8 @@ function updateFastaSequenceTable() {
                     curr_cell.style.color           = "white";
                 }
             }
-            if(click_count>2){
+            
+            if(click_count > 2){
                 resetTable();
             }
         });
@@ -139,9 +139,9 @@ function updateFastaSequenceTable() {
 
 function resetTable() {
     updateFastaSequenceTable();
-    lower_range.value="";
-    end_range.value="";
-    ranges.length=0;
+    lower_range.value = "";
+    end_range.value   = "";
+    ranges            = [];
 }
 
 // function updateRegionAvoidHighlightTable() {
