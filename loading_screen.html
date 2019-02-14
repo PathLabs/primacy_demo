@@ -9,26 +9,30 @@
 <body>
   <div class="container">
     <div class="box box1">
+      </br>
+      <img src="img/logo.png" id="loading_logo">
+      </br></br>
+      <h1 style="font-size:24px;">LOADING...</h1>
+      <div class="box progress_bar">
+
+      </div>
       <p id="bio_text">
-        TESTTESTTESTTESTTESTTEST
       </p>
       <script>
         running = true
         var bio_text = document.getElementById("bio_text")
         const options = ["ATGC","AGCT","CTAG","TAGC","GTCA","CCAA","AAAA","CTCC","TGAT","GTAA"]
-        if(running == true){
-          document.write(options[Math.floor(Math.random() * 9)]);
-        }
       </script>
     </div>
   </div>
 
   <div class="tab_container">
-    <button class="tab tab1" id="module0" style="background-color: rgb(25,25,25);">Tab 1</button>
-    <button class="tab tab2" id="module1">Tab 2</button>
-    <button class="tab tab3" id="module2">Tab 3</button>
+    <button class="tab tab1" id="module0"></button>
+    <button class="tab tab2" id="module1"></button>
+    <button class="tab tab3" id="module2"></button>
+    <button class="tab tab4" id="module3"></button>
   </div>
 
 </body>
-<script src="module0.js"></script>
+<script src="loading_screen.js"></script>
 </html>

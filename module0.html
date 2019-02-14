@@ -9,7 +9,7 @@
 <body>
   <div class="container" id="background_settings">
     <!-- Background Sequences -->
-    <div class="box box2"><h1>Background Sequences</h1>
+    <div class="box box2"><h1>BACKGROUND SEQUENCES</h1>
       <div>
         <input type="file" id="backgroundseqfilepicker" class="input" accept="">
       </div>
@@ -18,44 +18,38 @@
       </table>
     </div>
 
-    <div class="box box1"><h1>PCR Salts</h1>
+    <div class="box box1"><h1>PCR SALTS</h1>
       <!-- PCR salts -->
       <table class="input_table">
         <tr>
           <td>
-            Na:
+            Na
           </td>
           <td>
-            <input id="pcrsodium" type="text" size="2">
+            K
+          </td>
+          <td>
+            Tris
+          </td>
+          <td>
+            Mg
+          </td>
+          <td>
+            dNTPS
           </td>
         </tr>
         <tr>
           <td>
-            K:
+            <input id="pcrsodium" type="text" size="2">
           </td>
           <td>
             <input id="pcrpotassium" type="text" size="2">
           </td>
-        </tr>
-        <tr>
-          <td>
-            Tris:
-          </td>
           <td>
             <input id="pcrtromethamine" type="text" size="2">
           </td>
-        </tr>
-        <tr>
-          <td>
-            Mg:
-          </td>
           <td>
             <input id="pcrmagnesium" type="text" size="2">
-          </td>
-        </tr>
-        <tr>
-          <td>
-            dNTPS:
           </td>
           <td>
             <input id="pcrdntp" type="text" size="2">
@@ -67,23 +61,8 @@
 
 <div class="container" id="neucleotide_input">
     <div class="box box1" id="input0">
-                <div class="input">
-                    <table>
-                        <tr>
-                            <td>
-                                <textarea id="sequenceIdentifier" size="20"></textarea>
-                            </td>
-                        <tr>
-                    </table>
-                    </br>
-                </div>
-
+            <h1>FASTA SEQUENCE</h1>
             <table class="input_table" >
-                <tr>
-                    <td>
-                        <label for="file_select" class="labels"><h1>FASTA sequence: </h1></label>
-                    </td>
-                </tr>
                 <tr>
                     <td>
                         <input type="file" id="fastaFileSelect" class="input" accept="">
@@ -91,7 +70,17 @@
                 </tr>
             </table>
             </br>
-
+            <hr/>
+            <div class="input">
+                <table>
+                  <tr>
+                    <td style="border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+                      <textarea id="sequenceIdentifier" size="20"></textarea>
+                    </td>
+                  <tr>
+                </table>
+                </br>
+            </div>
           <table class="input_table">
             <tr>
               <td>Please enter start of range: </td>
@@ -102,9 +91,9 @@
               <td><input type="text" id="endRange" size=2></td>
             </tr>
           </table>
-          </br>
+          <input type="submit" id="resetButton" value="Reset">
           <div style="align: center; justify-content: center; max-width: 100%; overflow-x: auto; overflow-y: hidden; background-color: white;">
-            <table style="text-align: center; align: center; justify-content: center;"id="regionPicker" >
+            <table style="text-align: center; align: center; justify-content: center;" id="regionPicker">
               <tr>
               <tr>
             </table>
@@ -120,6 +109,7 @@
     <button class="tab tab1" id="module0" style="background-color: #012035;">PRIMER COLLECTION</button>
     <button class="tab tab2" id="module1">PRIMER SCORING</button>
     <button class="tab tab3" id="module2">OPTIMIZATION</button>
+    <button class="tab tab4" id="module3">OVERVIEW</button>
   </div>
 
 </body>
