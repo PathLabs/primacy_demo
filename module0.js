@@ -220,7 +220,7 @@ function rangeUpdate() {
 
 
 lower_range.addEventListener('change', rangeUpdate);
-end_range.addEventListener('change', rangeUpdate)
+end_range.addEventListener('change', rangeUpdate);
 
 
 //listening
