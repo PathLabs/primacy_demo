@@ -102,32 +102,7 @@ function updateFastaSequenceTable() {
             ranges.push(this.id);
 
             if(ranges.length == 2) {
-                let temp  = ranges.shift();
-                let temp2 = ranges.shift();
-
-                temp  = parseInt(temp);
-                temp2 = parseInt(temp2);
-
-                if(temp > temp2) {
-                    lower_range.value    = temp2;
-                    end_range.value      = temp;
-                    sequence_start_range = temp2;
-                    sequence_end_range   = temp;
-                } else {
-                    lower_range.value    = temp;
-                    end_range.value      = temp2;
-                    sequence_start_range = temp;
-                    sequence_end_range   = temp2;
-                }
-
-                ranges = [];
-                
-                // Highlight every cell between the lower and upper range
-                for(cell = parseInt(lower_range.value); cell < parseInt(end_range.value); cell++) {
-                    let curr_cell = document.getElementById(cell);
-                    curr_cell.style.backgroundColor = "green";
-                    curr_cell.style.color           = "white";
-                }
+                highlightFastaSequence();
             }
             
             if(click_count > 2){
@@ -138,10 +113,10 @@ function updateFastaSequenceTable() {
 }
 
 function resetTable() {
-    updateFastaSequenceTable();
     lower_range.value = "";
     end_range.value   = "";
     ranges            = [];
+    updateFastaSequenceTable();
 }
 
 // function updateRegionAvoidHighlightTable() {
@@ -190,6 +165,62 @@ function updateBackgroundSequences() {
         });
     }
 }
+
+function highlightFastaSequence() {
+    let temp  = ranges.shift();
+    let temp2 = ranges.shift();
+
+    temp  = parseInt(temp);
+    temp2 = parseInt(temp2);
+
+    if(temp > temp2) {
+        lower_range.value    = temp2;
+        end_range.value      = temp;
+        sequence_start_range = temp2;
+        sequence_end_range   = temp;
+    } else {
+        lower_range.value    = temp;
+        end_range.value      = temp2;
+        sequence_start_range = temp;
+        sequence_end_range   = temp2;
+    }
+
+    // Highlight every cell between the lower and upper range
+    for(cell = parseInt(lower_range.value); cell < parseInt(end_range.value); cell++) {
+        let curr_cell = document.getElementById(cell);
+        curr_cell.style.backgroundColor = "green";
+        curr_cell.style.color           = "white";
+    }
+
+}
+
+function rangeUpdate() {
+    console.log(ranges.length);
+    switch(ranges.length) {
+        // Just add the number to ranges, highlight the table element in green
+        case 0:
+            ranges.push(parseInt(this.value));
+            document.getElementById(this.value).style.color           = "white";
+            document.getElementById(this.value).style.backgroundColor = "green";
+            break;
+
+        // Add the number to ranges, then update the table
+        case 1:
+            ranges.push(parseInt(this.value));
+            document.getElementById(this.value).style.color           = "white";
+            document.getElementById(this.value).style.backgroundColor = "green";
+            highlightFastaSequence();
+            break;
+        
+        default:
+            resetTable();
+    }
+
+}
+
+
+lower_range.addEventListener('change', rangeUpdate);
+end_range.addEventListener('change', rangeUpdate)
 
 
 //listening
