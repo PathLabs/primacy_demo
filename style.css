@@ -160,8 +160,13 @@ input[type=submit]{
   background-color: black;
 }
 
-#sequenceIdentifier{
+#sequenceIdentifier {
   border-bottom-right-radius: 10px;
+  color:white;
+  background-color: #000010;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 #background_settings{
@@ -227,12 +232,14 @@ input[type=submit]{
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(1, 32, 53);
+  /* background: rgb(1, 32, 53); */
+  background: gray;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background:rgb(0, 36, 56);
+  /* background:rgb(0, 36, 56); */
+  background: gray;
   border-radius: 0px;
 }
 

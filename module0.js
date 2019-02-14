@@ -10,20 +10,20 @@
 const module0                      = document.getElementById("module0");
 const module1                      = document.getElementById("module1");
 const submit_button                = document.getElementById("submitButton");
-const reset_button                = document.getElementById("resetButton");
-const fasta_file_select             = document.getElementById("fastaFileSelect");
-const fasta_file_textarea           = document.getElementById("fastaTextInput");
+const reset_button                 = document.getElementById("resetButton");
+const fasta_file_select            = document.getElementById("fastaFileSelect");
+const fasta_file_textarea          = document.getElementById("fastaTextInput");
 const region_picker_table          = document.getElementById("regionPicker");
 const lower_range                  = document.getElementById("startRange");
 const end_range                    = document.getElementById("endRange");
-const sequence_identifier_textarea  = document.getElementById("sequenceIdentifier");
+const sequence_identifier_textarea = document.getElementById("sequenceIdentifier");
 
 const pcr_sodium       = document.getElementById("pcrsodium");
 const pcr_potassium    = document.getElementById("pcrpotassium");
 const pcr_tromethamine = document.getElementById("pcrtromethanime");
 const pcr_magnesium    = document.getElementById("pcrmagnesium");
 
-const background_sequence_filepicker  = document.getElementById("backgroundseqfilepicker");
+const background_sequence_filepicker = document.getElementById("backgroundseqfilepicker");
 const background_sequence_table      = document.getElementById("backgroundseqtable");
 
 
@@ -46,7 +46,6 @@ var validate = require('./lib/input_validation.js');
 
 const {ipcRenderer} = require('electron');
 
-//sending
 function sendMessage(channel, message){
     ipcRenderer.send(channel, message);
 }
@@ -95,7 +94,6 @@ function updateFastaSequenceTable() {
         }
 
         cell.addEventListener('click', function() {
-            console.log('you clicked', this.id);
             click_count++;
 
             cell.style.backgroundColor = "green";
@@ -104,28 +102,10 @@ function updateFastaSequenceTable() {
             ranges.push(this.id);
 
             if(ranges.length == 2) {
-                let temp  = ranges.shift();
-                let temp2 = ranges.shift();
-
-                temp  = parseInt(temp);
-                temp2 = parseInt(temp2);
-
-                if(temp > temp2) {
-                    lower_range.value    = temp2;
-                    end_range.value      = temp;
-                    sequence_start_range = temp2;
-                    sequence_end_range   = temp;
-                } else {
-                    lower_range.value    = temp;
-                    end_range.value      = temp2;
-                    sequence_start_range = temp;
-                    sequence_end_range   = temp2;
-                }
-
-                ranges = [];
-                //updateRegionAvoidHighlightTable();
+                highlightFastaSequence();
             }
-            if(click_count>2){
+            
+            if(click_count > 2){
                 resetTable();
             }
         });
@@ -133,10 +113,10 @@ function updateFastaSequenceTable() {
 }
 
 function resetTable() {
+    lower_range.value = "";
+    end_range.value   = "";
+    ranges            = [];
     updateFastaSequenceTable();
-    lower_range.value="";
-    end_range.value="";
-    ranges.length=0;
 }
 
 // function updateRegionAvoidHighlightTable() {
@@ -185,6 +165,62 @@ function updateBackgroundSequences() {
         });
     }
 }
+
+function highlightFastaSequence() {
+    let temp  = ranges.shift();
+    let temp2 = ranges.shift();
+
+    temp  = parseInt(temp);
+    temp2 = parseInt(temp2);
+
+    if(temp > temp2) {
+        lower_range.value    = temp2;
+        end_range.value      = temp;
+        sequence_start_range = temp2;
+        sequence_end_range   = temp;
+    } else {
+        lower_range.value    = temp;
+        end_range.value      = temp2;
+        sequence_start_range = temp;
+        sequence_end_range   = temp2;
+    }
+
+    // Highlight every cell between the lower and upper range
+    for(cell = parseInt(lower_range.value); cell < parseInt(end_range.value); cell++) {
+        let curr_cell = document.getElementById(cell);
+        curr_cell.style.backgroundColor = "green";
+        curr_cell.style.color           = "white";
+    }
+
+}
+
+function rangeUpdate() {
+    console.log(ranges.length);
+    switch(ranges.length) {
+        // Just add the number to ranges, highlight the table element in green
+        case 0:
+            ranges.push(parseInt(this.value));
+            document.getElementById(this.value).style.color           = "white";
+            document.getElementById(this.value).style.backgroundColor = "green";
+            break;
+
+        // Add the number to ranges, then update the table
+        case 1:
+            ranges.push(parseInt(this.value));
+            document.getElementById(this.value).style.color           = "white";
+            document.getElementById(this.value).style.backgroundColor = "green";
+            highlightFastaSequence();
+            break;
+        
+        default:
+            resetTable();
+    }
+
+}
+
+
+lower_range.addEventListener('change', rangeUpdate);
+end_range.addEventListener('change', rangeUpdate);
 
 
 //listening
