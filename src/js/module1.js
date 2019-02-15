@@ -42,7 +42,7 @@ var sequence_end_range   = null;
 const os = require('os');
 const fs = require('fs');
 
-var validate = require('input_validation.js');
+const validate = require('../js/input_validation.js');
 
 const {ipcRenderer} = require('electron');
 

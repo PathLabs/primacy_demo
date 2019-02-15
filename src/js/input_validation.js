@@ -90,13 +90,13 @@ exports.validateFasta = function(fasta_seq) {
      */
     fasta_seq = fasta_seq.split('\n');
 
-    const legal_char_set = ['A', 'C', 'T', 'G', 'M', 'R', 'W', 'S', 
+    const legal_char_set = ['A', 'C', 'T', 'G', 'M', 'R', 'W', 'S',
                             'Y', 'K', 'V', 'H', 'D', 'B', 'N', 'X'];
 
     for(i = 0; i < fasta_seq.length; i++) {
         for(j = 0; j < fasta_seq[i].length; j++) {
             let curr_char = fasta_seq[i][j];
-           
+
             // Is the character in the legal set?
             if(legal_char_set.indexOf(curr_char) > -1) {
                 continue;

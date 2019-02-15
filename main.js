@@ -13,6 +13,7 @@ const ipcMain = require('electron').ipcMain;
 
 var fs = require('fs');
 
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected
 let win;
@@ -31,11 +32,9 @@ function initial() {
 
     // and load the index.html of the app.
     win.loadURL('file:///'+ __dirname + '/src/html/module1.html');
-    console.log(__dirname);
-    console.log('loading module1.html');
 
     // Open the DevTools.
-    //win.webContents.openDevTools()
+    // win.webContents.openDevTools()
 
     // Emitted when the window is closed.
     win.on('closed', () => {
@@ -129,6 +128,8 @@ app.on('activate', () => {
     initial();
   }
 });
+
+
 
 
 
