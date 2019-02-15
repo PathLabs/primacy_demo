@@ -13,13 +13,14 @@ const ipcMain = require('electron').ipcMain;
 
 var fs = require('fs');
 
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected
 let win;
 
 var pipeline_args    = [{}];
 var pipeline_results = [];
-var current_module   = 0;
+var current_module   = 1;
 
 
 function initial() {
@@ -30,11 +31,10 @@ function initial() {
     win = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
 
     // and load the index.html of the app.
-    win.loadURL('file:///'+ __dirname + '/module1.html');
-    console.log('loading module1.html');
+    win.loadURL('file:///'+ __dirname + '/src/html/module1.html');
 
     // Open the DevTools.
-    //win.webContents.openDevTools()
+    // win.webContents.openDevTools()
 
     // Emitted when the window is closed.
     win.on('closed', () => {
@@ -63,7 +63,7 @@ function goToModule(module_number) {
     }
 
     // Load the html
-    win.loadURL('file:///' + __dirname + '/module' + module_number.toString() + '.html');
+    win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
 
     current_module = module_number;
 
@@ -90,7 +90,7 @@ function execPipeline(cmd, args, callback) {
 
     fs.writeFileSync(__dirname + '/args.json', args);
 
-    child_process.exec('python ' + __dirname + '/lib/pipeline/' + cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
+    child_process.exec('python ' + __dirname + '/src/pipeline/' + cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
         console.log(stdout);
 
         if(stdout) {
@@ -128,6 +128,8 @@ app.on('activate', () => {
     initial();
   }
 });
+
+
 
 
 
