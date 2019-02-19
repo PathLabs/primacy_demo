@@ -67,6 +67,11 @@ function init(json_string){
     init_run = true;
 }
 
+function resetEntryText() {
+    startRange = "";
+    endRange = "";
+}
+
 function updateFastaSequenceTable() {
     region_picker_table.deleteRow(0);  // Remove current sequence
 
