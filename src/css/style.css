@@ -18,10 +18,6 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   padding:10px;
 }
 
-.input{
-  font-size: 50%;
-}
-
 /* Header */
 .header {
   height: 7vh
@@ -44,6 +40,11 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   border:1px solid #000010;
   height:90vh;
   flex:1;
+}
+
+#sequence_title{
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .box {

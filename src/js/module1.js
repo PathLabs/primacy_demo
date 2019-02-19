@@ -53,6 +53,8 @@ function sendMessage(channel, message){
 function init(json_string){
     console.log(json_string);
 
+    resetEntryText();
+
     result_json = json_string;
 
     if(result_json) {
