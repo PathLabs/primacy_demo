@@ -14,15 +14,11 @@ const reset_button                 = document.getElementById("resetButton");
 const fasta_file_select            = document.getElementById("fastaFileSelect");
 const fasta_file_textarea          = document.getElementById("fastaTextInput");
 
-const region_picker_table          = document.getElementById("regionPicker");
-const lower_range                  = document.getElementById("startrange");
-const end_range                    = document.getElementById("endrange");
-const sequence_identifier_textarea = document.getElementById("sequenceIdentifier");
-
 const pcr_sodium       = document.getElementById("pcrsodium");
 const pcr_potassium    = document.getElementById("pcrpotassium");
-const pcr_tromethamine = document.getElementById("pcrtromethanime");
+const pcr_tromethamine = document.getElementById("pcrtromethamine");
 const pcr_magnesium    = document.getElementById("pcrmagnesium");
+const pcr_dntps        = document.getElementById("pcrdntps");
 
 const background_sequence_filepicker = document.getElementById("backgroundseqfilepicker");
 const background_sequence_table      = document.getElementById("backgroundseqtable");
@@ -43,10 +39,12 @@ var background_sequences = [];
 /**
  * @brief Template for a nucleotide sequence
  */
-var sequence_template = {
-    identifier: '',           
-    nucleotide_sequence: '',
-    ranges: []
+class Sequence {
+    constructor(identifier, nucleotide_sequence, ranges) {
+        this.identifier = identifier;
+        this.nucleotide_sequence = nucleotide_sequence;
+        this.ranges = ranges;
+    }
 };
 
 /**
@@ -54,7 +52,7 @@ var sequence_template = {
  *
  * Start the sequence array with a single template sequence
  */
-var sequences = [sequence_template];
+var sequences = [new Sequence('', '', [])];
 
 
 //gets users home directory
@@ -81,18 +79,19 @@ const {ipcRenderer} = require('electron');
  */
 function createNewSequenceSelector(fasta_seq, seq_identifier, lower_range, upper_range) {
     // push a new sequence to the array, get the index of this new sequence
-    let new_sequence = sequence_template;
-
-    new_sequence.identifier          = seq_identifier;
-    new_sequence.nucleotide_sequence = fasta_seq;
+    let new_sequence = new Sequence(seq_identifier, fasta_seq, [lower_range, upper_range]);
 
     let index = sequences.push(new_sequence) - 1; 
+
+    console.log(index);
 
     // Get the first sequence container's html
     let first_sequence_container = document.getElementsByClassName('fasta_selector')[0];
 
-    // Perform a full clone (including event handlers)
+    // Perform a full clone (all children)
     let new_container = first_sequence_container.cloneNode(true);
+
+    console.log("new container:", new_container);
 
     document.getElementById('neucleotide_input').appendChild(new_container);
 
@@ -103,33 +102,40 @@ function createNewSequenceSelector(fasta_seq, seq_identifier, lower_range, upper
     let lower_range_element = new_element.querySelector('#startrange');
     let upper_range_element = new_element.querySelector('#endrange');
 
+    if(lower_range) {
+        lower_range_element.value = parseInt(lower_range);
+        sequences[index].ranges.push(lower_range);
+    }
+
+    if(upper_range) {
+        upper_range_element.value = parseInt(upper_range);
+        sequences[index].ranges.push(upper_range);
+    }
+
+    // Set the sequence identifier
+    let sequence_identifier = new_element.querySelector('#sequenceidentifier');
+
+    sequence_identifier.value = new_sequence.identifier;
     // Initialize the sequence picker table
     updateFastaSequenceTable(input_table_element, index);
 
     // If there are ranges, highlight in the table
     if(lower_range && upper_range) {
+        console.log("Highlighting");
         highlightFastaSequence(index);
     }
-
-    if(lower_range) {
-        lower_range_element.value = parseInt(lower_range);
-    }
-
-    if(upper_range) {
-        upper_range_element.value = parseInt(upper_range);
-    }
-
-    // Set the sequence identifier
-    let sequence_identifier = new_element.querySelector('#sequenceidentifier');
-    console.log(sequence_identifier);
-
-    sequence_identifier.value = new_sequence.identifier;
 } 
 
+/**
+ * @brief update/reset a FASTA selection table
+ *
+ * @param table_element HTML DOM element for the selection table
+ * @param sequence_index index in the array 'sequences' for the primer
+ *                       selection object
+ */
 function updateFastaSequenceTable(table_element, sequence_index) {
     table_element.deleteRow(0);  // Remove current sequence
 
-    console.log(sequence_index);
     let sequence = sequences[sequence_index].nucleotide_sequence;
 
     let row = table_element.insertRow(0);
@@ -155,27 +161,36 @@ function updateFastaSequenceTable(table_element, sequence_index) {
             cell.style.color="rgb(255,130,255)";
         }
 
-        cell.addEventListener('click', function(sequence_index) {
+        cell.addEventListener('click', function() {
             cell.style.backgroundColor = "green";
             cell.style.color           = "white";
 
-            sequences[sequence_index].ranges.push(this.id);
+            console.log(sequence_index, sequences[sequence_index]);
+            sequences[sequence_index].ranges.push(parseInt(this.id));
 
-            if(ranges.length == 2) {
+            while(sequences[sequence_index].ranges.length > 2) {
+                sequences[sequence_index].ranges.shift();
+            }
+
+            if(sequences[sequence_index].ranges.length == 2) {
                 highlightFastaSequence(sequence_index);
             }
 
-            if(click_count > 2){
-                resetTable();
-            }
         });
     }
 }
 
+
+/**
+ * @brief highlight a selection in a FASTA selection table
+ *
+ * @param sequence_index index of the 'sequences' array that points to the
+ *                       primer selection object
+ */
 function highlightFastaSequence(sequence_index) {
     let ranges = sequences[sequence_index].ranges;
     let selector_element = document.getElementsByClassName('fasta_selector')[sequence_index];
-    
+
     let lower_range = selector_element.querySelector('#startrange');
     let upper_range = selector_element.querySelector('#endrange');
 
@@ -184,23 +199,26 @@ function highlightFastaSequence(sequence_index) {
 
     if(temp > temp2) {
         lower_range.value    = temp2;
-        end_range.value      = temp;
+        upper_range.value    = temp;
         sequence_start_range = temp2;
         sequence_end_range   = temp;
     } else {
         lower_range.value    = temp;
-        end_range.value      = temp2;
+        upper_range.value    = temp2;
         sequence_start_range = temp;
         sequence_end_range   = temp2;
     }
 
-    // Highlight every cell between the lower and upper range
-    for(cell = parseInt(lower_range.value); cell < parseInt(end_range.value); cell++) {
-        let curr_cell = document.getElementById(cell);
-        curr_cell.style.backgroundColor = "green";
-        curr_cell.style.color           = "white";
-    }
+    sequence_start_range = parseInt(sequence_start_range);
+    sequence_end_range = parseInt(sequence_end_range);
 
+    // Highlight every cell between the lower and upper range
+    let cells = selector_element.getElementsByClassName('sequence_item');//.slice(sequence_start_range, sequence_end_range);
+    console.log(cells);
+    for(let cell_index = sequence_start_range; cell_index < sequence_end_range; cell_index++) {
+        cells[cell_index].style.backgroundColor = "green";
+        cells[cell_index].style.color           = "white";
+    }
 }
 
 function sendMessage(channel, message){
@@ -208,27 +226,17 @@ function sendMessage(channel, message){
 }
 
 function init(json_string){
-    console.log(json_string);
-
     result_json = json_string;
-/*
+
     if(result_json) {
-        startRange.value = result_json['range-lower'];
-        endRange.value   = result_json['range-upper'];
+
     } else {
         pcr_sodium.value       = "50";
         pcr_magnesium.value    = "0";
         pcr_tromethamine.value = "0";
         pcr_potassium.value    = "0";
+        pcr_dntps.value        = "0";
     }
-    */
-}
-
-function resetTable() {
-    lower_range.value = "";
-    end_range.value   = "";
-    ranges            = [];
-    updateFastaSequenceTable();
 }
 
 function updateSequenceIdentifierTextarea() {
@@ -256,35 +264,6 @@ function updateBackgroundSequences() {
         });
     }
 }
-
-
-function rangeUpdate() {
-    console.log(ranges.length);
-    switch(ranges.length) {
-        // Just add the number to ranges, highlight the table element in green
-        case 0:
-            ranges.push(parseInt(this.value));
-            document.getElementById(this.value).style.color           = "white";
-            document.getElementById(this.value).style.backgroundColor = "green";
-            break;
-
-        // Add the number to ranges, then update the table
-        case 1:
-            ranges.push(parseInt(this.value));
-            document.getElementById(this.value).style.color           = "white";
-            document.getElementById(this.value).style.backgroundColor = "green";
-            highlightFastaSequence();
-            break;
-
-        default:
-            resetTable();
-    }
-
-}
-
-
-lower_range.addEventListener('change', rangeUpdate);
-end_range.addEventListener('change', rangeUpdate);
 
 
 //listening
@@ -318,21 +297,46 @@ resetButton.addEventListener('click', function() {
 });
 
 submitButton.addEventListener('click', function () {
-    try {
-        if (startRange && endRange){
-            var startString = validate.parseTemperature(startRange.value.toString());
-            var endString   = validate.parseTemperature(endRange.value.toString());
+    let out_json = {}
+   
+    out_json.sequences = {};
 
-            json_string = {'range-lower': startString, 'range-upper': endString, 'file': '"'+file_select.input +'"'};
-            json_string = JSON.stringify(json_string);
-
-            sendMessage('EXECUTE', ['primacy.py', json_string]);
-
-            console.log("message sent");
+    let sequence_array = []
+    for(let i = 0; i < sequences.length; i++) {
+        let current_sequence = sequences[i];
+        
+        if(current_sequence.identifier == '') {
+            continue;
         }
-    } catch(e) {
-        console.log(e);
+        
+        current_sequence.ranges.sort();
+        out_json.sequences[current_sequence.identifier] = {
+            seq: current_sequence.nucleotide_sequence,
+            target_start: current_sequence.ranges[0],
+            target_end: current_sequence.ranges[1],
+            
+            // TODO: primer length ranges
+            primer_len_range: {
+                min: 18,
+                max: 22
+            }
+        };
     }
+  
+    out_json.primer_collection                   = {};
+    out_json.primer_collection.params            = {};
+    out_json.primer_collection.params.pcr_salts  = {};
+
+    out_json.primer_collection.params.pcr_salts.na    = pcr_sodium.value.toString();
+    out_json.primer_collection.params.pcr_salts.k     = pcr_potassium.value.toString();
+    out_json.primer_collection.params.pcr_salts.tris  = pcr_tromethamine.value.toString();
+    out_json.primer_collection.params.pcr_salts.mg    = pcr_magnesium.value.toString();
+    out_json.primer_collection.params.pcr_salts.dntps = pcr_dntps.value.toString();
+
+    console.log("Created output JSON:")
+    console.log(out_json);
+
+    sendMessage('EXECUTE', ['module1.py', out_json])
 });
 
 fasta_file_select.addEventListener('change', function() {
@@ -348,20 +352,31 @@ fasta_file_select.addEventListener('change', function() {
             console.log("FASTA file read error");
         }
 
-        fasta_raw_string = data.toString();
+        let fasta_raw_string = data.toString();
+        fasta_raw_string = fasta_raw_string.split(/\n/);
 
+        let current_sequence = '';
+        let current_header = null;
 
-        // If there is a header, split it from the string
-        if('>' == fasta_raw_string[0]) {
-            console.log("Found header in FASTA file");
-            fasta_nucleotide_sequence = fasta_raw_string.split(/\n/);
-            fasta_header              = fasta_nucleotide_sequence.shift();
-            fasta_nucleotide_sequence = fasta_nucleotide_sequence.join("");
+        for(let line of fasta_raw_string) {
+            if('>' == line[0]) {
+                if(!current_header) {
+                    current_header = line;
+                    continue;
+                } else {
+                    createNewSequenceSelector(current_sequence, current_header, undefined, undefined);
+                    current_header = line;
+                    current_sequence = '';
+                    continue;
+                }
+            } else {
+                current_sequence += line;
+            }
         }
 
-        // Update the nucleotide sequence picker table
-        updateFastaSequenceTable();
-        updateSequenceIdentifierTextarea();
+        if(current_sequence != '') {
+            createNewSequenceSelector(current_sequence, current_header, undefined, undefined);
+        }
     });
 
 });
@@ -384,4 +399,4 @@ background_sequence_filepicker.addEventListener('change', function() {
 });
 
 
-init('{}');
+init(null);
