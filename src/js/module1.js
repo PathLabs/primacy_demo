@@ -303,11 +303,11 @@ resetButton.addEventListener('click', function() {
 });
 
 submitButton.addEventListener('click', function () {
-    let out_json = {}
+    let out_json = {};
    
     out_json.sequences = {};
 
-    let sequence_array = []
+    let sequence_array = [];
     for(let i = 0; i < sequences.length; i++) {
         let current_sequence = sequences[i];
         
