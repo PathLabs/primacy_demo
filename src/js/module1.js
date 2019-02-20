@@ -124,6 +124,8 @@ function createNewSequenceSelector(fasta_seq, seq_identifier, lower_range, upper
 
     // Allow editing of the sequence text
     let sequence_editable_textarea = new_element.querySelector('.rawsequence');
+    sequence_editable_textarea.value = sequences[index].nucleotide_sequence;
+    console.log(sequence_editable_textarea);
     sequence_editable_textarea.addEventListener('change', function() {
         let sequence = sequences[index];
         
@@ -193,7 +195,6 @@ function updateFastaSequenceTable(table_element, sequence_index) {
             if(sequences[sequence_index].ranges.length == 2) {
                 highlightFastaSequence(sequence_index);
             }
-
         });
     }
 }
