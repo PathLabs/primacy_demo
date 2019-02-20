@@ -122,6 +122,18 @@ function createNewSequenceSelector(fasta_seq, seq_identifier, lower_range, upper
         sequence.identifier = this.value;
     });
 
+    // Allow editing of the sequence text
+    let sequence_editable_textarea = new_element.querySelector('.rawsequence');
+    sequence_editable_textarea.addEventListener('change', function() {
+        let sequence = sequences[index];
+        
+        // TODO validate new sequence string
+        sequence.nucleotide_sequence = this.value;
+
+        let sequence_element = document.getElementsByClassName('fasta_selector')[index];
+        updateFastaSequenceTable(sequence_element, index);
+    });
+
     // Initialize the sequence picker table
     updateFastaSequenceTable(input_table_element, index);
 
