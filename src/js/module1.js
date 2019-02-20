@@ -114,8 +114,14 @@ function createNewSequenceSelector(fasta_seq, seq_identifier, lower_range, upper
 
     // Set the sequence identifier
     let sequence_identifier = new_element.querySelector('#sequenceidentifier');
-
     sequence_identifier.value = new_sequence.identifier;
+
+    // Change the sequences identifier on text area update
+    sequence_identifier.addEventListener('change', function() {
+        let sequence = sequences[index];
+        sequence.identifier = this.value;
+    });
+
     // Initialize the sequence picker table
     updateFastaSequenceTable(input_table_element, index);
 
