@@ -6,6 +6,10 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 
+body {
+  overflow: hidden;
+}
+
 /* Some default styles to make each box visible */
 .box {
   overflow-y: auto;
@@ -16,10 +20,6 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   text-align: center;
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
   padding:10px;
-}
-
-.input{
-  font-size: 50%;
 }
 
 /* Header */
@@ -44,6 +44,11 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
   border:1px solid #000010;
   height:90vh;
   flex:1;
+}
+
+#sequence_title{
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .box {
@@ -79,6 +84,10 @@ hr{
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.sequence_box {
+
 }
 
 /* Example Different Sizes */
@@ -171,6 +180,7 @@ input[type=submit]{
 
 #background_settings{
   height:25vh;
+  overflow-x: hidden;
 }
 
 #neucleotide_input{
@@ -195,6 +205,7 @@ input[type=submit]{
   flex-wrap:nowrap;
   flex-direction:row;
   height:10vh;
+  overflow-x: none;
 }
 
 .tab {
