@@ -221,6 +221,12 @@ function highlightFastaSequence(sequence_index) {
     }
 }
 
+/**
+ * @brief send a message to the main thread
+ *
+ * @param channel channel to send message on. Can be 'EXECUTE', 'LOADMODULE', etc
+ * @param message message to send
+ */
 function sendMessage(channel, message){
     ipcRenderer.send(channel, message);
 }
@@ -293,7 +299,7 @@ module2.addEventListener('click', function (){
 });
 
 resetButton.addEventListener('click', function() {
-    resetTable();
+    // TODO: resetTable();
 });
 
 submitButton.addEventListener('click', function () {
@@ -334,16 +340,12 @@ submitButton.addEventListener('click', function () {
     out_json.primer_collection.params.pcr_salts.dntps = pcr_dntps.value.toString();
 
     console.log("Created output JSON:")
-    console.log(out_json);
+    console.log(JSON.stringify(out_json));
 
-    sendMessage('EXECUTE', ['module1.py', out_json])
+    sendMessage('EXECUTE', ['module1.py', JSON.stringify(out_json)]);
 });
 
 fasta_file_select.addEventListener('change', function() {
-    /**
-     * Desc: Reads in a FASTA file and displays it in the
-     *       textarea.
-     */
     console.log("FASTA file change");
 
     // Read in the data from the file
@@ -382,11 +384,6 @@ fasta_file_select.addEventListener('change', function() {
 });
 
 background_sequence_filepicker.addEventListener('change', function() {
-    /**
-     * Desc: If a file has been added to the background sequence list,
-     *       add a new file picker, and set up this event listener
-     */
-
     path = background_sequence_filepicker.files[0].path;
 
     // TODO: Validate fasta file
