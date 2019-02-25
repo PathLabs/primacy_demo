@@ -7,12 +7,16 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 ```bash
 # Clone this repository
 git clone https://github.com/PathLabs/primacy_demo
+
 # Go into the repository
 cd primacy_demo
 
 # Install dependencies
-npm install electron --save-dev --verbose
+make install
 
 # Run the app
-npm start
+make start
+
+# Clean the node_modules
+make clean
 ```
