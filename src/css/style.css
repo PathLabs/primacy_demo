@@ -275,7 +275,20 @@ input[type=submit]{
 .progress_bar {
   margin: auto;
   height:10vh;
-  width:50vw;
+  width:100%;
   border: 1px solid #000010;
   background-color: #35506b;
+  overflow-y: hidden;
+  padding: 0px;
+}
+
+#current_progress {
+  margin: left;
+  width:1%;
+  height:100%;
+  background-color: black;
+}
+
+#loading_screen_container {
+  height: 100vh;
 }
