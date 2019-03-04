@@ -71,7 +71,7 @@ hr{
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 100px;
-  background-color: rgb(1, 32, 53);
+  background-color: black;
   color: #fff;
   text-align: center;
   padding: 5px 0;
@@ -84,6 +84,14 @@ hr{
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.setting_title {
+  float: left;
+}
+
+.setting_input {
+  float: right;
 }
 
 .sequence_box {
