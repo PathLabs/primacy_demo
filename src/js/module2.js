@@ -88,6 +88,7 @@ gcc_min_slider.addEventListener('input', function() {
 gcc_max_slider.addEventListener('input', function() {
     gcc_max_val.innerHTML = gcc_max_slider.value;
     current_module_args['gcc_max_val'] = parseInt(gcc_max_slider.value);
+});
 
 submitButton.addEventListener('click', function () {
     try {
