@@ -8,29 +8,44 @@
 
 <body>
   <div class="container">
-    <div class="box box1">Box 1
+    <div class="box box1"><h1>TEMPERATURE SETTINGS</h1>
       <hr>
       <div class="input">
         <table class="input_table">
           <tr>
-            <td>Start - End values from previous tab: </td>
-            <td id="result"></td>
+            <td>Optimal Melting Temperature for Reaction: </td>
+            <td><input type="text" name="melting_temp" value=55></td>
           </tr>
+		  <tr>
+			<td>Please enter a value between 40-80ºC</td>
+	   	  </tr>
         </table>
         </br>
       </div>
     </div>
-    <div class="box box2">Box 2
+    <div class="box box2"><h1>GCC CONTENT</h1>
+      (Guanylate cyclase 2C)
       <hr>
       <div class="input_box">
         <div class="input">
           <table class="input_table">
             <tr>
-              <td>Temperature Max: </td>
-              <td><input id="slider" type="range" min="0" max="100" value = 50
+              <td>GCC Content Min: </td>
+              <td><input id="gccMinSlider" type="range" min="0" max="100" value = 40
                 class = "slider"></td>
-              <td id="sliderValue"></td>
+              <td id="gccMin"></td>
+			  <td>%</td>
             </tr>
+			<tr>
+			  <td>GCC Content Max: </td>
+			  <td><input id="gccMaxSlider" type="range" min="0" max="100" value = 60
+				class = "slider"></td>
+			  <td id="gccMax"></td>
+			  <td>%</td>
+			</tr>
+			<tr>
+			  Please Ensure Max > Min
+			</tr>
           </table>
           </br>
           <input id="submitButton" type="submit" value="Submit">
