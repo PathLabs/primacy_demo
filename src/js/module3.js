@@ -11,12 +11,23 @@ const validate      = require('input_validation.js');
 const {ipcRenderer} = require('electron');
 
 
-const module1       = document.getElementById("module1");
-const module2       = document.getElementById("module2");
-const module3       = document.getElementById("module3");
-const submit_button = document.getElementById("submitButton");
-const module_1_sum  = document.getElementById('result');
+const module1            = document.getElementById("module1");
+const module2            = document.getElementById("module2");
+const module3            = document.getElementById("module3");
+const submit_button      = document.getElementById("submitButton");
+const module_1_sum       = document.getElementById('result');
 
+var iterations           = document.getElementById("iterations");
+var amplicon_size        = document.getElementById("optimumAmpliconSize");
+var max_distance         = document.getElementById("maxDistance");
+var move_forward         = document.getElementById("moveForward");
+var background_primers   = document.getElementById("backgroundPrimers");
+
+var sim_melt_temp        = document.getElementById("simMeltTemp");
+var primer_scores        = document.getElementById("primerScores");
+var cross_dimerization   = document.getElementById("crossimerizationSlider");
+var amplicon_size        = document.getElementById("ampliconSize");
+var target_distance      = document.getElementById("targetDistance");
 
 var last_module_results = {};
 var current_module_args = {};
