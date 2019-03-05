@@ -30,8 +30,9 @@
               </div>
             </td>
             <td>
-              <td class=setting_input><input id="slider" type="range" min="0" max="100" value = 50
+              <td class=setting_input><input id="amplicon_slider" type="range" min="0" max="100" value = 50
                 class = "slider">
+                <input type="text" name="amplicon_value" class="sliderValue">
               </td>
             </td>
           </tr>
@@ -88,7 +89,9 @@
           </td>
           <td><td><input id="slider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
-          <td id="sliderValue"></td>
+          <td class="sliderValue">
+            <input type="text" name="sim_melt_temp" class="sliderValue" id="simMeltTemp">
+          </td>
         </tr>
         <tr>
           <td class=setting_title>
@@ -99,7 +102,9 @@
           </td>
           <td><td><input id="slider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
-          <td id="sliderValue"></td>
+          <td class="sliderValue">
+            <input type="text" name="primer_scores" class="sliderValue" id="primerScores">
+          </td>
         </tr>
         <tr>
           <td class=setting_title>
@@ -110,7 +115,9 @@
           </td>
           <td><td><input id="slider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
-          <td id="sliderValue"></td>
+          <td class="sliderValue">
+            <input type="text" name="cross_dimerization" class="sliderValue" id="crossDimerization">
+          </td>
         </tr>
         <tr>
           <td class=setting_title>
@@ -121,7 +128,9 @@
           </td>
           <td><td><input id="slider" type="range" min="0" max="100" value = 0
             class = "slider"></td></td>
-          <td id="sliderValue"></td>
+          <td class="sliderValue">
+            <input type="text" name="amplicon_size" class="sliderValue" id=ampliconSize>
+          </td>
         </tr>
         <tr>
           <td class=setting_title>
@@ -132,11 +141,12 @@
           </td>
           <td><td><input id="slider" type="range" min="0" max="100" value = 0
             class = "slider"></td></td>
-          <td id="sliderValue"></td>
+          <td class="sliderValue">
+            <input type="text" name="target_distance" class="sliderValue" id=targetDistance>
+          </td>
         </tr>
       </table>
     </div>
-
   </div>
 
   <div class="tab_container">

@@ -111,6 +111,10 @@ hr{
   text-align: center;
 }
 
+.sliderValue {
+  width: 3em;
+}
+
 h1 {
   font-size: 15px;
   font-family: sans-serif;
