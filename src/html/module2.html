@@ -8,7 +8,7 @@
 
 <body>
   <div class="container">
-    <div class="box box1"><h1>TEMPERATURE SETTINGS</h1>
+    <div class="box box1"><h1>OPTIMAL MELTING TEMPERATURE (°C)</h1>
       <hr>
       <div class="input">
         <table class="input_table">
@@ -23,28 +23,27 @@
         </br>
       </div>
     </div>
-    <div class="box box2"><h1>GCC CONTENT</h1>
-      (Guanylate cyclase 2C)
+    <div class="box box2"><h1>OPTIMAL RANGE FOR GC CONTENT (%)</h1>
       <hr>
       <div class="input_box">
         <div class="input">
           <table class="input_table">
             <tr>
-              <td>GCC Content Min: </td>
-              <td><input id="gccMinSlider" type="range" min="0" max="100" value = 40
+              <td>GC Content Min: </td>
+              <td><input id="gcMinSlider" type="range" min="0" max="100" value = 40
                 class = "slider"></td>
-              <td id="gccMin"></td>
+              <td id="gcMin"></td>
 			  <td>%</td>
             </tr>
 			<tr>
-			  <td>GCC Content Max: </td>
-			  <td><input id="gccMaxSlider" type="range" min="0" max="100" value = 60
+			  <td>GC Content Max: </td>
+			  <td><input id="gcMaxSlider" type="range" min="0" max="100" value = 60
 				class = "slider"></td>
-			  <td id="gccMax"></td>
+			  <td id="gcMax"></td>
 			  <td>%</td>
 			</tr>
 			<tr>
-			  Please Ensure Max > Min
+			  <!-- Please Ensure Max > Min -->
 			</tr>
           </table>
           </br>
@@ -52,6 +51,61 @@
         </div>
       </div>
     </div>
+
+    <div class="box box2"><h1>RELATIVE IMPORTENCE OF FEATURES</h1>
+      <h1> Zero indicates feature will not be considered </h1>
+      <table class="input_table">
+      <tr>
+        <td>Tm</td>
+        <td><input id="tmSlider" type="range" min="0" max="100" value = 1
+        class = "slider"></td>
+        <td id="tm"></td>
+        <td>%</td>
+      </tr>
+
+      <tr>
+        <td>GC</td>
+        <td><input id="gcfSlider" type="range" min="0" max="100" value = 1
+        class = "slider"></td>
+        <td id="gcf"></td>
+        <td>%</td>
+      </tr>
+
+      <tr>
+        <td>Homopolymers</td>
+        <td><input id="hpolySlider" type="range" min="0" max="100" value = 1
+        class = "slider"></td>
+        <td id="hpoly"></td>
+        <td>%</td>
+      </tr>
+
+      <tr>
+        <td>dimerization</td>
+        <td><input id="dimerzSlider" type="range" min="0" max="100" value = 1
+        class = "slider"></td>
+        <td id="dimerz"></td>
+        <td>%</td>
+      </tr>
+
+      <tr>
+        <td>specifity</td>
+        <td><input id="specifSlider" type="range" min="0" max="100" value = 1
+        class = "slider"></td>
+        <td id="specif"></td>
+        <td>%</td>
+      </tr>
+
+      <tr>
+        <td>degenerate</td>
+        <td><input id="degenSlider" type="range" min="0" max="100" value = 1
+        class = "slider"></td>
+        <td id="degen"></td>
+        <td>%</td>
+      </tr>
+
+
+    </table>
+
   </div>
 
   <div class="tab_container">
