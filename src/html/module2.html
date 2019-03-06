@@ -29,19 +29,18 @@
         <div class="input">
           <table class="input_table">
             <tr>
-              <td>GC Content Min: </td>
-              <td><input id="gcMinSlider" type="range" min="0" max="100" value = 40
-                class = "slider"></td>
-              <td id="gcMin"></td>
-			  <td>%</td>
+              <td>GC Content Min</td>
+              <td><input id="gcMinSlider" type="range" min="0" max="100" value = 0
+              oninput="gcMin.value=gcMinSlider.value" class = "slider"></td>
+              <td><output name="gcMin" id="gcMin" for="gcMinSlider">0</output>%</td>
             </tr>
-			<tr>
-			  <td>GC Content Max: </td>
-			  <td><input id="gcMaxSlider" type="range" min="0" max="100" value = 60
-				class = "slider"></td>
-			  <td id="gcMax"></td>
-			  <td>%</td>
-			</tr>
+
+            <tr>
+              <td>GC Content Max</td>
+              <td><input id="gcMaxSlider" type="range" min="0" max="100" value = 0
+              oninput="gcMax.value=gcMaxSlider.value" class = "slider"></td>
+              <td><output name="gcMax" id="gcMax" for="gcMaxSlider">0</output>%</td>
+            </tr>
 			<tr>
 			  <!-- Please Ensure Max > Min -->
 			</tr>
@@ -58,49 +57,43 @@
       <tr>
         <td>Tm</td>
         <td><input id="tmSlider" type="range" min="0" max="100" value = 1
-        class = "slider"></td>
-        <td id="tm"></td>
-        <td>%</td>
+        oninput="tm.value=tmSlider.value" class = "slider"></td>
+        <td><output name="tm" id="tm" for="tmSlider">0</output></td>
       </tr>
 
       <tr>
         <td>GC</td>
         <td><input id="gcfSlider" type="range" min="0" max="100" value = 1
-        class = "slider"></td>
-        <td id="gcf"></td>
-        <td>%</td>
+        oninput="gcf.value=gcfSlider.value" class = "slider"></td>
+        <td><output name="gcf" id="gcf" for="gcfSlider">0</output></td>
       </tr>
 
       <tr>
         <td>Homopolymers</td>
         <td><input id="hpolySlider" type="range" min="0" max="100" value = 1
-        class = "slider"></td>
-        <td id="hpoly"></td>
-        <td>%</td>
+        oninput="hpoly.value=hpolySlider.value" class = "slider"></td>
+        <td><output name="hpoly" id="hpoly" for="hpolySlider">0</output></td>
       </tr>
 
       <tr>
-        <td>dimerization</td>
+        <td>Dimerzation</td>
         <td><input id="dimerzSlider" type="range" min="0" max="100" value = 1
-        class = "slider"></td>
-        <td id="dimerz"></td>
-        <td>%</td>
+        oninput="dimer.value=dimerzSlider.value" class = "slider"></td>
+        <td><output name="dimerz" id="dimerz" for="dimerzSlider">0</output></td>
       </tr>
 
       <tr>
-        <td>specifity</td>
+        <td>Specifity</td>
         <td><input id="specifSlider" type="range" min="0" max="100" value = 1
-        class = "slider"></td>
-        <td id="specif"></td>
-        <td>%</td>
+        oninput="specif.value=specifSlider.value" class = "slider"></td>
+        <td><output name="specif" id="specif" for="specifSlider">0</output></td>
       </tr>
 
       <tr>
-        <td>degenerate</td>
+        <td>Degenerate</td>
         <td><input id="degenSlider" type="range" min="0" max="100" value = 1
-        class = "slider"></td>
-        <td id="degen"></td>
-        <td>%</td>
+        oninput="degen.value=degenSlider.value" class = "slider"></td>
+        <td><output name="degen" id="degen" for="degenSlider">0</output></td>
       </tr>
 
 

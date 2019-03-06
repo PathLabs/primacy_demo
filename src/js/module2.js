@@ -122,6 +122,7 @@ degenSlider.addEventListener('input', function() {
 });
 
 
+
 submitButton.addEventListener('click', function () {
     try {
         json_string = JSON.stringify(current_module_args);
