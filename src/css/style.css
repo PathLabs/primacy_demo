@@ -37,7 +37,7 @@ body {
   flex:1;
 }
 
-.container_mod2 {
+.container_mod3 {
   display:flex;
   flex-wrap:nowrap;
   flex-direction:row;
@@ -88,6 +88,10 @@ hr{
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.setting_title {
+  float: left;
 }
 
 .setting_input {

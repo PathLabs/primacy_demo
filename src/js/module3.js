@@ -83,6 +83,14 @@ module2.addEventListener('click', function (){
     sendMessage('LOADMODULE', 1);
 });
 
+
+iterations.value = 100;
+sim_melt_temp.value = 1;
+primer_scores.value = 1;
+cross_dimerization.value = 1;
+amplicon_size.value = 0;
+target_distance.value = 0;
+
 amplicon_slider.oninput = function() {
     opt_amplicon_size.value = this.value;
 }
