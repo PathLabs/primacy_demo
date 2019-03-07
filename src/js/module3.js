@@ -7,7 +7,7 @@
  *      - Chance Nelson <chance-nelson@nau.edu>
  */
 const os            = require('os');
-const validate      = require('input_validation.js');
+// const validate      = require('input_validation.js');
 const {ipcRenderer} = require('electron');
 
 
@@ -18,7 +18,8 @@ const submit_button      = document.getElementById("submitButton");
 const module_1_sum       = document.getElementById('result');
 
 var iterations           = document.getElementById("iterations");
-var amplicon_size        = document.getElementById("optimumAmpliconSize");
+var amplicon_slider      = document.getElementById("ampliconSlider")
+var opt_amplicon_size    = document.getElementById("optimumAmpliconSize");
 var max_distance         = document.getElementById("maxDistance");
 var move_forward         = document.getElementById("moveForward");
 var background_primers   = document.getElementById("backgroundPrimers");
@@ -77,14 +78,10 @@ module2.addEventListener('click', function (){
     sendMessage('LOADMODULE', 1);
 });
 
+amplicon_slider.oninput = function() {
+    opt_amplicon_size.value = this.value;
+}
 
-submitButton.addEventListener('click', function () {
-    try {
-        json_string = JSON.stringify(current_module_args);
-        sendMessage('EXECUTE', ['primacy2.py', json_string]);
-
-        console.log("message sent");
-    } catch(e) {
-        console.log(e);
-    }
-});
+opt_amplicon_size.oninput = function() {
+    amplicon_slider.value = this.value;
+}
