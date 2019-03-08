@@ -7,7 +7,7 @@ input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}b
 
 
 body {
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Some default styles to make each box visible */
