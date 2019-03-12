@@ -17,10 +17,10 @@ const module3       = document.getElementById("module3");
 
 const submit_button = document.getElementById("submitButton");
 const module_0_sum  = document.getElementById('result');
-const gcc_min_slider = document.getElementById('gccMinSlider');
-const gcc_max_slider = document.getElementById('gccMaxSlider');
-const gcc_min_val  = document.getElementById('gccMin');
-const gcc_max_val  = document.getElementById('gccMax');
+const gc_min_slider = document.getElementById('gcMinSlider');
+const gc_max_slider = document.getElementById('gcMaxSlider');
+const gc_min_val  = document.getElementById('gcMin');
+const gc_max_val  = document.getElementById('gcMax');
 
 var last_module_results = {};
 var current_module_args = {};
@@ -38,14 +38,14 @@ function init(json) {
     last_module_results = json[1];
 
     if(current_module_args) {
-        gcc_min_slider.value = current_module_args['gcc_min_val'];
-        gcc_max_slider.value = current_module_args['gcc_max_val'];
+        gc_min_slider.value = current_module_args['gc_min_val'];
+        gc_max_slider.value = current_module_args['gc_max_val'];
     } else {
-        current_module_args = {'gcc_min_val': parseInt(gcc_min_slider.value),
-              'gcc_max_val': parseInt(gcc_max_slider.value)};
+        current_module_args = {'gc_min_val': parseInt(gc_min_slider.value),
+              'gc_max_val': parseInt(gc_max_slider.value)};
     }
-    gcc_min_val.innerHTML = gcc_min_slider.value;
-    gcc_max_val.innerHTML = gcc_max_slider.value;
+    gc_min_val.innerHTML = gc_min_slider.value;
+    gc_max_val.innerHTML = gc_max_slider.value;
 }
 
 
@@ -80,15 +80,48 @@ module3.addEventListener('click', function (){
     sendMessage('LOADMODULE', 2);
 });
 
-gcc_min_slider.addEventListener('input', function() {
-    gcc_min_val.innerHTML = gcc_min_slider.value;
-    current_module_args['gcc_min_val'] = parseInt(gcc_min_slider.value);
+gc_min_slider.addEventListener('input', function() {
+    gc_min_val.innerHTML = gc_min_slider.value;
+    current_module_args['gc_min_val'] = parseInt(gc_min_slider.value);
 });
 
-gcc_max_slider.addEventListener('input', function() {
-    gcc_max_val.innerHTML = gcc_max_slider.value;
-    current_module_args['gcc_max_val'] = parseInt(gcc_max_slider.value);
+gc_max_slider.addEventListener('input', function() {
+    gc_max_val.innerHTML = gc_max_slider.value;
+    current_module_args['gc_max_val'] = parseInt(gc_max_slider.value);
 });
+
+tmSlider.addEventListener('input', function() {
+    tm.innerHTML = tmSlider.value;
+    current_module_args['tm'] = parseInt(tmSlider.value);
+});
+
+gcfSlider.addEventListener('input', function() {
+    gcf.innerHTML = gcfSlider.value;
+    current_module_args['gc'] = parseInt(gcfSlider.value);
+});
+
+
+hpolySlider.addEventListener('input', function() {
+    hpoly.innerHTML = hpolySlider.value;
+    current_module_args['homopolymer'] = parseInt(hpolySlider.value);
+});
+
+dimerzSlider.addEventListener('input', function() {
+    dimerz.innerHTML = dimerzSlider.value;
+    current_module_args['dimer'] = parseInt(dimerzSlider.value);
+});
+
+specifSlider.addEventListener('input', function() {
+    specif.innerHTML = specifSlider.value;
+    current_module_args['specifity'] = parseInt(specifSlider.value);
+});
+
+degenSlider.addEventListener('input', function() {
+    degen.innerHTML = degenSlider.value;
+    current_module_args['degenerate'] = parseInt(dimerzSlider.value);
+});
+
+
 
 submitButton.addEventListener('click', function () {
     try {
