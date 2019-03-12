@@ -33,7 +33,7 @@ function initial() {
     win = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
 
     // and load the index.html of the app.
-    win.loadURL('file:///'+ __dirname + '/src/html/module1.html');
+    win.loadURL('file:///'+ __dirname + '/src/html/module2.html');
 
     // Open the DevTools.
     // win.webContents.openDevTools()
@@ -68,6 +68,19 @@ function goToModule(module_number) {
      *      - If there is a problem rendering the page, False.
      *      - Else, True.
      */
+
+    if(module_number < current_module) {
+        var choice = require('electron').dialog.showMessageBox(this,
+            {
+                type: 'question',
+                buttons: ['Yes', 'No'],
+                title: 'Confirm',
+                message: 'Unsaved progress will be lost. Are you sure you want to leave this module?'
+            });
+        if(choice == 1){
+            e.preventDefault();
+        }
+    }
 
     if(pipeline_args.length < (module_number + 1) && pipeline_results.length < (module_number)) {
         return false;
