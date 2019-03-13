@@ -18,7 +18,7 @@ const submit_button      = document.getElementById("submitButton");
 const module_1_sum       = document.getElementById('result');
 
 var iterations           = document.getElementById("iterations");
-var amplicon_slider      = document.getElementById("ampliconSlider")
+var amplicon_slider      = document.getElementById("ampliconSlider");
 var opt_amplicon_size    = document.getElementById("optimumAmpliconSize");
 var max_distance         = document.getElementById("maxDistance");
 var move_forward         = document.getElementById("moveForward");
@@ -93,53 +93,53 @@ target_distance.value = 0;
 
 amplicon_slider.oninput = function() {
     opt_amplicon_size.value = this.value;
-}
+};
 
 opt_amplicon_size.oninput = function() {
     amplicon_slider.value = this.value;
-}
+};
 
 
 sim_melt_temp_slider.oninput = function() {
     sim_melt_temp.value = this.value;
-}
+};
 
 sim_melt_temp.oninput = function() {
     sim_melt_temp_slider.value = this.value;
-}
+};
 
 
 primer_scores_slider.oninput = function() {
     primer_scores.value = this.value;
-}
+};
 
 primer_scores.oninput = function() {
     primer_scores_slider.value = this.value;
-}
+};
 
 
 cross_dim_slider.oninput = function() {
     cross_dimerization.value = this.value;
-}
+};
 
 cross_dimerization.oninput = function() {
     cross_dim_slider.value = this.value;
-}
+};
 
 
 amplicon_size_slider.oninput = function() {
     amplicon_size.value = this.value;
-}
+};
 
 amplicon_size.oninput = function() {
     amplicon_size_slider.value = this.value;
-}
+};
 
 
 target_dist_slider.oninput = function() {
     target_distance.value = this.value;
-}
+};
 
 target_distance.oninput = function() {
     target_dist_slider.value = this.value;
-}
+};
