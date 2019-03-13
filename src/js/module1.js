@@ -7,7 +7,6 @@
  */
 
 
-const state;
 
 
 /**
@@ -21,7 +20,7 @@ class Module1 {
      * @param previous_state JSON object that contains the arguments for
      *        a run of Primacy module 1.
      */
-    constructor(previous_state) {
+    constructor(previous_state=null) {
         this.target_regions = [];
         
         this.background_sequences = [];
@@ -94,17 +93,17 @@ class Module1 {
      * @param max_length (optional) maximum length of primer
      */
     addTargetRegionIdentifier(label, sequence, target_start=null, target_end=null, min_length=null, max_length=null) {
-        target_region_obj = {
-            label.toString(): {
-                'seq': sequence.toString(),
-                'target_start': target_start,
-                'target_end': target_end,
-                'primer_len_range': {
-                    'min': min_length,
-                    'max': max_length
-                }
-            }   
-        };
+        target_region_obj = {};
+        target_region_obj[label.toString()] = {
+            'seq': sequence.toString(),
+            'target_start': target_start,
+            'target_end': target_end,
+            'primer_len_range': {
+                'min': min_length,
+                'max': max_length
+            }
+        };   
+        
         
         this.target_regions.push(target_region_obj);
     }
@@ -131,7 +130,7 @@ class Module1 {
 
 
 // set up listeners for PCR Salts
-const pcr_salts_inputs = document.querySelector('#pcr > input');
+const pcr_salts_inputs = document.querySelectorAll('#pcr > tbody > tr > td > input');
 for(let i = 0; i < pcr_salts_inputs.length; i++) {
     pcr_salts_inputs[i].addEventListener('change', function() {
         let id = this.id;
@@ -153,7 +152,7 @@ function updateBackgroundSequences() {
         let row = background_seq_list.insertRow();
         let cell = row.insertCell();
 
-        cell.innerHTML = background_sequences[i];
+        cell.innerHTML = background_sequences[i].split('/').pop();
         
         // Add event listener for removal of background sequences
         cell.addEventListener('click', function() {
@@ -177,13 +176,109 @@ background_seq_fp.addEventListener('change', function() {
 
 
 /**
+ * @brief Remove a target region from the list in the DOM
+ */
+function removeTargetRegionIdentifier(identifier) {
+    let identifiers = document.querySelectorAll('#sequence_identifiers > table');
+
+    console.log(identifiers);
+
+    for(let i = 0; i < identifiers.length; i++) {
+        let table = identifiers[i];
+        if(table.rows[0].cells[0].childNodes[0].innerHTML == identifier) {
+            table.remove();
+            return;
+        }
+    }
+}
+
+
+/**
  * @brief Add a new target region identifier to the list on the DOM
  */
-addNewTargetRegionIdentifier(label, target_start=null, target_end=null, min_length=null, max_length=null) {
+function addNewTargetRegionIdentifier(identifier_label, target_start=null, target_end=null, min_length=null, max_length=null) {
     let identifiers = document.querySelector('#sequence_identifiers');
     
-    let table = identifiers.createElement('table');
-
+    // Create a new table
+    let table = document.createElement('table');
+    table.className = 'input_table';
     let row = table.insertRow(0);
+    
+    identifiers.appendChild(table);
+
+    // Add sequence label
+    let cell = row.insertCell();
+
+    // create label
+    let label = document.createElement('div');
+    label.className = 'sequence_name';
+    label.innerHTML = identifier_label;
+    
+    cell.appendChild(label);
+
+    // create target start label
+    cell = row.insertCell();
+    
+    let target_start_label = document.createElement('div');
+    target_start_label.innerHTML = 'Target Start:';
+    
+    let target_start_input = document.createElement('input');
+    target_start_input.setAttribute('type', 'number');
+    target_start_input.className = 'target_start';
+
+    cell.appendChild(target_start_label);
+    cell.appendChild(target_start_input);
+
+    // create target end label
+    cell = row.insertCell();
+    
+    let target_end_label = document.createElement('div');
+    target_end_label.innerHTML = 'Target End:';
+    
+    let target_end_input = document.createElement('input');
+    target_end_input.setAttribute('type', 'number');
+    target_end_input.className = 'target_end';
+
+    cell.appendChild(target_end_label);
+    cell.appendChild(target_end_input);
+
+    // create min length
+    cell = row.insertCell();
+    
+    let length_min_label = document.createElement('div');
+    length_min_label.innerHTML = 'Min Length:';
+    
+    let length_min_input = document.createElement('input');
+    length_min_input.setAttribute('type', 'number');
+    length_min_input.className = 'length_min';
+
+    cell.appendChild(length_min_label);
+    cell.appendChild(length_min_input);
+
+    // create max length
+    cell = row.insertCell();
+    
+    let length_max_label = document.createElement('div');
+    length_max_label.innerHTML = 'Max Length:';
+    
+    let length_max_input = document.createElement('input');
+    length_max_input.setAttribute('type', 'number');
+    length_max_input.className = 'length_max';
+
+    cell.appendChild(length_max_label);
+    cell.appendChild(length_max_input);
+
+    cell = row.insertCell();
+    let remove_button = document.createElement('input');
+    remove_button.setAttribute('type', 'submit');
+    remove_button.setAttribute('value', 'Remove');
+    remove_button.addEventListener('click', function() {
+        removeTargetRegionIdentifier(identifier_label);
+    });
+
+    cell.appendChild(remove_button);
 
 }
+
+
+var state = new Module1();
