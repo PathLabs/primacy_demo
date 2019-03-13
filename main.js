@@ -22,7 +22,7 @@ let win;
 
 var pipeline_args    = [{}];
 var pipeline_results = [];
-var current_module   = 1;
+var current_module   = 3;
 
 
 function initial() {
@@ -33,7 +33,7 @@ function initial() {
     win = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
 
     // and load the index.html of the app.
-    win.loadURL('file:///'+ __dirname + '/src/html/module2.html');
+    win.loadURL('file:///'+ __dirname + '/src/html/module3.html');
 
     // Open the DevTools.
     // win.webContents.openDevTools()
@@ -59,27 +59,30 @@ function initial() {
 
 function goToModule(module_number) {
     /**
-     * Desc: Load and render a module page
-     *
-     * Args:
-     *      module_number (int): module number to load. Also affects which html file is loaded.
-     *
-     * Returns:
-     *      - If there is a problem rendering the page, False.
-     *      - Else, True.
-     */
+    * Desc: Load and render a module page
+    *
+    * Args:
+    *      module_number (int): module number to load. Also affects which html file is loaded.
+    *
+    * Returns:
+    *      - If there is a problem rendering the page, False.
+    *      - Else, True.
+    */
+
+    const options = {
+        type: 'question',
+        buttons: ['Yes', 'No'],
+        defaultid: 1,
+        title: 'Question',
+        message: 'Are you sure you want to go back?',
+        detail: 'Progress on current module will be lost.'
+    };
+    let response;
 
     if(module_number < current_module) {
-        var choice = require('electron').dialog.showMessageBox(this,
-            {
-                type: 'question',
-                buttons: ['Yes', 'No'],
-                title: 'Confirm',
-                message: 'Unsaved progress will be lost. Are you sure you want to leave this module?'
-            });
-        if(choice == 1){
-            e.preventDefault();
-        }
+        require('electron').dialog.showMessageBox(null, options,(response) => {
+          console.log(response);
+        });
     }
 
     if(pipeline_args.length < (module_number + 1) && pipeline_results.length < (module_number)) {
@@ -87,7 +90,9 @@ function goToModule(module_number) {
     }
 
     // Load the html
-    win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
+    if (response == 0){
+        win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
+    }
 
     current_module = module_number;
 
