@@ -14,5 +14,10 @@
   },
   "dependencies": {
     "electron-tabs": "^0.9.4"
+  },
+  "build": {
+    "win": {
+      "icon": "src/img/favicon.ico"
+    }
   }
 }
