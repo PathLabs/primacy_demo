@@ -172,6 +172,8 @@ input{
   color: #ffe8e1;
   border: 1px solid #35506b;
   border-radius: 3px;
+  outline-width: thick;
+  outline-color: #35506b;
 }
 
 input[type=file]{
