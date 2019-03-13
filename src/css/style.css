@@ -65,7 +65,8 @@ hr{
 .tooltip {
   position: static;
   display: inline-block;
-  cursor:default;
+  text-align: left;
+  cursor:help;
 }
 
 .tooltip .tooltiptext {
@@ -80,10 +81,20 @@ hr{
   position: absolute;
   z-index: 1;
   overflow: visible;
+  margin-top: 6px;
+  border: solid 1px #35506b;
 }
 
-.tooltip {
-  text-align: left;
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border: solid 1px #35506b;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
 }
 
 .tooltip:hover .tooltiptext {
