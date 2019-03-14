@@ -6,6 +6,13 @@
  * @author Chance Nelson <chance-nelson@nau.edu>
  */
 
+//gets users home directory
+const os = require('os');
+const fs = require('fs');
+ 
+const validate = require('../js/input_validation.js');
+
+const {ipcRenderer} = require('electron');
 
 
 
@@ -91,10 +98,20 @@ class Module1 {
      * @param target_end (optional) target end
      * @param min_length (optional) minimum length of primer
      * @param max_length (optional) maximum length of primer
+     *
+     * @return true sequence identifier successfuly added
+     * @return false sequence identifier not added, likely due to duplicate sequence labels
      */
     addTargetRegionIdentifier(label, sequence, target_start=null, target_end=null, min_length=null, max_length=null) {
-        target_region_obj = {};
-        target_region_obj[label.toString()] = {
+        // Check if the label is already in the list
+        for(let i = 0; i < this.target_regions.length; i++) {
+            if(label in this.target_regions[i]) {
+                return false;
+            }
+        }
+
+        let target_region_obj = {};
+        target_region_obj[label] = {
             'seq': sequence.toString(),
             'target_start': target_start,
             'target_end': target_end,
@@ -104,12 +121,13 @@ class Module1 {
             }
         };   
         
-        
         this.target_regions.push(target_region_obj);
+
+        return true;
     }
     
     /**
-     * @param Remove a target region identifier
+     * @brief Remove a target region identifier
      *
      * @param label Label of the target region
      *
@@ -125,6 +143,55 @@ class Module1 {
 
             return false;
         }
+    }
+
+    /**
+     * @brief Alter a target region identifier
+     *
+     * @param label Label of the target region
+     * @param sequence Neucleotide sequence
+     * @param target_start (optional) target start
+     * @param target_end (optional) target end
+     * @param min_length (optional) minimum length of primer
+     * @param max_length (optional) maximum length of primer
+     *
+     * @return true sequence identifier successfully altered
+     * @return false error in altering sequence identifier
+     */
+    alterTargetRegionIdentifier(label, target_start=null, target_end=null, min_length=null, max_length=null) {
+        let target_region_index = null;
+        for(let i = 0; i < this.target_regions.length; i++) {
+            if(label in this.target_regions[i]) {
+                target_region_index = i;
+                break;
+            }
+        }
+
+        console.log(target_region_index);
+
+        if(target_region_index == null) {
+            return false;
+        }
+
+        if(target_start) {
+            this.target_regions[target_region_index][label]['target_start'] = target_start;
+        }
+
+        if(target_end) {
+            this.target_regions[target_region_index][label]['target_end'] = target_end;
+        }
+
+        if(min_length) {
+            this.target_regions[target_region_index][label]['primer_len_range']['min'] = min_length;
+        }
+
+        if(max_length) {
+            this.target_regions[target_region_index][label]['primer_len_range']['max'] = max_length;
+        }
+
+        console.log(this.target_regions[target_region_index]);
+
+        return true;
     }
 }
 
@@ -180,12 +247,13 @@ background_seq_fp.addEventListener('change', function() {
  */
 function removeTargetRegionIdentifier(identifier) {
     let identifiers = document.querySelectorAll('#sequence_identifiers > table');
-
+    
     console.log(identifiers);
 
     for(let i = 0; i < identifiers.length; i++) {
         let table = identifiers[i];
         if(table.rows[0].cells[0].childNodes[0].innerHTML == identifier) {
+            console.log(table);
             table.remove();
             return;
         }
@@ -195,8 +263,22 @@ function removeTargetRegionIdentifier(identifier) {
 
 /**
  * @brief Add a new target region identifier to the list on the DOM
+ *
+ * @param identifier_label
+ * @param sequence
+ * @param target_start
+ * @param target_end
+ * @param min_length
+ * @param max_length
+ *
+ * @return true identifier added to list in DOM
+ * @return false identifier was not added
  */
-function addNewTargetRegionIdentifier(identifier_label, target_start=null, target_end=null, min_length=null, max_length=null) {
+function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=null, target_end=null, min_length=null, max_length=null) {
+    if(!state.addTargetRegionIdentifier(identifier_label, sequence, target_start, target_end, min_length, max_length)) {
+        return false;
+    }
+
     let identifiers = document.querySelector('#sequence_identifiers');
     
     // Create a new table
@@ -206,14 +288,13 @@ function addNewTargetRegionIdentifier(identifier_label, target_start=null, targe
     
     identifiers.appendChild(table);
 
-    // Add sequence label
     let cell = row.insertCell();
 
     // create label
     let label = document.createElement('div');
     label.className = 'sequence_name';
     label.innerHTML = identifier_label;
-    
+
     cell.appendChild(label);
 
     // create target start label
@@ -225,6 +306,14 @@ function addNewTargetRegionIdentifier(identifier_label, target_start=null, targe
     let target_start_input = document.createElement('input');
     target_start_input.setAttribute('type', 'number');
     target_start_input.className = 'target_start';
+
+    if(target_start) {
+        target_start_input.value = target_start;
+    }
+
+    target_start_input.addEventListener('change', function() {
+        state.alterTargetRegionIdentifier(identifier_label, target_start=parseInt(this.value));
+    });
 
     cell.appendChild(target_start_label);
     cell.appendChild(target_start_input);
@@ -239,6 +328,14 @@ function addNewTargetRegionIdentifier(identifier_label, target_start=null, targe
     target_end_input.setAttribute('type', 'number');
     target_end_input.className = 'target_end';
 
+    if(target_end) {
+        target_end_input.value = target_end;
+    }
+ 
+    target_end_input.addEventListener('change', function() {
+        state.alterTargetRegionIdentifier(identifier_label, target_end=parseInt(this.value));
+    });   
+
     cell.appendChild(target_end_label);
     cell.appendChild(target_end_input);
 
@@ -251,6 +348,14 @@ function addNewTargetRegionIdentifier(identifier_label, target_start=null, targe
     let length_min_input = document.createElement('input');
     length_min_input.setAttribute('type', 'number');
     length_min_input.className = 'length_min';
+
+    if(min_length) {
+        length_min_input.value = min_length;
+    }
+
+    length_min_input.addEventListener('change', function() {
+        state.alterTargetRegionIdentifier(identifier_label, length_min=parseInt(this.value));
+    });
 
     cell.appendChild(length_min_label);
     cell.appendChild(length_min_input);
@@ -265,6 +370,14 @@ function addNewTargetRegionIdentifier(identifier_label, target_start=null, targe
     length_max_input.setAttribute('type', 'number');
     length_max_input.className = 'length_max';
 
+    if(max_length) {
+        length_max_input.value = max_length;
+    }
+
+    length_max_input.addEventListener('change', function() {
+        state.alterTargetRegionIdentifier(identifier_label, length_max=parseInt(this.value));
+    });
+
     cell.appendChild(length_max_label);
     cell.appendChild(length_max_input);
 
@@ -277,8 +390,62 @@ function addNewTargetRegionIdentifier(identifier_label, target_start=null, targe
     });
 
     cell.appendChild(remove_button);
-
 }
 
+
+// Event listener for sequence identifier manual entry
+let manual_submit = document.getElementById('manual_submit');
+manual_submit.addEventListener('click', function() {
+    let manual_label    = document.getElementById('manual_label');
+    let manual_sequence = document.getElementById('manual_sequence');
+
+    let label    = manual_label.value;
+    let sequence = manual_sequence.value
+
+    if(addNewTargetRegionIdentifier(label, sequence)) {
+        manual_label.value    = '';
+        manual_sequence.value = '';
+    }
+     
+});
+
+
+let bulk_upload = document.getElementById('fasta_file_upload');
+bulk_upload.addEventListener('change', function() {
+    console.log("FASTA file change");
+
+    // Read in the data from the file
+    fs.readFile(bulk_upload.files[0].path, function(err, data) {
+        if(err) {
+            console.log("FASTA file read error");
+        }
+
+        let fasta_raw_string = data.toString();
+        fasta_raw_string = fasta_raw_string.split(/\n/);
+
+        let current_sequence = '';
+        let current_header = null;
+
+        for(let line of fasta_raw_string) {
+            if('>' == line[0]) {
+                if(!current_header) {
+                    current_header = line.replace(new RegExp('>'), '');
+                    continue;
+                } else {
+                    addNewTargetRegionIdentifier(current_header, current_sequence);
+                    current_header = line.replace(new RegExp('>'), '');
+                    current_sequence = '';
+                    continue;
+                }
+            } else {
+                current_sequence += line;
+            }
+        }
+
+        if(current_sequence != '') {
+            addNewTargetRegionIdentifier(current_header, current_sequence);
+        }
+    });
+});
 
 var state = new Module1();
