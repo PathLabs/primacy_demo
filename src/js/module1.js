@@ -28,7 +28,7 @@ class Module1 {
      *        a run of Primacy module 1.
      */
     constructor(previous_state=null) {
-        this.target_regions = [];
+        this.target_regions = {};
         
         this.background_sequences = [];
         
@@ -104,14 +104,11 @@ class Module1 {
      */
     addTargetRegionIdentifier(label, sequence, target_start=null, target_end=null, min_length=null, max_length=null) {
         // Check if the label is already in the list
-        for(let i = 0; i < this.target_regions.length; i++) {
-            if(label in this.target_regions[i]) {
-                return false;
-            }
+        if(label in this.target_regions) {
+            return false;
         }
 
-        let target_region_obj = {};
-        target_region_obj[label] = {
+        this.target_regions[label] = {
             'seq': sequence.toString(),
             'target_start': target_start,
             'target_end': target_end,
@@ -121,8 +118,6 @@ class Module1 {
             }
         };   
         
-        this.target_regions.push(target_region_obj);
-
         return true;
     }
     
@@ -135,12 +130,11 @@ class Module1 {
      * @return false Identifier not found
      */
     removeTargetRegionIdentifier(label) {
-        for(let i = 0; i < this.target_regions.length; i++) {
-            if(this.target_regions[i].hasOwnProperty(label)) {
-                this.target_regions.splice(i, 1);
-                return true;
-            }
+        if(label in this.target_regions) {
+            delete this.target_regions.label;
+            return true;
 
+        } else {
             return false;
         }
     }
@@ -159,37 +153,25 @@ class Module1 {
      * @return false error in altering sequence identifier
      */
     alterTargetRegionIdentifier(label, target_start=null, target_end=null, min_length=null, max_length=null) {
-        let target_region_index = null;
-        for(let i = 0; i < this.target_regions.length; i++) {
-            if(label in this.target_regions[i]) {
-                target_region_index = i;
-                break;
-            }
-        }
-
-        console.log(target_region_index);
-
-        if(target_region_index == null) {
+        if(!(label in this.target_regions)) {
             return false;
         }
 
         if(target_start) {
-            this.target_regions[target_region_index][label]['target_start'] = target_start;
+            this.target_regions[label]['target_start'] = target_start;
         }
 
         if(target_end) {
-            this.target_regions[target_region_index][label]['target_end'] = target_end;
+            this.target_regions[label]['target_end'] = target_end;
         }
 
         if(min_length) {
-            this.target_regions[target_region_index][label]['primer_len_range']['min'] = min_length;
+            this.target_regions[label]['primer_len_range']['min'] = min_length;
         }
 
         if(max_length) {
-            this.target_regions[target_region_index][label]['primer_len_range']['max'] = max_length;
+            this.target_regions[label]['primer_len_range']['max'] = max_length;
         }
-
-        console.log(this.target_regions[target_region_index]);
 
         return true;
     }
@@ -246,18 +228,22 @@ background_seq_fp.addEventListener('change', function() {
  * @brief Remove a target region from the list in the DOM
  */
 function removeTargetRegionIdentifier(identifier) {
+    if(!state.removeTargetRegionIdentifier(identifier)) {
+        console.log(identifier);
+        return false
+    }
+
     let identifiers = document.querySelectorAll('#sequence_identifiers > table');
-    
-    console.log(identifiers);
 
     for(let i = 0; i < identifiers.length; i++) {
         let table = identifiers[i];
         if(table.rows[0].cells[0].childNodes[0].innerHTML == identifier) {
-            console.log(table);
             table.remove();
-            return;
+            return true;
         }
     }
+
+    return false;
 }
 
 
@@ -390,6 +376,7 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     });
 
     cell.appendChild(remove_button);
+    return true;
 }
 
 
@@ -400,7 +387,7 @@ manual_submit.addEventListener('click', function() {
     let manual_sequence = document.getElementById('manual_sequence');
 
     let label    = manual_label.value;
-    let sequence = manual_sequence.value
+    let sequence = manual_sequence.value;
 
     if(addNewTargetRegionIdentifier(label, sequence)) {
         manual_label.value    = '';
@@ -410,6 +397,7 @@ manual_submit.addEventListener('click', function() {
 });
 
 
+// Event listener for sequence identifier bulk upload
 let bulk_upload = document.getElementById('fasta_file_upload');
 bulk_upload.addEventListener('change', function() {
     console.log("FASTA file change");
@@ -447,5 +435,26 @@ bulk_upload.addEventListener('change', function() {
         }
     });
 });
+
+
+
+
+
+// Intercept NEW message and bootstrap the page
+ipcRenderer.on('NEW', (event, arg) => {
+    state = new Module1(arg[0]);
+});
+
+
+// Intercept response to EXECUTE request
+ipcRenderer.on('EXECUTE', (event, arg) => {
+    if(arg != null) {
+        console.log('Error during pipeline execution:');
+        console.log(arg);
+    } else {
+        sendMessage('LOADMODULE', 2);
+    }
+});
+
 
 var state = new Module1();
