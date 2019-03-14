@@ -135,36 +135,36 @@
           <td>
           </td>
         </tr>
-        <tr>
+        <tr id="ampliconSizeRow">
           <td>
             <div class="tooltip setting_title">
               Amplicon Size:
               <span class="tooltiptext">test test test test test test</span>
             </div>
           </td>
-          <td><td><input id="ampliconSizeSlider" type="range" min="0" max="100" value = 0
+          <td><td><input id="ampliconSizeSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
           <td class="sliderValue">
             <input type="number" name="amplicon_size" class="sliderValue" id=ampliconSize>
           </td>
           <td>
-            <input type="checkbox" name="scales" checked>
+            <input type="checkbox" id="ampliconCheck" checked>
           </td>
         </tr>
-        <tr>
+        <tr id="targetDistanceRow">
           <td>
             <div class="tooltip setting_title">
               Target Distance From Primer:
               <span class="tooltiptext">test test test test test test</span>
             </div>
           </td>
-          <td><td><input id="targetDistanceSlider" type="range" min="0" max="100" value = 0
+          <td><td><input id="targetDistanceSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
           <td class="sliderValue">
             <input type="number" name="target_distance" class="sliderValue" id=targetDistance>
           </td>
           <td>
-            <input type="checkbox" name="scales" checked>
+            <input type="checkbox" id=targetDistanceCheck checked>
           </td>
         </tr>
       </table>
