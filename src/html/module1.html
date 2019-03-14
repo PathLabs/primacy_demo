@@ -51,15 +51,30 @@
         </div>
 
         <div class="box">
-            <h1>Neucleotides</h1>
-            
             <div class="box">
+                <h1>Bulk Upload</h1>
+
                 <table class="input_table">
                     <tr>
                         <td>Upload FASTA File</td>
                         <td><input type="file" id="fasta_file_upload" class="input"></td>
                     </tr>
                 </table>
+
+                <h1>Manual Entry</h1>
+                <table class="input_table">
+                    <tr>
+                        <td>Label:</td>
+                        <td><input type="text" id="manual_label" class="input"></td>
+                    </tr>
+
+                    <tr>
+                        <td>FASTA Sequence:</td>
+                        <td><textarea rows="4" cols="50" id="manual_sequence" class="input"></textarea></td>
+                    </tr>
+                </table>
+
+                <input type="submit" id="manual_submit" class="input">
             </div>
 
             <div id="sequence_identifiers" class="box">
