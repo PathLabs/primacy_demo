@@ -6,6 +6,7 @@
  * @author Chance Nelson <chance-nelson@nau.edu>
  */
 
+
 //gets users home directory
 const os = require('os');
 const fs = require('fs');
@@ -14,6 +15,8 @@ const validate = require('../js/input_validation.js');
 
 const {ipcRenderer} = require('electron');
 
+
+var state = null;
 
 
 /**
@@ -39,6 +42,20 @@ class Module1 {
             'Mg': 0,
             'dNTPs': 0
         };
+    }
+
+    /**
+     * @brief output a JSON object version of the current module state
+     */
+    toJSON() {
+        let out = {}
+        out['sequences'] = this.target_sequences;
+        out['primer_collection'] = {};
+        out['primer_collection']['params'] = {};
+        out['primer_collection']['params']['pcr_salts'] = this.pcr_salts;
+        out['primer_collection']['params']['background_seq'] = this.background_sequences;
+
+        return out;
     }
 
     /**
@@ -185,6 +202,12 @@ for(let i = 0; i < pcr_salts_inputs.length; i++) {
         let id = this.id;
         state.updatePCR(id, parseInt(this.value));
     });
+
+    if(i == 0) {
+        pcr_salts_inputs[0].value = 50;
+    } else {
+        pcr_salts_inputs[i].value = 0;
+    }
 }
 
 
@@ -434,10 +457,45 @@ bulk_upload.addEventListener('change', function() {
             addNewTargetRegionIdentifier(current_header, current_sequence);
         }
     });
+
+    bulk_upload.value = '';
 });
 
 
+/**
+ * @brief helper function for sending IPC messages
+ */
+function sendMessage(channel, message) {
+    ipcRenderer.send(channel, message);
+}
 
+
+const module_2 = document.getElementById('module2');
+module_2.addEventListener('click', function() {
+    sendMessage('LOADMODULE', 2);
+    console.log('attempting to load module 2');
+});
+
+
+const module_3 = document.getElementById('module3');
+module_3.addEventListener('click', function() {
+    sendMessage('LOADMODULE', 3);
+    console.log('attempting to load module 3');
+});
+
+
+const module_4 = document.getElementById('module4');
+module_4.addEventListener('click', function() {
+    sendMessage('LOADMODULE', 4);
+    console.log('attempting to load module 4');
+});
+
+
+const submit = document.getElementById('submit');
+submit.addEventListener('click', function() {
+    sendMessage('EXECUTE', ['primacy1.py', state.toJSON()]);
+    console.log('attempting execution');
+})
 
 
 // Intercept NEW message and bootstrap the page
@@ -457,4 +515,13 @@ ipcRenderer.on('EXECUTE', (event, arg) => {
 });
 
 
-var state = new Module1();
+// Intercept module load denials
+ipcRenderer.on('LOADMODULE', (event, arg) => {
+    console.log('Module load denied');
+});
+
+
+// Clean init of state if nothing to bootstrap from
+if(!state) {
+    state = new Module1();
+}
