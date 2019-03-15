@@ -12,17 +12,33 @@ const validate      = require('input_validation.js');
 const {ipcRenderer} = require('electron');
 
 
-const module1       = document.getElementById("module1");
-const module3       = document.getElementById("module3");
+const module1 = document.getElementById("module1");
+const module3 = document.getElementById("module3");
 
-const submit_button = document.getElementById("submitButton");
-const module_0_sum  = document.getElementById('result');
-const gc_min_slider = document.getElementById('gcMinSlider');
-const gc_max_slider = document.getElementById('gcMaxSlider');
+const tm_opt = document.getElementById('tm_opt');
 const gc_min_val  = document.getElementById('gcMin');
 const gc_max_val  = document.getElementById('gcMax');
 
-var last_module_results = {};
+const tm  = document.getElementById('tmSlider');
+const gc  = document.getElementById('gcfSlider');
+const homopolymer  = document.getElementById('hpolySlider');
+const dimer  = document.getElementById('dimerzSlider');
+const specificity  = document.getElementById('specifSlider');
+const degenerate  = document.getElementById('degenSlider');
+
+
+const tm_chkbx  = document.getElementById('tmCheckbox');
+const gc_chkbx  = document.getElementById('gcCheckbox');
+const homopolymer_chkbx  = document.getElementById('hpolyCheckbox');
+const dimer_chkbx  = document.getElementById('dimerzCheckbox');
+const specificity_chkbx  = document.getElementById('specifCheckbox');
+const degenerate_chkbx  = document.getElementById('degenCheckbox');
+
+
+
+const submit_button = document.getElementById("submitButton");
+
+
 var current_module_args = {};
 
 
@@ -35,7 +51,6 @@ function sendMessage(channel, message){
 function init(json) {
     console.log(json);
     current_module_args = json[0];
-    last_module_results = json[1];
 
     if(current_module_args) {
         gc_min_slider.value = current_module_args['gc_min_val'];
