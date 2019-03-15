@@ -16,7 +16,7 @@ const validate = require('../js/input_validation.js');
 const {ipcRenderer} = require('electron');
 
 
-var state = null;
+var state;
 
 const module_2 = document.getElementById('module2');
 const pcr_salts_inputs = document.querySelectorAll('#pcr > tbody > tr > td > input');
@@ -54,14 +54,35 @@ class Module1 {
 
 
         // Attempt to load previous config from state
-        if(state) {
-            console.log(state);
-            if(state['primer_collection']) {
-                this.pcr_salts            = state['primer_collection']['params']['pcr_salts'];
-                this.background_sequences = state['primer_collection']['params']['background_seq'];
-                this.target_regions       = state['sequences'];
+        if(state && state['primer_collection']) {
+            this.pcr_salts            = state['primer_collection']['params']['pcr_salts'];
+            this.background_sequences = state['primer_collection']['params']['background_seq'];
+            this.target_regions       = state['sequences'];
+
+            // Init PCR
+            pcr_salts_inputs[0].value = this.pcr_salts['Na']
+            pcr_salts_inputs[1].value = this.pcr_salts['K']
+            pcr_salts_inputs[2].value = this.pcr_salts['Tris']
+            pcr_salts_inputs[3].value = this.pcr_salts['dNTPS']
+
+            // Init background sequences
+            updateBackgroundSequences();
+
+            console.log(this.target_regions)
+
+            // Init target region list
+            for(let key in this.target_regions) {
+                console.log(key);
+                console.log(this.target_regions[key]);
+                let sequence = this.target_regions[key]['seq'];
+                let target_start = this.target_regions[key]['target_start'];
+                let target_end = this.target_regions[key]['target_end'];
+                let length_min = this.target_regions[key]['primer_len_range']['min'];
+                let length_max = this.target_regions[key]['primer_len_range']['max'];
+                addNewTargetRegionIdentifier(key, sequence, target_start, target_end, length_min, length_max);
             }
         }
+
     }
 
     /**
