@@ -1,0 +1,3246 @@
+{
+    "set_optimization": {
+        "params": {
+            "iter": 100,
+            "amp_size": {
+                "min": 100,
+                "max": 350
+            },
+            "target_distance": {
+                "forward": null,
+                "reverse": null,
+                "any": 50,
+                "both": null
+            },
+            "background": {}
+            },
+            "weights": {
+                "tm": 1,
+                "scores": 1,
+                "cross_dimerization": 1,
+                "size": 1,
+                "target_dist": 1
+            },
+            "include": {},
+            "result_score": 0.1,
+            "result": {
+                "Sa_1001623": {
+                    "forward": {
+                        "Sa_1001623_295_20_F": {
+                            "seq_id": "Sa_1001623",
+                            "start": 295,
+                            "length": 20,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 45.0,
+                            "gc_clamp": 2,
+                            "tm": 48.63005160945585,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 35.0,
+                                "run": 12,
+                                "median": 5.0,
+                                "hairpin": 28
+                            },
+                            "seq": "ATTACTACAGCCGGTATGAC",
+                            "rank": 0.20572450805008943,
+                            "score": 0.13976360216968972
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1001623_90_18_R": {
+                            "seq_id": "Sa_1001623",
+                            "start": 90,
+                            "length": 18,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 27.77777777777778,
+                            "gc_clamp": 3,
+                            "tm": 38.63991481524744,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 16.666666666666664,
+                                "run": 6,
+                                "median": 2.0,
+                                "hairpin": 12
+                            },
+                            "seq": "ATCAAAGAAATAATGGAC",
+                            "rank": 0.5688729874776386,
+                            "score": 0.2141146707794895
+                        }
+                    }
+                },
+                "Sa_1045617": {
+                    "forward": {
+                        "Sa_1045617_150_22_F": {
+                            "seq_id": "Sa_1045617",
+                            "start": 150,
+                            "length": 22,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 22.727272727272727,
+                            "gc_clamp": 0,
+                            "tm": 44.579008062049354,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 25.0,
+                                "run": 12,
+                                "median": 6.0,
+                                "hairpin": 22
+                            },
+                            "seq": "ATTAACCATTGCAATTGATAAT",
+                            "rank": 0.44543828264758495,
+                            "score": 0.25214945016033186
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1045617_102_22_R": {
+                            "seq_id": "Sa_1045617",
+                            "start": 102,
+                            "length": 22,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 45.45454545454545,
+                            "gc_clamp": 1,
+                            "tm": 53.89886743694808,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 27.27272727272727,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 24
+                            },
+                            "seq": "CTATCTGCGGCATTTGCAGAAT",
+                            "rank": 0.050536672629695883,
+                            "score": 0.10876891827958135
+                        }
+                    }
+                },
+                "Sa_1117202": {
+                    "forward": {
+                        "Sa_1117202_265_19_F": {
+                            "seq_id": "Sa_1117202",
+                            "start": 265,
+                            "length": 19,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 31.57894736842105,
+                            "gc_clamp": 1,
+                            "tm": 42.40298842604335,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 15.789473684210526,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 12
+                            },
+                            "seq": "CCTTATGCTTCAATTACAA",
+                            "rank": 0.7822003577817531,
+                            "score": 0.18365298827636733
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1117202_89_25_R": {
+                            "seq_id": "Sa_1117202",
+                            "start": 89,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 32.0,
+                            "gc_clamp": 1,
+                            "tm": 48.44623011419833,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 18.0,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 18
+                            },
+                            "seq": "GACTCTAACACTTTCTTTAGTAGAA",
+                            "rank": 0.6766547406082289,
+                            "score": 0.16352094381000928
+                        }
+                    }
+                },
+                "Sa_1299351": {
+                    "forward": {
+                        "Sa_1299351_278_25_F": {
+                            "seq_id": "Sa_1299351",
+                            "start": 278,
+                            "length": 25,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 32.0,
+                            "gc_clamp": 2,
+                            "tm": 51.55540707631576,
+                            "homopolymers": {
+                                "percent": 16.0,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 20.0,
+                                "run": 16,
+                                "median": 4.0,
+                                "hairpin": 20
+                            },
+                            "seq": "CGATGAATGTTGATTCAAAACAACT",
+                            "rank": 0.6256708407871199,
+                            "score": 0.22663662735380133
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1299351_44_25_R": {
+                            "seq_id": "Sa_1299351",
+                            "start": 44,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 28.0,
+                            "gc_clamp": 1,
+                            "tm": 48.32516077278956,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 20.0,
+                                "run": 8,
+                                "median": 5.0,
+                                "hairpin": 20
+                            },
+                            "seq": "TTGGTATTGTAATGATTCCTTATCA",
+                            "rank": 0.115608228980322,
+                            "score": 0.1789574401511691
+                        }
+                    }
+                },
+                "Sa_1304406": {
+                    "forward": {
+                        "Sa_1304406_207_23_F": {
+                            "seq_id": "Sa_1304406",
+                            "start": 207,
+                            "length": 23,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 17.391304347826086,
+                            "gc_clamp": 0,
+                            "tm": 41.812408939956356,
+                            "homopolymers": {
+                                "percent": 17.391304347826086,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 21.73913043478261,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 20
+                            },
+                            "seq": "GTATAAATGTTATTGCTTATTTT",
+                            "rank": 0.9400715563506261,
+                            "score": 0.36275714840120854
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1304406_72_19_R": {
+                            "seq_id": "Sa_1304406",
+                            "start": 72,
+                            "length": 19,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 42.10526315789474,
+                            "gc_clamp": 1,
+                            "tm": 45.80616913939065,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 34.21052631578947,
+                                "run": 14,
+                                "median": 5.0,
+                                "hairpin": 26
+                            },
+                            "seq": "CTCAGTCATTGACCCATTA",
+                            "rank": 0.41010733452593917,
+                            "score": 0.17536411881625077
+                        }
+                    }
+                },
+                "Sa_1410000": {
+                    "forward": {
+                        "Sa_1410000_237_24_F": {
+                            "seq_id": "Sa_1410000",
+                            "start": 237,
+                            "length": 24,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 37.5,
+                            "gc_clamp": 1,
+                            "tm": 51.02729623832005,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 22.916666666666664,
+                                "run": 14,
+                                "median": 5.0,
+                                "hairpin": 22
+                            },
+                            "seq": "TTTCATGTACACCAGTCACTAAAG",
+                            "rank": 0.4163685152057245,
+                            "score": 0.14290390978711082
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1410000_71_25_R": {
+                            "seq_id": "Sa_1410000",
+                            "start": 71,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 24.0,
+                            "gc_clamp": 1,
+                            "tm": 46.318321191359246,
+                            "homopolymers": {
+                                "percent": 32.0,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 22.0,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 22
+                            },
+                            "seq": "GATTTTCTAACGATATGTATGAAAA",
+                            "rank": 0.8564400715563506,
+                            "score": 0.3200093267146708
+                        }
+                    }
+                },
+                "Sa_1508179": {
+                    "forward": {
+                        "Sa_1508179_97_24_F": {
+                            "seq_id": "Sa_1508179",
+                            "start": 97,
+                            "length": 24,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 29.166666666666668,
+                            "gc_clamp": 1,
+                            "tm": 47.56922682790599,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 22.916666666666664,
+                                "run": 6,
+                                "median": 3.0,
+                                "hairpin": 22
+                            },
+                            "seq": "ATACAAAGACACTACAAAGACTAT",
+                            "rank": 0.4007155635062612,
+                            "score": 0.17577281391904076
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1508179_176_24_R": {
+                            "seq_id": "Sa_1508179",
+                            "start": 176,
+                            "length": 24,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 20.833333333333332,
+                            "gc_clamp": 1,
+                            "tm": 46.30608004839411,
+                            "homopolymers": {
+                                "percent": 16.666666666666664,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 27.083333333333332,
+                                "run": 10,
+                                "median": 8.0,
+                                "hairpin": 26
+                            },
+                            "seq": "TAATTGCTTTTAAAGAAACATTCA",
+                            "rank": 0.8282647584973166,
+                            "score": 0.31693381454595865
+                        }
+                    }
+                },
+                "Sa_1515294": {
+                    "forward": {
+                        "Sa_1515294_56_22_F": {
+                            "seq_id": "Sa_1515294",
+                            "start": 56,
+                            "length": 22,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 40.90909090909091,
+                            "gc_clamp": 3,
+                            "tm": 51.7531306986138,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 27.27272727272727,
+                                "run": 6,
+                                "median": 4.0,
+                                "hairpin": 24
+                            },
+                            "seq": "TGGCAATCAATGTCTTAACTGC",
+                            "rank": 0.18492844364937389,
+                            "score": 0.11652301127032735
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1515294_48_23_R": {
+                            "seq_id": "Sa_1515294",
+                            "start": 48,
+                            "length": 23,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 43.47826086956522,
+                            "gc_clamp": 2,
+                            "tm": 51.792801795237835,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 19.565217391304348,
+                                "run": 8,
+                                "median": 5.0,
+                                "hairpin": 18
+                            },
+                            "seq": "CAAGCAGCAATGGAAGTACTATC",
+                            "rank": 0.02728085867620751,
+                            "score": 0.09585218809408932
+                        }
+                    }
+                },
+                "Sa_1552948": {
+                    "forward": {
+                        "Sa_1552948_197_18_F": {
+                            "seq_id": "Sa_1552948",
+                            "start": 197,
+                            "length": 18,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 44.44444444444444,
+                            "gc_clamp": 2,
+                            "tm": 47.117608138973935,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 19.444444444444446,
+                                "run": 8,
+                                "median": 2.0,
+                                "hairpin": 14
+                            },
+                            "seq": "ACGATTTCACGGATTTCC",
+                            "rank": 0.17262969588550983,
+                            "score": 0.11439291774644109
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1552948_35_22_R": {
+                            "seq_id": "Sa_1552948",
+                            "start": 35,
+                            "length": 22,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 31.818181818181817,
+                            "gc_clamp": 0,
+                            "tm": 47.99178654134812,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 20.454545454545457,
+                                "run": 10,
+                                "median": 3.0,
+                                "hairpin": 18
+                            },
+                            "seq": "ATGGACTGCATTGATGATATTT",
+                            "rank": 0.4481216457960644,
+                            "score": 0.18524133739655083
+                        }
+                    }
+                },
+                "Sa_1569469": {
+                    "forward": {
+                        "Sa_1569469_214_25_F": {
+                            "seq_id": "Sa_1569469",
+                            "start": 214,
+                            "length": 25,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 28.0,
+                            "gc_clamp": 2,
+                            "tm": 49.2657405317683,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 20.0,
+                                "run": 6,
+                                "median": 4.0,
+                                "hairpin": 20
+                            },
+                            "seq": "TCAATAATGCATCTATCAATTGTGA",
+                            "rank": 0.1708407871198569,
+                            "score": 0.15185699704573163
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1569469_300_24_R": {
+                            "seq_id": "Sa_1569469",
+                            "start": 300,
+                            "length": 24,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 33.333333333333336,
+                            "gc_clamp": 2,
+                            "tm": 51.50583877094198,
+                            "homopolymers": {
+                                "percent": 33.33333333333333,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 18.75,
+                                "run": 10,
+                                "median": 5.0,
+                                "hairpin": 18
+                            },
+                            "seq": "AAAGACAAAACGTCTTTTCCAAAC",
+                            "rank": 0.5518783542039356,
+                            "score": 0.23769904386513716
+                        }
+                    }
+                },
+                "Sa_1599932": {
+                    "forward": {
+                        "Sa_1599932_225_18_F": {
+                            "seq_id": "Sa_1599932",
+                            "start": 225,
+                            "length": 18,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 27.77777777777778,
+                            "gc_clamp": 0,
+                            "tm": 38.45129429926169,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 19.444444444444446,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 14
+                            },
+                            "seq": "ATCGAGAAATTCCTTATA",
+                            "rank": 0.5556797853309481,
+                            "score": 0.24548663660904
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1599932_175_25_R": {
+                            "seq_id": "Sa_1599932",
+                            "start": 175,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 24.0,
+                            "gc_clamp": 1,
+                            "tm": 49.30154360445749,
+                            "homopolymers": {
+                                "percent": 40.0,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 16.0,
+                                "run": 8,
+                                "median": 2.0,
+                                "hairpin": 16
+                            },
+                            "seq": "TTTTTCAGTTGTTTTTACACGTTTA",
+                            "rank": 0.7750447227191414,
+                            "score": 0.31740809108634727
+                        }
+                    }
+                },
+                "Sa_1620237": {
+                    "forward": {
+                        "Sa_1620237_226_24_F": {
+                            "seq_id": "Sa_1620237",
+                            "start": 226,
+                            "length": 24,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 41.666666666666664,
+                            "gc_clamp": 1,
+                            "tm": 54.55213708101462,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 22.916666666666664,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 22
+                            },
+                            "seq": "CGCTTTAGCCATTGGTGATTCATT",
+                            "rank": 0.0836314847942755,
+                            "score": 0.10422423843880765
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1620237_159_22_R": {
+                            "seq_id": "Sa_1620237",
+                            "start": 159,
+                            "length": 22,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 27.272727272727273,
+                            "gc_clamp": 1,
+                            "tm": 44.129539407835125,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 25.0,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 22
+                            },
+                            "seq": "TTAGCAAGCAATAGTATAATTC",
+                            "rank": 0.48434704830053665,
+                            "score": 0.2098863972291988
+                        }
+                    }
+                },
+                "Sa_1743111": {
+                    "forward": {
+                        "Sa_1743111_274_20_F": {
+                            "seq_id": "Sa_1743111",
+                            "start": 274,
+                            "length": 20,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 45.0,
+                            "gc_clamp": 3,
+                            "tm": 48.074172449890455,
+                            "homopolymers": {
+                                "percent": 20.0,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 25.0,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 20
+                            },
+                            "seq": "GGGCGTTTTAAAGTACTAGG",
+                            "rank": 0.47719141323792486,
+                            "score": 0.2273657086117197
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1743111_207_23_R": {
+                            "seq_id": "Sa_1743111",
+                            "start": 207,
+                            "length": 23,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 30.434782608695652,
+                            "gc_clamp": 2,
+                            "tm": 47.5655390203313,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 15.217391304347828,
+                                "run": 10,
+                                "median": 3.0,
+                                "hairpin": 14
+                            },
+                            "seq": "TATGGTTTGTTGTAGAATGATCT",
+                            "rank": 0.21779964221824688,
+                            "score": 0.14937925181941547
+                        }
+                    }
+                },
+                "Sa_1788290": {
+                    "forward": {
+                        "Sa_1788290_282_23_F": {
+                            "seq_id": "Sa_1788290",
+                            "start": 282,
+                            "length": 23,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 26.08695652173913,
+                            "gc_clamp": 1,
+                            "tm": 44.820409549098656,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 21.73913043478261,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 20
+                            },
+                            "seq": "TGTACATTATTATCCGTAGTTAA",
+                            "rank": 0.4107789855072464,
+                            "score": 0.21102187931660168
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1788290_215_23_R": {
+                            "seq_id": "Sa_1788290",
+                            "start": 215,
+                            "length": 23,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 13.043478260869565,
+                            "gc_clamp": 0,
+                            "tm": 41.236155312471,
+                            "homopolymers": {
+                                "percent": 21.73913043478261,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 19.565217391304348,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 18
+                            },
+                            "seq": "TTTGGAAATAAAAAGTATTTAAA",
+                            "rank": 0.8412343470483006,
+                            "score": 0.4014658038196055
+                        }
+                    }
+                },
+                "Sa_1901958": {
+                    "forward": {
+                        "Sa_1901958_206_20_F": {
+                            "seq_id": "Sa_1901958",
+                            "start": 206,
+                            "length": 20,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 55.0,
+                            "gc_clamp": 3,
+                            "tm": 53.42178126520179,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 30.0,
+                                "run": 10,
+                                "median": 6.0,
+                                "hairpin": 24
+                            },
+                            "seq": "TATGTCCATCCCGGTCCTCT",
+                            "rank": 0.33094812164579607,
+                            "score": 0.1208512151933234
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1901958_287_25_R": {
+                            "seq_id": "Sa_1901958",
+                            "start": 287,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 68.0,
+                            "gc_clamp": 4,
+                            "tm": 65.60558777438183,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 36.0,
+                                "run": 12,
+                                "median": 8.0,
+                                "hairpin": 36
+                            },
+                            "seq": "GCGCTAGCTTACGTGGAGGCGCTGG",
+                            "rank": 0.9069767441860465,
+                            "score": 0.23203104319101014
+                        }
+                    }
+                },
+                "Sa_1957010": {
+                    "forward": {
+                        "Sa_1957010_83_23_F": {
+                            "seq_id": "Sa_1957010",
+                            "start": 83,
+                            "length": 23,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 21.73913043478261,
+                            "gc_clamp": 2,
+                            "tm": 42.68142428912881,
+                            "homopolymers": {
+                                "percent": 21.73913043478261,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 8.695652173913043,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 8
+                            },
+                            "seq": "TTATATTCTTCTTCTTTTTCTTC",
+                            "rank": 0.8671140939597315,
+                            "score": 0.29277228051933263
+                        }
+                    },
+                    "reverse": {
+                        "Sa_1957010_121_22_R": {
+                            "seq_id": "Sa_1957010",
+                            "start": 121,
+                            "length": 22,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 40.90909090909091,
+                            "gc_clamp": 1,
+                            "tm": 52.357134722382966,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 20.454545454545457,
+                                "run": 6,
+                                "median": 4.0,
+                                "hairpin": 18
+                            },
+                            "seq": "TGAGACATTGGGCATGATTGAA",
+                            "rank": 0.04114490161001789,
+                            "score": 0.1052128879059532
+                        }
+                    }
+                },
+                "Sa_2000608": {
+                    "forward": {
+                        "Sa_2000608_177_22_F": {
+                            "seq_id": "Sa_2000608",
+                            "start": 177,
+                            "length": 22,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 13.636363636363637,
+                            "gc_clamp": 0,
+                            "tm": 38.863080613619616,
+                            "homopolymers": {
+                                "percent": 18.181818181818183,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 18.181818181818183,
+                                "run": 8,
+                                "median": 3.0,
+                                "hairpin": 16
+                            },
+                            "seq": "AAATGTTTTATCTATGTTATTA",
+                            "rank": 0.9964221824686941,
+                            "score": 0.38570384507585054
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2000608_208_21_R": {
+                            "seq_id": "Sa_2000608",
+                            "start": 208,
+                            "length": 21,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 52.38095238095238,
+                            "gc_clamp": 2,
+                            "tm": 58.36611494106444,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 33.33333333333333,
+                                "run": 12,
+                                "median": 6.0,
+                                "hairpin": 28
+                            },
+                            "seq": "TTGCAACGCGATCGACATGCA",
+                            "rank": 0.19275491949910556,
+                            "score": 0.1221728607836913
+                        }
+                    }
+                },
+                "Sa_2022705": {
+                    "forward": {
+                        "Sa_2022705_261_22_F": {
+                            "seq_id": "Sa_2022705",
+                            "start": 261,
+                            "length": 22,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 18.181818181818183,
+                            "gc_clamp": 2,
+                            "tm": 40.51603945665511,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 25.0,
+                                "run": 12,
+                                "median": 4.0,
+                                "hairpin": 22
+                            },
+                            "seq": "CAATTAATTTATTTCATTACCT",
+                            "rank": 0.5022361359570662,
+                            "score": 0.2569815989781787
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2022705_217_18_R": {
+                            "seq_id": "Sa_2022705",
+                            "start": 217,
+                            "length": 18,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 22.22222222222222,
+                            "gc_clamp": 1,
+                            "tm": 37.71156329414231,
+                            "homopolymers": {
+                                "percent": 27.77777777777778,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 19.444444444444446,
+                                "run": 8,
+                                "median": 6.0,
+                                "hairpin": 14
+                            },
+                            "seq": "ATCAGTTACAAATTTTTG",
+                            "rank": 0.9986583184257602,
+                            "score": 0.37235859898316
+                        }
+                    }
+                },
+                "Sa_2053840": {
+                    "forward": {
+                        "Sa_2053840_275_19_F": {
+                            "seq_id": "Sa_2053840",
+                            "start": 275,
+                            "length": 19,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 31.57894736842105,
+                            "gc_clamp": 2,
+                            "tm": 45.43445382920652,
+                            "homopolymers": {
+                                "percent": 21.052631578947366,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 15.789473684210526,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 12
+                            },
+                            "seq": "AAGCATAAAACCAAACGAA",
+                            "rank": 0.9110017889087657,
+                            "score": 0.24078812200148425
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2053840_42_25_R": {
+                            "seq_id": "Sa_2053840",
+                            "start": 42,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 36.0,
+                            "gc_clamp": 2,
+                            "tm": 51.705247180328286,
+                            "homopolymers": {
+                                "percent": 16.0,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 16.0,
+                                "run": 6,
+                                "median": 3.0,
+                                "hairpin": 16
+                            },
+                            "seq": "GAAAATGAGTAAGGAAACGAGAGTT",
+                            "rank": 0.5241502683363148,
+                            "score": 0.18370696010928728
+                        }
+                    }
+                },
+                "Sa_2133338": {
+                    "forward": {
+                        "Sa_2133338_147_22_F": {
+                            "seq_id": "Sa_2133338",
+                            "start": 147,
+                            "length": 22,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 31.818181818181817,
+                            "gc_clamp": 1,
+                            "tm": 46.828204923716726,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 25.0,
+                                "run": 8,
+                                "median": 6.0,
+                                "hairpin": 22
+                            },
+                            "seq": "TCCTTAAGACCAGTAATTTCAA",
+                            "rank": 0.42531305903398925,
+                            "score": 0.1793003766864222
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2133338_191_24_R": {
+                            "seq_id": "Sa_2133338",
+                            "start": 191,
+                            "length": 24,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 4.166666666666667,
+                            "gc_clamp": 0,
+                            "tm": 35.95606461475438,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 27.083333333333332,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 26
+                            },
+                            "seq": "ATATAATAATTTGAAATATAAATA",
+                            "rank": 0.6923076923076923,
+                            "score": 0.3415635299180312
+                        }
+                    }
+                },
+                "Sa_2135096": {
+                    "forward": {
+                        "Sa_2135096_282_21_F": {
+                            "seq_id": "Sa_2135096",
+                            "start": 282,
+                            "length": 21,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 23.80952380952381,
+                            "gc_clamp": 1,
+                            "tm": 40.942993643156115,
+                            "homopolymers": {
+                                "percent": 19.047619047619047,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 19.047619047619047,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 16
+                            },
+                            "seq": "GCTAAAATCTTTGTTTATAAG",
+                            "rank": 0.6632379248658319,
+                            "score": 0.3214145855803496
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2135096_139_23_R": {
+                            "seq_id": "Sa_2135096",
+                            "start": 139,
+                            "length": 23,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 56.52173913043478,
+                            "gc_clamp": 2,
+                            "tm": 56.914083780000226,
+                            "homopolymers": {
+                                "percent": 21.73913043478261,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 21.73913043478261,
+                                "run": 12,
+                                "median": 6.0,
+                                "hairpin": 20
+                            },
+                            "seq": "ACAAGGGGGAGTCAGACCTGTAG",
+                            "rank": 0.6332737030411449,
+                            "score": 0.20625577945410753
+                        }
+                    }
+                },
+                "Sa_2159554": {
+                    "forward": {
+                        "Sa_2159554_292_22_F": {
+                            "seq_id": "Sa_2159554",
+                            "start": 292,
+                            "length": 22,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 31.818181818181817,
+                            "gc_clamp": 1,
+                            "tm": 46.1477971245389,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 25.0,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 22
+                            },
+                            "seq": "CACATTAATGAGTACGTATGAA",
+                            "rank": 0.5697674418604651,
+                            "score": 0.1809970866818546
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2159554_282_20_R": {
+                            "seq_id": "Sa_2159554",
+                            "start": 282,
+                            "length": 20,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 30.0,
+                            "gc_clamp": 1,
+                            "tm": 43.210478538969085,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 22.5,
+                                "run": 12,
+                                "median": 4.0,
+                                "hairpin": 18
+                            },
+                            "seq": "TCGAACTATTCATGAAGTAT",
+                            "rank": 0.6207513416815742,
+                            "score": 0.2098028970057273
+                        }
+                    }
+                },
+                "Sa_229008": {
+                    "forward": {
+                        "Sa_229008_129_25_F": {
+                            "seq_id": "Sa_229008",
+                            "start": 129,
+                            "length": 25,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 44.0,
+                            "gc_clamp": 3,
+                            "tm": 53.763804525992384,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 32.0,
+                                "run": 20,
+                                "median": 6.0,
+                                "hairpin": 32
+                            },
+                            "seq": "CACTGAATTACCAGTATGGTCACAC",
+                            "rank": 0.42352415026833634,
+                            "score": 0.14211775263337564
+                        }
+                    },
+                    "reverse": {
+                        "Sa_229008_53_19_R": {
+                            "seq_id": "Sa_229008",
+                            "start": 53,
+                            "length": 19,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 31.57894736842105,
+                            "gc_clamp": 3,
+                            "tm": 41.27899176595213,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 21.052631578947366,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 16
+                            },
+                            "seq": "TAATTCTAGCTAATCCCAT",
+                            "rank": 0.7522361359570662,
+                            "score": 0.20437109837628933
+                        }
+                    }
+                },
+                "Sa_2303560": {
+                    "forward": {
+                        "Sa_2303560_133_18_F": {
+                            "seq_id": "Sa_2303560",
+                            "start": 133,
+                            "length": 18,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 27.77777777777778,
+                            "gc_clamp": 1,
+                            "tm": 38.432133344482565,
+                            "homopolymers": {
+                                "percent": 22.22222222222222,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 13.88888888888889,
+                                "run": 4,
+                                "median": 2.0,
+                                "hairpin": 10
+                            },
+                            "seq": "TTCCTATGTCTTTTCTTA",
+                            "rank": 0.8211091234347049,
+                            "score": 0.29628753080225734
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2303560_251_19_R": {
+                            "seq_id": "Sa_2303560",
+                            "start": 251,
+                            "length": 19,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 26.31578947368421,
+                            "gc_clamp": 0,
+                            "tm": 39.57733615989628,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 10.526315789473683,
+                                "run": 6,
+                                "median": 4.0,
+                                "hairpin": 8
+                            },
+                            "seq": "ATTGTTAGAGAGGAATAAA",
+                            "rank": 0.4203935599284436,
+                            "score": 0.21784520846841252
+                        }
+                    }
+                },
+                "Sa_2306271": {
+                    "forward": {
+                        "Sa_2306271_116_20_F": {
+                            "seq_id": "Sa_2306271",
+                            "start": 116,
+                            "length": 20,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 25.0,
+                            "gc_clamp": 2,
+                            "tm": 42.768870941287275,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 25.0,
+                                "run": 10,
+                                "median": 5.0,
+                                "hairpin": 20
+                            },
+                            "seq": "GAAATTTCCATTAAACGTTT",
+                            "rank": 0.6350626118067979,
+                            "score": 0.21482571699284847
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2306271_116_19_R": {
+                            "seq_id": "Sa_2306271",
+                            "start": 116,
+                            "length": 19,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 42.10526315789474,
+                            "gc_clamp": 3,
+                            "tm": 46.01182323439929,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 21.052631578947366,
+                                "run": 10,
+                                "median": 3.0,
+                                "hairpin": 16
+                            },
+                            "seq": "AGGAGTAGATATTCCACGT",
+                            "rank": 0.17531305903398928,
+                            "score": 0.14845405220655364
+                        }
+                    }
+                },
+                "Sa_2461540": {
+                    "forward": {
+                        "Sa_2461540_267_21_F": {
+                            "seq_id": "Sa_2461540",
+                            "start": 267,
+                            "length": 21,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 14.285714285714286,
+                            "gc_clamp": 1,
+                            "tm": 37.85122249690863,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 23.809523809523807,
+                                "run": 14,
+                                "median": 4.0,
+                                "hairpin": 20
+                            },
+                            "seq": "TTAACATAAATAATTGTCTAA",
+                            "rank": 0.9092128801431127,
+                            "score": 0.3063820972393964
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2461540_22_20_R": {
+                            "seq_id": "Sa_2461540",
+                            "start": 22,
+                            "length": 20,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 45.0,
+                            "gc_clamp": 1,
+                            "tm": 49.9689512774566,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 17.5,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 14
+                            },
+                            "seq": "GGACACGTAGTTGGATTGTT",
+                            "rank": 0.06574239713774598,
+                            "score": 0.11503360401413
+                        }
+                    }
+                },
+                "Sa_2611857": {
+                    "forward": {
+                        "Sa_2611857_152_23_F": {
+                            "seq_id": "Sa_2611857",
+                            "start": 152,
+                            "length": 23,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 30.434782608695652,
+                            "gc_clamp": 2,
+                            "tm": 46.955094816266524,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 21.73913043478261,
+                                "run": 14,
+                                "median": 4.0,
+                                "hairpin": 20
+                            },
+                            "seq": "ATAGTATCATTCTTCGTTCTTCT",
+                            "rank": 0.28041144901610016,
+                            "score": 0.17392097082750482
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2611857_42_25_R": {
+                            "seq_id": "Sa_2611857",
+                            "start": 42,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 36.0,
+                            "gc_clamp": 3,
+                            "tm": 52.267284104549276,
+                            "homopolymers": {
+                                "percent": 24.0,
+                                "run": 6
+                            },
+                            "dimerization": {
+                                "percent": 12.0,
+                                "run": 10,
+                                "median": 2.0,
+                                "hairpin": 12
+                            },
+                            "seq": "AGACTGTTTTTTGTTTGGTATGAGG",
+                            "rank": 0.580948121645796,
+                            "score": 0.23265397719694844
+                        }
+                    }
+                },
+                "Sa_2681306": {
+                    "forward": {
+                        "Sa_2681306_183_20_F": {
+                            "seq_id": "Sa_2681306",
+                            "start": 183,
+                            "length": 20,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 35.0,
+                            "gc_clamp": 2,
+                            "tm": 46.412505375437206,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 17.5,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 14
+                            },
+                            "seq": "TTTATCGTTTCTGGACTCAA",
+                            "rank": 0.3926654740608229,
+                            "score": 0.14173608124757106
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2681306_75_21_R": {
+                            "seq_id": "Sa_2681306",
+                            "start": 75,
+                            "length": 21,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 33.333333333333336,
+                            "gc_clamp": 0,
+                            "tm": 49.57450973952439,
+                            "homopolymers": {
+                                "percent": 42.857142857142854,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 19.047619047619047,
+                                "run": 8,
+                                "median": 2.0,
+                                "hairpin": 16
+                            },
+                            "seq": "ATTTTTGGCGTTCGAGATTTT",
+                            "rank": 0.868515205724508,
+                            "score": 0.3045794432460285
+                        }
+                    }
+                },
+                "Sa_2685205": {
+                    "forward": {
+                        "Sa_2685205_278_19_F": {
+                            "seq_id": "Sa_2685205",
+                            "start": 278,
+                            "length": 19,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 31.57894736842105,
+                            "gc_clamp": 0,
+                            "tm": 42.94423081029919,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 26.31578947368421,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 20
+                            },
+                            "seq": "GTTAACTTGGGCATTAATT",
+                            "rank": 0.855098389982111,
+                            "score": 0.22209345456266533
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2685205_27_22_R": {
+                            "seq_id": "Sa_2685205",
+                            "start": 27,
+                            "length": 22,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 45.45454545454545,
+                            "gc_clamp": 2,
+                            "tm": 55.07866473793729,
+                            "homopolymers": {
+                                "percent": 22.727272727272727,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 34.090909090909086,
+                                "run": 20,
+                                "median": 4.0,
+                                "hairpin": 30
+                            },
+                            "seq": "TGTTGATACGCGCGTAAAAAGC",
+                            "rank": 0.6104651162790697,
+                            "score": 0.2266996525845001
+                        }
+                    }
+                },
+                "Sa_2704366": {
+                    "forward": {
+                        "Sa_2704366_223_20_F": {
+                            "seq_id": "Sa_2704366",
+                            "start": 223,
+                            "length": 20,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 25.0,
+                            "gc_clamp": 2,
+                            "tm": 39.841949124535745,
+                            "homopolymers": {
+                                "percent": 20.0,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 20.0,
+                                "run": 8,
+                                "median": 2.0,
+                                "hairpin": 16
+                            },
+                            "seq": "AATATAAAGGCTAAAAGTAC",
+                            "rank": 0.8255813953488372,
+                            "score": 0.306850282641468
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2704366_102_18_R": {
+                            "seq_id": "Sa_2704366",
+                            "start": 102,
+                            "length": 18,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 16.666666666666668,
+                            "gc_clamp": 1,
+                            "tm": 34.30792491574732,
+                            "homopolymers": {
+                                "percent": 33.33333333333333,
+                                "run": 6
+                            },
+                            "dimerization": {
+                                "percent": 19.444444444444446,
+                                "run": 10,
+                                "median": 3.0,
+                                "hairpin": 14
+                            },
+                            "seq": "TAGTATTTGTTAAAAAAC",
+                            "rank": 0.9950805008944544,
+                            "score": 0.4370624541717741
+                        }
+                    }
+                },
+                "Sa_2733075": {
+                    "forward": {
+                        "Sa_2733075_213_19_F": {
+                            "seq_id": "Sa_2733075",
+                            "start": 213,
+                            "length": 19,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 31.57894736842105,
+                            "gc_clamp": 2,
+                            "tm": 43.7226866626707,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 21.052631578947366,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 16
+                            },
+                            "seq": "ATAAGCTGCTTTATTTGGA",
+                            "rank": 0.6118067978533095,
+                            "score": 0.1741283489500751
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2733075_294_20_R": {
+                            "seq_id": "Sa_2733075",
+                            "start": 294,
+                            "length": 20,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 20.0,
+                            "gc_clamp": 1,
+                            "tm": 41.084104900493,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 22.5,
+                                "run": 8,
+                                "median": 3.0,
+                                "hairpin": 18
+                            },
+                            "seq": "AAATTATTACGCTAAACAAA",
+                            "rank": 0.962432915921288,
+                            "score": 0.25112997277503885
+                        }
+                    }
+                },
+                "Sa_2739917": {
+                    "forward": {
+                        "Sa_2739917_129_21_F": {
+                            "seq_id": "Sa_2739917",
+                            "start": 129,
+                            "length": 21,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 38.095238095238095,
+                            "gc_clamp": 1,
+                            "tm": 48.30972983118721,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 19.047619047619047,
+                                "run": 10,
+                                "median": 3.0,
+                                "hairpin": 16
+                            },
+                            "seq": "CCGATTGTAGCTGTTATGAAA",
+                            "rank": 0.39311270125223613,
+                            "score": 0.14075613056747843
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2739917_90_24_R": {
+                            "seq_id": "Sa_2739917",
+                            "start": 90,
+                            "length": 24,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 33.333333333333336,
+                            "gc_clamp": 3,
+                            "tm": 52.00707891584932,
+                            "homopolymers": {
+                                "percent": 20.833333333333336,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 18.75,
+                                "run": 14,
+                                "median": 7.0,
+                                "hairpin": 18
+                            },
+                            "seq": "AACGGGTTGTAAAAATAATGCCAT",
+                            "rank": 0.723613595706619,
+                            "score": 0.2550532652823186
+                        }
+                    }
+                },
+                "Sa_275293": {
+                    "forward": {
+                        "Sa_275293_205_18_F": {
+                            "seq_id": "Sa_275293",
+                            "start": 205,
+                            "length": 18,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 33.333333333333336,
+                            "gc_clamp": 0,
+                            "tm": 40.76444493722107,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 22.22222222222222,
+                                "run": 10,
+                                "median": 6.0,
+                                "hairpin": 16
+                            },
+                            "seq": "ATTGTCCAGCAGTATATA",
+                            "rank": 0.7714669051878354,
+                            "score": 0.22468826886729035
+                        }
+                    },
+                    "reverse": {
+                        "Sa_275293_110_20_R": {
+                            "seq_id": "Sa_275293",
+                            "start": 110,
+                            "length": 20,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 35.0,
+                            "gc_clamp": 1,
+                            "tm": 43.54550469947196,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 27.500000000000004,
+                                "run": 12,
+                                "median": 5.0,
+                                "hairpin": 22
+                            },
+                            "seq": "TCATTAAGTGGTCAGTATAC",
+                            "rank": 0.8488372093023255,
+                            "score": 0.19537219611404463
+                        }
+                    }
+                },
+                "Sa_2760927": {
+                    "forward": {
+                        "Sa_2760927_231_25_F": {
+                            "seq_id": "Sa_2760927",
+                            "start": 231,
+                            "length": 25,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 48.0,
+                            "gc_clamp": 1,
+                            "tm": 59.223656753172406,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 24.0,
+                                "run": 12,
+                                "median": 6.0,
+                                "hairpin": 24
+                            },
+                            "seq": "TGATGTCGACACCGATGTGCTTTGT",
+                            "rank": 0.38506261180679785,
+                            "score": 0.1327147597398467
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2760927_66_25_R": {
+                            "seq_id": "Sa_2760927",
+                            "start": 66,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 48.0,
+                            "gc_clamp": 3,
+                            "tm": 55.83860836682453,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 20.0,
+                                "run": 12,
+                                "median": 8.0,
+                                "hairpin": 20
+                            },
+                            "seq": "CAAGTGATTCGTCTAGCATCAGTGG",
+                            "rank": 0.23837209302325582,
+                            "score": 0.11132560203791406
+                        }
+                    }
+                },
+                "Sa_2797194": {
+                    "forward": {
+                        "Sa_2797194_213_24_F": {
+                            "seq_id": "Sa_2797194",
+                            "start": 213,
+                            "length": 24,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 33.333333333333336,
+                            "gc_clamp": 1,
+                            "tm": 51.42490456910207,
+                            "homopolymers": {
+                                "percent": 16.666666666666664,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 18.75,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 18
+                            },
+                            "seq": "TGACTTACAAAAGGTCGTTTGATT",
+                            "rank": 0.6238819320214669,
+                            "score": 0.22599590054202554
+                        }
+                    },
+                    "reverse": {
+                        "Sa_2797194_196_18_R": {
+                            "seq_id": "Sa_2797194",
+                            "start": 196,
+                            "length": 18,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 38.888888888888886,
+                            "gc_clamp": 3,
+                            "tm": 46.49011430667821,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 33.33333333333333,
+                                "run": 14,
+                                "median": 3.0,
+                                "hairpin": 24
+                            },
+                            "seq": "TAAAGCGTCAATACGCAT",
+                            "rank": 0.19320214669051877,
+                            "score": 0.17277868595055312
+                        }
+                    }
+                },
+                "Sa_319127": {
+                    "forward": {
+                        "Sa_319127_53_25_F": {
+                            "seq_id": "Sa_319127",
+                            "start": 53,
+                            "length": 25,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 36.0,
+                            "gc_clamp": 1,
+                            "tm": 52.50638959699751,
+                            "homopolymers": {
+                                "percent": 16.0,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 14.000000000000002,
+                                "run": 6,
+                                "median": 4.0,
+                                "hairpin": 14
+                            },
+                            "seq": "TAGATGAAGGTAAGGATGCACAAAA",
+                            "rank": 0.4740608228980322,
+                            "score": 0.19046450223890277
+                        }
+                    },
+                    "reverse": {
+                        "Sa_319127_167_23_R": {
+                            "seq_id": "Sa_319127",
+                            "start": 167,
+                            "length": 23,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 39.130434782608695,
+                            "gc_clamp": 1,
+                            "tm": 52.670812892672586,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 26.08695652173913,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 24
+                            },
+                            "seq": "TTTGGATATAACGCTGCCATCAT",
+                            "rank": 0.19007155635062611,
+                            "score": 0.12175635349481412
+                        }
+                    }
+                },
+                "Sa_443264": {
+                    "forward": {
+                        "Sa_443264_148_21_F": {
+                            "seq_id": "Sa_443264",
+                            "start": 148,
+                            "length": 21,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 33.333333333333336,
+                            "gc_clamp": 1,
+                            "tm": 46.68921619077679,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 16.666666666666664,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 14
+                            },
+                            "seq": "AAGAATCAACAATGGCTAGTA",
+                            "rank": 0.4418604651162791,
+                            "score": 0.16237472486605486
+                        }
+                    },
+                    "reverse": {
+                        "Sa_443264_271_21_R": {
+                            "seq_id": "Sa_443264",
+                            "start": 271,
+                            "length": 21,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 52.38095238095238,
+                            "gc_clamp": 2,
+                            "tm": 56.04650539738867,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 21.428571428571427,
+                                "run": 14,
+                                "median": 7.0,
+                                "hairpin": 18
+                            },
+                            "seq": "TGCGACGCCCATTTCTTCTTG",
+                            "rank": 0.05635062611806798,
+                            "score": 0.10060558554104818
+                        }
+                    }
+                },
+                "Sa_450795": {
+                    "forward": {
+                        "Sa_450795_266_21_F": {
+                            "seq_id": "Sa_450795",
+                            "start": 266,
+                            "length": 21,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 23.80952380952381,
+                            "gc_clamp": 1,
+                            "tm": 41.98697950028031,
+                            "homopolymers": {
+                                "percent": 19.047619047619047,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 28.57142857142857,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 24
+                            },
+                            "seq": "TTGTACATTGAAAACTAGATA",
+                            "rank": 0.8000894454382826,
+                            "score": 0.3308924419296596
+                        }
+                    },
+                    "reverse": {
+                        "Sa_450795_244_20_R": {
+                            "seq_id": "Sa_450795",
+                            "start": 244,
+                            "length": 20,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 40.0,
+                            "gc_clamp": 3,
+                            "tm": 47.06342023188779,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 20.0,
+                                "run": 10,
+                                "median": 6.0,
+                                "hairpin": 16
+                            },
+                            "seq": "AGATGATTCGTCTAATGTCG",
+                            "rank": 0.45080500894454384,
+                            "score": 0.14450877648951227
+                        }
+                    }
+                },
+                "Sa_483483": {
+                    "forward": {
+                        "Sa_483483_186_20_F": {
+                            "seq_id": "Sa_483483",
+                            "start": 186,
+                            "length": 20,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 35.0,
+                            "gc_clamp": 2,
+                            "tm": 45.80331709992561,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 20.0,
+                                "run": 8,
+                                "median": 6.0,
+                                "hairpin": 16
+                            },
+                            "seq": "GACATTGATGTTAAGCTCAA",
+                            "rank": 0.148479427549195,
+                            "score": 0.15012046055596884
+                        }
+                    },
+                    "reverse": {
+                        "Sa_483483_65_25_R": {
+                            "seq_id": "Sa_483483",
+                            "start": 65,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 28.0,
+                            "gc_clamp": 2,
+                            "tm": 49.315046133647684,
+                            "homopolymers": {
+                                "percent": 16.0,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 28.000000000000004,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 28
+                            },
+                            "seq": "TTTCTAAAGTTTTAAGGTCACCTTT",
+                            "rank": 0.4490161001788909,
+                            "score": 0.2514719659241796
+                        }
+                    }
+                },
+                "Sa_514541": {
+                    "forward": {
+                        "Sa_514541_251_20_F": {
+                            "seq_id": "Sa_514541",
+                            "start": 251,
+                            "length": 20,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 50.0,
+                            "gc_clamp": 1,
+                            "tm": 50.24272175696092,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 27.500000000000004,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 22
+                            },
+                            "seq": "GGTAGACCAGGATGGCATAT",
+                            "rank": 0.31887298747763865,
+                            "score": 0.13351265690577266
+                        }
+                    },
+                    "reverse": {
+                        "Sa_514541_99_20_R": {
+                            "seq_id": "Sa_514541",
+                            "start": 99,
+                            "length": 20,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 55.0,
+                            "gc_clamp": 3,
+                            "tm": 51.5007233537612,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 27.500000000000004,
+                                "run": 10,
+                                "median": 6.0,
+                                "hairpin": 22
+                            },
+                            "seq": "CTCTAGTCCACTACGTGCTG",
+                            "rank": 0.10778175313059034,
+                            "score": 0.12860709247910443
+                        }
+                    }
+                },
+                "Sa_55386": {
+                    "forward": {
+                        "Sa_55386_199_22_F": {
+                            "seq_id": "Sa_55386",
+                            "start": 199,
+                            "length": 22,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 45.45454545454545,
+                            "gc_clamp": 1,
+                            "tm": 52.854108820352906,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 25.0,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 22
+                            },
+                            "seq": "ACGTGGCCTGGATATGATGATA",
+                            "rank": 0.09861359570661896,
+                            "score": 0.11608828433137272
+                        }
+                    },
+                    "reverse": {
+                        "Sa_55386_93_21_R": {
+                            "seq_id": "Sa_55386",
+                            "start": 93,
+                            "length": 21,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 23.80952380952381,
+                            "gc_clamp": 1,
+                            "tm": 43.121590130113475,
+                            "homopolymers": {
+                                "percent": 23.809523809523807,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 19.047619047619047,
+                                "run": 6,
+                                "median": 2.0,
+                                "hairpin": 16
+                            },
+                            "seq": "AAAAATAATGCCTAACACTAA",
+                            "rank": 0.7227191413237924,
+                            "score": 0.32488666858931664
+                        }
+                    }
+                },
+                "Sa_651958": {
+                    "forward": {
+                        "Sa_651958_263_25_F": {
+                            "seq_id": "Sa_651958",
+                            "start": 263,
+                            "length": 25,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 32.0,
+                            "gc_clamp": 1,
+                            "tm": 51.01844605464788,
+                            "homopolymers": {
+                                "percent": 32.0,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 28.000000000000004,
+                                "run": 18,
+                                "median": 4.0,
+                                "hairpin": 28
+                            },
+                            "seq": "ACACTAAAGGAACTTTTGTGAAAAC",
+                            "rank": 0.6601073345259392,
+                            "score": 0.2864530774741784
+                        }
+                    },
+                    "reverse": {
+                        "Sa_651958_119_22_R": {
+                            "seq_id": "Sa_651958",
+                            "start": 119,
+                            "length": 22,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 27.272727272727273,
+                            "gc_clamp": 0,
+                            "tm": 42.75853293969419,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 20.454545454545457,
+                                "run": 14,
+                                "median": 5.0,
+                                "hairpin": 18
+                            },
+                            "seq": "TCATCTTCTACTAGTAGTATTT",
+                            "rank": 0.5536672629695886,
+                            "score": 0.24240840286028478
+                        }
+                    }
+                },
+                "Sa_653977": {
+                    "forward": {
+                        "Sa_653977_257_20_F": {
+                            "seq_id": "Sa_653977",
+                            "start": 257,
+                            "length": 20,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 40.0,
+                            "gc_clamp": 3,
+                            "tm": 47.3842380897687,
+                            "homopolymers": {
+                                "percent": 20.0,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 27.500000000000004,
+                                "run": 10,
+                                "median": 6.0,
+                                "hairpin": 22
+                            },
+                            "seq": "ACTGTCAGATTGATTTTCCC",
+                            "rank": 0.6149373881932021,
+                            "score": 0.24036534394572942
+                        }
+                    },
+                    "reverse": {
+                        "Sa_653977_29_25_R": {
+                            "seq_id": "Sa_653977",
+                            "start": 29,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 44.0,
+                            "gc_clamp": 2,
+                            "tm": 57.74535136887414,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 16.0,
+                                "run": 14,
+                                "median": 7.0,
+                                "hairpin": 16
+                            },
+                            "seq": "ATCTCGCAACACTTCTTGTGCCATT",
+                            "rank": 0.024597495527728087,
+                            "score": 0.1037102853826341
+                        }
+                    }
+                },
+                "Sa_692846": {
+                    "forward": {
+                        "Sa_692846_263_23_F": {
+                            "seq_id": "Sa_692846",
+                            "start": 263,
+                            "length": 23,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 34.78260869565217,
+                            "gc_clamp": 0,
+                            "tm": 51.1030573453873,
+                            "homopolymers": {
+                                "percent": 21.73913043478261,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 21.73913043478261,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 20
+                            },
+                            "seq": "CAAGCGGCATTAAAAACCATTTA",
+                            "rank": 0.7607334525939177,
+                            "score": 0.26047818382997395
+                        }
+                    },
+                    "reverse": {
+                        "Sa_692846_99_23_R": {
+                            "seq_id": "Sa_692846",
+                            "start": 99,
+                            "length": 23,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 47.82608695652174,
+                            "gc_clamp": 2,
+                            "tm": 56.146397145976664,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 21.73913043478261,
+                                "run": 10,
+                                "median": 5.0,
+                                "hairpin": 20
+                            },
+                            "seq": "GCTCTGCAAACGCATTGTACTCT",
+                            "rank": 0.04025044722719141,
+                            "score": 0.0911061918737834
+                        }
+                    }
+                },
+                "Sa_711412": {
+                    "forward": {
+                        "Sa_711412_243_21_F": {
+                            "seq_id": "Sa_711412",
+                            "start": 243,
+                            "length": 21,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 42.857142857142854,
+                            "gc_clamp": 2,
+                            "tm": 49.02117731465489,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 26.190476190476193,
+                                "run": 14,
+                                "median": 4.0,
+                                "hairpin": 22
+                            },
+                            "seq": "GGCTACAAATCTGATGTCATG",
+                            "rank": 0.08899821109123435,
+                            "score": 0.1304379038074728
+                        }
+                    },
+                    "reverse": {
+                        "Sa_711412_114_19_R": {
+                            "seq_id": "Sa_711412",
+                            "start": 114,
+                            "length": 19,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 21.05263157894737,
+                            "gc_clamp": 0,
+                            "tm": 36.82330882298942,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 23.684210526315788,
+                                "run": 10,
+                                "median": 5.0,
+                                "hairpin": 18
+                            },
+                            "seq": "TCTTCAAGTCATTAATATA",
+                            "rank": 0.8640429338103757,
+                            "score": 0.2950057404570763
+                        }
+                    }
+                },
+                "Sa_773371": {
+                    "forward": {
+                        "Sa_773371_251_22_F": {
+                            "seq_id": "Sa_773371",
+                            "start": 251,
+                            "length": 22,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 31.818181818181817,
+                            "gc_clamp": 1,
+                            "tm": 45.780940104476656,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 22.727272727272727,
+                                "run": 8,
+                                "median": 3.0,
+                                "hairpin": 20
+                            },
+                            "seq": "CTATATGAAATGTTCCCTTCAA",
+                            "rank": 0.41949910554561715,
+                            "score": 0.1793419994195741
+                        }
+                    },
+                    "reverse": {
+                        "Sa_773371_71_25_R": {
+                            "seq_id": "Sa_773371",
+                            "start": 71,
+                            "length": 25,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 40.0,
+                            "gc_clamp": 3,
+                            "tm": 55.20642183465077,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 30.0,
+                                "run": 10,
+                                "median": 5.0,
+                                "hairpin": 30
+                            },
+                            "seq": "TGGTCCGTTTAATTTAACTGCACCT",
+                            "rank": 0.12567084078711985,
+                            "score": 0.11218845463694871
+                        }
+                    }
+                },
+                "Sa_876229": {
+                    "forward": {
+                        "Sa_876229_38_23_F": {
+                            "seq_id": "Sa_876229",
+                            "start": 38,
+                            "length": 23,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 43.47826086956522,
+                            "gc_clamp": 2,
+                            "tm": 53.9912161110596,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 26.08695652173913,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 24
+                            },
+                            "seq": "AACGATATCACTGATCGCAAAGC",
+                            "rank": 0.011627906976744186,
+                            "score": 0.09437247088058676
+                        }
+                    },
+                    "reverse": {
+                        "Sa_876229_93_18_R": {
+                            "seq_id": "Sa_876229",
+                            "start": 93,
+                            "length": 18,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 33.333333333333336,
+                            "gc_clamp": 1,
+                            "tm": 41.27943413748363,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 19.444444444444446,
+                                "run": 6,
+                                "median": 4.0,
+                                "hairpin": 14
+                            },
+                            "seq": "TGTTACCATCTTGTCTAA",
+                            "rank": 0.48434704830053665,
+                            "score": 0.18733647701397985
+                        }
+                    }
+                },
+                "Sa_889432": {
+                    "forward": {
+                        "Sa_889432_138_23_F": {
+                            "seq_id": "Sa_889432",
+                            "start": 138,
+                            "length": 23,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 34.78260869565217,
+                            "gc_clamp": 3,
+                            "tm": 48.94579670617429,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 23.91304347826087,
+                                "run": 10,
+                                "median": 4.0,
+                                "hairpin": 22
+                            },
+                            "seq": "TGGTCTTTAATTGACTATGATGC",
+                            "rank": 0.48345259391771017,
+                            "score": 0.1568228685405776
+                        }
+                    },
+                    "reverse": {
+                        "Sa_889432_40_22_R": {
+                            "seq_id": "Sa_889432",
+                            "start": 40,
+                            "length": 22,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 31.818181818181817,
+                            "gc_clamp": 3,
+                            "tm": 45.89183046701771,
+                            "homopolymers": {
+                                "percent": 22.727272727272727,
+                                "run": 5
+                            },
+                            "dimerization": {
+                                "percent": 22.727272727272727,
+                                "run": 8,
+                                "median": 6.0,
+                                "hairpin": 20
+                            },
+                            "seq": "CTATTTCTGAAAAATCTTCAGC",
+                            "rank": 0.5259391771019678,
+                            "score": 0.2891741741731339
+                        }
+                    }
+                },
+                "Sa_910719": {
+                    "forward": {
+                        "Sa_910719_217_23_F": {
+                            "seq_id": "Sa_910719",
+                            "start": 217,
+                            "length": 23,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 43.47826086956522,
+                            "gc_clamp": 3,
+                            "tm": 53.606481235423985,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 26.08695652173913,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 24
+                            },
+                            "seq": "AGAAGGCTTAAACAATCGTTGGG",
+                            "rank": 0.12701252236135957,
+                            "score": 0.10900988685634017
+                        }
+                    },
+                    "reverse": {
+                        "Sa_910719_208_24_R": {
+                            "seq_id": "Sa_910719",
+                            "start": 208,
+                            "length": 24,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 12.5,
+                            "gc_clamp": 1,
+                            "tm": 40.94550852687678,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 27.083333333333332,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 26
+                            },
+                            "seq": "TATAATTTATTTAATTTGGCATAT",
+                            "rank": 0.8457066189624329,
+                            "score": 0.2874555081840179
+                        }
+                    }
+                },
+                "Sa_993081": {
+                    "forward": {
+                        "Sa_993081_87_22_F": {
+                            "seq_id": "Sa_993081",
+                            "start": 87,
+                            "length": 22,
+                            "flank": 0,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 22.727272727272727,
+                            "gc_clamp": 0,
+                            "tm": 43.53347281816991,
+                            "homopolymers": {
+                                "percent": 18.181818181818183,
+                                "run": 4
+                            },
+                            "dimerization": {
+                                "percent": 18.181818181818183,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 16
+                            },
+                            "seq": "AATCGTAAATCACTTACTTTTA",
+                            "rank": 0.917262969588551,
+                            "score": 0.32544535303036914
+                        }
+                    },
+                    "reverse": {
+                        "Sa_993081_67_24_R": {
+                            "seq_id": "Sa_993081",
+                            "start": 67,
+                            "length": 24,
+                            "flank": 1,
+                            "specificity": {
+                                "mm0": 0,
+                                "mm1": 0,
+                                "mm2": 0,
+                                "mm3": 0
+                            },
+                            "degenerate": 1,
+                            "gc": 33.333333333333336,
+                            "gc_clamp": 2,
+                            "tm": 48.4720424684304,
+                            "homopolymers": {
+                                "percent": 0.0,
+                                "run": 0
+                            },
+                            "dimerization": {
+                                "percent": 18.75,
+                                "run": 8,
+                                "median": 4.0,
+                                "hairpin": 18
+                            },
+                            "seq": "GGTTGGAACTTAACATTATTCATC",
+                            "rank": 0.32558139534883723,
+                            "score": 0.1382340233235348
+                        }
+                    }
+                }
+            }
+        },
+    "primer_scores": {
+            "params": {
+                "tm_opt": 55,
+                "gc_opt": {
+                    "min": 40,
+                    "max": 60
+                },
+                "weights": {
+                    "tm": 1,
+                    "gc": 1,
+                    "homopolymer": 1,
+                    "dimer": 1,
+                    "specificity": 1,
+                    "degenerate": 1
+                }
+            }
+        },
+    "sequences": {"Sa_55386": {"seq": "CTTATAACTATGCATCACATATAAATCCTGAAATTGCAAAAACGATTAAAGCAAATGGGAAAGCTAGAACGGGTTGGCTGATTGTTGACTATGCAGGATATACGTGGCCTGGATATGATGATATCGTAAGTGAAATTATAGATAGTAATAAATAAGGATTCAATAATGATATTAAGACGAGTATGAAAATAGTTAGATTCTAATTATTTTCACTACTCGTTTTTATTTTGAAAATAAGTAATAATTCAACAATATTATAAATTGAACAGATTGTTTGTGAAATTTTTGATAATATTAAAGTGAAAAAGTGTTATAAATTGATAAATATATGTAATTAACAAAAACAAATCATTTTAAAAAGAAGAGAGTTGTAAGATGATGAAACGATTAAACAAATTAGTGTTAGGCATTATTTTTCTGTTTTTAGTCATTAGTATCACTGCTGGTTGTGGCATAGGTAAAGAAGCGGAAGTTAAGAAAAGCTTTGAAAAAACATTGAGTATGTACCCTATTAAAAATCTAGAGGATTTATACGATAAGGAAGGCTATCGTGATGATCAGTTTGATAAAAATGATAAAGGTACATGGATTATAAATTCTGAAATGGTTATTCAACCTAATAAT", "target_start": 300, "target_end": 323, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_55386.json"}, "Sa_229008": {"seq": "TCCTGTTGATATTTTAGCGTATGCAACATGGAAATTCTCTGGTTTACCTAAAGAACGTGTTATAGGTTCTGGTACAATTTTAGACTCTGCACGCTTTAGATTATTGTTAAGCGAAGCGTTCGATGTTGCGCCACGTAGCGTCGATGCTCAAATTATTGGTGAACATGGTGACACTGAATTACCAGTATGGTCACACGCTAATATTGCGGGTCAACCTTTGAAGACATTACTTGAACAACGTCCTGAGGGCAAAGCGCAAATTGAACAAATTTTTGTTCAAACACGTGATGCAGCATATGACATTATTCAAGCTAAAGGTGCCACTTATTATGGTGTTGCAATGGGATTAGCTAGAATTACTGAAGCGATTTTCAGAAATGAAGATGCCGTATTGACTGTATCAGCATTATTAGAAGGCGAATATGAGGAAGAAGATGTTTATATTGGTGTTCCAGCAGTCATCAATAGAAACGGTATTCGCAACGTCGTAGAAATCCCATTAAACGACGAAGAACAAAGCAAGTTCGCACATTCAGCTAAAACATTAAAAGATATTATGGCTGAAGCAGAAGAACTTAAATAACTTTTTATAAAATCTATACCATC", "target_start": 300, "target_end": 305, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_229008.json"}, "Sa_275293": {"seq": "GCTTGAAGCTTGGCCTGCCCAGTTTTTAGCATCTCCCCAAAATGTACTAATCGTGTGTCCATCTTTGGCACGTTTATCAAAGACATACCATGTACATTGTCCAGCAGTATATAAGTTGTTCTTACTTGTGATAAGAGGCTGATCAATGATTTTACCGTTACCTAATGCTAAAGGTTTACCGTCAGCGGTCTTTGCTTTGTCATTAAATTCGGCGATTTGTAATTCGTCATACAATTCGTCTAAATCGATGCCTGTAATAAGCCCTTTGTTATCTTTTGAAAAAGCGTTATTTAATTCATCGTCATTGTCTTCGACATTCGGTATTGCTGGTGTCAAAGGATTGCTTGGTGACGTTTGAGGCGGTGTGTGTGAATCAATTGCGTCATTAATGTGCGTATACTGACCACTTAATGAAGAATGGTACTGATTGTTGTTAAGATCACGTTGATTTGCGTGTTGATGATTGTCGTTTGTACGTGACTGGTTTTGATGATTGTTGTTTGGCGTGTTGTTTTTGTCATATGTATAAGTATACGCGCCGGTGTCTTTATTCACTTTGAACTGTGCGTTTGGGTGTGCTTTCTTTGCTTCTTCTAATGTTTTG", "target_start": 300, "target_end": 303, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_275293.json"}, "Sa_319127": {"seq": "TTGGTACATGGAAAGTATTTTTAAAATTAAACTAATGAATGGCATTTGTAGGTCTGAAAATATGAATATGAAAAAGAAAAATAAAGGCGAAAAGATATAAAAGTTAATTGAAAAACGTTATCATATACGTGGGTATATGAAGAGGGAATGGTATTAAGAACGCTAAAATGTTATGTCGGTTTGACATGACAGGATAAGTTTGGAGATGACGGATTGGTTAAATTAAGCGTATTAGACTATGCCTTAATAGATGAAGGTAAGGATGCACAAAAGGCATTGCAAGATTCAGTGACACTTGCAAAATTAGCAGATCGACTTGGCTTTAAGCGAATTTGGTTTACGGAACATCATAATGTACCAGCGTTTGCGTGTAGTAGTCCAGAACTTTTGATGATGCATACATTGGCGCAGACAAATCACATACGAGTTGGCTCTGGTGGTGTGATGCTGCCGCACTATCGACCTTATAAAATTGCTGAGCATTTTAGAATGATGGCAGCGTTATATCCAAATCGTATTGATTTAGGTATTGGTAATAATCCAGGTACTACTATGGTAAAGCAAGCTTTAGATGGAATAAATCCTACATATGATAGTTACGATGAATCGATTTCGTTATTACGTGATTATCTTACAATAAAGGAT", "target_start": 300, "target_end": 344, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_319127.json"}, "Sa_443264": {"seq": "ACGTTAGACAAGCACTTCAGAATAAAGAGTCTATTTTCTATACGTATCAAAAATTAATACAATTAAGACATACGCATGATATTATTACGTATGGAGACATTGTGCCACGTTTTATGGATCATGATCATTTATTTGTTTATGAACGTCATTATAAGAATCAACAATGGCTAGTAATTGCGAATTTCTCAGCATCGGCTGTTGATTTGCCAGAAGGATTGGCTAGAGAAGGTTGTGTTGTGATTCAAACAGGCACAGTGGAAAATAATACGATAAGCGGGTTTGGTGCAATTGTAATCGAAACAAACGCGTAAAATAAATTGAGTGGATGCGTTTATATGGCGAAACAAAAAAAGTTTATGAAGATTTATGAGGCGTTGAAAGAAGATATATTAAACGGGCAGATTCAATATGGTGAACAAATTCCGTCTGAACATGATTTGGTGCAATTGTACCAGTCATCTCGAGAGACCGTGCGTAAGGCATTAGATTTGTTGGCATTAGACGGCATGATTCAAAAGATTCATGGTAAAGGGTCACTTGTCATTTATCAGGAGGTTACAGAGTTTCCATTTTCTGAACTTGTTAGTTTTAAAGAAATGCAAGAAGAAATGGGCGTCGCATATTTAACTGAAGTTGTTGTGAATGAGGT", "target_start": 300, "target_end": 348, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_443264.json"}, "Sa_450795": {"seq": "TAAAGCAGTATGCGAGCGCTTGACTAAAAAGAAATTGTACATTGAAAACTAGATAAGTAAGTAAAATATAGATTTTACCAAGCAAAACCGAGTGAATAAAGAGTTTTAAATAAGCTTGAATTCATAAGAAATAATCGCTAGTGTTCGAAAGAACACTCACAAGATTAATAACGCGTTTAAATCTTTTTATAAAAGAACGTAACTTCATGTTAACGTTTGACTTATAAAAATGGTGGAAACATAGATTAAGTTATTAAGGGCGCACGGTGGATGCCTTGGCACTAGAAGCCAATGAAGGACGTTACTAACGACGATATGCTTTGGGGAGCTGTAAGTAAGCTTTGATCCAGAGATTTCCGAATGGGGAAACCCAGCATGAGTTATGTCATGTTATCGATATGTGAATACATAGCATATCAGAAGGCACACCCGGAGAACTGAAACATCTTAGTACCCGGAGGAAGAGAAAGAAAATTCGATTCCCTTAGTAGCGGCGAGCGAAACGGGAAGAGCCCAAACCAACAAGCTTGCTTGTTGGGGTTGTAGGACACTCTATACGGAGTTACAAAGGACGACATTAGACGAATCATCTGGAAAGATGAATCAAAGAAGGTAATAATCCTGTAGTCGAAAATGTTGTCTCTCTTG", "target_start": 300, "target_end": 347, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_450795.json"}, "Sa_483483": {"seq": "GTGTAGACTCAAAAATATGAAAAATGTATTTCATATATATTTAATTTTAGACAAGACATATGTCTTGAAAAGTTGAAAAATATAGAGATTGATAAAACTAATACGGGTGTGAATGACATTGATGTTAAGCTCAATTACTAGCTTATAAAACATGTCATATGTTACAATTTTTGTTAGTTTTATTATGGGAAGTAGGAGGAAATGACGCATGCAGAAAGCTTTTCGCAATGTGCTAGTTATCGTAATAATAGGCGTTATTATTTTTGGTCTATTTTCATATTTAAACGGTAATGGAAATATGCCGAAACAGCTTACATATAATCAATTTACTGAGAAGTTGGAAAAAGGTGACCTTAAAACTTTAGAAATCCAACCACAACAAAATGTCTATATGGTAAGTGGTAAAACGAAAAATGATGAAGACTATTCATCAACTATTTTATATAACAACGAAAAAGAATTACAAAAAATTACTGATGCTGCTAAAAAGCAAAACGGTGTAAAATTAACGATTAAAGAAGAAGAAAAACAAAGTGTCTTTGTGAGTATACTTTCAACATTAATTCCAGTTGTAGTCATAGCGTTATTATTTATTTTCTTCCT", "target_start": 300, "target_end": 302, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_483483.json"}, "Sa_514541": {"seq": "GAAAAAAGCGAAGCCTGGCGAGATTAGTTGGGATAGCCCATTTGGTGAAGGTAGACCAGGATGGCATATAGAATGTTCTGTAATGGCATTTCATGAGCTAGGACCTACAATTGATATACATGCGGGTGGTTCAGATTTACAATTTCCACATCATGAAAATGAAATAGCACAATCAGAAGCACATAATCATGCGCCATTTGCTAATTATTGGATGCATAATGGTTTCATTAATATTGATAATGAAAAAATGAGTAAATCACTAGGCAACTTTATTTTAGTTCACGATATTATTAAAGAAGTTGATCCAGATGTACTAAGATTCTTTATGATTAGCGTACATTATAGAAGCCCAATTAACTATAATCTAGAATTGGTAGAATCAGCACGTAGTGGACTAGAGCGTATTCGCAATAGTTATCAATTAATTGAAGAGCGCGCACAAATTGCTACTAATATTGAAAATCAACAGACATATATTGATCAAATTGATGCGATTTTAAATCGTTTTGAAACAGTTATGAATGATGATTTTAATACAGCTAATGCAATTACAGCTTGGTATGATTTAGCAAAACTTGCGAATAAATATGTACTAGAGAAC", "target_start": 300, "target_end": 300, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_514541.json"}, "Sa_651958": {"seq": "AAGAACGTTGTAAACCATTTTATTGCATGGATGGGTTACACTAAAGGAACTTTTGTGAAAACAGAAAAATCACATGATCAATTTAAGATATATATTAAGAATAAGGTGCGACCGCTCGCAGTATTTAAAATAGAAGAAACAGCTGATGGAATAATAACTTTAATTTTATTGAGTGGAAGTTTAGTGAAAAAATATACAGTTAATCAAGGGAAGTTAGAATTTAGATTAATCAAAGAGTCGGCAGTCGTTTATATACATCTATACGATTATATCCCTCGATTATTTTGGCCGATTTATTACTTTATACAAGCACCAATGCAAAAAATGATGATTCATGGCTTTGAAGTTGACTGCCGGATTAAAGATTTTCAAAGTCGATTAAAATCAGGAGAAAATATGAAATATACTAAATGATATTGGGTGATATGGATGCAAATACTACTAGTAGAAGATGACAATACTTTGTTTCAAGAATTGAAAAAAGAATTAGAACAATGGGATTTTAATGTTGCTGGTATTGAAGATTTCGGCAAAGTAATGGATACATTTGAAAGTTTTAATCCTGAAATTGTTATATTGGATGTTCAATTACCTAAATATGATGGGTTTTATTGGTGCAGAAAAATGAGAGAAGTT", "target_start": 300, "target_end": 335, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_651958.json"}, "Sa_653977": {"seq": "AGGTATTCACCTGCAAGTCACGTCGACTGTTGGTAAGGGGACAACTGTCAGATTGATTTTCCCATTACAAAATGAAATTGTTGAACGCATGTCGGAAGTGACAAATTTGTCATTTTAAACATGCGTTTTGTTACTTAGAATTGATACATCAATGCAGCTTCAACGTTATAATAAGATAGATGTTAGTCATATGTTAAATTGAAGATACAAGTGCCAAAGCCTAAAGGAAATGAAGTTAAGATAAATTATAGGAGTGTTAAAGTGGCAATTTTAGAAGTAAAACAATTAACAAAAATATATGGAACTAAAAAAATGGCACAAGAAGTGTTGCGAGATATCAATATGTCTATTGAAGAAGGCGAGTTTATTGCTATTATGGGTCCCTCTGGATCTGGGAAAACGACATTATTAAATGTTTTAAGTTCAATTGATTATATTTCACAAGGTTCTATTACATTAAAAGGAAAAAAATTAGAAAAGCTTTCAAACAAGGAATTATCTGATATACGCAAGCATGATATTGGTTTTATTTTTCAAGAGTATAATTTACTGCATACATTGACTGTTAAAGAAAACATAATGTTACCACTAACGGTACAGAAGTTAG", "target_start": 300, "target_end": 306, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_653977.json"}, "Sa_692846": {"seq": "AAAATGGGTATTAAAATTAAAGTAGAAACGAATGGTTCAAGCGGCATTAAAAACCATTTAACTGAACAAGATATTGAAAATGCAACAGGTATCATTGTTGCTGCTGATGTTCATGTTGAGACGGATCGCTTCGATGGTAAAAATGTCGTAGAAGTACCAGTAGCAGATGGTATTAAACGCCCAGAAGAATTAATTAATAAAGCATTAGATACAAGTCGTAAACCTTTTGTTGCCCGTGATGGTCAAAGAAAAGGTAACTCAAATGACAGTCAAGAAAAATTAAGCCCAGGTAAAGCATTCTATAAACACTTAATGAACGGTGTTTCTAACATGTTGCCACTTGTAATATCTGGTGGTATTTTAATGGCAATTGTATTTTTATTTGGAGCAAATTCATTTAATCCAAAAAGCTCAGAGTACAATGCGTTTGCAGAGCAGCTTTGGAACATTGGTAGTAAAAGTGCATTCGCGTTAATCATTCCAATTTTATCTGGATTCATTGCACGTAGTATTGCGGATAAACCTGGTTTCGCTTCAGGTCTTGTAGGTGGTATGTTAGCAATTTCAGGTGGTTCAGGATTTATTGGTGGTATTATTGCAGGTTTCTTAGCAGGTTACTTAACACAAGGTGTTAAAG", "target_start": 300, "target_end": 336, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_692846.json"}, "Sa_711412": {"seq": "TCATTAAAAGGAGATAATACGTATCAGTCATTACCAGCAATTTTAGATCAAAAGCAAGGCTACAAATCTGATGTCATGCACGGTGACTATAAAACATTCTGGAACAGAGACCAAGTATATAAACACTTTGGTATCGATAAATTCTATGATGCAACATACTATGACATGTCAGATAAAAACGTTGTAAACTTAGGCTTGAAAGACAAAATTTTCTTTAAAGATTCTGCTAATTATCAAGCTAAGATGAAATCACCATTCTATTCTCATTTAATTACATTGACTAACCACTATCCATTCACATTAGATGAAAAGGATGCAACTATTGAGAAATCAAACACAGGTGATGCAACAGTTGATGGTTATATTCAAACAGCACGTTATTTAGACGAAGCATTAGAAGAATATATTAATGACTTGAAGAAAAAAGGATTATATGACAATTCAGTGATTATGATTTATGGTGACCACTATGGTATCTCTGAAAACCATAACAATGCCATGGAAAAACTATTAGGTGAAAAAATCACACCGGCTAAATTTACAGATTTAAACAGAACTGGTTTCTGGATTAAAATCCCTGGTAAATCTGGTGGTATCAATAATGAAT", "target_start": 300, "target_end": 306, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_711412.json"}, "Sa_773371": {"seq": "ACTATACTTTGAGCGGAAATATGATTGAATGAAGCTAGTTGAACCGTAACTATATGAAATGTTCCCTTCAAAGTAGACATTGAAAGGAACATTTCAATCCTTTGTTTGTAAGTCGCTCTAGACATTACATTTAGTACATATGTTGTTTCTAATGCTCATTAATGGTATTGATTATTCTTTAATTAAATCTTCAAGTGCCATTTTTAAATTACTATATTTAAATTGGAATCCCAATGCTTGAATTTTATTAGGTAATACTTTTTGAGTATCCAATACTACTGTTGACATTTGACCAAGTATGAGACGCATTGCAAGACTTGGTGCCCAAGTTTCATGAGGCTTATGCATAGCTCTTGCTAAAGTGTAGCCAAATAAATTTTGACGTTCAGGTATAGGTGCAGTTAAATTAAACGGACCACTAGCTGACTCGTTATTTATTAAAAATAAAATAGCTTGAATTAAATCATTGATATGAATCCATGAATACCATTGTTGACCAGAACCTAATTTACCACCAATGTAATATTCGTATGGTAGTTTCATTGTTTGTAACGCACCGCCTTCATTCGATAAAATTATACCGAAACGACCGATGACAACTCGTGTACCTAATTGTTCAAATTGTTGTGCGAAACGTTCCCATTGAT", "target_start": 300, "target_end": 346, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_773371.json"}, "Sa_876229": {"seq": "AGTAACACCTCCGAATAATGTGATTGCTTTTGGTAGAAATTACAAAGATCATGCGAACGAATTAAATCATGAAGTGGAAAAATTATATGTATTTACAAAAGCAGCGTCATCTTTAACAGGAGATAATGCAACAATTCCAAATCATAAAGATATTACTGATCAATTAGATTATGAAGGTGAATTAGGTATTGTTATTGGTAAGTCTGGTGAAAAGATTCCAAAAGCATTAGCTTTAGATTATGTTTACGGCTATACAATTATTAACGATATCACTGATCGCAAAGCACAAAGTGAACAAGATCAAGCATTTTTATCAAAAAGTTTAACTGGCGGTTGCCCAATGGGTCCTTATATCGTTACTAAAGACGAACTACCATTACCTGAAAATGTAAATATTGTTACAAAAGTTAACAATGAAATTAGACAAGATGGTAACACTGGCGAAATGATTCTTAAAATTGATGAATTAATAGAAGAAATTTCAAAATATGTTGCACTACATCCGGGAGATATTATTGCAACTGGTACACCAGCAGGCGTTGGTGCAGGTATGCAACCACCTAAATTTTTACAACCAGGTGATGAAGTTAAAGTGACTATTGATAATATTGGAACGCTGACAACTTATATCGCTAAATAATTAT", "target_start": 300, "target_end": 343, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_876229.json"}, "Sa_889432": {"seq": "CAAGGAGAGAGCAACATGAAAATAAAAACTGAATTTAAAGGGAACAATATACCATATGAATACGCAGCAGGTGCAGATGTGAGTGATTCTATTAACGGGAATCCAATTAAGTCATTTCCATTTGAAGTAATTGAATTACCGGAAGGGACTAAATATCTTGCTTGGTCTTTAATTGACTATGATGCAATTCCTGTATGTGGCTTTGCTTGGATTCATTGGAGTGTAGCTAATGTAAGTGTTAGTGGCAATTCAATTTCTATAAAAGCAGATTTATCAAGAACAAAGGGCGACTATGTACAAGGTAAAAATAGCTTTACTAGTGGGTTGTTGGCTGAAGATTTTTCAGAAATAGAAAATCACTATGTAGGACCTACACCACCTGATCAAGATCATCAATATGAATTAACAGTTTATGCGTTAGATCATTCTTTAAATTTGAAGAATGGGTTCTACTTGAATGAATTTTTAAAAGAAGTAAATCAACATAAAATTGATCAAACAAGTATTAACCTTATAGGAAGAAAAATTTAATACTAAATATCTCATCAATATAAAATTGTTCAATTAAAAGTACAAAGAAACAAAGGTTTTAATTTATATATTAGGTACGGC", "target_start": 300, "target_end": 311, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_889432.json"}, "Sa_910719": {"seq": "TTTGAAATGCCTTATGAAGAAGCTAAAGAGTGGATGTTAAAAGCATTAGAACCAATGGGTGAAGAATATTTAAATGTAGTTAAAGAAGGCTTAAACAATCGTTGGGTCGATGTCTATGAGAATAAAGGTAAACGTTCAGGTGGCTATTCATCAGGTGCACATTTAACTAATCCATTTATTCTACTTAACTGGTCTAATACTATTTCAGACTTATACACATTAGTTCATGAATTTGGGCATTCAGCACATAGTTACTTCAGTAGAAAATTCCAACCGTCAAATTCTAGTGACTACACTATTTTTGTCGCTGAAGTTGCATCAACTTGTAACGAAGCACTTTTAAGTGATTATATGGATAAACATCTTGATGATGAAAAACGCTTATTATTATTAAACCAAGAATTAGAACGTTTCAGAGCTACATTATTCCGACAAACAATGTTCGCAGAATTTGAGCATAAAATTCATGCAATTGAAGAAGCAGGTGAACCATTAACGCCAACTAGAATGAATGAAGAATATGCCAAATTAAATAAATTATACTTCGGTGATTCTGTAGAAACTGATGAAGATATTAGTAAGGAATGGTCACGTATTCCACACTTCTATATGAATTATTATGTATATCAATACG", "target_start": 300, "target_end": 333, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_910719.json"}, "Sa_993081": {"seq": "TCAGGGTCTTGGAAAATAACGCCACTTAATGGGTCAACGATTAGTTCATCATATTTCATAGGTAATTCAATTAAATTAGGAACAATACCACTTAATACATTCAGAAGTGTACTTTTACCGCAACCAGAAGGACCGAGTAAAAGTACTTTTTCTTTGTCTTGAATAGTGATATTTAAATGATCGAAAATTTTACGTTGACCACTTGGATATTTTAATCGTAAATCACTTACTTTTAACACTCTGAATGCTCCTCTTATAAGTTGTCGTAATCTTCTTTAGCAGCTGGTCTAAATAATTTTGTTACGCCTGTCTTATCTAAAGCTTTTACTAAAAGGTAAGATAGGACGCCGGCGACTACTGCACCACTAATTAATCTAAATACGATGAATAATGTTAAGTTCCAACCTGCAACTTCATTTAAATAACCATAGAAATAATCTATCGGGAAAGCCGCGATTGCTGTACAAAAACCTGCTAACATAGCTACCATAACTGAACGTGATTGATATTTAAAAATTGCAAAGACAAGTTCACACGCTAAACCTTGTATAAAAGCGTAAACGATTGTCGGAATATCGAAACGACCCATAATGATAGTTTCGCCGGCACCTGCAGCAAATTCAGCCAGTAAAGCAATAC", "target_start": 300, "target_end": 338, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_993081.json"}, "Sa_1001623": {"seq": "ACGTAATTACTACAGCCGGTATGACGATGGCATTTGTTATTGCATCAATAGCAGCTTTTAAATTATTGCGTAATCGTCAACCTAAAGATACTGTCTACCATAAGAAAGCTTTGAAAATGTCTATGATAGTTGGATTCTTTTCAACATTACTTTCTATGTTGGCAGGGGATTTATCTGCAAAATTTTTGCATAAATTCCAACCTGAAAAATTAGCAGCTTATGAATGGCATTTCGATACATCTTCCCATGCCAAATTATTATTATTTGGTGTGTTAGATGAAAAGACTCAGCAAGTTAAAGGTGCGATTGAATTACCTGGACTATTGAGTTTCTTAGCAGATAATAGTGTCAAAACTAAAGTACAAGGGTTAAATGATTTTCCAAAAAGTTTACATCCGCCTATGATCGTCCATTATTTCTTTGATTTAATGGTAACGATGGGAATTTTATGTTTTGTCATTTCAGGTGTTTATGTCTTAACTTTAATGTTTAAAAAGCTTAGAAAGTTTTCTACTCATAAATGGATGCTTTATGGAATATTATTAACAGGCCCAGCTTCAATGCTAGCTATAGAATTTGGATGGTTCTTAACAGAGATGGGTAGACAGCCTTGGATTGTTCGTGGTTATATGCGC", "target_start": 300, "target_end": 334, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1001623.json"}, "Sa_1045617": {"seq": "CAAGGGAACCTAAAATGATAGATGCTGTACCCATTGTAATCTTTTTCATAGCTGATGAACGTTGTTCTGATTGATACTTACTGTTTAAATAATGTTTTGTCATGTTGTTTTCCTCCTAAGGATACAAATTATGTGTTGTTATATGAGATGATTAACCATTGCAATTGATAATGGTTATCAATTATACTAGCACATCTATTTTCGTATAACAATAATAAATTGATTATAAAATAAATATTGACAATGATAATCATTATTATTTATGATTTTACTAAAGACTTAAAAGCAATCATAAAAAGGAGGATTATGTTTTGAAAAATATTTTAAAAGTTTTTAATACAACGATTTTAGCGTTAATTATCATCATCGCGACATTCAGTAATTCTGCAAATGCCGCAGATAGCGGTACTTTGAATTATGAGGTTTACAAATACAATACCAATGACACGTCAATTGCTAATGACTATTTTAATAAACCGGCAAAGTACATTAAGAAAAATGGTAAATTGTATGTTCAAATAACTGTCAACCACAGTCATTGGATTACTGGAATGAGTATCGAAGGACATAAAGAAAATATTATTAGTAAAAACACTGCCAA", "target_start": 300, "target_end": 300, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1045617.json"}, "Sa_1117202": {"seq": "AATTAATCGATGACAATGCTCAAGTACGTGTATTACCTTATGCTTCAATTACAACACGTCAATTAGGTAAAGAATTGGTTGATTTCCCAGCACTAGTAAAAGAAGGTGCCTTTGCGTTTACAGATGACGGTGTAGGAGTACAAACTGCAAGCATGATGTATGAAGGCATGATTGAAGCTGCAAAAGTAAACAAAGCCATCGTAGCACACTGTGAAGATAATTCATTAATCTATGGTGGTGCAATGCATGAAGGGAAACGCAGTAAAGAGTTAGGTATACCAGGTATTCCAAACATTTGTGAATCTGTTCAAATCGCAAGAGATGTACTATTAGCTGAAGCAGCAGGTTGTCATTATCATGTATGTCATGTTTCTACTAAAGAAAGTGTTAGAGTCATTCGTGACGCTAAACGCGCAGGCATTCATGTTACAGCTGAAGTTACACCACACCATTTATTGTTAACAGAAGATGATATTCCTGGTAATAATGCCATTTATAAAATGAATCCACCATTGAGAAGTACTGAAGATAGAGAGGCTTTGTTAGAAGGGTTACTAGACGGTACAATTGACTGTATCGCAACAGACCATGCACCACATGCACGTG", "target_start": 300, "target_end": 305, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1117202.json"}, "Sa_1299351": {"seq": "TTGAATTTTATTTCTAATACTGCGATGAATGTTGATTCAAAACAACTTGTAGTTTCATTAACGGATCATATTATATTTGCTTATAAACGCTTAAAACAAAATCAAGTTATTAGCAATCCATTTGTTATGGAAACTATGCAGTTATATAGTGATGCATATCATATTGCTAAACAGGTGATTGATCAGTTAAATGCAGCATTAGATGTACATTTTCCTGAAGATGAGATAGGATTTATTGCATTACATATTGCATCTAATACAGAAGATTTATCTATGCATGAGATGACCTTGATCAATAATGTTATTAAAAAAGGTATAGATATCATTGAATCAGACCTTGTGACAACTGTTGATAAGGAATCATTACAATACCAACGTTTTATAAGGCACGTACAATTTTTAATTCGCCGATTAAGAAGAAAAGAATATATACATGCACAAGATGATTTTGTGTCTATGATTAAAAATCACTATCCGATTTGCTATAACACAGCATATAAAATTTTAACTATGATACAAAAACAATTTGATGTTAATATCAGTGAGTCTGAAATTATATATTTAACATTACACATTCATCATTTTGAAGAAAGGATTAATCAATCCTAAATTAAGTGTATTACACGGGCGT", "target_start": 300, "target_end": 330, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1299351.json"}, "Sa_1304406": {"seq": "ATTTAAGTTTCCTATCTGTACCGTATTTTAATATTGAAATGAGCTAAAGTTAAGTCGCCTAACTTTTATTATCAGTCCAATCAGTTTCATCAAGTATAAATGTTATTGCTTATTTTTGTATTCTTGGCGTATTTTTTGTTCTTCTGCATAGCGCTCTGGATTTTTCTTATAAAAATCTTGGTGATAGTCTTCGGCTTTGTAAAATTGTGACGCTGGTAATATTTTTGTTGCAATTGCCTTATCAGCATTAATCGTATTTTTAAGCTGCTCGATATAAGTCTCAGCGAGTTCTTTTTGATGATCATTAGTGTAGAAAATAGCTGTTTGATATTGAGGACCACGGTCTTGATATTGACCACCTGTATCTAATGGGTCAATGACTGAGAAAAATATTTCTAATAACTTATTGTATGAGAATAATGCAACATCATATTGAATTTCAACAGTTTCTAAATGACCACTCGTACCTGATTTTACTTGTTCGTAAGTAGGATTTTCAATATGTCCGCCCATATATCCAGAAGTTACTTTTTCTATGCCGTCAAAGGTGTCAAATGGTTTCGTCATACACCAAAAGCAACCTCCGGCAAAATAAGCTGTATTAATATTCATT", "target_start": 300, "target_end": 312, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1304406.json"}, "Sa_1410000": {"seq": "CTGCATTTGTTGCTGCTACTCCACCACCGAAAATCACATATGTACTACCAGGTATATCCACATTTTCATGTACACCAGTCACTAAAGTACCTTGACCACCATGTTGTGCTTCAGAGTAGTAAGCTCCCATAATTGCTGAGCGTTGACCTGCTATAGCACTCATTGGCGCTAATAATTCTGCTTTTCCATTTTTTATAATGGTTTCACCACTAATCGCAGTTACACCAACTTCTTGCATTTTTTCTACTATTTCTTTTGAAGATGCTAGATGTAAAAATCCCCAGATAATTTGATTCTTTTTGAAATATTGATATTCGCTTTCATGAGGTTCTTTTACTTTGATAACAAGATCAGCTTCCCATGCTTGTTCGTGAGTTACGATCTTAGCGCCTTCTTTTTCATACATATCGTTAGAAAATCCTGAACCAATGCCAGCATTTTTTTCAACAATTACTTTATGTCCTGCATCCGTTAACTTACGCACATTTTCGGGTGTGCAAGCTACACGTCCTTCACCTTGTTTTAATTCTTTGACTACTGCAACTAACATTTGCAACACTCCTCTTTCATTTGTGAATAATTTCACAATTATTTTATCCTTTGGTTATGAATATGTAAATACCATTAATTAATTATTCATATTTTATCT", "target_start": 300, "target_end": 348, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1410000.json"}, "Sa_1508179": {"seq": "CAGATACGTGATCATATACTAAATGATAATAAGTTACAAAAGCGAAATCGCATTTTAATTGCCAGCATCTTAGAAGTACAGGCTTTAACTGGTATGCGCATAGGAGAACTACAAGCACTGCAGGAAAAAGATATAGATTTATTAAACAAAACTATCAATATAACAGGTACAATTCACCGCATTAAATACGAGAAAGGATTCGGATACAAAGACACTACAAAGACTATAAGTTCAAAAAGAAGTATCAGCATCAATTCTAGAACCGTAGAAATTTTTAAAAAGATAATACTGGAAAACAAAATGTTGAAAAGATGGAATTCGAGCTATGTTGACAGAGGGTTCATATTCACAACAAAAAAAGGGAATCCTTTATGTAATAATCAAATCGCCGGTGTGCTTAAGAAAACTACAAAAGCTTTAAATATGAATAAGAAAGTTACCACGCACACATTTAGACATACACACATAACTTTATTAGTAGAAATGAATGTTTCTTTAAAAGCAATTATGAAAAGGGTAGGACATGTAGATGAAAAAACAACCATTCGCATATATACTCATGTAACTGAAAAAATGGATAGAGAACTAACTCAAAAACTCGAAAACATTCCAAGTTAGCTTAAATCTGCCCT", "target_start": 300, "target_end": 331, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1508179.json"}, "Sa_1515294": {"seq": "CCTTACGTCTTGAAGTATAACCGCTATTAGCTATACGTTTTTGTAATCGTTCTAATTCTTTAGTCATTATTTTCTCCTTTTTGATTGACTAGATTACTGAAAAAAGCATCCATTTCTTCATCGTCTTCTTCAGTTGTCGGCAAATCTTCTATATTGGAAATACCAAATACATTTAAAAATAAATCAGTAGTAATTAACTGTTGGCTACGCTGTTCATTAACCACTTTAGCCTCAACTAGTCCTTTGGCAATCAATGTCTTAACTGCACCATCTGAATTGATACTACGAATTAATTCAATATCACTTCTTGATAATGGCTGGTTATAAGCAATAATTGATAGTACTTCCATTGCTGCTTGTGATAATTTCATTTGTGACTTTTGTTCAATTAATTGTTCAATATACGTTGCCGCTTCTTTTTTAGTCGTTAAAACATACGTCATTCCAAATCGTTGTATCATTAATCCATGTGATGAATAATTTTCAATTAATTCAACGAGTTGGTCTTTCGACATATCTAATATTTCTAATAGTTGTTTTTCATCTAAACCTTCATCGCCAGCTGTAAATAAAAGCGACTCTAATATACCATGATTATCCAAAATGGTAGT", "target_start": 300, "target_end": 310, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1515294.json"}, "Sa_1552948": {"seq": "GTTTAAATGAACAGCATCAAATCCCATATCTCCTGGGCGAACTTTGTCCATAATAGCGTTTAAATTCGCACCATCATAATATAATAGACCACCAGCATTATGGACGATTTCACGGATTTCCATAATATTTTTTTCGAAAATACCTAAAGTGTTTGGATTAGTTAACATAATAGCTGCTGTATTTTCATTTACAACACGTTTCAAGTCATCAATATCAACTTCGCCACGTTCGTTTGATTTTACAGTAACTGATTTAAATCCTGCAAATGAAGCTGAGGCTGGATTCGTACCATGCGCAGAATCTGGCACAATGACTTCATCACGATGACCTTCACCATTATTCTCATGGTAAGCTTTAAATATCATCAATGCAGTCCATTCACCATGTGCGCCAGCAGCTGGTTGTAATGTCACCTCATCCATACCAGTAATTTCTTTTAATTCTTCTTGCAAACTATAAATAATTTCTAATGAACCTTGAACTTGATCTTCATCTTGTAATGGATGTGATTCACTAAATCCTGGTATTCTAGCAACCTTTTCATTAATTTTAGGGTTATACTTCATCGTACATGAACCCAATGGATAAAATCCGTTGTCTACACCGAAATTTTTATTTGAAAGTTCAGTATAATGACGTACTA", "target_start": 300, "target_end": 343, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1552948.json"}, "Sa_1569469": {"seq": "TCTAACAACGATAAAAGCACCGATTAGAGGCGCAATAAAACCTATCAAGATACCACTAATTAAAGAGTACCTCATAAAATCAAAATTCAATAATGCATCTATCAATTGTGACACGCCTTTCCATTTTAAATAAACTCAAATCTTTATTAATTACAACATTCTCGATTATGCTGATGATCGACAAAACGTACAGGATGTCCATAAATTTTTGAAATTTCAACTTCATCAAGTGATTTAAACTCATCAGTTGTACCATGGAAATGCAAATGCTTATTTAAACATGCTACTTCAGTAGCAGTATCTGCTACAACACCGATATCATGAGTAACTAAGATAATGGTGATACCTTCTTGTTTTAATTGATCTAAAGTATTATAAAATTCACTTACATGTTTTGCATCAATACCATTCGTTGGTTCATCAAGTACTAATACTGCAGGTTCTGAAATCAATGCTCGAGCAATCATTACACGTTGTTGTTGACCACCTGATAATTCTGCTATATTTTTATGAATTAAATCACTTATATTCAGTCTTTCTAGTACTTTAATCACTTTTTCATTATCTTTGCTATTAAATGTTTGGAAAAGACGTTTTGTCTTT", "target_start": 300, "target_end": 302, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1569469.json"}, "Sa_1599932": {"seq": "CTTGTTTCAACTGATTTGGTATTTTCTAAAATTCTATCAGCCAATGTAGATTTTCCGTGGTCAATATGTGCTATAATCGAGAAATTCCTTATATTCTCTCTTCTTTTTAAGCGTTGCTCATTATCCATTTTATCCTTCTCACTTTCATAAAATAAACCCGTATTATCTTTCGCATCTTTGATATAATAACGTTTTTAATAGGTAAATGCAAACGCCATAATCTTGGATGAACTTTGAAATTATAACAATCTTTATTTAAATACATACTTGCGATATGTTAATATGTTAATTACGTACTTATAATTATAAAACGTATTGATTGTGTTTCCAACACAATTTATTAAATCTGCAAAATTTTAAGCTAACCCCATCAAATAAATGATTGCACAACGGTTAGACTTTTGTTAAAATATTTCTTGTTGTAATCAAATAAAATTTTGATAAGATGAACTCACTTTTAGGAGGTGACAGAAATGGCAAATATCAAATCTGCAATTAAACGTGTAAAAACAACTGAAAAAGCTGAAGCACGCAACATTTCACAAAAGAGTGCAATGCGTACAGCAGTTAAAAACGCTAAAACAGCTGTTTCAAATAACGCTGATAATAAAAATGAATTAGTAAGCTTAGCAGTTAAGTTAGTAGA", "target_start": 300, "target_end": 345, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1599932.json"}, "Sa_1620237": {"seq": "ACAATTTTTACGTTCATTTCGCCACCATTAGGTAGTGGAACACGAACTTCATCATCTAAACCTTTACCAATTAACGCTTTAGCCATTGGTGATTCATTTGAAATCTTACCATTAAATGCATCTGATTCAGCTGAACCAACGATTTGATAACTTTCCTCTTCATCACCTGGTAATTCTACAAACGTTACTGTTTTACCAATTTTAACAACGTTGTTATCTCCAGTATCTTCAATGATTAATGCATTTCTTAACATATGCTCAATTCTTTGAATATCTTGTTCGATGAATCCTTGTTCATCTTTTGCTGCATCATACTCAGAGTTCTCTGATAAGTCACCAAATGAACGTGCAACTTTAATTTTCTCTACAACTTCAGGACGCTTAACTGTTTTTAATTCTTCAAGTTCACGCTCTAATTTTTCAAAACCTTCTTGAGTCATTGGATATTGCTTTTGATTTTCCATATTGTCATCTTCCTTTACTGAATTATACTATTGCTTGCTAACTAAAGACTGAATTTTTGTTGTCATAATATCTATTGCAACTTTATTGCTCCCACCTTCAGGAATAATTATATCAGCATATTTCTTAGTCGGTTCAATAAATTGGTCATGCATAGGTCTAACAACACTTAAATATTGATTGA", "target_start": 300, "target_end": 345, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1620237.json"}, "Sa_1743111": {"seq": "TCTTATTATCTTTCAACAAATTGATTGGGCGTTTTAAAGTACTAGGTCCTGGATTTTCACGATCTACAGGAAATGCATTTAAAGACGTTAAAAATTTACCAATCCATTTATTTTTGAATAATTCTTTTTTAGCCATATAATGAATTTGATTAGGATATAATGCCATACCTAGCATAATGACTTCGTTATAACTTTCATGCGTACAAGTTACGACATATTTACTATCCTTAGGAATATTATCTTTACCGATTACGTATAATGATTTTGACATTTTAACTAAAATGAAATTCAAAATCTTACTAATCACTGAATACATTGTGCCACCTACTTAACTTATTTGTTTATAACAACTAGATTTTATCACTATATTTTTACTAGAACAAGATAGTCTGAAAATACATCTAAAGTTGTATAGTGTATTACTAGCAATAATTATAAAAAAAAGACATAATTAAAGCATATATAAATCATATAATGGAGGTTAAGTATGTCAGATTTTAATCATACAGATCATTCTACAACAAACCATAGCCAAACACCTAGATACAGAAGACCTAAATTTCCATGGTTTAAAACAGTCATCGTTGCATTGATTGCTGGAATTATTGGTGCACTTCTAGTAC", "target_start": 300, "target_end": 322, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1743111.json"}, "Sa_1788290": {"seq": "GCTTGATTAGTATCGCTTTGTACATTATTATCCGTAGTTAAGGCTTGTGCACCATTTGGGTTTGAAAGTAATAAAACTGTTCCGATTAAAGTAGAGAATATGCCTACTTTATACTTCCTAATACTATATTTATTTTTCTTTAACAAATTCATTTCATTTTCCTCCTGGTTGTCTGTTCTCTGCTGTGTTGTTAAGAATTATGCTAAAAATATACGCTCCCTCATATTATATTTATAGCTATATTATATTTATAGCTATATTATTTTGTACAATATTTTAAGTTCACTCAATTTTATCATCATCATTTTATAAAATAAAGTTTTATTTTATTACAATTTAGTTTCCGTTTTGTAATTAAAATCTTAATAAAACATAACAAGAACGCTTTAGATTGTTTTGTAACAGAAAGTAATTCATACCAAAAAACACCAAGCAACCGAAACGTTACTTGGTGTCATTACAAATGTAATATTATTTTAAATTATGTCACTACTTTAAATACTTTTTATTTCCAAACCTTCATCGCCCCATGCGTGCATGCCGCCTTCGACATTTACGGCATCAATGCCATTTGCCTCTAAATATTCTACAACTTTAGCGC", "target_start": 300, "target_end": 300, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1788290.json"}, "Sa_1901958": {"seq": "AGGGGGGCTTCATGCTTAGATGCTTTCAGCACTTATCCCGTCCACACATAGCTACCCAGCTATGCCGTTGGCACGACAACTGGTACACCAGAGGTATGTCCATCCCGGTCCTCTCGTACTAAGGACAGCTCCTCTCAAATTTCCTACGCCCACGACGGATAGGGACCGAACTGTCTCACGACGTTCTGAACCCAGCTCGCGTACCGCTTTAATGGGCGAACAGCCCAACCCTTGGGACCGACTACAGCCCCAGGATGCGATGAGCCGACATCGAGGTGCCAAACCTCCCCGTCGATGTGAACTCTTGGGGGAGATAAGCCTGTTATCCCCGGGGTAGCTTTTATCCGTTGAGCGATGGCCCTTCCATGCGGAACCACCGGATCACTAAGTCCGTCTTTCGACCCTGCTCGACTTGTAGGTCTCGCAGTCAAGCTCCCTTATGCCTTTACACTCTATGAATGATTTCCAACCATTCTGAGGGAACCTTTGAGCGCCTCCGTTACCTTTTAGGAGGCGACCGCCCCAGTCAAACTGCCCGCCTGACACTGTCTCCCACCACGATAAGTGGTGCGGGTTAGAAAGCCAACACAGCTAGGGTAGTATCCCACCAGCGCCTCCACGTAAGCTAGCGCTCACGTTTCAAAG", "target_start": 300, "target_end": 344, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1901958.json"}, "Sa_1957010": {"seq": "CCAGTTGTTTAAAACTTTAATTAAATAGCCACCATGCGCACTTTTGCTTTTAGTGTACTCAACACCTACTTTTACAACTTCAAAAGCGTTTGTACCTATATCATCAATAGCAAACCCTAATTGTTCCATTTGATTAGGTGTTAACTTATCATCCAAATTTGCAATTATATATTTTATTGAAGATGAGAAGACGGCTTCTCTTTCTTCTTCTTTATTCTTATATTCTTCTTCTTTTTCTTCTTCTCTTTCTTCTTCTTCTTCTGTATCGTTACGTAACGTTACGGTAACGTTACGTTTTGCTTCTAGTAACTTTTTCTGTTTCTCACGATAGCGTTGTTGTCGCAATTTATTTTTTTCTTTATGCTTAGCTTTGCTATCTAAGCTTTGATGCTTCTCCCAGTTTGTCACTTTTATGACACCATTAACTTTTTCAATCATGCCCAATGTCTCAAAAGTTTGAATTGCTAACCTTATTGAGTTAATAGGTCTATTAAATTCATTTGCTAACATTTCTTCGTTGTACGGCAAGTTTTCGGATAGCATAATATAACCTTGTTCATTGTACTTTCCTGATAAAGTTAGTAACTTAACCCAAATAGTTATGATCGTATCTCTTTCGGGTAAAGCTTC", "target_start": 300, "target_end": 329, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_1957010.json"}, "Sa_2000608": {"seq": "ACGGAACGGTGTTTTCGTTTCCCAAGATATCATCGCTTTTGGTTGTACTTTGTCGTATGCTTCTTCACGAACCATACCTTTATTAATTAATGCTAATAAGACACGTTGTGAGAAAATCAGACCAAATGTTTTATCTATGTTATTACGCATATTATCTTCAAATACAGTTAAACGGTCCACAATATTTGTGAAACGATTCAATGCATAATCTAGTGCTATTGTAACATCTGGTAACATAATACGCTCAGCAGAAGAATGAGAAATATCTCTTTCATGCCATAATGGCACATTCTCATAAGCTGTAGTAATATAACCACGAATGACTCTTGAAATACCTGTGATATTTTCAGAACCAATTGGATTTCGTTTATGAGGCATTGCAGATGAACCTTTTTGGCCTTTTGCAAATGCTTCTTCAACTTCTCTCGTTTCGGTTTTTTGAAGGTTACGTATTTCAACGGCAAATTTTTCTAGTGATGTCGCGATTAATGCTAATGTCGCAATATAGTATGCATGTCGATCGCGTTGCAATGTTTGCGTTGATACAGGCGCTGTGCCAATACCTAAATGTTTACACACATAACTTTCTATTTCAGGAGGAATGTTAGCAAAAGTACCTACTG", "target_start": 300, "target_end": 322, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2000608.json"}, "Sa_2022705": {"seq": "TTCCCGTTTCATCCTTAACAAAAATTAACAAAGAATTTGCAATTAATTTATTTCATTACCTTTTATTACTATAAATTGGTATAATGTTGTAAATGCTAAAGGAGGTTTTTACAATGACAAATTTAGAAACTTATTTCAAAAATAGCCAACCCTTAAATGAATACATTGATGGAATGAAGACAAATCAAGATACCGTTCTCAGTATCTATCAATCATTTGAGTTACCAGAAGATGATTCACGCATCAAAAAAATAAAAGAGATGAATTATTCTAAAGTATTAGTAATTACTGAAGACTGGTGTGGAGATGCAATGATGAATCTCCCAATTCTAAAACACATCAGTGAAGCATTAAATTTAGAAGTACGCGTGTTCCATAGAGATGATGATACAAAACTGATCGATCAATATTTAACAAATGGTAAATCACGTGCAATTCCTATCTTCGTATTCTTGAATGATCAATTCGAACAAGAAACAGTTTGGGGACCAAGAGCAAATGAAGTCCAAAAATTTGTAACTGATGTTCGTGCTGATAAATTACCGAGCAAAGATCATCCAGACTATGCAGATTTAGAAAAAGAAACACACTTAGTTATATCAAACCG", "target_start": 300, "target_end": 306, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2022705.json"}, "Sa_2053840": {"seq": "AACGCACTTCATCGCCTTTATCGTCAAGCATAAAACCAAACGAACATTGATTGATGTTGCCTACACGCATGTTCTCATATAAATCACGTGCAAATGTTGTGTTTGGTAACTTACAACGATATTTAAGTCCAACATCATCAGTTTCGAGCTCCAAAGTACCCGATTTTGTCCTACCAATTATTTGCGATGGGATATGATCTACTAAACAACGCACATCAGATAAATCAGTGTTTTCTAAAGCGCGACGTGAAATCGTTTCTTTGAATCCACCAAGATTTTCAGACCAAGTGTCAAACTTTAACGCATACCCCTCTATGACCATTTCGTTGTTATCATTTGAGCGTACCTCAATAATGTTGCCAACTCTCGTTTCCTTACTCATTTTCCTCACCACCTTTCAATTTTTTATCAGTAGCTCTCGATTTATTCATCTGATACTCATCTACAAGTTCAATATTTACATGGTTTAAATCGACTCTGTGAATGCTACCATTACCGCCTGGTATTGGCGCTAATCCATCACGTTGTCTAATTTCATCGATATTCATCTTTCCAGAATCAATGTTAATTTTGTCAATTTCAGCTTGTGTTTTTTCATCAACAACTCGTATTTCAGTGGTATCAAATTTAAATTCACGATTCAC", "target_start": 300, "target_end": 343, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2053840.json"}, "Sa_2133338": {"seq": "CATCATATGTAGCACCAGCTCTCGAAAAAACGCCAGAAAGTGTTAAACGAATTAAACTTACATACTCTGCCGATGCTGGCACGCGCATTTCGATAAAATCTTCTTTAGATTGCATGTTATTCGACCTCCGTTCCTTCATTAACATGCATTAAATCCTTAAGACCAGTAATTTCAAATAGTCTACCGATACGATCTGACACACCTAAAATGTATAGTTCTTTATCATTTTGGTTTAATGCTTTTAATGTACCTACGAATAAACCTAAACCTGTCGAATCCATATAACTCACATTTTCTAAATTAACATAAATATCACGAGTTCCATCTTGTCTCATAGGTGTTAAAACCTCTTCTAATTCAGGCACAGTATAAACATCTAATTCTCCACCGACTTTAACTTCGTAAAATTTATCTTGAGTGGTTGTTTCTATATTAAGATTCATTTCATTACACTCCTACTTATTAAAAATATTTATCTTCATTTTAAGCGCTGTATCCACCATATTTATATTTCAAATTATTATATACCCATCGAAATAATTTCTAATCTTCTTTTTTAAATTAATTTACTCTTTTTATAATCAAAATAGTCATATCATCTTTTTTATTTGGGTTTTGAAGCTTTAAAATTGCTT", "target_start": 300, "target_end": 334, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2133338.json"}, "Sa_2135096": {"seq": "ATATCATAACTGGTATTTGCTAAAATCTTTGTTTATAAGAAAATTCTTCGTACAGAATTTAGAAATAGTTATAATTATTATAAAGTTATTGTCTTTTATATCAATATTTTATTTATCTCTGAAAAATACATATAATAGACGCCTAATTTTTCTGGTGAGCTACTGCATTCAGCCCTAAACTAATCATTAGTGCATTATCTACTTCTTTCATTTTATCATCGGATAAGTACGTCAGTTTTTCTTTCAATCGTTTTTTATCAAGTGTACGAATTTGTTCTAATAATATAACTGAGTCTTTATCCAACTTATACTTTTTCTTTTCAATCTCTACATGTGTCGGTATTTTCGCTTTATTAATCCTACCAGTTATTGCCGCAACAATAACTGTAGGACTATATTTATTACCAGTATCATTTTGAATTATGACTACAGGTCTGACTCCCCCTTGTTCAGATCCCTGTACTGGTGATAAATCTGCTAAATAAACATCTCCTCGTCTAATCATTCATTCGTTGAATTAGAAGATAAATATGTTTCGTTGCAATCGCATGCTTCACACTCTATCGGAAAAGCTTCGTTCGCTAGGGAGAGATTTAAATCAGCCATTTGT", "target_start": 300, "target_end": 309, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2135096.json"}, "Sa_2159554": {"seq": "TATTCTATCACATTAATGAGTACGTATGAAACAATAAGTGGAAAAATTTAACTAATTATTAAAAAAATCTTTGAATCGATTAACAGTCTTTTCAATATTTTCACTTTTAGAAATGGCTGAAATGACTGAAATTCCATTGGCACCTGCTTCTACAATCGGCGCCACATTATTAGTATTGATACCGCCAATAGCTACAATCGGTAGTTGCGGATTCATTTCTTTAAACGTTGCAATCATTTCTGGACCTACTGGTATATGCGCGTCATGCTTCGACGGCGTAGGATAGATTGGTCCAACACCTATATAATCAACATGAGTTAAATCAGATTTTGCATACTCATCTAAATCACTAATACTAAGTCCAATAATTTTATCAGTGAAATATTGTGCTATCTCTTTGACTTTCGCATCATCTTGACCGACATGTATACCATCCGCGTTAATTTCTTTTGCCAAGGATACATCATCATTAACGATAAAAGGCACATCATATTGATGACAGAGATGCTGTAATTCTTTAGCTAATACAAGTTTATCGTTTCCTTTTAAAGCTGATTCACCCTTTTCTCGAAATTGGAAAAGTGTAATCCCTGCCTTTAATGCTGCTTCTAATACTTCATGAATAGTTCGATGACTCGGAACATCGGAG", "target_start": 300, "target_end": 348, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2159554.json"}, "Sa_2303560": {"seq": "TGCATTAGGTTCATAATCTGCACGTTCTAACATATCAACTTGTTTAAGTGCTTCGCTGACTCTTCTATGCATTTCGTCATATGGAACCGCATGATTTTCGAGTCCAAATGCCACATCGTATTTTACAATTGAACCAACAAATTGATTATCCGGATTCTGAAATACAATTCCTATGTCTTTTCTTAACTTTTCAAAATTATCATCAGTTATAGCTTGATTATTATAAAAAATTTCTCCAGATTTAACTTTCTCTATGCCAATCATTAACTTGGCAATTGTAGATTTTCCAGAACCGTTATGACCAACAATAGATGTCCACTGACCTTTAGGTATATTAAAAGAAACATCTTTCAATGTGAAGGATGCATCACTTTGATATTGAAATGAAACATTTTTAAATACAATAACTGAATTCTTATCCTCCACTTGTCTCTCTCCTTTACGATTCGTGTATCTATCATATTTTACAATATTTATAAATCGCTGTATATGACATTGACTGGGTTCTCTATATATTACTAGTATTTTCTGACTCATTTCTAGTCTTTAAAGTGTTGTTTAACAACTAATGATAAGGACTTTTATTCCTCTCTAACAATTATGTATAAACGTTAATAAAATAAATGATTTACTAATATAGGGGTGGTC", "target_start": 300, "target_end": 347, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2303560.json"}, "Sa_2306271": {"seq": "TATTCTTTTTCACTCTACGTTTACGAGATACTTGTTTACGTGCCATTTAAAATTTGCCTCCTTTACCTATTATTTTTTCTTGTTAGCTACCGTTTTAACTGGTCCTTTACGAGTACGCGCGTTGTTTTTCGTTTTTTGACCACGAACTGGTAAACCACGACGGTGACGGATACCACGGTATGATGAAATTTCCATTAAACGTTTGATATTTAAGTTAGTTTCACGACGTAAGTCACCTTCGACTTTATAACCGTCTACAACTTCACGGATGCGACCTAATTCGTCATCAGTTAAATCTTTCACACGAGTATCAGCTGATACGTTAGCTTCTTCAAGAATTTTTTGAGCAGTTGACGTACCGATACCGTATATATAAGTTAATGAGATAACTACGCGTTTTTCACGTGGAATATCTACTCCTGCAATACGTGCCATATTAATTTACACCTCTCTTTTATTAACCTTGTCTTTGTTTGTGTTTTGGATTTTCACAAATTACCATTACTTTACCTTTACGTTTAATGACTTTACATTTTTCGCAAATAGGTTTTACTGATGGTCTTACTTTCATTTTTATACCTCCCTATATTATGGAGTGACGATTA", "target_start": 300, "target_end": 304, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2306271.json"}, "Sa_2461540": {"seq": "TCGGCACACCACTCATCAATGACGCATCTGGTTTTAACATAAATAATTGTCTAAACCAAATTGATAATGAAGTTCTGTAGTTAAAGTCTGGATGTTGTATATTTGTTACTAATGTTGCGTAACATCCCATAAATACGATAAGTAATAATAAGAAATTTACAAATATATCCGACGCTGAACTTAATCTTCGAATACTTTTCGTAGTAACACGTCTCGCTGTTAATAAAAACATCCCTATCAAAGTTATTATACCAAAGATGCTACCAATATAAACAGCGCCTATATGATATAAATGCTCAGACACACCCACTGCATCCATCCATGGTTTCGGTATTAACAATCCAACTACGTGTCCAAAAAACACTGGAATAATACCTAAGTGAAATAATAAACTTCCCCACATCAACCTTTTTCTTTCTATTAATTCACTAGATTTAGCTGTCCAAGAAAATTTATCATAACGATAACGTGCAATATGACCTGCGACAAAGACAACTAAACATAAATACGGAAATATAACCCATAAAAACTGATTAAGCATGATGTTTCACTCCTTTTGGTGATGTCAAACATAATTTCAATGTTTTTCTAAGTGCTTGAATCACATAGGCATATGGATTGTTATCTTCACCA", "target_start": 300, "target_end": 332, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2461540.json"}, "Sa_2611857": {"seq": "TTGGATTGGTTCAGTCATCTTAGTTGCCATTAATAAAAATATATTTGGTATCGTTGCTCCATTTGAGGCGAGCAATACGATGTATCGTGCCGTAGAAAAAATATTGAATAACGAGTCAACATTTATGTGTCCTACTGAAATTATAAATATAGTATCATTCTTCGTTCTTCTATTTATAGTTAATACTATTGTCTTATTACTAAGTAGAAAGAGATGGTTGAAAATCGGTATGTAGTATAAAAAAGGAGCGGTATACATTGCCGCTTCTTTTTATTATGTATTTTTACAATCTCCACCAATGACACGTCGTCATTGCTACCTCATACCAAACAAAAAACAGTCTCGCAATCAAGACTGTTTTCCACTCAATATATTCATCCATTAGCGTAATAGATTATTTGACTTCTGTAGCTACAAAGATTTTACGTTTTTCCCAAACGCCTGTCTTTTCATTGTAATCATCACAAGTAATTAATGTTAATTGTTTATCTTTACCTTTTTGTTCATCTAGAACTCCTACATCTGTAGGCTTAACATCTCTTATACTTGTCATTTTATACTTACGTGTTTCATTACCAACTTTAAAGTACACCATACTACC", "target_start": 300, "target_end": 300, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2611857.json"}, "Sa_2681306": {"seq": "CTCAATGGTGGGTCGCATCATTAAATCCACCACATTTAAAAGCAATGATTCCTTGGGAAGGCTTAAATGATATGTATAGAGAAGTAGCCTTTCACGGAGGTATACCAGATACTGGCTTTTATCGTTTCTGGACTCAAGGTATTTTTGCGAGATGGACAGATAATCCAAATATCGAAGATTTGATTCAAGCACAACAAGAACATCCTCTGTTCGATGATTTTTGGAAACAGCGTCAAGTGCCATTATCACAAATTAAAACACCTCTACTAACATGTGCTAGTTGGTCTACACAAGGTTTGCACAACCGTGGCTCTTTTGAAGGATTTAAACAAGCTGCATCTGAAGAAAAATGGCTATATGTGCATGGACGTAAAGAGTGGGAAAGTTACTACGCTAGAGAAAATCTCGAACGCCAAAAATCATTCTTTGATTTTTACCTTAAAGAAGAAAATAACGATTGGAAAGATACGCCTCATGTCATTTATGAAGTTAGAGATCAATTTTATAAAGGCGAATTCAAATCAGCGTCAGCGTTCCCTTTACCTAACGCAGAATATACACCATTGTATTTGAATGCTGAAAATCACACATTGAATCATGCAAAGATTAGTAGCGCGCATGTCGCACAATATGACTCTGAAGATA", "target_start": 300, "target_end": 344, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2681306.json"}, "Sa_2685205": {"seq": "AGCTATTTGGTATAAATTGTTAGTTAACTTGGGCATTAATTCTATCACAGCACTCGGTAGACAGACCGTTGCAATCATGCATAATCCTGAAATACGTACACTGTGTAGACAGCTATTACTAGATGGTTGTCGTGTTGCACAGGCAGAGGGGTTAAACTTTTCAGAACAAACTGTCGATACTATTATGACTATATATCAAGGTTATCCCGACGAAATGGGAACGAGCATGTATTACGACATTGCGCATCAGCAACCTCTTGAAGTCGAAGCGATTCAAGGCTTTATTTATCGACGTGCACGTGAACACATTCTTGACACCCCATATCTTGATACTATTTATAGCTTTTTACGCGCGTATCAACAAAATATGTAAGCACATATATAATATAAAAAGACCTTAACGATGCATTTAGAACCACCTGTTCCTAATATCGCTAAGGTCTTTTAATTATATTAGACTATTCAGCTTCTCTAATTTCTTCTGCCACATCTTTATAGTCTATTTTCGCTTTAACAAACGTCTCGTTATTTACCGGGAAATGTTGTTGGAATGTTTCAAAGTTTTGTATCTCAACGACAACGTCATCCACTTCAAAGTCAAGAACATGTCCACCATAAGCTCTTTCATCATCCGCA", "target_start": 300, "target_end": 335, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2685205.json"}, "Sa_2704366": {"seq": "TATGAAAGAAATCTCTCAACATATTTCCGAACCCTGTCACTGTCGTTTCCATAATAAAAACAGTCGGTCCAATAATAAATATAAAGGCTAAAAGTACAAAGGATAGCCAAACGTTGATATCACTTAACTTTTGAATACCTTTTTTCAATCCTGTATATGAACTAATGGCAAATATAACCGTGATTGTTAATAAAATGGCCGAACGTAAAATCATATTTTTACCATCTAAACCAGTTAATCTTTCTATGCCTGCAGAAATTAATGGCACACCTAACGCTAGTGATGTTGCCGCACCACCTAGCAATCCAAAGATAAATAAGATATCTACAACTTTACCTACAAATTTATCTGTTTGACCTTTTAAAATCGGACGACAAGCTTGACTAATTTTATACACCGGTTGTTTTTTAACAAATACTAAATAACCAATTGGTAATGCTGGTAGAACATAAATAGCCCAAGCAATTGGCCCCCAGTGGAACATACCATATTGCGTCGCATATTGGAGTGCTTCATCACTCATACTTTTCGCGCCATTTGGTGGAACTTGATAGTAAAAAGCCCATTCAATAACGCCCCAGTATAAAATATCAGAGCCTATGCCTGCACAAAACAGCA", "target_start": 300, "target_end": 317, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2704366.json"}, "Sa_2733075": {"seq": "GAAGTTTGAATTACTTGTTAAGTATTCCGTTAATGCTCGGTAGTAAATTTGTTCTGATTTAGATTTCCCTATTGCTTGAATCACGTTATAAGCTGCTTTATTTGGAATTCCAGAATTCGTATGTACGCCACCATTATCTTTTTCAGTGAATACATAGTCTTTCATATGAGCTGGTTGACCAAATTGTTCTGGGTTTGACATGCTGCGTAAAGCGTCTCCCTCTTTTCCAGGTGTGTAGACATCTTCACCCATTAAGAAATCCTCGTCATCTACAAAGTATCCAAAAACATCTGAAAAGCTTTCATTTAGAGCGCCTGACTGGTCCTTATATTCTAAGTTCGCTGTCTCTTGTGTCACACCGTGTGTTAATTCGTGTGCTACTACGTCATTTGCACCCGATAAACTTGTGAATGTGCGACCATCACCATCACCATAGATCATTTTGTCACCGATCCATGCGGCATTATTTCTGTTATCTTGACCACCGTAGTTATTAACATGCGTTAATGAAACAATTGGACTACCTTGGTTGTCATATGATTCACGACCAAATGTGTCTTTGTAATAATCATATGTTTGTTTAGCGTAATAATTTGCATCT", "target_start": 300, "target_end": 300, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2733075.json"}, "Sa_2739917": {"seq": "ATGTCTCGAAACGAAGCAATTGATATGTTGATTCATAAACTTAAAATTTGCCGTTATGTAGAGCACACATCGCATTTAAAAAATGCAATACTAGAACGTGAAATGGAGTCTACGACAGCTATTGGCATGAACGTGGCCATTCCACATGCAAAGTCTGATGTTGTAAAACAACCGATTGTAGCTGTTATGAAAAATAATCATGGTGTTAAATGGGACAGTCTAGATGGTAGTCTACCTCAATTGATATTCTTAATTGCCGTACCAAACAACAGTCAGGATACACATTTAAAAATACTTCAGCGCTTATCTAAAGCGTTAATGAATGATGAGACACGCCAATCACTAATTAATGCAAACAGTACTACAGAAATTTATAACTTATTAATGAAAATATAGAGGAGTTTTAACTATGGCATTATTTTTACAACCCGTTTTTAAAGACAGAATTTGGGGCGGTCATGCATTAAAAGCATTTAACTATGATATCCCTAATGAAACAACTGGTGAATGCTGGGCAATTTCTGCACATCCAAATGGTCCTAATACAATTATCAATGGTCCATACAAGGATATGACCCTAGATCAACTTTGGTCACAACATCGTGAATTATTCGATAATGATTCACGAGATAGTTTCCCTCTG", "target_start": 300, "target_end": 342, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2739917.json"}, "Sa_2760927": {"seq": "TTCTACTGTACTTTGTGAACCACTGATACTTATTGAAGTAGAATCACTGATACTGTCTGATGTTGATAATGATGTCGACACCGATGTGCTTTGTGATGACGATGTACTAGCACTCATTGACATTGATGTTGATATCGATGTACTTAAGGAACCAGATGCACTTGTACTTGTTGACTGGCTTTGTGACATTGAATCACTTAATGATGTAGATGTGCTTGTTGAGCTCGAGTCACTTACACTTGTTGAACCTGATATTGAGTCACTTAAACTTGTCGATGTTGAAACTGATACGCTTCCGCTCATTGAGTCAGATGTTGAAAGTGATGTACTCGTTGAATTTGATCCACTGATGCTAGACGAATCACTTGTAGACATTGAGTCGCTTTCTGATGCACTGATGCTCATAGAGTCAAATTGACTATTACTTGTTGAGCTTGACTGCGAATCGCTCACACTTGTTGACGTTGATTCTGATCCACTCATACTTTGCGAGCTACTCAATGATTTTGAATCACTTAATGAATCCGAAGTGCTAAGACTTGTGGAACCACTTAAAGATATTGATCCACTTAATGAGTCGGAGTCACTTGTACTAGTAGAAT", "target_start": 300, "target_end": 301, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2760927.json"}, "Sa_2797194": {"seq": "ATGCCTCCTGTAGATTTAAAATCTCCTAAATAACAAACGAATAATCGGCCATCTTTATGTATTTTGATTGCTGCAGGATTCGCTTTGTGACTTACAAAAGGTCGTTTGATTTCCTTCGTTTCAGGATTGATTTTGAAAATATTGCCTTCGAATACATCCAATAAAAAGAGTTGTCCCTGCCGATCAAAGTTCAATCCTTCTAGTTGCAATCCTTTTTTGGAAATTTCAAGCCATGGTTCAGCTGTAATTGTTTGTAATTCACTTTCAGATATAATTGGAACAGCACTATTGGACTTCCCGCTATAAAATAATGTAGGTAAATCTTGTTGTGACATCATGATCATTCCTTTCATTTCATTCGTTTTAACTATCAATTTTATTTTAAACAAGATAACTATCAAATAAAATGATAACGGTTTCATCTATCTATTTTATCGGTCTAGTGGCTGATTTCAAGCTAGAAATATTGAATGACAATACAACTCTGTTAAAATGATGGACGTAGACAAATATGCGTATTGACGCTTTATTTTAAAAATTAACATGCTTATAACATGTTTATAGAAGGAGATTAACCTATGAACTATCAAGTTCTTTTATATTATAAATATATGACGATTGATGACCCTGAAC", "target_start": 300, "target_end": 332, "primer_len_range": {"min": 18, "max": 25}, "outfile": "./src/assets/test_targets/seq_Sa_2797194.json"}}, "primer_collection": {"params": {"pcr_salts": {"Na": 50, "K": 0, "Tris": 0, "Mg": 0, "dNTPs": 0}, "background_seq": []}}}
