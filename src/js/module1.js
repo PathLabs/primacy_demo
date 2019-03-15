@@ -49,7 +49,7 @@ class Module1 {
      */
     toJSON() {
         let out = {}
-        out['sequences'] = this.target_sequences;
+        out['sequences'] = this.target_regions;
         out['primer_collection'] = {};
         out['primer_collection']['params'] = {};
         out['primer_collection']['params']['pcr_salts'] = this.pcr_salts;
@@ -66,23 +66,23 @@ class Module1 {
      */
     updatePCR(salt, value) {
         switch(salt) {
-            case 'Na': 
+            case 'pcr_na': 
                 this.pcr_salts['Na'] = value;
                 return;
 
-            case 'K': 
+            case 'pcr_k': 
                 this.pcr_salts['K'] = value;
                 return;
             
-            case 'Mg': 
+            case 'pcr_mg': 
                 this.pcr_salts['Mg'] = value;
                 return;
             
-            case 'Tris': 
+            case 'pcr_tris': 
                 this.pcr_salts['Tris'] = value;
                 return;
             
-            case 'dNTPs': 
+            case 'pcr_dntps': 
                 this.pcr_salts['dNTPS'] = value;
                 return;
         }
@@ -252,7 +252,6 @@ background_seq_fp.addEventListener('change', function() {
  */
 function removeTargetRegionIdentifier(identifier) {
     if(!state.removeTargetRegionIdentifier(identifier)) {
-        console.log(identifier);
         return false
     }
 
@@ -321,7 +320,7 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     target_start_input.addEventListener('change', function() {
-        state.alterTargetRegionIdentifier(identifier_label, target_start=parseInt(this.value));
+        state.alterTargetRegionIdentifier(identifier_label, target_start=parseInt(this.value), null, null, null);
     });
 
     cell.appendChild(target_start_label);
@@ -342,7 +341,7 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
  
     target_end_input.addEventListener('change', function() {
-        state.alterTargetRegionIdentifier(identifier_label, target_end=parseInt(this.value));
+        state.alterTargetRegionIdentifier(identifier_label, null, target_end=parseInt(this.value), null, null);
     });   
 
     cell.appendChild(target_end_label);
@@ -363,7 +362,7 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     length_min_input.addEventListener('change', function() {
-        state.alterTargetRegionIdentifier(identifier_label, length_min=parseInt(this.value));
+        state.alterTargetRegionIdentifier(identifier_label, null, null, length_min=parseInt(this.value), null);
     });
 
     cell.appendChild(length_min_label);
@@ -384,7 +383,7 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     length_max_input.addEventListener('change', function() {
-        state.alterTargetRegionIdentifier(identifier_label, length_max=parseInt(this.value));
+        state.alterTargetRegionIdentifier(identifier_label, null, null, null, length_max=parseInt(this.value));
     });
 
     cell.appendChild(length_max_label);
@@ -411,6 +410,10 @@ manual_submit.addEventListener('click', function() {
 
     let label    = manual_label.value;
     let sequence = manual_sequence.value;
+
+    if(!validate.validateFasta(sequence)) {
+        return;
+    }
 
     if(addNewTargetRegionIdentifier(label, sequence)) {
         manual_label.value    = '';
@@ -443,7 +446,9 @@ bulk_upload.addEventListener('change', function() {
                     current_header = line.replace(new RegExp('>'), '');
                     continue;
                 } else {
-                    addNewTargetRegionIdentifier(current_header, current_sequence);
+                    if(validate.validateFasta(current_sequence)) {
+                        addNewTargetRegionIdentifier(current_header, current_sequence);
+                    }
                     current_header = line.replace(new RegExp('>'), '');
                     current_sequence = '';
                     continue;
@@ -453,7 +458,7 @@ bulk_upload.addEventListener('change', function() {
             }
         }
 
-        if(current_sequence != '') {
+        if(current_sequence != '' && validate.validateFasta(current_sequence)) {
             addNewTargetRegionIdentifier(current_header, current_sequence);
         }
     });
