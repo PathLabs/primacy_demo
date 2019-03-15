@@ -20,7 +20,9 @@ const module_1_sum       = document.getElementById('result');
 var iterations           = document.getElementById("iterations");
 var amplicon_slider      = document.getElementById("ampliconSlider");
 var opt_amplicon_size    = document.getElementById("optimumAmpliconSize");
+var optimum_check        = document.getElementById("optimumAmpliconCheck");
 var max_distance         = document.getElementById("maxDistance");
+var max_distance_check   = document.getElementById("maxDistanceCheck");
 var move_forward         = document.getElementById("moveForward");
 var background_primers   = document.getElementById("backgroundPrimers");
 
@@ -32,8 +34,15 @@ var cross_dim_slider     = document.getElementById("crossDimerizationSlider");
 var cross_dimerization   = document.getElementById("crossDimerization");
 var amplicon_size_slider = document.getElementById("ampliconSizeSlider");
 var amplicon_size        = document.getElementById("ampliconSize");
+var amplicon_check       = document.getElementById("ampliconCheck");
 var target_dist_slider   = document.getElementById("targetDistanceSlider");
 var target_distance      = document.getElementById("targetDistance");
+var target_dist_check    = document.getElementById("targetDistanceCheck");
+
+var opt_amp_row          = document.getElementById("optAmpRow");
+var max_distance_row     = document.getElementById("maxDistanceRow");
+var amplicon_size_row    = document.getElementById("ampliconSizeRow");
+var target_distance_row  = document.getElementById("targetDistanceRow");
 
 var last_module_results = {};
 var current_module_args = {};
@@ -83,13 +92,51 @@ module2.addEventListener('click', function (){
     sendMessage('LOADMODULE', 1);
 });
 
+optimumAmpliconCheck.addEventListener('change', function() {
+    if(this.checked) {
+        opt_amp_row.style.backgroundColor = "rgb(0, 36, 56)";
+    } else {
+        opt_amp_row.style.backgroundColor = "initial";
+        opt_amplicon_size.value = undefined;
+        amplicon_slider.value = 0;
+    }
+});
+
+maxDistanceCheck.addEventListener('change', function() {
+    if(this.checked) {
+        max_distance_row.style.backgroundColor = "rgb(1, 32, 53)";
+    } else {
+        max_distance_row.style.backgroundColor = "initial";
+        max_distance.value = "None";
+    }
+});
+
+ampliconCheck.addEventListener('change', function() {
+    if(this.checked) {
+        amplicon_size_row.style.backgroundColor = "rgb(0, 36, 56)";
+    } else {
+        amplicon_size_row.style.backgroundColor = "initial";
+        amplicon_size.value = undefined;
+        amplicon_size_slider.value = 0;
+    }
+});
+
+targetDistanceCheck.addEventListener('change', function() {
+    if(this.checked) {
+        target_distance_row.style.backgroundColor = "rgb(1, 32, 53)";
+    } else {
+        target_distance_row.style.backgroundColor = "initial";
+        target_distance.value = undefined;
+        target_dist_slider.value = 0;
+    }
+});
 
 iterations.value = 100;
 sim_melt_temp.value = 1;
 primer_scores.value = 1;
 cross_dimerization.value = 1;
-amplicon_size.value = 0;
-target_distance.value = 0;
+amplicon_size.value = 1;
+target_distance.value = 1;
 
 amplicon_slider.oninput = function() {
     opt_amplicon_size.value = this.value;
