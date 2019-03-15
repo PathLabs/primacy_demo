@@ -96,7 +96,7 @@ function goToModule(module_number) {
         message: 'Are you sure you want to go back?',
         detail: 'Progress on current module will be lost.'
     };
-    let response;
+    let response = 0;
 
     if(module_number < current_module) {
         require('electron').dialog.showMessageBox(null, options,(response) => {
@@ -104,7 +104,7 @@ function goToModule(module_number) {
         });
     }
 
-    if((current_module <= module_number) && !visited_modules[module_number]['executed']) {
+    if((current_module <= module_number) && !visited_modules[module_number-1]['executed']) {
         return false;
     }
 
@@ -139,7 +139,7 @@ function execPipeline(cmd, args, callback) {
         current_json[key] = args_json[key];
     }
 
-    fs.writeFileSync(__dirname + '/args.json', current_json.toString());
+    fs.writeFileSync(__dirname + '/args.json', JSON.stringify(current_json));
 
     child_process.exec('python ' + __dirname + '/src/pipeline/' + cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
         console.log(stdout);
@@ -153,6 +153,10 @@ function execPipeline(cmd, args, callback) {
             data = fs.readFileSync(__dirname + '/args.json', 'utf-8');
 
             current_json = JSON.parse(data.toString());
+            console.log(current_json);
+
+            visited_modules[current_module]['executed'] = true;
+
             callback(null);
         }
     });
@@ -192,7 +196,7 @@ ipcMain.on('LOADMODULE', (event, module_number) =>  {
         // Send IPC message with the arguments to the current module
         console.log('page load', module_number);
         win.webContents.once('dom-ready', () => {
-            win.webContents.send('NEW', [pipeline_args[module_number], pipeline_results[module_number-1]]);
+            win.webContents.send('NEW', JSON.stringify(current_json));
         });
     } else {
         event.sender.send('LOADMODULE', 'DENIED');
@@ -201,9 +205,7 @@ ipcMain.on('LOADMODULE', (event, module_number) =>  {
 
 // Attempt to execute pipeline with args
 ipcMain.on('EXECUTE', (event, data) => {
-    console.log('execute with args:', data);
     execPipeline(data[0], data[1], (result) => {
-        console.log("results:", pipeline_results);
         event.sender.send('EXECUTE', result);
     });
 })

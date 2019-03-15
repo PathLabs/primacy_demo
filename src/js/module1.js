@@ -498,7 +498,7 @@ module_4.addEventListener('click', function() {
 
 const submit = document.getElementById('submit');
 submit.addEventListener('click', function() {
-    sendMessage('EXECUTE', ['primacy1.py', state.toJSON().toString()]);
+    sendMessage('EXECUTE', ['primacy1.py', JSON.stringify(state.toJSON())]);
     console.log('attempting execution');
 })
 
