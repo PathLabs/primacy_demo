@@ -9,100 +9,6 @@
         <div id="myDiv"></div>
 
         <script>
-<<<<<<< Updated upstream
-        var Y = [
-  [0.2, 0.2, 0.6, 1.0, 0.5, 0.4],
-  [0.2, 0.7, 0.9, 0.1, 0.5, 0.3],
-  [0.6, 0.7, 0.3, 0.6, 0.0, 0.5],
-  [0.7, 0.9, 0.5, 0.8, 0.7, 0.2],
-  [0.1, 0.3, 0.1, 0.9, 0.6, 0.6],
-  [0.9, 1.0, 0.3, 0.6, 0.8, 0.5]
-];
-
-var gap = 0.3
-var groupgap = 0.2
-
-var X = [
-	-groupgap,
-	0,
-	groupgap,
-	1 - groupgap,
-	1,
-	1 + groupgap,
-	2 - groupgap,
-	2,
-	2 + groupgap
-]
-
-var color1 = "#3D9970";
-var color2 = "#FF4136";
-var color3 = "#6287ff";
-
-Plotly.plot(
-  "myDiv",
-  [
-    {
-      y: Y[0],
-      x0: X[0],
-      name: "kale 1",
-      marker: { color: color1 },
-      type: "box"
-    },
-    {
-      y: Y[1],
-      x0: X[1],
-      name: "kale 2",
-      marker: { color: color1 },
-      type: "box"
-    },
-    {
-      y: Y[2],
-      x0: X[2],
-      name: "kale 3",
-      marker: { color: color1 },
-      type: "box"
-    },
-    {
-      y: Y[3],
-      x0: X[3],
-      name: "radish 1",
-      marker: { color: color2 },
-      type: "box"
-    },
-    {
-      y: Y[4],
-      x0: X[4],
-      name: "radish 2",
-      marker: { color: color2 },
-      type: "box"
-    },
-    {
-      y: Y[5],
-      x0: X[5],
-      name: "radish 3",
-      marker: { color: color2 },
-      type: "box"
-    }
-  ],
-  {
-	  xaxis: {
-		  tickvals: X,
-		 	ticktext: [
-				'kale 1', 'kale 2', 'kale 3',
-				'radish 1', 'radish 2', 'radish 3'
-			]
-	 	},
-    yaxis: {
-      title: "normalized moisture",
-      zeroline: false
-    },
-    boxmode: "overlay",
-    showlegend: false
-  }
-);
-
-        </script>
-=======
         // hard coded data
         // TODO dynamically get data
         var xData = ['Sa_692840', 'Sa_692841',
@@ -179,7 +85,6 @@ layout = {
 
 Plotly.newPlot('myDiv', data, layout);
   </script>
->>>>>>> Stashed changes
         </body>
 
 </html>
