@@ -70,7 +70,7 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
         console.log("error received");
     } else {
         console.log("sending load message");
-        sendMessage('LOADMODULE', 2);
+        sendMessage('LOADMODULE', 3);
     }
 });
 
