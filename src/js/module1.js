@@ -27,6 +27,7 @@ const module_3 = document.getElementById('module3');
 const module_4 = document.getElementById('module4');
 const submit = document.getElementById('submit');
 
+
 /**
  * @brief object for the state of module 1
  */
@@ -38,7 +39,7 @@ class Module1 {
      * @param previous_state JSON object that contains the arguments for
      *        a run of Primacy module 1.
      */
-    constructor(previous_state=null) {
+    constructor(state=null) {
         this.target_regions = {};
         
         this.background_sequences = [];
@@ -50,6 +51,17 @@ class Module1 {
             'Mg': 0,
             'dNTPs': 0
         };
+
+
+        // Attempt to load previous config from state
+        if(state) {
+            console.log(state);
+            if(state['primer_collection']) {
+                this.pcr_salts            = state['primer_collection']['params']['pcr_salts'];
+                this.background_sequences = state['primer_collection']['params']['background_seq'];
+                this.target_regions       = state['sequences'];
+            }
+        }
     }
 
     /**
@@ -505,7 +517,8 @@ submit.addEventListener('click', function() {
 
 // Intercept NEW message and bootstrap the page
 ipcRenderer.on('NEW', (event, arg) => {
-    state = new Module1(arg[0]);
+    console.log("NEW Recieved:");
+    state = new Module1(JSON.parse(arg));
 });
 
 
