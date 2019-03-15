@@ -50,39 +50,68 @@ function initial() {
     win = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
 
     // and load the index.html of the app.
-    win.loadURL('file:///'+ __dirname + '/src/html/module3.html');
+  
+    win.loadURL('file:///'+ __dirname + '/src/html/module1.html');
+
 
     // Open the DevTools.
     // win.webContents.openDevTools()
 
     // Emitted when the window is closed.
-    win.on('closed', () => {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
+    win.on('close', function(e){
+      // Dereference the window object, usually you would store windows
+      // in an array if your app supports multi windows, this is the time
+      // when you should delete the corresponding element.
+        var choice = require('electron').dialog.showMessageBox(this,
+        {
+            type: 'question',
+            buttons: ['Yes', 'No'],
+            title: 'Confirm',
+            message: 'Are you sure you want to quit?'
+        });
+        if(choice == 1){
+            e.preventDefault();
+        }
         win = null;
     });
 }
 
-
 function goToModule(module_number) {
     /**
-     * Desc: Load and render a module page
-     *
-     * Args:
-     *      module_number (int): module number to load. Also affects which html file is loaded.
-     *
-     * Returns:
-     *      - If there is a problem rendering the page, False.
-     *      - Else, True.
-     */
+    * Desc: Load and render a module page
+    *
+    * Args:
+    *      module_number (int): module number to load. Also affects which html file is loaded.
+    *
+    * Returns:
+    *      - If there is a problem rendering the page, False.
+    *      - Else, True.
+    */
+
+    const options = {
+        type: 'question',
+        buttons: ['Yes', 'No'],
+        defaultid: 1,
+        title: 'Question',
+        message: 'Are you sure you want to go back?',
+        detail: 'Progress on current module will be lost.'
+    };
+    let response;
+
+    if(module_number < current_module) {
+        require('electron').dialog.showMessageBox(null, options,(response) => {
+          console.log(response);
+        });
+    }
 
     if((current_module <= module_number) && !visited_modules[module_number]['executed']) {
         return false;
     }
 
     // Load the html
-    win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
+    if (response == 0){
+        win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
+    }
 
     current_module = module_number;
 
