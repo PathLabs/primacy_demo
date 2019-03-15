@@ -23,7 +23,6 @@ function get_paths(json_file_path){
    var yData = [];
 
    if (direction === 'forward'){  for (var i = 0; i < paths_array.length; i++){
-        console.log('if statement run')
        var data = JSON.parse(fs.readFileSync(path.resolve(paths_array[i]),'UTF-8'));
 
        for (var j = 0; j<Object.keys(data).length; j++){
@@ -48,9 +47,9 @@ function get_paths(json_file_path){
              if (data[sequence_id].hasOwnProperty('reverse')){
                var values = [];
                xData.unshift(sequence_id)
-               forward_primers = Object.keys(data[sequence_id].forward);
+               reverse_primers = Object.keys(data[sequence_id].reverse);
                for (var k = 0; k < forward_primers.length; k++){
-                 values.push(data[sequence_id].forward[forward_primers[k]].tm);
+                 values.push(data[sequence_id].reverse[reverse_primers[k]][field]);
                }
                yData.unshift(values)
              }
@@ -105,7 +104,7 @@ function create_viz_spec(direction, field, div){
   }
 
   layout = {
-    title: field + " Box Plot Chart for " + direction + " Reads",
+    title: field + " Box Plot Chart for " + direction + " primers",
     autosize: false,
     width: 1024,
     height: 600,
@@ -134,3 +133,15 @@ function create_viz_spec(direction, field, div){
   Plotly.newPlot(div, data, layout);
 
 }
+
+const module_1 = document.getElementById('module1');
+module_1.addEventListener('click', function() {
+    sendMessage('LOADMODULE', 1);
+    console.log('attempting to load module 1');
+});
+
+const module_2 = document.getElementById('module2');
+module_2.addEventListener('click', function() {
+    sendMessage('LOADMODULE', 2);
+    console.log('attempting to load module 2');
+});
