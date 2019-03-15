@@ -20,8 +20,25 @@ var fs = require('fs');
 // be closed automatically when the JavaScript object is garbage collected
 let win;
 
-var pipeline_args    = [{}];
-var pipeline_results = [];
+var current_json = {};
+var visited_modules  = {
+    1: {
+        'visited': true,
+        'executed': false
+    },
+    2: {
+        'visited': false,
+        'executed': false
+    },
+    3: {
+        'visited': false,
+        'executed': false
+    },
+    4: {
+        'visited': false,
+        'executed': false
+    }
+};
 var current_module   = 1;
 
 
@@ -33,39 +50,68 @@ function initial() {
     win = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
 
     // and load the index.html of the app.
+  
     win.loadURL('file:///'+ __dirname + '/src/html/module1.html');
+
 
     // Open the DevTools.
     // win.webContents.openDevTools()
 
     // Emitted when the window is closed.
-    win.on('closed', () => {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
+    win.on('close', function(e){
+      // Dereference the window object, usually you would store windows
+      // in an array if your app supports multi windows, this is the time
+      // when you should delete the corresponding element.
+        var choice = require('electron').dialog.showMessageBox(this,
+        {
+            type: 'question',
+            buttons: ['Yes', 'No'],
+            title: 'Confirm',
+            message: 'Are you sure you want to quit?'
+        });
+        if(choice == 1){
+            e.preventDefault();
+        }
         win = null;
     });
 }
 
-
 function goToModule(module_number) {
     /**
-     * Desc: Load and render a module page
-     *
-     * Args:
-     *      module_number (int): module number to load. Also affects which html file is loaded.
-     *
-     * Returns:
-     *      - If there is a problem rendering the page, False.
-     *      - Else, True.
-     */
+    * Desc: Load and render a module page
+    *
+    * Args:
+    *      module_number (int): module number to load. Also affects which html file is loaded.
+    *
+    * Returns:
+    *      - If there is a problem rendering the page, False.
+    *      - Else, True.
+    */
 
-    if(pipeline_args.length < (module_number + 1) && pipeline_results.length < (module_number)) {
+    const options = {
+        type: 'question',
+        buttons: ['Yes', 'No'],
+        defaultid: 1,
+        title: 'Question',
+        message: 'Are you sure you want to go back?',
+        detail: 'Progress on current module will be lost.'
+    };
+    let response = 0;
+
+    if(module_number < current_module) {
+        require('electron').dialog.showMessageBox(null, options,(response) => {
+          console.log(response);
+        });
+    }
+
+    if((current_module <= module_number) && !visited_modules[module_number-1]['executed']) {
         return false;
     }
 
     // Load the html
-    win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
+    if (response == 0){
+        win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
+    }
 
     current_module = module_number;
 
@@ -88,9 +134,12 @@ function execPipeline(cmd, args, callback) {
      */
     args_json = JSON.parse(args);
 
-    pipeline_args[current_module] = args_json;
+    // Merge current args into current json
+    for(key in args_json) {
+        current_json[key] = args_json[key];
+    }
 
-    fs.writeFileSync(__dirname + '/args.json', args);
+    fs.writeFileSync(__dirname + '/args.json', JSON.stringify(current_json));
 
     child_process.exec('python ' + __dirname + '/src/pipeline/' + cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
         console.log(stdout);
@@ -103,7 +152,11 @@ function execPipeline(cmd, args, callback) {
             // Read back in file
             data = fs.readFileSync(__dirname + '/args.json', 'utf-8');
 
-            pipeline_results[current_module] = JSON.parse(data.toString());
+            current_json = JSON.parse(data.toString());
+            console.log(current_json);
+
+            visited_modules[current_module]['executed'] = true;
+
             callback(null);
         }
     });
@@ -143,7 +196,7 @@ ipcMain.on('LOADMODULE', (event, module_number) =>  {
         // Send IPC message with the arguments to the current module
         console.log('page load', module_number);
         win.webContents.once('dom-ready', () => {
-            win.webContents.send('NEW', [pipeline_args[module_number], pipeline_results[module_number-1]]);
+            win.webContents.send('NEW', JSON.stringify(current_json));
         });
     } else {
         event.sender.send('LOADMODULE', 'DENIED');
@@ -152,9 +205,7 @@ ipcMain.on('LOADMODULE', (event, module_number) =>  {
 
 // Attempt to execute pipeline with args
 ipcMain.on('EXECUTE', (event, data) => {
-    console.log('execute with args:', data);
     execPipeline(data[0], data[1], (result) => {
-        console.log("results:", pipeline_results);
         event.sender.send('EXECUTE', result);
     });
 })

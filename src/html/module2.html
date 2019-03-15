@@ -14,7 +14,9 @@
         <table class="input_table">
           <tr>
             <td>Optimal Melting Temperature for Reaction: </td>
-            <td><input type="number" id="tm_opt" value=55></td>
+            <td><input id="tm_optSlider" type="range" min="40" max="80" value = 55
+            oninput="tm_opt.value=tm_optSlider.value" class = "slider"></td>
+            <td><output name="tm_opt" id="tm_opt" for="tm_optSlider">55</output> °C</td>
           </tr>
 		  <tr>
 

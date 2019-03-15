@@ -9,42 +9,48 @@
 </head>
 
 <body>
-  <div class="container_mod2">
-    <div class="box box1" id="primer_settings"> <h1>PRIMER SETTINGS</h1>
+  <div class="container_mod3">
+    <div class="box" id="primer_settings"> <h1>PRIMER SETTINGS</h1>
       <div class="input">
         <table class="input_table">
           <tr>
             <td>
-              <div class="tooltip">
+              <div class="tooltip setting_title">
                 Max Iterations:
-                <span class="tooltiptext">test test test test test test</span>
+                <span class="tooltiptext">Amount of times to run</span>
               </div>
             </td>
-            <td><td><input type="text" id="iterations" size=2 value=100></td></td>
+            <td><td><input class=setting_input type="number" id="iterations" size=2 value=100></td></td>
+            <td>
+            </td>
           </tr>
-          <tr>
+          <tr id="optAmpRow">
             <td>
-              <div class="tooltip">
+              <div class="tooltip setting_title">
                 Optimum Amplicon Size Range:
-                <span class="tooltiptext">test test test test test test</span>
+                <span class="tooltiptext">This will help pick primer pairs that will produce an amplicon in this size range</span>
               </div>
             </td>
             <td>
-              <td><input id="slider" type="range" min="0" max="100" value = 50
-                class = "slider">
+              <td class=setting_input><input id="ampliconSlider" type="range" min="0" max="100" value = 50
+                        class = "slider">
+                <input type="number" name="amplicon_value" class="sliderValue" id="optimumAmpliconSize" value = 50>
               </td>
             </td>
-          </tr>
-          <tr>
             <td>
-              <div class="tooltip">
+              <input type="checkbox" id="optimumAmpliconCheck" checked>
+            </td>
+          </tr>
+          <tr id="maxDistanceRow">
+            <td>
+              <div class="tooltip setting_title">
                 Max Distance of Target from Primer:
-                <span class="tooltiptext">test test test test test test</span>
+                <span class="tooltiptext">Sets longest distance in reference to another primer</span>
               </div>
             </td>
             <td>
               <td>
-                <select class="form-control">
+                <select class="form-control setting_input" id="maxDistance">
                   <option>None</option>
                   <option>Distance from forward primer</option>
                   <option>Distance from reverse primer</option>
@@ -53,24 +59,31 @@
                 </select>
               </td>
             </td>
+            <td>
+              <input type="checkbox" id="maxDistanceCheck" checked>
+            </td>
           </tr>
           <tr>
             <td>
-              <div class="tooltip">
+              <div class="tooltip setting_title">
                 Percentage of Primers to Move Forward:
-                <span class="tooltiptext">test test test test test test</span>
+                <span class="tooltiptext">Percentage of primers to keep</span>
               </div>
             </td>
-            <td><td><input type="text" id="iterations" size=1 value=0>%</td></td>
+            <td><td class=setting_input><input type="number" id="moveForward" size=1 value=0>%</td></td>
+            <td>
+            </td>
           </tr>
           <tr>
             <td>
-              <div class="tooltip">
+              <div class="tooltip setting_title">
                 Background Primers:
-                <span class="tooltiptext">test test test test test test</span>
+                <span class="tooltiptext">List of primer ID's that should be included</span>
               </div>
             </td>
-            <td><td><input type="file" id="file_select" class="input" accept=""></td></td>
+            <td><td><input class=setting_input type="file" id="backgroundPrimers" class="input" accept=""></td></td>
+            <td>
+            </td>
           </tr>
         </table>
         </br>
@@ -81,62 +94,83 @@
       <table class="input_table">
         <tr>
           <td>
-            <div class="tooltip">
+            <div class="tooltip setting_title">
               Similar Melting Temperatures:
-              <span class="tooltiptext">test test test test test test</span>
+              <span class="tooltiptext">Minimizes the variation in melting temperatures for primers in the set</span>
             </div>
           </td>
-          <td><td><input id="slider" type="range" min="0" max="100" value = 1
+          <td><td><input id="simMeltTempSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
-          <td id="sliderValue"></td>
+          <td class="sliderValue">
+            <input type="number" name="sim_melt_temp" class="sliderValue" id="simMeltTemp">
+          </td>
+          <td>
+          </td>
         </tr>
         <tr>
           <td>
-            <div class="tooltip">
+            <div class="tooltip setting_title">
               Primer Scores:
-              <span class="tooltiptext">test test test test test test</span>
+              <span class="tooltiptext">Minimizes the individual primer scores for primers in the set to favor high ranking primers</span>
             </div>
           </td>
-          <td><td><input id="slider" type="range" min="0" max="100" value = 1
+          <td><td><input id="primerScoresSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
-          <td id="sliderValue"></td>
+          <td class="sliderValue">
+            <input type="number" name="primer_scores" class="sliderValue" id="primerScores">
+          </td>
+          <td>
+          </td>
         </tr>
         <tr>
           <td>
-            <div class="tooltip">
+            <div class="tooltip setting_title">
               Cross Dimerization:
-              <span class="tooltiptext">test test test test test test</span>
+              <span class="tooltiptext">Minimizes the number of cross interactions between all primers</span>
             </div>
           </td>
-          <td><td><input id="slider" type="range" min="0" max="100" value = 1
+          <td><td><input id="crossDimerizationSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
-          <td id="sliderValue"></td>
-        </tr>
-        <tr>
+          <td class="sliderValue">
+            <input type="number" name="cross_dimerization" class="sliderValue" id="crossDimerization">
+          </td>
           <td>
-            <div class="tooltip">
+          </td>
+        </tr>
+        <tr id="ampliconSizeRow">
+          <td>
+            <div class="tooltip setting_title">
               Amplicon Size:
-              <span class="tooltiptext">test test test test test test</span>
+              <span class="tooltiptext">Minimizes distance outside of range of optimal amplicon size</span>
             </div>
           </td>
-          <td><td><input id="slider" type="range" min="0" max="100" value = 0
+          <td><td><input id="ampliconSizeSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
-          <td id="sliderValue"></td>
-        </tr>
-        <tr>
+          <td class="sliderValue">
+            <input type="number" name="amplicon_size" class="sliderValue" id=ampliconSize>
+          </td>
           <td>
-            <div class="tooltip">
+            <input type="checkbox" id="ampliconCheck" checked>
+          </td>
+        </tr>
+        <tr id="targetDistanceRow">
+          <td>
+            <div class="tooltip setting_title">
               Target Distance From Primer:
-              <span class="tooltiptext">test test test test test test</span>
+              <span class="tooltiptext">Minimizes distance of primer from target</span>
             </div>
           </td>
-          <td><td><input id="slider" type="range" min="0" max="100" value = 0
+          <td><td><input id="targetDistanceSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
-          <td id="sliderValue"></td>
+          <td class="sliderValue">
+            <input type="number" name="target_distance" class="sliderValue" id=targetDistance>
+          </td>
+          <td>
+            <input type="checkbox" id=targetDistanceCheck checked>
+          </td>
         </tr>
       </table>
     </div>
-
   </div>
 
   <div class="tab_container">
