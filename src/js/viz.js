@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path')
-
+const os            = require('os');
+const {ipcRenderer} = require('electron');
 
 // pipeline output after running module 1
 var pipeline_mod_1_output = 'Sa_50_collection_out.json'
@@ -134,8 +135,13 @@ function create_viz_spec(direction, field, div){
 
 }
 
+function sendMessage(channel, message) {
+    ipcRenderer.send(channel, message);
+}
+
 const module_1 = document.getElementById('module1');
 module_1.addEventListener('click', function() {
+    console.log("clicked");
     sendMessage('LOADMODULE', 1);
     console.log('attempting to load module 1');
 });
