@@ -1,90 +1,79 @@
 <html lang="en">
+  <head>
+    <!-- Plotly.js -->
+    <script src="../js/plotly/plotly-latest.min.js"></script>
+    <script src="../js/viz.js"></script>
+    <script>
+      var data = parse_json();
+    </script>
+  </head>
+  <body>
+    <div class="container" id="background_settings">
+      <!-- Plotly chart will be drawn inside this DIV -->
+      <div id="myDiv"></div>
+    </div>
 
-<head>
-<!-- Plotly.js -->
-        <script src="../js/plotly/plotly-latest.min.js"></script>
-</head>
-        <body>
-        <!-- Plotly chart will be drawn inside this DIV -->
-        <div id="myDiv"></div>
+    <script>
+      var xData = data[0];
 
-        <script>
-        // hard coded data
-        // TODO dynamically get data
-        var xData = ['Sa_692840', 'Sa_692841',
-      'Sa_692842', 'Sa_692843',
-      'Sa_692844', 'Sa_692845',
-      'Sa_692846', 'Sa_692847',
-      'Sa_692848'];
+      var yData = data[1];
+      var colors = [
+        "rgba(93, 164, 214, 0.5)",
+        "rgba(255, 144, 14, 0.5)",
+        "rgba(44, 160, 101, 0.5)",
+        "rgba(255, 65, 54, 0.5)",
+        "rgba(207, 114, 255, 0.5)",
+        "rgba(127, 96, 0, 0.5)",
+        "rgba(255, 140, 184, 0.5)",
+        "rgba(79, 90, 117, 0.5)",
+        "rgba(222, 223, 0, 0.5)"
+      ];
 
-function getrandom(num , mul) {
-    var value = [ ];
-    for ( i = 0; i <= num; i++ ) {
-        var rand = Math.random() * mul;
-        value.push(rand);
-    }
-    return value;
-}
+      var data = [];
 
-var yData = [
-        getrandom(30 ,10),
-        getrandom(30, 20),
-        getrandom(30, 25),
-        getrandom(30, 40),
-        getrandom(30, 45),
-        getrandom(30, 30),
-        getrandom(30, 20),
-        getrandom(30, 15),
-        getrandom(30, 43),
-    ];
-var colors = ['rgba(93, 164, 214, 0.5)', 'rgba(255, 144, 14, 0.5)', 'rgba(44, 160, 101, 0.5)', 'rgba(255, 65, 54, 0.5)', 'rgba(207, 114, 255, 0.5)', 'rgba(127, 96, 0, 0.5)', 'rgba(255, 140, 184, 0.5)', 'rgba(79, 90, 117, 0.5)', 'rgba(222, 223, 0, 0.5)'];
-
-var data = [];
-
-for ( var i = 0; i < xData.length; i ++ ) {
-    var result = {
-        type: 'box',
-        y: yData[i],
-        name: xData[i],
-        boxpoints: 'all',
-        jitter: 0.5,
-        whiskerwidth: 0.2,
-        fillcolor: 'cls',
-        marker: {
+      for (var i = 0; i < xData.length; i++) {
+        var result = {
+          type: "box",
+          y: yData[i],
+          name: xData[i],
+          // boxpoints: 'all',
+          // jitter: 0.5,
+          whiskerwidth: 0.2,
+          fillcolor: "cls",
+          marker: {
             size: 2
-        },
-        line: {
+          },
+          line: {
             width: 1
-        }
-    };
-    data.push(result);
-};
+          }
+        };
+        data.push(result);
+      }
 
-layout = {
-    title: 'TM Box Plot for Forward Reads',
-    yaxis: {
-        autorange: true,
-        showgrid: true,
-        zeroline: true,
-        dtick: 5,
-        gridcolor: 'rgb(255, 255, 255)',
-        gridwidth: 1,
-        zerolinecolor: 'rgb(255, 255, 255)',
-        zerolinewidth: 2
-    },
-    margin: {
-        l: 40,
-        r: 30,
-        b: 80,
-        t: 100
-    },
-    paper_bgcolor: 'rgb(243, 243, 243)',
-    plot_bgcolor: 'rgb(243, 243, 243)',
-    showlegend: false
-};
+      layout = {
+        title: "TM Box Plot for Forward Reads",
+        yaxis: {
+          autorange: true,
+          showgrid: true,
+          zeroline: true,
+          // dtick: 5,
+          gridcolor: "rgb(255, 255, 255)",
+          gridwidth: 1,
+          zerolinecolor: "rgb(255, 255, 255)",
+          zerolinewidth: 2
+        },
+        margin: {
+          l: 40,
+          r: 30,
+          b: 80,
+          t: 100
+        },
+        paper_bgcolor: "rgb(243, 243, 243)",
+        plot_bgcolor: "rgb(243, 243, 243)",
+        showlegend: false
+      };
 
-Plotly.newPlot('myDiv', data, layout);
-  </script>
-        </body>
-
+      Plotly.newPlot("myDiv", data, layout);
+    </script>
+  </body>
 </html>

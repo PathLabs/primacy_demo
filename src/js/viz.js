@@ -18,56 +18,24 @@ function get_paths(json_file_path){
   return json_paths
 }
 
-
-function parse_json(paths_array){
-    var xData = []
-    var yData = []
+ function parse_json(paths_array){
+    paths_array = get_paths(pipeline_mod_1_output);
+    var xData = [];
+    var yData = [];
     for (var i = 0; i < paths_array.length; i++){
       var data = JSON.parse(fs.readFileSync(path.resolve(paths_array[i]),'UTF-8'));
 
       for (var j = 0; j<Object.keys(data).length; j++){
         var sequence_id = Object.keys(data)[j]
-        var values = []
+        var values = [];
         xData.unshift(sequence_id)
-        forward_primers = Object.keys(data[sequence_id].forward)
+        forward_primers = Object.keys(data[sequence_id].forward);
         for (var k = 0; k < forward_primers.length; k++){
-          values.push(data[sequence_id].forward[forward_primers[k]].start)
+          values.push(data[sequence_id].forward[forward_primers[k]].tm);
         }
+        yData.unshift(values)
       }
 
     }
-
+    return [xData, yData]
 }
-
-json_paths = get_paths(pipeline_mod_1_output)
-parse_json(json_paths)
-
-
-
-
-
-// var data =
-//     JSON.parse(
-//         fs.readFileSync(
-//             require('path').resolve(
-//                 __dirname,
-//                 'test_input.json'),
-//             'utf8'));
-//
-//
-//
-// var sequence_id = Object.keys(data)[0]
-//
-//
-// var primer_ids = Object.keys(data[sequence_id].forward)
-// // console.log(data[sequence_id]['forward']['Sa_692846_245_18_F']['gc'])
-//
-// var i;
-//
-// var result_gc = []
-//
-// for (i = 0; i< primer_ids.length; i++ ){
-//   primer_id = primer_ids[i]
-//
-//   result_gc.push(data[sequence_id].forward[primer_id].gc)
-// }
