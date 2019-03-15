@@ -20,8 +20,25 @@ var fs = require('fs');
 // be closed automatically when the JavaScript object is garbage collected
 let win;
 
-var pipeline_args    = [{}];
-var pipeline_results = [];
+var current_json = {};
+var visited_modules  = {
+    1: {
+        'visited': true,
+        'executed': false
+    },
+    2: {
+        'visited': false,
+        'executed': false
+    },
+    3: {
+        'visited': false,
+        'executed': false
+    },
+    4: {
+        'visited': false,
+        'executed': false
+    }
+};
 var current_module   = 1;
 
 
@@ -60,7 +77,7 @@ function goToModule(module_number) {
      *      - Else, True.
      */
 
-    if(pipeline_args.length < (module_number + 1) && pipeline_results.length < (module_number)) {
+    if((current_module <= module_number) && !visited_modules[module_number]['executed']) {
         return false;
     }
 
@@ -88,9 +105,12 @@ function execPipeline(cmd, args, callback) {
      */
     args_json = JSON.parse(args);
 
-    pipeline_args[current_module] = args_json;
+    // Merge current args into current json
+    for(key in args_json) {
+        current_json[key] = args_json[key];
+    }
 
-    fs.writeFileSync(__dirname + '/args.json', args);
+    fs.writeFileSync(__dirname + '/args.json', current_json.toString());
 
     child_process.exec('python ' + __dirname + '/src/pipeline/' + cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
         console.log(stdout);
@@ -103,7 +123,7 @@ function execPipeline(cmd, args, callback) {
             // Read back in file
             data = fs.readFileSync(__dirname + '/args.json', 'utf-8');
 
-            pipeline_results[current_module] = JSON.parse(data.toString());
+            current_json = JSON.parse(data.toString());
             callback(null);
         }
     });
