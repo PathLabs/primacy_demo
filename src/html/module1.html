@@ -1,126 +1,100 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Primacy</title>
-  <link rel="stylesheet" href="../css/style.css">
+    <meta charset="UTF-8">
+    <title>Primacy</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
-  <div class="container" id="background_settings">
-    <!-- Background Sequences -->
-    <div class="box box2"><h1>BACKGROUND SEQUENCES</h1>
-      <div>
-        <input type="file" id="backgroundseqfilepicker" class="input" accept="">
-      </div>
+    <div class="container_mod2">
+        <div class="box" style="max-width: 25%;">
+            <div class="box">
+                <h1>PCR Salts</h1>
 
-      <table id="backgroundseqtable" class="input_table">
-      </table>
-    </div>
+                <table id="pcr" class="input_table">
+                    <tr>
+                        <td>Na</td>
+                        <td><input id="pcr_na" type="number" size="1"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>K</td>
+                        <td><input id="pcr_k" type="number" size="1"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Tris</td>
+                        <td><input id="pcr_tris" type="number" size="1"></td>
+                    </tr>
 
-    <div class="box box1"><h1>PCR SALTS</h1>
-      <!-- PCR salts -->
-      <table class="input_table">
-        <tr>
-          <td>
-            Na
-          </td>
-          <td>
-            K
-          </td>
-          <td>
-            Tris
-          </td>
-          <td>
-            Mg
-          </td>
-          <td>
-            dNTPS
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input id="pcrsodium" type="text" size="2">
-          </td>
-          <td>
-            <input id="pcrpotassium" type="text" size="2">
-          </td>
-          <td>
-            <input id="pcrtromethamine" type="text" size="2">
-          </td>
-          <td>
-            <input id="pcrmagnesium" type="text" size="2">
-          </td>
-          <td>
-            <input id="pcrdntps" type="text" size="2">
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
+                    <tr>
+                        <td>Mg</td>
+                        <td><input id="pcr_mg" type="number" size="1"></td>
+                    </tr>
 
-<div class="container" id="neucleotide_input">
-    <div class="box box1">
-        <h1>FASTA SEQUENCE</h1>
-        <table class="input_table" >
-            <tr>
-                <td>
-                    <input type="file" id="fastaFileSelect" class="input" accept="">
-                </td>
-            </tr>
-        </table>
-        
-        </br>
-        <hr/>
-    </div>
+                    <tr>
+                        <td>dNTPS</td>
+                        <td><input id="pcr_dntps" type="number" size="1"></td>
+                    </tr>
+                </table>
+            </div>
 
-    <div class="box box1 fasta_selector">
-        <div class="input">
-            <table>
-                <tr>
-                    <td style="border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
-                        <textarea id="sequenceidentifier" size="20"></textarea>
-                    </td>
-                <tr>
-            </table>
-            </br>
+            <div class="box">
+                <h1>Background Sequences</h1>
+
+                <input type="file" id="background_seq_fp" class="input">
+
+                <table id="background_seq_list" class="input_table">
+                </table>
+            </div>
         </div>
 
-        <div class="input">
-            <textarea class="rawsequence" size="50"></textarea>
-        </div>
+        <div class="box">
+            <div class="box">
+                <h1>Bulk Upload</h1>
 
-        <table class="input_table">
-            <tr>
-                <td>Please enter start of range: </td>
-                <td><input type="text" id="startrange" size=2></td>
-            </tr>
-            <tr>
-                <td>Please enter end of range: </td>
-                <td><input type="text" id="endrange" size=2></td>
-            </tr>
-        </table>
-        
-        <input type="submit" id="resetButton" value="Reset">
-        
-        <div style="align: center; justify-content: center; max-width: 100%; overflow-x: auto; overflow-y: hidden; background-color: white;">
-            <table style="text-align: center; align: center; justify-content: center;" id="regionpicker">
-                <tr>
-                <tr>
-            </table>
-        </div>
+                <table class="input_table">
+                    <tr>
+                        <td>Upload FASTA File</td>
+                        <td><input type="file" id="fasta_file_upload" class="input"></td>
+                    </tr>
+                </table>
 
+                <h1>Manual Entry</h1>
+                <table class="input_table">
+                    <tr>
+                        <td>Label:</td>
+                        <td><input type="text" id="manual_label" class="input"></td>
+                    </tr>
+
+                    <tr>
+                        <td>FASTA Sequence:</td>
+                        <td><textarea rows="4" cols="50" id="manual_sequence" class="input"></textarea></td>
+                    </tr>
+                </table>
+
+                <input type="submit" id="manual_submit" class="input">
+            </div>
+
+            <div id="sequence_identifiers" class="box">
+                <div id="sequence_picker_template">
+                </div> 
+            </div>
+        </div>
+    <input type="submit" class="input" id="submit">
     </div>
-    <input type="submit" id="submitButton" value="Submit" data-tooltip="test">
-</div>
 
-  <div class="tab_container">
-    <button class="tab tab1" id="module1" style="background-color: #012035;">PRIMER COLLECTION</button>
-    <button class="tab tab2" id="module2">PRIMER SCORING</button>
-    <button class="tab tab3" id="module3">OPTIMIZATION</button>
-    <button class="tab tab4" id="module4">OVERVIEW</button>
-  </div>
+
+    <div class="tab_container">
+        <button class="tab tab1" id="module1" style="background-color: #012035;">PRIMER COLLECTION</button>
+        <button class="tab tab2" id="module2">PRIMER SCORING</button>
+        <button class="tab tab3" id="module3">OPTIMIZATION</button>
+        <button class="tab tab4" id="module4">OVERVIEW</button>
+    </div>
 
 </body>
+
 <script src="../js/module1.js"></script>
+
 </html>

@@ -1,374 +1,435 @@
 /**
- * Desc: Listens to replys from main.js
- * Acts as a Library of helper functions for executing primacy pipeline commands
+ * @file module1.js
  *
- * Authors:
- *      - Austin Kelly <ak678@nau.edu>
- *      - Chance Nelson <chance-nelson@nau.edu>
- */
-
-const module1                      = document.getElementById("module1");
-const module2                      = document.getElementById("module2");
-const submit_button                = document.getElementById("submitButton");
-const reset_button                 = document.getElementById("resetButton");
-const fasta_file_select            = document.getElementById("fastaFileSelect");
-const fasta_file_textarea          = document.getElementById("fastaTextInput");
-
-const pcr_sodium       = document.getElementById("pcrsodium");
-const pcr_potassium    = document.getElementById("pcrpotassium");
-const pcr_tromethamine = document.getElementById("pcrtromethamine");
-const pcr_magnesium    = document.getElementById("pcrmagnesium");
-const pcr_dntps        = document.getElementById("pcrdntps");
-
-const background_sequence_filepicker = document.getElementById("backgroundseqfilepicker");
-const background_sequence_table      = document.getElementById("backgroundseqtable");
-
-
-/**
- * @brief Template for a background sequence
- */
-var background_template = {
-    file: null 
-};
-
-/**
- * @brief Array of all selected files for 
- */
-var background_sequences = [];
-
-/**
- * @brief Template for a nucleotide sequence
- */
-class Sequence {
-    constructor(identifier, nucleotide_sequence, ranges) {
-        this.identifier = identifier;
-        this.nucleotide_sequence = nucleotide_sequence;
-        this.ranges = ranges;
-    }
-};
-
-/**
- * @brief array of sequences currently available for user input 
+ * @brief JS for Primacy GUI Module 1: Primer Collection
  *
- * Start the sequence array with a single template sequence
+ * @author Chance Nelson <chance-nelson@nau.edu>
  */
-var sequences = [new Sequence('', '', [])];
 
 
 //gets users home directory
 const os = require('os');
 const fs = require('fs');
-
+ 
 const validate = require('../js/input_validation.js');
 
 const {ipcRenderer} = require('electron');
 
 
+var state = null;
+
+
 /**
- * @brief create a new fasta sequence selector
- *
- * copies the first HTML select container, and also pushes a new template
- * sequence JSON object to the array of sequences available. The id of the
- * container is set to 'sequence#' where '#' is the index of the sequence
- * array
- *
- * @param fasta_seq fasta sequence string
- * @param seq_identifier identifier for the sequence
- * @param lower_range lower range selection, can be undefined
- * @param upper_range upper range selection, can be undefined
+ * @brief object for the state of module 1
  */
-function createNewSequenceSelector(fasta_seq, seq_identifier, lower_range, upper_range) {
-    // push a new sequence to the array, get the index of this new sequence
-    let new_sequence = new Sequence(seq_identifier, fasta_seq, [lower_range, upper_range]);
-
-    let index = sequences.push(new_sequence) - 1; 
-
-    console.log(index);
-
-    // Get the first sequence container's html
-    let first_sequence_container = document.getElementsByClassName('fasta_selector')[0];
-
-    // Perform a full clone (all children)
-    let new_container = first_sequence_container.cloneNode(true);
-
-    console.log("new container:", new_container);
-
-    document.getElementById('neucleotide_input').appendChild(new_container);
-
-    // Set up the text inputs, and sequence selection tables
-    let new_element = document.getElementsByClassName('fasta_selector')[index];
-    
-    let input_table_element = new_element.querySelector('#regionpicker');
-    let lower_range_element = new_element.querySelector('#startrange');
-    let upper_range_element = new_element.querySelector('#endrange');
-
-    if(lower_range) {
-        lower_range_element.value = parseInt(lower_range);
-        sequences[index].ranges.push(lower_range);
-    }
-
-    if(upper_range) {
-        upper_range_element.value = parseInt(upper_range);
-        sequences[index].ranges.push(upper_range);
-    }
-
-    // Set the sequence identifier
-    let sequence_identifier = new_element.querySelector('#sequenceidentifier');
-    sequence_identifier.value = new_sequence.identifier;
-
-    // Change the sequences identifier on text area update
-    sequence_identifier.addEventListener('change', function() {
-        let sequence = sequences[index];
-        sequence.identifier = this.value;
-    });
-
-    // Allow editing of the sequence text
-    let sequence_editable_textarea = new_element.querySelector('.rawsequence');
-    sequence_editable_textarea.value = sequences[index].nucleotide_sequence;
-    console.log(sequence_editable_textarea);
-    sequence_editable_textarea.addEventListener('change', function() {
-        let sequence = sequences[index];
+class Module1 {
+    /**
+     * @brief Constructor for module 1 state. Can accept a JSON object of a
+     *        previous state to bootstrap from.
+     *
+     * @param previous_state JSON object that contains the arguments for
+     *        a run of Primacy module 1.
+     */
+    constructor(previous_state=null) {
+        this.target_regions = {};
         
-        // TODO validate new sequence string
-        sequence.nucleotide_sequence = this.value;
+        this.background_sequences = [];
+        
+        this.pcr_salts = {
+            'Na': 50,
+            'K': 0,
+            'Tris': 0,
+            'Mg': 0,
+            'dNTPs': 0
+        };
+    }
 
-        let sequence_element = document.getElementsByClassName('fasta_selector')[index];
-        updateFastaSequenceTable(sequence_element, index);
+    /**
+     * @brief output a JSON object version of the current module state
+     */
+    toJSON() {
+        let out = {}
+        out['sequences'] = this.target_regions;
+        out['primer_collection'] = {};
+        out['primer_collection']['params'] = {};
+        out['primer_collection']['params']['pcr_salts'] = this.pcr_salts;
+        out['primer_collection']['params']['background_seq'] = this.background_sequences;
+
+        return out;
+    }
+
+    /**
+     * @brief Update the value of a PCR salt
+     *
+     * @param salt PCR salt value to update
+     * @param value number to change PCD salt value to
+     */
+    updatePCR(salt, value) {
+        switch(salt) {
+            case 'pcr_na': 
+                this.pcr_salts['Na'] = value;
+                return;
+
+            case 'pcr_k': 
+                this.pcr_salts['K'] = value;
+                return;
+            
+            case 'pcr_mg': 
+                this.pcr_salts['Mg'] = value;
+                return;
+            
+            case 'pcr_tris': 
+                this.pcr_salts['Tris'] = value;
+                return;
+            
+            case 'pcr_dntps': 
+                this.pcr_salts['dNTPS'] = value;
+                return;
+        }
+    }
+
+    /**
+     * @brief Add a background sequence to the list
+     *
+     * @param sequence_path file path to background sequence file
+     */
+    addBackgroundSequence(sequence_path) {
+        this.background_sequences.push(sequence_path);
+    }
+
+    /**
+     * @brief Remove a background sequence from the list
+     *
+     * @param sequence_path file path to background sequence file
+     */
+    removeBackgroundSequence(sequence_path) {
+        this.background_sequences.splice(this.background_sequences.indexOf(sequence_path), 1);       
+    }
+
+    /**
+     * @brief Add a new target region identifier
+     *
+     * @param label Label of the target region
+     * @param sequence Neucleotide sequence
+     * @param target_start (optional) target start
+     * @param target_end (optional) target end
+     * @param min_length (optional) minimum length of primer
+     * @param max_length (optional) maximum length of primer
+     *
+     * @return true sequence identifier successfuly added
+     * @return false sequence identifier not added, likely due to duplicate sequence labels
+     */
+    addTargetRegionIdentifier(label, sequence, target_start=null, target_end=null, min_length=null, max_length=null) {
+        // Check if the label is already in the list
+        if(label in this.target_regions) {
+            return false;
+        }
+
+        this.target_regions[label] = {
+            'seq': sequence.toString(),
+            'target_start': target_start,
+            'target_end': target_end,
+            'primer_len_range': {
+                'min': min_length,
+                'max': max_length
+            }
+        };   
+        
+        return true;
+    }
+    
+    /**
+     * @brief Remove a target region identifier
+     *
+     * @param label Label of the target region
+     *
+     * @return true Identifier successfully removed
+     * @return false Identifier not found
+     */
+    removeTargetRegionIdentifier(label) {
+        if(label in this.target_regions) {
+            delete this.target_regions.label;
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @brief Alter a target region identifier
+     *
+     * @param label Label of the target region
+     * @param sequence Neucleotide sequence
+     * @param target_start (optional) target start
+     * @param target_end (optional) target end
+     * @param min_length (optional) minimum length of primer
+     * @param max_length (optional) maximum length of primer
+     *
+     * @return true sequence identifier successfully altered
+     * @return false error in altering sequence identifier
+     */
+    alterTargetRegionIdentifier(label, target_start=null, target_end=null, min_length=null, max_length=null) {
+        if(!(label in this.target_regions)) {
+            return false;
+        }
+
+        if(target_start) {
+            this.target_regions[label]['target_start'] = target_start;
+        }
+
+        if(target_end) {
+            this.target_regions[label]['target_end'] = target_end;
+        }
+
+        if(min_length) {
+            this.target_regions[label]['primer_len_range']['min'] = min_length;
+        }
+
+        if(max_length) {
+            this.target_regions[label]['primer_len_range']['max'] = max_length;
+        }
+
+        return true;
+    }
+}
+
+
+// set up listeners for PCR Salts
+const pcr_salts_inputs = document.querySelectorAll('#pcr > tbody > tr > td > input');
+for(let i = 0; i < pcr_salts_inputs.length; i++) {
+    pcr_salts_inputs[i].addEventListener('change', function() {
+        let id = this.id;
+        state.updatePCR(id, parseInt(this.value));
     });
 
-    // Initialize the sequence picker table
-    updateFastaSequenceTable(input_table_element, index);
-
-    // If there are ranges, highlight in the table
-    if(lower_range && upper_range) {
-        console.log("Highlighting");
-        highlightFastaSequence(index);
-    }
-} 
-
-/**
- * @brief update/reset a FASTA selection table
- *
- * @param table_element HTML DOM element for the selection table
- * @param sequence_index index in the array 'sequences' for the primer
- *                       selection object
- */
-function updateFastaSequenceTable(table_element, sequence_index) {
-    table_element.deleteRow(0);  // Remove current sequence
-
-    let sequence = sequences[sequence_index].nucleotide_sequence;
-
-    let row = table_element.insertRow(0);
-    for(i = 0; i < sequence.length; i++) {
-        var click_count = 0;
-        let cell        = row.insertCell(i);
-        cell.id         = i.toString();
-
-        cell.classList.add('sequence_item');
-
-        cell.innerHTML = sequence[i];
-
-        if(cell.innerHTML == "A"){
-            cell.style.color="rgb(255,130,130)";
-        }
-        if(cell.innerHTML == "G"){
-            cell.style.color="rgb(130,130,255)";
-        }
-        if(cell.innerHTML == "C"){
-            cell.style.color="rgb(130,255,130)";
-        }
-        if(cell.innerHTML == "T"){
-            cell.style.color="rgb(255,130,255)";
-        }
-
-        cell.addEventListener('click', function() {
-            cell.style.backgroundColor = "green";
-            cell.style.color           = "white";
-
-            console.log(sequence_index, sequences[sequence_index]);
-            sequences[sequence_index].ranges.push(parseInt(this.id));
-
-            while(sequences[sequence_index].ranges.length > 2) {
-                sequences[sequence_index].ranges.shift();
-            }
-
-            if(sequences[sequence_index].ranges.length == 2) {
-                highlightFastaSequence(sequence_index);
-            }
-        });
-    }
-}
-
-
-/**
- * @brief highlight a selection in a FASTA selection table
- *
- * @param sequence_index index of the 'sequences' array that points to the
- *                       primer selection object
- */
-function highlightFastaSequence(sequence_index) {
-    let ranges = sequences[sequence_index].ranges;
-    let selector_element = document.getElementsByClassName('fasta_selector')[sequence_index];
-
-    let lower_range = selector_element.querySelector('#startrange');
-    let upper_range = selector_element.querySelector('#endrange');
-
-    temp  = parseInt(ranges[0]);
-    temp2 = parseInt(ranges[1]);
-
-    if(temp > temp2) {
-        lower_range.value    = temp2;
-        upper_range.value    = temp;
-        sequence_start_range = temp2;
-        sequence_end_range   = temp;
+    if(i == 0) {
+        pcr_salts_inputs[0].value = 50;
     } else {
-        lower_range.value    = temp;
-        upper_range.value    = temp2;
-        sequence_start_range = temp;
-        sequence_end_range   = temp2;
-    }
-
-    sequence_start_range = parseInt(sequence_start_range);
-    sequence_end_range = parseInt(sequence_end_range);
-
-    // Highlight every cell between the lower and upper range
-    let cells = selector_element.getElementsByClassName('sequence_item');//.slice(sequence_start_range, sequence_end_range);
-    console.log(cells);
-    for(let cell_index = sequence_start_range; cell_index < sequence_end_range; cell_index++) {
-        cells[cell_index].style.backgroundColor = "green";
-        cells[cell_index].style.color           = "white";
+        pcr_salts_inputs[i].value = 0;
     }
 }
+
 
 /**
- * @brief send a message to the main thread
- *
- * @param channel channel to send message on. Can be 'EXECUTE', 'LOADMODULE', etc
- * @param message message to send
+ * @brief Set up the background sequence list. Add a click remove event listener
+ *        on each background sequence.
  */
-function sendMessage(channel, message){
-    ipcRenderer.send(channel, message);
-}
-
-function init(json_string){
-    result_json = json_string;
-
-    if(result_json) {
-
-    } else {
-        pcr_sodium.value       = "50";
-        pcr_magnesium.value    = "0";
-        pcr_tromethamine.value = "0";
-        pcr_potassium.value    = "0";
-        pcr_dntps.value        = "0";
-    }
-}
-
-function updateSequenceIdentifierTextarea() {
-    sequence_identifier_textarea.value = fasta_header;
-}
-
 function updateBackgroundSequences() {
-    table = background_sequence_table;
+    let background_seq_list = document.querySelector('#background_seq_list');
+    background_seq_list.innerHTML = "";
+    let background_sequences = state.background_sequences;
 
-    table.innerHTML = "";
+    for(let i = 0; i < background_sequences.length; i++) {
+        let row = background_seq_list.insertRow();
+        let cell = row.insertCell();
 
-    for(i = 0; i < background_sequences.length; i++) {
-        let row  = table.insertRow(i);
-        let cell = row.insertCell(0);
-
-        cell.innerHTML = background_sequences[i];
-        cell.addEventListener("click", function() {
-            for(i = 0; i < background_sequences.length; i++) {
-                if(this.innerHTML == background_sequences[i]) {
-                    background_sequences.splice(i, 1);
-                }
-            }
-
+        cell.innerHTML = background_sequences[i].split('/').pop();
+        
+        // Add event listener for removal of background sequences
+        cell.addEventListener('click', function() {
+            state.removeBackgroundSequence(this.innerHTML);
             updateBackgroundSequences();
         });
     }
 }
 
 
-//listening
-ipcRenderer.on('EXECUTE', (event, arg) =>{
-    if(arg != null){
-        console.log("error received");
-    } else {
-        console.log("sending load message");
-        sendMessage('LOADMODULE', 1);
+// set up event listener for background sequence addition
+const background_seq_fp = document.querySelector('#background_seq_fp');
+background_seq_fp.addEventListener('change', function() {
+    let path = background_seq_fp.files[0].path;
+    state.addBackgroundSequence(path);
+
+    background_seq_fp.value = '';
+
+    updateBackgroundSequences();
+});
+
+
+/**
+ * @brief Remove a target region from the list in the DOM
+ */
+function removeTargetRegionIdentifier(identifier) {
+    if(!state.removeTargetRegionIdentifier(identifier)) {
+        return false
     }
-});
 
-ipcRenderer.on('NEW', (event, arg) =>{
-    console.log("NEW received");
-    console.log(fasta_file_select.value);
-    init(arg[0]);
-});
+    let identifiers = document.querySelectorAll('#sequence_identifiers > table');
 
-ipcRenderer.on('LOADMODULE', (event, arg) =>{
-    console.log("DENIED");
-})
-
-//loads tab on click
-module2.addEventListener('click', function (){
-    console.log("click");
-    sendMessage('LOADMODULE', 1);
-});
-
-resetButton.addEventListener('click', function() {
-    // TODO: resetTable();
-});
-
-submitButton.addEventListener('click', function () {
-    let out_json = {};
-   
-    out_json.sequences = {};
-
-    let sequence_array = [];
-    for(let i = 0; i < sequences.length; i++) {
-        let current_sequence = sequences[i];
-        
-        if(current_sequence.identifier == '') {
-            continue;
+    for(let i = 0; i < identifiers.length; i++) {
+        let table = identifiers[i];
+        if(table.rows[0].cells[0].childNodes[0].innerHTML == identifier) {
+            table.remove();
+            return true;
         }
-        
-        current_sequence.ranges.sort();
-        out_json.sequences[current_sequence.identifier] = {
-            seq: current_sequence.nucleotide_sequence,
-            target_start: current_sequence.ranges[0],
-            target_end: current_sequence.ranges[1],
-            
-            // TODO: primer length ranges
-            primer_len_range: {
-                min: 18,
-                max: 22
-            }
-        };
     }
-  
-    out_json.primer_collection                   = {};
-    out_json.primer_collection.params            = {};
-    out_json.primer_collection.params.pcr_salts  = {};
 
-    out_json.primer_collection.params.pcr_salts.na    = pcr_sodium.value.toString();
-    out_json.primer_collection.params.pcr_salts.k     = pcr_potassium.value.toString();
-    out_json.primer_collection.params.pcr_salts.tris  = pcr_tromethamine.value.toString();
-    out_json.primer_collection.params.pcr_salts.mg    = pcr_magnesium.value.toString();
-    out_json.primer_collection.params.pcr_salts.dntps = pcr_dntps.value.toString();
+    return false;
+}
 
-    console.log("Created output JSON:")
-    console.log(JSON.stringify(out_json));
 
-    sendMessage('EXECUTE', ['module1.py', JSON.stringify(out_json)]);
+/**
+ * @brief Add a new target region identifier to the list on the DOM
+ *
+ * @param identifier_label
+ * @param sequence
+ * @param target_start
+ * @param target_end
+ * @param min_length
+ * @param max_length
+ *
+ * @return true identifier added to list in DOM
+ * @return false identifier was not added
+ */
+function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=null, target_end=null, min_length=null, max_length=null) {
+    if(!state.addTargetRegionIdentifier(identifier_label, sequence, target_start, target_end, min_length, max_length)) {
+        return false;
+    }
+
+    let identifiers = document.querySelector('#sequence_identifiers');
+    
+    // Create a new table
+    let table = document.createElement('table');
+    table.className = 'input_table';
+    let row = table.insertRow(0);
+    
+    identifiers.appendChild(table);
+
+    let cell = row.insertCell();
+
+    // create label
+    let label = document.createElement('div');
+    label.className = 'sequence_name';
+    label.innerHTML = identifier_label;
+
+    cell.appendChild(label);
+
+    // create target start label
+    cell = row.insertCell();
+    
+    let target_start_label = document.createElement('div');
+    target_start_label.innerHTML = 'Target Start:';
+    
+    let target_start_input = document.createElement('input');
+    target_start_input.setAttribute('type', 'number');
+    target_start_input.className = 'target_start';
+
+    if(target_start) {
+        target_start_input.value = target_start;
+    }
+
+    target_start_input.addEventListener('change', function() {
+        state.alterTargetRegionIdentifier(identifier_label, target_start=parseInt(this.value), null, null, null);
+    });
+
+    cell.appendChild(target_start_label);
+    cell.appendChild(target_start_input);
+
+    // create target end label
+    cell = row.insertCell();
+    
+    let target_end_label = document.createElement('div');
+    target_end_label.innerHTML = 'Target End:';
+    
+    let target_end_input = document.createElement('input');
+    target_end_input.setAttribute('type', 'number');
+    target_end_input.className = 'target_end';
+
+    if(target_end) {
+        target_end_input.value = target_end;
+    }
+ 
+    target_end_input.addEventListener('change', function() {
+        state.alterTargetRegionIdentifier(identifier_label, null, target_end=parseInt(this.value), null, null);
+    });   
+
+    cell.appendChild(target_end_label);
+    cell.appendChild(target_end_input);
+
+    // create min length
+    cell = row.insertCell();
+    
+    let length_min_label = document.createElement('div');
+    length_min_label.innerHTML = 'Min Length:';
+    
+    let length_min_input = document.createElement('input');
+    length_min_input.setAttribute('type', 'number');
+    length_min_input.className = 'length_min';
+
+    if(min_length) {
+        length_min_input.value = min_length;
+    }
+
+    length_min_input.addEventListener('change', function() {
+        state.alterTargetRegionIdentifier(identifier_label, null, null, length_min=parseInt(this.value), null);
+    });
+
+    cell.appendChild(length_min_label);
+    cell.appendChild(length_min_input);
+
+    // create max length
+    cell = row.insertCell();
+    
+    let length_max_label = document.createElement('div');
+    length_max_label.innerHTML = 'Max Length:';
+    
+    let length_max_input = document.createElement('input');
+    length_max_input.setAttribute('type', 'number');
+    length_max_input.className = 'length_max';
+
+    if(max_length) {
+        length_max_input.value = max_length;
+    }
+
+    length_max_input.addEventListener('change', function() {
+        state.alterTargetRegionIdentifier(identifier_label, null, null, null, length_max=parseInt(this.value));
+    });
+
+    cell.appendChild(length_max_label);
+    cell.appendChild(length_max_input);
+
+    cell = row.insertCell();
+    let remove_button = document.createElement('input');
+    remove_button.setAttribute('type', 'submit');
+    remove_button.setAttribute('value', 'Remove');
+    remove_button.addEventListener('click', function() {
+        removeTargetRegionIdentifier(identifier_label);
+    });
+
+    cell.appendChild(remove_button);
+    return true;
+}
+
+
+// Event listener for sequence identifier manual entry
+let manual_submit = document.getElementById('manual_submit');
+manual_submit.addEventListener('click', function() {
+    let manual_label    = document.getElementById('manual_label');
+    let manual_sequence = document.getElementById('manual_sequence');
+
+    let label    = manual_label.value;
+    let sequence = manual_sequence.value;
+
+    if(!validate.validateFasta(sequence)) {
+        return;
+    }
+
+    if(addNewTargetRegionIdentifier(label, sequence)) {
+        manual_label.value    = '';
+        manual_sequence.value = '';
+    }
+     
 });
 
-fasta_file_select.addEventListener('change', function() {
+
+// Event listener for sequence identifier bulk upload
+let bulk_upload = document.getElementById('fasta_file_upload');
+bulk_upload.addEventListener('change', function() {
     console.log("FASTA file change");
 
     // Read in the data from the file
-    fs.readFile(fasta_file_select.files[0].path, function(err, data) {
+    fs.readFile(bulk_upload.files[0].path, function(err, data) {
         if(err) {
             console.log("FASTA file read error");
         }
@@ -382,11 +443,13 @@ fasta_file_select.addEventListener('change', function() {
         for(let line of fasta_raw_string) {
             if('>' == line[0]) {
                 if(!current_header) {
-                    current_header = line;
+                    current_header = line.replace(new RegExp('>'), '');
                     continue;
                 } else {
-                    createNewSequenceSelector(current_sequence, current_header, undefined, undefined);
-                    current_header = line;
+                    if(validate.validateFasta(current_sequence)) {
+                        addNewTargetRegionIdentifier(current_header, current_sequence);
+                    }
+                    current_header = line.replace(new RegExp('>'), '');
                     current_sequence = '';
                     continue;
                 }
@@ -395,24 +458,75 @@ fasta_file_select.addEventListener('change', function() {
             }
         }
 
-        if(current_sequence != '') {
-            createNewSequenceSelector(current_sequence, current_header, undefined, undefined);
+        if(current_sequence != '' && validate.validateFasta(current_sequence)) {
+            addNewTargetRegionIdentifier(current_header, current_sequence);
         }
     });
 
-});
-
-background_sequence_filepicker.addEventListener('change', function() {
-    path = background_sequence_filepicker.files[0].path;
-
-    // TODO: Validate fasta file
-
-    background_sequences.push(path);
-
-    background_sequence_filepicker.value = "";
-
-    updateBackgroundSequences();
+    bulk_upload.value = '';
 });
 
 
-init(null);
+/**
+ * @brief helper function for sending IPC messages
+ */
+function sendMessage(channel, message) {
+    ipcRenderer.send(channel, message);
+}
+
+
+const module_2 = document.getElementById('module2');
+module_2.addEventListener('click', function() {
+    sendMessage('LOADMODULE', 2);
+    console.log('attempting to load module 2');
+});
+
+
+const module_3 = document.getElementById('module3');
+module_3.addEventListener('click', function() {
+    sendMessage('LOADMODULE', 3);
+    console.log('attempting to load module 3');
+});
+
+
+const module_4 = document.getElementById('module4');
+module_4.addEventListener('click', function() {
+    sendMessage('LOADMODULE', 4);
+    console.log('attempting to load module 4');
+});
+
+
+const submit = document.getElementById('submit');
+submit.addEventListener('click', function() {
+    sendMessage('EXECUTE', ['primacy1.py', state.toJSON().toString()]);
+    console.log('attempting execution');
+})
+
+
+// Intercept NEW message and bootstrap the page
+ipcRenderer.on('NEW', (event, arg) => {
+    state = new Module1(arg[0]);
+});
+
+
+// Intercept response to EXECUTE request
+ipcRenderer.on('EXECUTE', (event, arg) => {
+    if(arg != null) {
+        console.log('Error during pipeline execution:');
+        console.log(arg);
+    } else {
+        sendMessage('LOADMODULE', 2);
+    }
+});
+
+
+// Intercept module load denials
+ipcRenderer.on('LOADMODULE', (event, arg) => {
+    console.log('Module load denied');
+});
+
+
+// Clean init of state if nothing to bootstrap from
+if(!state) {
+    state = new Module1();
+}
