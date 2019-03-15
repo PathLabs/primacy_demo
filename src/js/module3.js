@@ -68,7 +68,7 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
         console.log("error received");
     } else {
         console.log("sending load message");
-        sendMessage('LOADMODULE', 2);
+        sendMessage('LOADMODULE', 3);
     }
 });
 
@@ -84,12 +84,12 @@ ipcRenderer.on('LOADMODULE', (event, arg) =>{
 //loads tab on click
 module1.addEventListener('click', function (){
     console.log("click");
-    sendMessage('LOADMODULE', 0);
+    sendMessage('LOADMODULE', 1);
 });
 
 module2.addEventListener('click', function (){
     console.log("click");
-    sendMessage('LOADMODULE', 1);
+    sendMessage('LOADMODULE', 2);
 });
 
 optimumAmpliconCheck.addEventListener('change', function() {
