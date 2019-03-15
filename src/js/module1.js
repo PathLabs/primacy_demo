@@ -60,15 +60,14 @@ class Module1 {
             this.target_regions       = state['sequences'];
 
             // Init PCR
-            pcr_salts_inputs[0].value = this.pcr_salts['Na']
-            pcr_salts_inputs[1].value = this.pcr_salts['K']
-            pcr_salts_inputs[2].value = this.pcr_salts['Tris']
-            pcr_salts_inputs[3].value = this.pcr_salts['dNTPS']
+            pcr_salts_inputs[0].value = this.pcr_salts['Na'];
+            pcr_salts_inputs[1].value = this.pcr_salts['K'];
+            pcr_salts_inputs[2].value = this.pcr_salts['Tris'];
+            pcr_salts_inputs[3].value = this.pcr_salts['Mg'];
+            pcr_salts_inputs[4].value = this.pcr_salts['dNTPs'];
 
             // Init background sequences
             updateBackgroundSequences();
-
-            console.log(this.target_regions)
 
             // Init target region list
             for(let key in this.target_regions) {
@@ -124,7 +123,7 @@ class Module1 {
                 return;
             
             case 'pcr_dntps': 
-                this.pcr_salts['dNTPS'] = value;
+                this.pcr_salts['dNTPs'] = value;
                 return;
         }
     }
@@ -240,14 +239,16 @@ class Module1 {
 for(let i = 0; i < pcr_salts_inputs.length; i++) {
     pcr_salts_inputs[i].addEventListener('change', function() {
         let id = this.id;
-        state.updatePCR(id, parseInt(this.value));
+        if(this.value >= 0) {
+            state.updatePCR(id, parseInt(this.value));
+        } else {
+            if(state.pcr_salts[this.id] != undefined) {
+                this.value = state.pcr_salts[this.id];
+            } else {
+                this.value = 0;
+            }
+        }
     });
-
-    if(i == 0) {
-        pcr_salts_inputs[0].value = 50;
-    } else {
-        pcr_salts_inputs[i].value = 0;
-    }
 }
 
 
@@ -291,7 +292,7 @@ background_seq_fp.addEventListener('change', function() {
  */
 function removeTargetRegionIdentifier(identifier) {
     if(!state.removeTargetRegionIdentifier(identifier)) {
-        return false
+        return false;
     }
 
     let identifiers = document.querySelectorAll('#sequence_identifiers > table');
