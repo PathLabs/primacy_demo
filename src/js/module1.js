@@ -18,6 +18,14 @@ const {ipcRenderer} = require('electron');
 
 var state = null;
 
+const module_2 = document.getElementById('module2');
+const pcr_salts_inputs = document.querySelectorAll('#pcr > tbody > tr > td > input');
+const background_seq_fp = document.querySelector('#background_seq_fp');
+const manual_submit = document.getElementById('manual_submit');
+const bulk_upload = document.getElementById('fasta_file_upload');
+const module_3 = document.getElementById('module3');
+const module_4 = document.getElementById('module4');
+const submit = document.getElementById('submit');
 
 /**
  * @brief object for the state of module 1
@@ -196,7 +204,6 @@ class Module1 {
 
 
 // set up listeners for PCR Salts
-const pcr_salts_inputs = document.querySelectorAll('#pcr > tbody > tr > td > input');
 for(let i = 0; i < pcr_salts_inputs.length; i++) {
     pcr_salts_inputs[i].addEventListener('change', function() {
         let id = this.id;
@@ -236,7 +243,6 @@ function updateBackgroundSequences() {
 
 
 // set up event listener for background sequence addition
-const background_seq_fp = document.querySelector('#background_seq_fp');
 background_seq_fp.addEventListener('change', function() {
     let path = background_seq_fp.files[0].path;
     state.addBackgroundSequence(path);
@@ -403,7 +409,6 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
 
 
 // Event listener for sequence identifier manual entry
-let manual_submit = document.getElementById('manual_submit');
 manual_submit.addEventListener('click', function() {
     let manual_label    = document.getElementById('manual_label');
     let manual_sequence = document.getElementById('manual_sequence');
@@ -424,7 +429,6 @@ manual_submit.addEventListener('click', function() {
 
 
 // Event listener for sequence identifier bulk upload
-let bulk_upload = document.getElementById('fasta_file_upload');
 bulk_upload.addEventListener('change', function() {
     console.log("FASTA file change");
 
@@ -475,28 +479,24 @@ function sendMessage(channel, message) {
 }
 
 
-const module_2 = document.getElementById('module2');
 module_2.addEventListener('click', function() {
     sendMessage('LOADMODULE', 2);
     console.log('attempting to load module 2');
 });
 
 
-const module_3 = document.getElementById('module3');
 module_3.addEventListener('click', function() {
     sendMessage('LOADMODULE', 3);
     console.log('attempting to load module 3');
 });
 
 
-const module_4 = document.getElementById('module4');
 module_4.addEventListener('click', function() {
     sendMessage('LOADMODULE', 4);
     console.log('attempting to load module 4');
 });
 
 
-const submit = document.getElementById('submit');
 submit.addEventListener('click', function() {
     sendMessage('EXECUTE', ['primacy1.py', JSON.stringify(state.toJSON())]);
     console.log('attempting execution');
