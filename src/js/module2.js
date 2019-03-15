@@ -8,7 +8,7 @@
  *      - Alex Lacy <al2428@nau.edu>
  */
 const os            = require('os');
-const validate      = require('input_validation.js');
+// const validate      = require('./input_validation.js');
 const {ipcRenderer} = require('electron');
 
 
@@ -16,8 +16,8 @@ const module1 = document.getElementById("module1");
 const module3 = document.getElementById("module3");
 
 const tm_opt = document.getElementById('tm_opt');
-const gc_min_val  = document.getElementById('gcMin');
-const gc_max_val  = document.getElementById('gcMax');
+const gc_min_val  = document.getElementById('gcMinSlider');
+const gc_max_val  = document.getElementById('gcMaxSlider');
 
 const tm  = document.getElementById('tmSlider');
 const gc  = document.getElementById('gcfSlider');
@@ -39,8 +39,8 @@ const degenerate_chkbx  = document.getElementById('degenCheckbox');
 const submit_button = document.getElementById("submitButton");
 
 
+var last_module_results = {};
 var current_module_args = {};
-
 
 function sendMessage(channel, message){
   ipcRenderer.send(channel, message);
@@ -49,20 +49,20 @@ function sendMessage(channel, message){
 
 
 function init(json) {
-    console.log(json);
     current_module_args = json[0];
+    last_module_results = json[1]
 
     if(current_module_args) {
-        gc_min_slider.value = current_module_args['gc_min_val'];
-        gc_max_slider.value = current_module_args['gc_max_val'];
-    } else {
-        current_module_args = {'gc_min_val': parseInt(gc_min_slider.value),
-              'gc_max_val': parseInt(gc_max_slider.value)};
+        tm_opt.value = current_module_args['tm_opt'];
+        gc_min_val.value = current_module_args['gc_min'];
+        gc_max_val.value = current_module_args['gc_max'];
+        tm.value = current_module_args['tm'];
+        gc.value = current_module_args['gc'];
+        homopolymer.value = current_module_args['homopolymer'];
+        specificity.value = current_module_args['specificity'];
+        degenerate.value = current_module_args['specificity'];
     }
-    gc_min_val.innerHTML = gc_min_slider.value;
-    gc_max_val.innerHTML = gc_max_slider.value;
 }
-
 
 //listening
 ipcRenderer.on('EXECUTE', (event, arg) =>{
@@ -77,63 +77,82 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
     init(arg);
-})
+});
 
 ipcRenderer.on('LOADMODULE', (event, arg) =>{
     console.log("DENIED");
-})
-
+});
 
 //loads tab on click
 module1.addEventListener('click', function (){
     console.log("click");
-    sendMessage('LOADMODULE', 0);
+    sendMessage('LOADMODULE', 1);
 });
 
 module3.addEventListener('click', function (){
     console.log("click");
-    sendMessage('LOADMODULE', 2);
-});
-
-gc_min_slider.addEventListener('input', function() {
-    gc_min_val.innerHTML = gc_min_slider.value;
-    current_module_args['gc_min_val'] = parseInt(gc_min_slider.value);
-});
-
-gc_max_slider.addEventListener('input', function() {
-    gc_max_val.innerHTML = gc_max_slider.value;
-    current_module_args['gc_max_val'] = parseInt(gc_max_slider.value);
-});
-
-tmSlider.addEventListener('input', function() {
-    tm.innerHTML = tmSlider.value;
-    current_module_args['tm'] = parseInt(tmSlider.value);
-});
-
-gcfSlider.addEventListener('input', function() {
-    gcf.innerHTML = gcfSlider.value;
-    current_module_args['gc'] = parseInt(gcfSlider.value);
+    sendMessage('LOADMODULE', 3);
 });
 
 
-hpolySlider.addEventListener('input', function() {
-    hpoly.innerHTML = hpolySlider.value;
-    current_module_args['homopolymer'] = parseInt(hpolySlider.value);
+tm_opt.addEventListener('change', function(){
+  current_module_args['tm_opt'] = parseInt(tm_opt.value);
 });
 
-dimerzSlider.addEventListener('input', function() {
-    dimerz.innerHTML = dimerzSlider.value;
-    current_module_args['dimer'] = parseInt(dimerzSlider.value);
+gc_min_val.addEventListener('change', function(){
+  current_module_args['gc_min'] = parseInt(gc_min_val.value);
 });
 
-specifSlider.addEventListener('input', function() {
-    specif.innerHTML = specifSlider.value;
-    current_module_args['specifity'] = parseInt(specifSlider.value);
+gc_max_val.addEventListener('change', function(){
+  current_module_args['gc_max'] = parseInt(gc_max_val.value);
 });
 
-degenSlider.addEventListener('input', function() {
-    degen.innerHTML = degenSlider.value;
-    current_module_args['degenerate'] = parseInt(dimerzSlider.value);
+
+tm_chkbx.addEventListener('change', function(){
+  if (tm_chkbx.checked){
+    current_module_args['tm'] = parseInt(tm.value);
+  }
+  else{
+    current_module_args['tm'] = 0;
+  }
+});
+
+gc_chkbx.addEventListener('change', function(){
+    if (gc_chkbx.checked){
+      current_module_args['gc'] = parseInt(gc.value);
+    }
+    else{
+      current_module_args['gc'] = 0;
+    }
+  });
+
+homopolymer_chkbx.addEventListener('change', function(){
+      if (homopolymer_chkbx.checked){
+        current_module_args['homopolymer'] = parseInt(homopolymer.value);
+      }
+      else{
+        current_module_args['homopolymer'] = 0;
+      }
+    });
+
+specificity_chkbx.addEventListener('change', function(){
+      if (specificity_chkbx.checked){
+        current_module_args['specificity'] = parseInt(specificity.value);
+      }
+      else{
+        current_module_args['specificity'] = 0;
+      }
+    });
+
+degenerate_chkbx.addEventListener('change', function(){
+      if (degenerate_chkbx.checked){
+        current_module_args['degenerate'] = parseInt(degenerate.value);
+      }
+
+      else{
+        current_module_args['degenerate'] = 0;
+      }
+
 });
 
 
