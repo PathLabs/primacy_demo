@@ -50,7 +50,6 @@ function initial() {
     win = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
 
     // and load the index.html of the app.
-  
     win.loadURL('file:///'+ __dirname + '/src/html/module1.html');
 
 
