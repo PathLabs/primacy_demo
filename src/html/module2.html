@@ -14,10 +14,12 @@
         <table class="input_table">
           <tr>
             <td>Optimal Melting Temperature for Reaction: </td>
-            <td><input type="text" name="melting_temp" value=55></td>
+            <td><input id="tm_optSlider" type="range" min="40" max="80" value = 55
+            oninput="tm_opt.value=tm_optSlider.value" class = "slider"></td>
+            <td><output name="tm_opt" id="tm_opt" for="tm_optSlider">55</output> °C</td>
           </tr>
 		  <tr>
-			<td>Please enter a value between 40-80ºC</td>
+
 	   	  </tr>
         </table>
         </br>
@@ -41,64 +43,66 @@
               oninput="gcMax.value=gcMaxSlider.value" class = "slider"></td>
               <td><output name="gcMax" id="gcMax" for="gcMaxSlider">0</output>%</td>
             </tr>
-			<tr>
-			  <!-- Please Ensure Max > Min -->
-			</tr>
           </table>
           </br>
-          <input id="submitButton" type="submit" value="Submit">
+
         </div>
       </div>
     </div>
   </div>
 
-    <div class="box box2"><h1>RELATIVE IMPORTENCE OF FEATURES</h1>
-      <h1> Zero indicates feature will not be considered </h1>
+    <div class="box box2"><h1>RELATIVE IMPORTANCE OF FEATURES</h1>
+      <h1> If a feature is left unchecked it will not be considered in the process </h1>
+      <h1> Default Value is 1 </h1>
       <table class="input_table">
       <tr>
-        <td>Tm</td>
-        <td><input id="tmSlider" type="range" min="0" max="100" value = 1
+        <td>Tm <input type="checkbox" name="tmCheckbox" id="tmCheckbox" value="TM"> </td>
+        <td>
+          <input id="tmSlider" type="range" min="0" max="100" value = 1
         oninput="tm.value=tmSlider.value" class = "slider"></td>
         <td><output name="tm" id="tm" for="tmSlider">0</output></td>
       </tr>
 
       <tr>
-        <td>GC</td>
+        <td>GC <input type="checkbox" name="gcCheckbox" id="gcCheckbox" value="GC"> </td>
         <td><input id="gcfSlider" type="range" min="0" max="100" value = 1
         oninput="gcf.value=gcfSlider.value" class = "slider"></td>
         <td><output name="gcf" id="gcf" for="gcfSlider">0</output></td>
       </tr>
 
       <tr>
-        <td>Homopolymers</td>
+        <td>Homopolymers <input type="checkbox" name="hpolyCheckbox" id="hpolyCheckbox" value="Homopolymers"> </td>
         <td><input id="hpolySlider" type="range" min="0" max="100" value = 1
         oninput="hpoly.value=hpolySlider.value" class = "slider"></td>
         <td><output name="hpoly" id="hpoly" for="hpolySlider">0</output></td>
       </tr>
 
       <tr>
-        <td>Dimerzation</td>
+        <td>Dimerzation <input type="checkbox" name="dimerzCheckbox" id="dimerzCheckbox" value="Dimerzation"> </td>
         <td><input id="dimerzSlider" type="range" min="0" max="100" value = 1
-        oninput="dimer.value=dimerzSlider.value" class = "slider"></td>
+        oninput="dimerz.value=dimerzSlider.value" class = "slider"></td>
         <td><output name="dimerz" id="dimerz" for="dimerzSlider">0</output></td>
       </tr>
 
       <tr>
-        <td>Specifity</td>
+        <td>Specifity <input type="checkbox" name="specifCheckbox" id="specifCheckbox" value="Specifity"> </td>
         <td><input id="specifSlider" type="range" min="0" max="100" value = 1
         oninput="specif.value=specifSlider.value" class = "slider"></td>
         <td><output name="specif" id="specif" for="specifSlider">0</output></td>
       </tr>
 
       <tr>
-        <td>Degenerate</td>
+        <td>Degenerate <input type="checkbox" name="degenCheckbox" id="degenCheckbox" value="Degenerate"> </td>
         <td><input id="degenSlider" type="range" min="0" max="100" value = 1
         oninput="degen.value=degenSlider.value" class = "slider"></td>
         <td><output name="degen" id="degen" for="degenSlider">0</output></td>
       </tr>
 
 
+
+
     </table>
+    <input id="submitButton" type="submit" value="Submit">
 
   </div>
 
