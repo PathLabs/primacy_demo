@@ -37,7 +37,7 @@ body {
   flex:1;
 }
 
-.container_mod2 {
+.container_mod3 {
   display:flex;
   flex-wrap:nowrap;
   flex-direction:row;
@@ -65,13 +65,14 @@ hr{
 .tooltip {
   position: static;
   display: inline-block;
-  cursor:default;
+  text-align: left;
+  cursor:help;
 }
 
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 100px;
-  background-color: rgb(1, 32, 53);
+  background-color: black;
   color: #fff;
   text-align: center;
   padding: 5px 0;
@@ -80,10 +81,32 @@ hr{
   position: absolute;
   z-index: 1;
   overflow: visible;
+  margin-top: 6px;
+  border: solid 1px #35506b;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border: solid 1px #35506b;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.setting_title {
+  float:left;
+}
+
+.setting_input {
+  float: right;
 }
 
 .sequence_box {
@@ -101,6 +124,14 @@ hr{
 
 .input_table td {
   text-align: center;
+}
+
+.sliderValue {
+  width: 3em;
+}
+
+#amplicon_slider {
+  margin-right: 10px;
 }
 
 h1 {
@@ -152,6 +183,8 @@ input{
   color: #ffe8e1;
   border: 1px solid #35506b;
   border-radius: 3px;
+  outline-width: thick;
+  outline-color: #35506b;
 }
 
 input[type=file]{
@@ -164,9 +197,58 @@ input[type=submit]{
   color:#ffe8e1;
 }
 
+input[type=number]{
+  font-size: 14px;
+  width: 45px;
+  color:#ffe8e1;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 18px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #2d6a9f;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 18px;
+  width: 10px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+}
+
+#ampliconSlider {
+  width:72%;
+}
+
 .form-control {
   color: #ffe8e1;
   background-color: black;
+  outline-width: thick;
+  outline-color: #35506b;
+}
+
+.setting_input {
+  outline-width: thick;
+  outline-color: #35506b;
+  border-color: #35506b;
 }
 
 #sequenceIdentifier {
@@ -270,6 +352,7 @@ input[type=submit]{
   border: 2px solid #000010;
   padding: 10px;
 }
+
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 
 .progress_bar {
