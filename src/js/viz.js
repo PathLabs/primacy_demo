@@ -21,7 +21,9 @@ function get_paths(json_file_path){
    paths_array = get_paths(pipeline_mod_1_output);
    var xData = [];
    var yData = [];
+
    if (direction === 'forward'){  for (var i = 0; i < paths_array.length; i++){
+        console.log('if statement run')
        var data = JSON.parse(fs.readFileSync(path.resolve(paths_array[i]),'UTF-8'));
 
        for (var j = 0; j<Object.keys(data).length; j++){
@@ -58,4 +60,77 @@ function get_paths(json_file_path){
           }
        }}
     return [xData, yData]
+}
+
+
+
+
+
+
+function create_viz_spec(direction, field, div){
+  data = parse_json(direction, field)
+  var xData = data[0];
+  var yData = data[1];
+  var colors = [
+    "rgba(93, 164, 214, 0.5)",
+    "rgba(255, 144, 14, 0.5)",
+    "rgba(44, 160, 101, 0.5)",
+    "rgba(255, 65, 54, 0.5)",
+    "rgba(207, 114, 255, 0.5)",
+    "rgba(127, 96, 0, 0.5)",
+    "rgba(255, 140, 184, 0.5)",
+    "rgba(79, 90, 117, 0.5)",
+    "rgba(222, 223, 0, 0.5)"
+  ];
+
+  var data = [];
+
+  for (var i = 0; i < xData.length; i++) {
+    var result = {
+      type: "box",
+      y: yData[i],
+      name: xData[i],
+      boxpoints: 'outliers',
+      // jitter: 0.5,
+      whiskerwidth: 0.2,
+      fillcolor: "cls",
+      marker: {
+        size: 2
+      },
+      line: {
+        width: 1
+      }
+    };
+    data.push(result);
+  }
+
+  layout = {
+    title: field + " Box Plot Chart for " + direction + " Reads",
+    autosize: false,
+    width: 1024,
+    height: 600,
+    yaxis: {
+      autorange: true,
+      showgrid: true,
+      zeroline: true,
+      // dtick: 5,
+      gridcolor: "rgb(255, 255, 255)",
+      gridwidth: 1,
+      zerolinecolor: "rgb(255, 255, 255)",
+      zerolinewidth: 2
+    },
+    margin: {
+      l: 50,
+      r: 50,
+      b: 100,
+      t: 100,
+      pad: 4
+    },
+    paper_bgcolor: "rgb(243, 243, 243)",
+    plot_bgcolor: "rgb(243, 243, 243)",
+    showlegend: false
+  };
+
+  Plotly.newPlot(div, data, layout);
+
 }
