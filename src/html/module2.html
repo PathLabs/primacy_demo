@@ -14,8 +14,7 @@
         <table class="input_table">
           <tr>
             <td>Optimal Melting Temperature for Reaction: </td>
-            <td>Please enter a value between 40-80ºC</td>
-            <td><input type="text" name="melting_temp" value=55></td>
+            <td><input type="number" id="tm_opt" value=55></td>
           </tr>
 		  <tr>
 
@@ -42,9 +41,6 @@
               oninput="gcMax.value=gcMaxSlider.value" class = "slider"></td>
               <td><output name="gcMax" id="gcMax" for="gcMaxSlider">0</output>%</td>
             </tr>
-			<tr>
-			  <!-- Please Ensure Max > Min -->
-			</tr>
           </table>
           </br>
 
@@ -53,8 +49,9 @@
     </div>
   </div>
 
-    <div class="box box2"><h1>RELATIVE IMPORTENCE OF FEATURES</h1>
+    <div class="box box2"><h1>RELATIVE IMPORTANCE OF FEATURES</h1>
       <h1> If a feature is left unchecked it will not be considered in the process </h1>
+      <h1> Default Value is 1 </h1>
       <table class="input_table">
       <tr>
         <td>Tm <input type="checkbox" name="tmCheckbox" id="tmCheckbox" value="TM"> </td>
