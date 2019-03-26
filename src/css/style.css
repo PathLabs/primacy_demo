@@ -286,6 +286,16 @@ input[type=range]::-webkit-slider-thumb {
   width:100%;
 }
 
+#background_seq_list td {
+  border: 1px solid transparent;
+}
+
+#background_seq_list td:hover {
+  cursor:no-drop;
+  border: 1px solid red;
+}
+
+
 .sequence_item:hover{
   transform:scale(1.8);
   transform-style: preserve-3d;
