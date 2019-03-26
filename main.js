@@ -87,6 +87,8 @@ function goToModule(module_number) {
     *      - Else, True.
     */
 
+    let response = 0;
+
     const options = {
         type: 'question',
         buttons: ['Yes', 'No'],
@@ -95,12 +97,18 @@ function goToModule(module_number) {
         message: 'Are you sure you want to go back?',
         detail: 'Progress on current module will be lost.'
     };
-    let response = 0;
 
     if(module_number < current_module) {
-        require('electron').dialog.showMessageBox(null, options,(response) => {
+        response = require('electron').dialog.showMessageBox(null, options,(response) => {
           console.log(response);
+          if (response == 0){
+              win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
+          }
         });
+    }
+
+    if(!visited_modules[module_number-1]['executed']){
+        return false;
     }
 
     if((current_module <= module_number) && !visited_modules[module_number-1]['executed']) {
@@ -109,7 +117,7 @@ function goToModule(module_number) {
 
     // Load the html
     if (response == 0){
-        win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
+      win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
     }
 
     current_module = module_number;
