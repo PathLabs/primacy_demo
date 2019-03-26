@@ -282,6 +282,10 @@ input[type=range]::-webkit-slider-thumb {
   padding: 3px;
 }
 
+#background_seq_fp {
+  width:100%;
+}
+
 .sequence_item:hover{
   transform:scale(1.8);
   transform-style: preserve-3d;
