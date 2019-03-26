@@ -295,7 +295,7 @@ input[type=range]::-webkit-slider-thumb {
   border: 1px solid red;
 }
 
-#pcr td {
+.input_table td {
   text-align:left;
 }
 
