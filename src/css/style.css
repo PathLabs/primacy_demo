@@ -80,11 +80,11 @@ hr{
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 100px;
+  max-width: 110px;
   background-color: black;
   color: #fff;
-  text-align: center;
-  padding: 5px 0;
+  text-align: left;
+  padding: 5px 5px;
   border-radius: 5px;
   font-size: 11px;
   position: absolute;
@@ -144,7 +144,7 @@ hr{
 }
 
 h1{
-  font-size: 17px;
+  font-size: 14px;
   font-family: sans-serif;
   font-weight: bold;
 }

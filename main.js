@@ -94,7 +94,7 @@ function goToModule(module_number) {
         buttons: ['Yes', 'No'],
         defaultid: 1,
         title: 'Question',
-        message: 'Are you sure you want to go back?',
+        message: 'Are you sure you want to leave?',
         detail: 'Progress on current module will be lost.'
     };
 
