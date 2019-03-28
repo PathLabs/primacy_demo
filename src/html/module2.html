@@ -7,100 +7,103 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="box box1"><h1>OPTIMAL MELTING TEMPERATURE (°C)</h1>
-      <hr>
-      <div class="input">
-        <table class="input_table">
-          <tr>
-            <td>Optimal Melting Temperature for Reaction: </td>
-            <td><input id="tm_optSlider" type="range" min="40" max="80" value = 55
-            oninput="tm_opt.value=tm_optSlider.value" class = "slider"></td>
-            <td><output name="tm_opt" id="tm_opt" for="tm_optSlider">55</output> °C</td>
-          </tr>
-        </table>
-        </br>
-      </div>
-    </div>
-    <div class="box box2"><h1>OPTIMAL RANGE FOR GC CONTENT (%)</h1>
-      <hr>
-      <div class="input_box">
+  <div class="mod2_overall_container">
+    <div class="mod2_optimization_settings">
+      <div class="box box2"><h1>OPTIMAL MELTING TEMPERATURE (°C)</h1>
+        <hr>
         <div class="input">
           <table class="input_table">
             <tr>
-              <td>GC Content Min</td>
-              <td><input id="gcMinSlider" type="range" min="0" max="100" value = 0
-              oninput="gcMin.value=gcMinSlider.value" class = "slider"></td>
-              <td><output name="gcMin" id="gcMin" for="gcMinSlider">0</output>%</td>
-            </tr>
-
-            <tr>
-              <td>GC Content Max</td>
-              <td><input id="gcMaxSlider" type="range" min="0" max="100" value = 0
-              oninput="gcMax.value=gcMaxSlider.value" class = "slider"></td>
-              <td><output name="gcMax" id="gcMax" for="gcMaxSlider">0</output>%</td>
+              <td>Optimal Melting Temperature for Reaction: </td>
+              <td><input id="tm_optSlider" type="range" min="40" max="80" value = 55
+              oninput="tm_opt.value=tm_optSlider.value" class = "slider"></td>
+              <td><output name="tm_opt" id="tm_opt" for="tm_optSlider">55</output> °C</td>
             </tr>
           </table>
           </br>
+        </div>
+      </div>
+      <div class="box box2"><h1>OPTIMAL RANGE FOR GC CONTENT (%)</h1>
+        <hr>
+        <div class="input_box">
+          <div class="input">
+            <table class="input_table">
+              <tr>
+                <td>GC Content Min</td>
+                <td><input id="gcMinSlider" type="range" min="0" max="100" value = 0
+                oninput="gcMin.value=gcMinSlider.value" class = "slider"></td>
+                <td><output name="gcMin" id="gcMin" for="gcMinSlider">0</output>%</td>
+              </tr>
 
+              <tr>
+                <td>GC Content Max</td>
+                <td><input id="gcMaxSlider" type="range" min="0" max="100" value = 0
+                oninput="gcMax.value=gcMaxSlider.value" class = "slider"></td>
+                <td><output name="gcMax" id="gcMax" for="gcMaxSlider">0</output>%</td>
+              </tr>
+            </table>
+            </br>
+
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-    <div class="box box2"><h1>RELATIVE IMPORTANCE OF FEATURES</h1>
-      <h3> If a feature is left unchecked it will not be considered in the process
-                              (Default Value is 1) </h3>
-      <table class="input_table">
-      <tr>
-        <td>Tm <input type="checkbox" name="tmCheckbox" id="tmCheckbox" value="TM"> </td>
-        <td>
-          <input id="tmSlider" type="range" min="0" max="100" value = 1
-        oninput="tm.value=tmSlider.value" class = "slider"></td>
-        <td><output name="tm" id="tm" for="tmSlider">0</output></td>
-      </tr>
-
-      <tr>
-        <td>GC <input type="checkbox" name="gcCheckbox" id="gcCheckbox" value="GC"> </td>
-        <td><input id="gcfSlider" type="range" min="0" max="100" value = 1
-        oninput="gcf.value=gcfSlider.value" class = "slider"></td>
-        <td><output name="gcf" id="gcf" for="gcfSlider">0</output></td>
-      </tr>
-
-      <tr>
-        <td>Homopolymers <input type="checkbox" name="hpolyCheckbox" id="hpolyCheckbox" value="Homopolymers"> </td>
-        <td><input id="hpolySlider" type="range" min="0" max="100" value = 1
-        oninput="hpoly.value=hpolySlider.value" class = "slider"></td>
-        <td><output name="hpoly" id="hpoly" for="hpolySlider">0</output></td>
-      </tr>
-
-      <tr>
-        <td>Dimerization <input type="checkbox" name="dimerzCheckbox" id="dimerzCheckbox" value="Dimerization"> </td>
-        <td><input id="dimerzSlider" type="range" min="0" max="100" value = 1
-        oninput="dimerz.value=dimerzSlider.value" class = "slider"></td>
-        <td><output name="dimerz" id="dimerz" for="dimerzSlider">0</output></td>
-      </tr>
-
-      <tr>
-        <td>Specifity <input type="checkbox" name="specifCheckbox" id="specifCheckbox" value="Specifity"> </td>
-        <td><input id="specifSlider" type="range" min="0" max="100" value = 1
-        oninput="specif.value=specifSlider.value" class = "slider"></td>
-        <td><output name="specif" id="specif" for="specifSlider">0</output></td>
-      </tr>
-
-      <tr>
-        <td>Degenerate <input type="checkbox" name="degenCheckbox" id="degenCheckbox" value="Degenerate"> </td>
-        <td><input id="degenSlider" type="range" min="0" max="100" value = 1
-        oninput="degen.value=degenSlider.value" class = "slider"></td>
-        <td><output name="degen" id="degen" for="degenSlider">0</output></td>
-      </tr>
 
 
 
+    <div class="mod2_importance">
+      <div class="box mod2_importance"><h1>RELATIVE IMPORTANCE OF FEATURES</h1>
+        <h3> If a feature is left unchecked it will not be considered in the process
+                                (Default Value is 1) </h3>
+        <table class="input_table">
+          <tr>
+            <td>Tm <input type="checkbox" name="tmCheckbox" id="tmCheckbox" value="TM"> </td>
+            <td>
+              <input id="tmSlider" type="range" min="0" max="100" value = 1
+                        oninput="tm.value=tmSlider.value" class = "slider">
+            </td>
+            <td><output name="tm" id="tm" for="tmSlider">0</output></td>
+          </tr>
 
-    </table>
-    <input id="submitButton" type="submit" value="Submit">
+          <tr>
+            <td>GC <input type="checkbox" name="gcCheckbox" id="gcCheckbox" value="GC"> </td>
+            <td><input id="gcfSlider" type="range" min="0" max="100" value = 1
+            oninput="gcf.value=gcfSlider.value" class = "slider"></td>
+            <td><output name="gcf" id="gcf" for="gcfSlider">0</output></td>
+          </tr>
 
+          <tr>
+            <td>Homopolymers <input type="checkbox" name="hpolyCheckbox" id="hpolyCheckbox" value="Homopolymers"> </td>
+            <td><input id="hpolySlider" type="range" min="0" max="100" value = 1
+            oninput="hpoly.value=hpolySlider.value" class = "slider"></td>
+            <td><output name="hpoly" id="hpoly" for="hpolySlider">0</output></td>
+          </tr>
+
+          <tr>
+            <td>Dimerization <input type="checkbox" name="dimerzCheckbox" id="dimerzCheckbox" value="Dimerization"> </td>
+            <td><input id="dimerzSlider" type="range" min="0" max="100" value = 1
+            oninput="dimerz.value=dimerzSlider.value" class = "slider"></td>
+            <td><output name="dimerz" id="dimerz" for="dimerzSlider">0</output></td>
+          </tr>
+
+          <tr>
+            <td>Specifity <input type="checkbox" name="specifCheckbox" id="specifCheckbox" value="Specifity"> </td>
+            <td><input id="specifSlider" type="range" min="0" max="100" value = 1
+            oninput="specif.value=specifSlider.value" class = "slider"></td>
+            <td><output name="specif" id="specif" for="specifSlider">0</output></td>
+          </tr>
+
+          <tr>
+            <td>Degenerate <input type="checkbox" name="degenCheckbox" id="degenCheckbox" value="Degenerate"> </td>
+            <td><input id="degenSlider" type="range" min="0" max="100" value = 1
+            oninput="degen.value=degenSlider.value" class = "slider"></td>
+            <td><output name="degen" id="degen" for="degenSlider">0</output></td>
+          </tr>
+
+        </table>
+        <input id="submitButton" type="submit" value="Submit">
+      </div>
+    </div>
   </div>
 
   <div class="tab_container">
