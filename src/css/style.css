@@ -143,10 +143,16 @@ hr{
   margin-right: 10px;
 }
 
-h1 {
-  font-size: 15px;
+h1{
+  font-size: 17px;
   font-family: sans-serif;
   font-weight: bold;
+}
+
+h3 {
+  font-size: 12px;
+  font-family: sans-serif;
+  font-weight: lighter;
 }
 
 table, th, td {
