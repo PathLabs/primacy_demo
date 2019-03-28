@@ -16,10 +16,13 @@
             <tr>
               <td>Optimal Melting Temperature for Reaction: </td>
               <td>
-                <input id="tm_optSlider" type="range" min="40" max="80" value = 55
+                <input id="tm_optSlider" type="range" min="40" max="80" value = "55"
                       oninput="tm_opt.value=tm_optSlider.value" class = "slider">
               </td>
-              <td><output name="tm_opt" id="tm_opt" for="tm_optSlider">55</output> °C</td>
+              <td>
+                <input type="number" name="tm_opt" id="tm_opt" for="tm_optSlider"
+                      oninput="tm_optSlider.value=tm_opt.value">°C
+              </td>
             </tr>
           </table>
           </br>
@@ -32,9 +35,14 @@
             <table class="input_table">
               <tr>
                 <td>GC Content Min</td>
-                <td><input id="gcMinSlider" type="range" min="0" max="100" value = 0
-                oninput="gcMin.value=gcMinSlider.value" class = "slider"></td>
-                <td><output name="gcMin" id="gcMin" for="gcMinSlider">0</output>%</td>
+                <td>
+                  <input id="gcMinSlider" type="range" min="0" max="100" value = 0
+                        oninput="gcMin.value=gcMinSlider.value" class = "slider">
+                </td>
+                <td>
+                  <input type="number" name="gcMin" id="gcMin" for="gcMinSlider"
+                        oninput="gcMinSlider.value=gcMin.value">%
+                </td>
               </tr>
 
               <tr>
@@ -43,7 +51,10 @@
                   <input id="gcMaxSlider" type="range" min="0" max="100" value = 0
                         oninput="gcMax.value=gcMaxSlider.value" class = "slider">
                 </td>
-                <td><output name="gcMax" id="gcMax" for="gcMaxSlider">0</output>%</td>
+                <td>
+                  <input type="number" name="gcMax" id="gcMax" for="gcMaxSlider"
+                        oninput="gcMaxSlider.value=gcMax.value">%
+                </td>
               </tr>
             </table>
             </br>
