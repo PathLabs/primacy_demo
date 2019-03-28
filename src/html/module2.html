@@ -15,8 +15,10 @@
           <table class="input_table">
             <tr>
               <td>Optimal Melting Temperature for Reaction: </td>
-              <td><input id="tm_optSlider" type="range" min="40" max="80" value = 55
-              oninput="tm_opt.value=tm_optSlider.value" class = "slider"></td>
+              <td>
+                <input id="tm_optSlider" type="range" min="40" max="80" value = 55
+                      oninput="tm_opt.value=tm_optSlider.value" class = "slider">
+              </td>
               <td><output name="tm_opt" id="tm_opt" for="tm_optSlider">55</output> °C</td>
             </tr>
           </table>
@@ -37,8 +39,10 @@
 
               <tr>
                 <td>GC Content Max</td>
-                <td><input id="gcMaxSlider" type="range" min="0" max="100" value = 0
-                oninput="gcMax.value=gcMaxSlider.value" class = "slider"></td>
+                <td>
+                  <input id="gcMaxSlider" type="range" min="0" max="100" value = 0
+                        oninput="gcMax.value=gcMaxSlider.value" class = "slider">
+                </td>
                 <td><output name="gcMax" id="gcMax" for="gcMaxSlider">0</output>%</td>
               </tr>
             </table>
@@ -59,52 +63,89 @@
           <tr>
             <td>Tm</td>
             <td>
-              <input id="tmSlider" type="range" min="0" max="100" value = 1
+              <input id="tmSlider" type="range" min="0" max="100" value = "1"
                         oninput="tm.value=tmSlider.value" class="slider">
             </td>
-            <td><input type="number" name="tm" id="tm" for="tmSlider"></input></td>
-            <td><input type="checkbox" name="tmCheckbox" id="tmCheckbox" value="TM"></td>
+            <td>
+              <input type="number" name="tm" id="tm" for="tmSlider"
+                        oninput="tmSlider.value=tm.value">
+            </td>
+            <td>
+              <input type="checkbox" name="tmCheckbox" id="tmCheckbox" value="TM">
+            </td>
           </tr>
 
           <tr>
             <td>GC</td>
-            <td><input id="gcfSlider" type="range" min="0" max="100" value = 1
+            <td>
+              <input id="gcfSlider" type="range" min="0" max="100" value = "1"
                         oninput="gcf.value=gcfSlider.value" class="slider">
             </td>
-            <td><input type="number" name="gcf" id="gcf" for="gcfSlider"></input></td>
+            <td>
+              <input type="number" name="gcf" id="gcf" for="gcfSlider"
+                        oninput="gcfSlider.value=gcf.value">
+            </td>
             <td><input type="checkbox" name="gcCheckbox" id="gcCheckbox" value="GC"></td>
           </tr>
 
           <tr>
             <td>Homopolymers</td>
-            <td><input id="hpolySlider" type="range" min="0" max="100" value = 1
-                        oninput="hpoly.value=hpolySlider.value" class = "slider"></td>
-            <td><input type="number" name="hpoly" id="hpoly" for="hpolySlider"></output></td>
-            <td><input type="checkbox" name="hpolyCheckbox" id="hpolyCheckbox" value="Homopolymers"></td>
+            <td>
+              <input id="hpolySlider" type="range" min="0" max="100" value = "1"
+                        oninput="hpoly.value=hpolySlider.value" class = "slider">
+            </td>
+            <td>
+              <input type="number" name="hpoly" id="hpoly" for="hpolySlider"
+                        oninput="hpolySlider.value=hpoly.value">
+            </td>
+            <td>
+              <input type="checkbox" name="hpolyCheckbox" id="hpolyCheckbox" value="Homopolymers">
+            </td>
           </tr>
 
           <tr>
             <td>Dimerization</td>
-            <td><input id="dimerzSlider" type="range" min="0" max="100" value = 1
-                        oninput="dimerz.value=dimerzSlider.value" class = "slider"></td>
-            <td><input type=number name="dimerz" id="dimerz" for="dimerzSlider"></output></td>
-            <td><input type="checkbox" name="dimerzCheckbox" id="dimerzCheckbox" value="Dimerization"></td>
+            <td>
+              <input id="dimerzSlider" type="range" min="0" max="100" value = "1"
+                        oninput="dimerz.value=dimerzSlider.value" class = "slider">
+            </td>
+            <td>
+              <input type=number name="dimerz" id="dimerz" for="dimerzSlider"
+                        oninput="dimerzSlider.value=dimerz.value">
+            </td>
+            <td>
+              <input type="checkbox" name="dimerzCheckbox" id="dimerzCheckbox" value="Dimerization">
+            </td>
           </tr>
 
           <tr>
             <td>Specifity</td>
-            <td><input id="specifSlider" type="range" min="0" max="100" value = 1
-                        oninput="specif.value=specifSlider.value" class = "slider"></td>
-            <td><input type= "number" name="specif" id="specif" for="specifSlider"></output></td>
-            <td><input type="checkbox" name="specifCheckbox" id="specifCheckbox" value="Specifity"></td>
+            <td>
+              <input id="specifSlider" type="range" min="0" max="100" value = "1"
+                        oninput="specif.value=specifSlider.value" class = "slider">
+            </td>
+            <td>
+              <input type= "number" name="specif" id="specif" for="specifSlider"
+                        oninput="specifSlider.value=specif.value">
+            </td>
+            <td>
+              <input type="checkbox" name="specifCheckbox" id="specifCheckbox" value="Specifity">
+            </td>
           </tr>
 
           <tr>
             <td>Degenerate</td>
-            <td><input id="degenSlider" type="range" min="0" max="100" value = 1
-                        oninput="degen.value=degenSlider.value" class = "slider"></td>
-            <td><input type="number" name="degen" id="degen" for="degenSlider"></output></td>
-            <td><input type="checkbox" name="degenCheckbox" id="degenCheckbox" value="Degenerate"> </td>
+            <td>
+              <input id="degenSlider" type="range" min="0" max="100" value = "1"
+                        oninput="degen.value=degenSlider.value" class = "slider">
+            </td>
+            <td>
+              <input type="number" name="degen" id="degen" for="degenSlider"
+                        oninput="degenSlider.value=degen.value">
+            </td>
+            <td>
+              <input type="checkbox" name="degenCheckbox" id="degenCheckbox" value="Degenerate">
+            </td>
           </tr>
 
         </table>
