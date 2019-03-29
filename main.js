@@ -107,6 +107,10 @@ function goToModule(module_number) {
         });
     }
 
+    if(module_number == 1) {
+        return true;
+    }
+
     if(!visited_modules[module_number-1]['executed']){
         return false;
     }

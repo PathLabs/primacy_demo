@@ -82,6 +82,12 @@ class Module1 {
             }
         }
 
+        // Init PCR
+        pcr_salts_inputs[0].value = this.pcr_salts['Na'];
+        pcr_salts_inputs[1].value = this.pcr_salts['K'];
+        pcr_salts_inputs[2].value = this.pcr_salts['Tris'];
+        pcr_salts_inputs[3].value = this.pcr_salts['Mg'];
+        pcr_salts_inputs[4].value = this.pcr_salts['dNTPs'];
     }
 
     /**
