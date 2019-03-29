@@ -19,7 +19,7 @@ const tm_opt = document.getElementById('tm_opt');
 const gc_min_val  = document.getElementById('gcMinSlider');
 const gc_max_val  = document.getElementById('gcMaxSlider');
 
-const tm  = document.getElementById('tmSlider');
+const tm_slider  = document.getElementById('tmSlider');
 const gc  = document.getElementById('gcfSlider');
 const homopolymer  = document.getElementById('hpolySlider');
 const dimer  = document.getElementById('dimerzSlider');

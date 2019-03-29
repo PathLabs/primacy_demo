@@ -10,7 +10,7 @@
 //gets users home directory
 const os = require('os');
 const fs = require('fs');
- 
+
 const validate = require('../js/input_validation.js');
 
 const {ipcRenderer} = require('electron');
@@ -41,9 +41,9 @@ class Module1 {
      */
     constructor(state=null) {
         this.target_regions = {};
-        
+
         this.background_sequences = [];
-        
+
         this.pcr_salts = {
             'Na': 50,
             'K': 0,
@@ -106,23 +106,23 @@ class Module1 {
      */
     updatePCR(salt, value) {
         switch(salt) {
-            case 'pcr_na': 
+            case 'pcr_na':
                 this.pcr_salts['Na'] = value;
                 return;
 
-            case 'pcr_k': 
+            case 'pcr_k':
                 this.pcr_salts['K'] = value;
                 return;
-            
-            case 'pcr_mg': 
+
+            case 'pcr_mg':
                 this.pcr_salts['Mg'] = value;
                 return;
-            
-            case 'pcr_tris': 
+
+            case 'pcr_tris':
                 this.pcr_salts['Tris'] = value;
                 return;
-            
-            case 'pcr_dntps': 
+
+            case 'pcr_dntps':
                 this.pcr_salts['dNTPs'] = value;
                 return;
         }
@@ -143,7 +143,7 @@ class Module1 {
      * @param sequence_path file path to background sequence file
      */
     removeBackgroundSequence(sequence_path) {
-        this.background_sequences.splice(this.background_sequences.indexOf(sequence_path), 1);       
+        this.background_sequences.splice(this.background_sequences.indexOf(sequence_path), 1);
     }
 
     /**
@@ -173,11 +173,11 @@ class Module1 {
                 'min': min_length,
                 'max': max_length
             }
-        };   
-        
+        };
+
         return true;
     }
-    
+
     /**
      * @brief Remove a target region identifier
      *
@@ -266,7 +266,7 @@ function updateBackgroundSequences() {
         let cell = row.insertCell();
 
         cell.innerHTML = background_sequences[i].split('/').pop();
-        
+
         // Add event listener for removal of background sequences
         cell.addEventListener('click', function() {
             state.removeBackgroundSequence(this.innerHTML);
@@ -328,12 +328,12 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     let identifiers = document.querySelector('#sequence_identifiers');
-    
+
     // Create a new table
     let table = document.createElement('table');
     table.className = 'input_table';
     let row = table.insertRow(0);
-    
+
     identifiers.appendChild(table);
 
     let cell = row.insertCell();
@@ -347,10 +347,10 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
 
     // create target start label
     cell = row.insertCell();
-    
+
     let target_start_label = document.createElement('div');
     target_start_label.innerHTML = 'Target Start:';
-    
+
     let target_start_input = document.createElement('input');
     target_start_input.setAttribute('type', 'number');
     target_start_input.className = 'target_start';
@@ -368,10 +368,10 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
 
     // create target end label
     cell = row.insertCell();
-    
+
     let target_end_label = document.createElement('div');
     target_end_label.innerHTML = 'Target End:';
-    
+
     let target_end_input = document.createElement('input');
     target_end_input.setAttribute('type', 'number');
     target_end_input.className = 'target_end';
@@ -379,20 +379,20 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     if(target_end) {
         target_end_input.value = target_end;
     }
- 
+
     target_end_input.addEventListener('change', function() {
         state.alterTargetRegionIdentifier(identifier_label, null, target_end=parseInt(this.value), null, null);
-    });   
+    });
 
     cell.appendChild(target_end_label);
     cell.appendChild(target_end_input);
 
     // create min length
     cell = row.insertCell();
-    
+
     let length_min_label = document.createElement('div');
     length_min_label.innerHTML = 'Min Length:';
-    
+
     let length_min_input = document.createElement('input');
     length_min_input.setAttribute('type', 'number');
     length_min_input.className = 'length_min';
@@ -410,10 +410,10 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
 
     // create max length
     cell = row.insertCell();
-    
+
     let length_max_label = document.createElement('div');
     length_max_label.innerHTML = 'Max Length:';
-    
+
     let length_max_input = document.createElement('input');
     length_max_input.setAttribute('type', 'number');
     length_max_input.className = 'length_max';
@@ -458,7 +458,7 @@ manual_submit.addEventListener('click', function() {
         manual_label.value    = '';
         manual_sequence.value = '';
     }
-     
+
 });
 
 
