@@ -20,6 +20,9 @@ body {
   text-align: center;
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
   padding:10px;
+  flex-basis:250px;
+  border: 1px solid #35506b;
+  overflow-x:auto;
 }
 
 /* Header */
@@ -30,8 +33,8 @@ body {
 /* Flexbox Start */
 .container {
   display:flex;
-  flex-wrap:wrap;
-  flex-direction:column;
+  flex-wrap:nowrap;
+  flex-direction:row;
   border:1px solid #000010;
   height:90vh;
   flex:1;
@@ -55,16 +58,26 @@ body {
   flex:1;
 }
 
+.mod2_optimization_settings {
+  display: inline-block;
+  height:90vh;
+  width:60vw;
+}
+
+.mod2_importance {
+  display: inline-block;
+  height: 90vh;
+  width:40vw;
+}
+
+.mod2_overall_container {
+  display:flex;
+  width:100vw;
+}
+
 #sequence_title{
   margin-left: auto;
   margin-right: auto;
-}
-
-.box {
-  flex-basis:250px;
-  flex-grow:1;
-  border: 1px solid #35506b;
-  overflow-x:auto;
 }
 
 hr{
@@ -80,11 +93,11 @@ hr{
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 100px;
+  max-width: 110px;
   background-color: black;
   color: #fff;
-  text-align: center;
-  padding: 5px 0;
+  text-align: left;
+  padding: 5px 5px;
   border-radius: 5px;
   font-size: 11px;
   position: absolute;
@@ -118,11 +131,17 @@ hr{
   float: right;
 }
 
-.sequence_box {
+/* Example Different Sizes */
 
+.box1 {
+  flex-grow:1;
 }
 
-/* Example Different Sizes */
+.box2 {
+  display:block;
+  height:45vh;
+}
+
 .box3 {
   flex-grow:5;
 }
@@ -143,10 +162,16 @@ hr{
   margin-right: 10px;
 }
 
-h1 {
-  font-size: 15px;
+h1{
+  font-size: 14px;
   font-family: sans-serif;
   font-weight: bold;
+}
+
+h3 {
+  font-size: 12px;
+  font-family: sans-serif;
+  font-weight: lighter;
 }
 
 table, th, td {
@@ -281,6 +306,24 @@ input[type=range]::-webkit-slider-thumb {
 #regionPicker td{
   padding: 3px;
 }
+
+#background_seq_fp {
+  width:100%;
+}
+
+#background_seq_list td {
+  border: 1px solid transparent;
+}
+
+#background_seq_list td:hover {
+  cursor:no-drop;
+  border: 1px solid red;
+}
+
+.input_table td {
+  text-align:left;
+}
+
 
 .sequence_item:hover{
   transform:scale(1.8);

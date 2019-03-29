@@ -97,7 +97,7 @@ optimumAmpliconCheck.addEventListener('change', function() {
         opt_amp_row.style.backgroundColor = "rgb(0, 36, 56)";
     } else {
         opt_amp_row.style.backgroundColor = "initial";
-        opt_amplicon_size.value = undefined;
+        opt_amplicon_size.value = 0;
         amplicon_slider.value = 0;
     }
 });
@@ -116,7 +116,7 @@ ampliconCheck.addEventListener('change', function() {
         amplicon_size_row.style.backgroundColor = "rgb(0, 36, 56)";
     } else {
         amplicon_size_row.style.backgroundColor = "initial";
-        amplicon_size.value = undefined;
+        amplicon_size.value = 0;
         amplicon_size_slider.value = 0;
     }
 });
@@ -126,7 +126,7 @@ targetDistanceCheck.addEventListener('change', function() {
         target_distance_row.style.backgroundColor = "rgb(1, 32, 53)";
     } else {
         target_distance_row.style.backgroundColor = "initial";
-        target_distance.value = undefined;
+        target_distance.value = 0;
         target_dist_slider.value = 0;
     }
 });
