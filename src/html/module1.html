@@ -1,119 +1,128 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Primacy</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <title>Primacy</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="box box1" style="max-width: 25%;">
-            <div class="box box1">
-                <h1>PCR SALTS</h1>
-                <h3>Set Melting Temperatures (Millimolar)</h3>
+  <div class="container">
+    <div class="box box1" style="max-width: 25%;">
+      <div class="box box1">
+        <h1>PCR SALTS</h1>
+        <h3>Set Melting Temperatures (Millimolar)</h3>
 
-                <table id="pcr" class="input_table">
-                    <tr>
-                      <td>
-                        <div class="tooltip setting_title">Na
-                          <span class="tooltiptext">Sodium</span>
-                        </div
-                      </td>
-                      <td><input id="pcr_na" type="number" size="1" value="50"></td>
-                    </tr>
+        <table id="pcr" class="input_table">
+          <tr>
+            <td>
+              <div class="tooltip setting_title">Na
+                <span class="tooltiptext">Sodium</span>
+              </div>
+            </td>
+            <td><input id="pcr_na" type="number" size="1" value="50"></td>
+          </tr>
 
-                    <tr>
-                      <td>
-                        <div class="tooltip setting_title">K
-                          <span class="tooltiptext">Potassium</span>
-                        </div>
-                      </td>
-                      <td><input id="pcr_k" type="number" size="1" value="0"></td>
-                    </tr>
+          <tr>
+            <td>
+              <div class="tooltip setting_title">K
+                <span class="tooltiptext">Potassium</span>
+              </div>
+            </td>
+            <td>
+              <input id="pcr_k" type="number" size="1" value="0">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="tooltip setting_title">Tris
+                <span class="tooltiptext">Tromethamine</span>
+              </div>
+            </td>
+            <td>
+              <input id="pcr_tris" type="number" size="1" value="0">
+            </td>
+          </tr>
 
-                    <tr>
-                      <td>
-                        <div class="tooltip setting_title">Tris
-                          <span class="tooltiptext">Tromethamine</span>
-                        </div>
-                      </td>
-                      <td><input id="pcr_tris" type="number" size="1" value="0"></td>
-                    </tr>
+          <tr>
+            <td>
+              <div class="tooltip setting_title">Mg
+                <span class="tooltiptext">Magnesium</span>
+              </div>
+            </td>
+            <td>
+              <input id="pcr_mg" type="number" size="1" value="0">
+            </td>
+          </tr>
 
-                    <tr>
-                      <td>
-                        <div class="tooltip setting_title">Mg
-                          <span class="tooltiptext">Magnesium</span>
-                        </div>
-                      </td>
-                      <td><input id="pcr_mg" type="number" size="1" value="0"></td>
-                    </tr>
+          <tr>
+            <td>
+              <div class="tooltip setting_title">dNTPs
+                <span class="tooltiptext">Deoxyribonucleotide Triphosphate</span>
+              </div>
+            </td>
+            <td>
+              <input id="pcr_dntps" type="number" size="1" value="0">
+            </td>
+          </tr>
+        </table>
+      </div>
 
-                    <tr>
-                      <td>
-                        <div class="tooltip setting_title">dNTPs
-                          <span class="tooltiptext">Deoxyribonucleotide Triphosphate</span>
-                        </div>
-                      </td>
-                      <td><input id="pcr_dntps" type="number" size="1" value="0"></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="box box1">
-                <h1>BACKGROUND SEQUENCES</h1>
-
-                <input type="file" id="background_seq_fp" class="input">
-
-                <table id="background_seq_list" class="input_table">
-                </table>
-            </div>
-        </div>
-
-        <div class="box box1">
-            <div class="box box1">
-                <h1>BULK UPLOAD</h1>
-
-                <table class="input_table">
-                    <tr>
-                        <td>Upload FASTA File</td>
-                        <td><input type="file" id="fasta_file_upload" class="input"></td>
-                    </tr>
-                </table>
-
-                <h1>MANUAL ENTRY</h1>
-                <table class="input_table">
-                    <tr>
-                        <td>Label:</td>
-                        <td><input type="text" id="manual_label" class="input"></td>
-                    </tr>
-
-                    <tr>
-                        <td>FASTA Sequence:</td>
-                        <td><textarea rows="4" cols="50" id="manual_sequence" class="input"></textarea></td>
-                    </tr>
-                </table>
-
-                <input type="submit" id="manual_submit" class="input">
-            </div>
-
-            <div id="sequence_identifiers" class="box">
-                <div id="sequence_picker_template">
-                </div>
-            </div>
-            <div id="container">
-              <input type="submit" class="input" id="submit" value="Next Module">
-            </div>
-        </div>
+      <div class="box box1">
+        <h1>BACKGROUND SEQUENCES</h1>
+        <input type="file" id="background_seq_fp" class="input">
+        <table id="background_seq_list" class="input_table"></table>
+      </div>
     </div>
 
+    <div class="box box1">
+      <div class="box box1">
+        <h1>BULK UPLOAD</h1>
 
-    <div class="tab_container">
-        <button class="tab tab1" id="module1" style="background-color: #012035;">PRIMER COLLECTION</button>
-        <button class="tab tab2" id="module2">PRIMER SCORING</button>
-        <button class="tab tab3" id="module3">OPTIMIZATION</button>
-        <button class="tab tab4" id="module4">OVERVIEW</button>
+        <table class="input_table">
+          <tr>
+            <td>Upload FASTA File</td>
+            <td><input type="file" id="fasta_file_upload" class="input"></td>
+          </tr>
+        </table>
+
+        <h1>MANUAL ENTRY</h1>
+        <table class="input_table">
+          <tr>
+            <td>Label:</td>
+            <td><input type="text" id="manual_label" class="input"></td>
+          </tr>
+
+          <tr>
+            <td>FASTA Sequence:</td>
+            <td>
+              <textarea rows="4" cols="50" id="manual_sequence" class="input">
+              </textarea>
+            </td>
+          </tr>
+        </table>
+
+        <input type="submit" id="manual_submit" class="input">
+      </div>
+
+      <div id="sequence_identifiers" class="box">
+        <div id="sequence_picker_template">
+
+        </div>
+      </div>
+      <div id="container">
+        <input type="submit" class="input" id="submit" value="Next Module">
+      </div>
     </div>
+  </div>
+
+
+  <div class="tab_container">
+      <button class="tab tab1" id="module1" style="background-color: #012035;">PRIMER COLLECTION</button>
+      <button class="tab tab2" id="module2">PRIMER SCORING</button>
+      <button class="tab tab3" id="module3">OPTIMIZATION</button>
+      <button class="tab tab4" id="module4">OVERVIEW</button>
+  </div>
 
 </body>
 
