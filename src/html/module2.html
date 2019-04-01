@@ -84,7 +84,7 @@
       <div class="box mod2_importance"><h1>RELATIVE IMPORTANCE OF FEATURES</h1>
         <h3> If a feature is left unchecked it will not be considered in the process</h3>
         <table class="input_table">
-          <tr>
+          <tr id="tmRow">
             <td>
               <div class="tooltip setting_title">Tm
                 <span class="tooltiptext">Minimize the distance of primers from optimal melting temperature</span>
@@ -103,24 +103,24 @@
             </td>
           </tr>
 
-          <tr>
+          <tr id="gcRow">
             <td>
               <div class="tooltip setting_title">GC
                 <span class="tooltiptext">Minimize distance of primer GC% out of optimal range</span>
               </div>
             </td>
             <td>
-              <input id="gcfSlider" type="range" min="0" max="100" value = "1"
-                        oninput="gcf.value=gcfSlider.value" class="slider">
+              <input id="gcSlider" type="range" min="0" max="100" value = "1"
+                        oninput="gc.value=gcSlider.value" class="slider">
             </td>
             <td>
-              <input type="number" name="gcf" id="gcf" for="gcfSlider"
-                        oninput="gcfSlider.value=gcf.value">
+              <input type="number" name="gc" id="gc" for="gcSlider"
+                        oninput="gcSlider.value=gc.value">
             </td>
             <td><input type="checkbox" name="gcCheckbox" id="gcCheckbox" value="GC" checked></td>
           </tr>
 
-          <tr>
+          <tr id="hpolyRow">
             <td>
               <div class="tooltip setting_title">Homopolymers
                 <span class="tooltiptext">Minimize the amount of homopolymer in primer</span>
@@ -139,7 +139,7 @@
             </td>
           </tr>
 
-          <tr>
+          <tr id="dimerizationRow">
             <td>
               <div class="tooltip setting_title">Dimerization
                 <span class="tooltiptext">Minimize the amount of self-dimerization in primer</span>
@@ -158,7 +158,7 @@
             </td>
           </tr>
 
-          <tr>
+          <tr id="specificityRow">
             <td>
               <div class="tooltip setting_title">Specificity
                 <span class="tooltiptext">Minimize the number of times primers appear in background</span>
@@ -177,7 +177,7 @@
             </td>
           </tr>
 
-          <tr>
+          <tr id="degenerateRow">
             <td>
               <div class="tooltip setting_title">Degenerate
                 <span class="tooltiptext">Minimize the number of degenerate / ambiguous bases in the primer</span>

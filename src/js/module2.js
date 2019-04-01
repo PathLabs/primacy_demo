@@ -20,9 +20,9 @@ const gc_min_val  = document.getElementById('gcMinSlider');
 const gc_max_val  = document.getElementById('gcMaxSlider');
 
 const tm_slider  = document.getElementById('tmSlider');
-const gc  = document.getElementById('gcfSlider');
-const homopolymer  = document.getElementById('hpolySlider');
-const dimer  = document.getElementById('dimerzSlider');
+const gc_slider  = document.getElementById('gcSlider');
+const homopolymer  = document.getElementById('hpoly');
+const dimerz_slider = document.getElementById('dimerzSlider');
 const specificity  = document.getElementById('specifSlider');
 const degenerate  = document.getElementById('degenSlider');
 
@@ -33,8 +33,6 @@ const homopolymer_chkbx  = document.getElementById('hpolyCheckbox');
 const dimer_chkbx  = document.getElementById('dimerzCheckbox');
 const specificity_chkbx  = document.getElementById('specifCheckbox');
 const degenerate_chkbx  = document.getElementById('degenCheckbox');
-
-
 
 const submit_button = document.getElementById("nextModule");
 
@@ -165,5 +163,72 @@ nextModule.addEventListener('click', function () {
         console.log("message sent");
     } catch(e) {
         console.log(e);
+    }
+});
+
+tm.value = 1;
+gc.value = 1;
+hpoly.value = 1;
+dimerz.value = 1;
+specif.value = 1;
+degen.value = 1;
+
+tmCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+        tmRow.style.backgroundColor = "rgb(1, 32, 53)";
+    } else {
+        tmRow.style.backgroundColor = "initial";
+        tm.value = 0;
+        tm_slider.value = 0;
+    }
+});
+
+gcCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+        gcRow.style.backgroundColor = "rgb(1, 32, 53)";
+    } else {
+        gcRow.style.backgroundColor = "initial";
+        gc.value = 0;
+        gc_slider.value = 0;
+    }
+});
+
+homopolymer_chkbx.addEventListener('change', function() {
+    if(this.checked) {
+        hpolyRow.style.backgroundColor = "rgb(1, 32, 53)";
+    } else {
+        hpolyRow.style.backgroundColor = "initial";
+        homopolymer.value = 0;
+        hpolySlider.value = 0;
+    }
+});
+
+dimer_chkbx.addEventListener('change', function() {
+    if(this.checked) {
+        dimerizationRow.style.backgroundColor = "rgb(1, 32, 53)";
+    } else {
+        dimerizationRow.style.backgroundColor = "initial";
+        dimerz.value = 0;
+        dimerz_slider.value = 0;
+    }
+});
+
+specificity_chkbx.addEventListener('change', function() {
+    if(this.checked) {
+        specificityRow.style.backgroundColor = "rgb(1, 32, 53)";
+    } else {
+        specificityRow.style.backgroundColor = "initial";
+        specif.value = 0;
+        specifSlider.value = 0;
+    }
+});
+
+degenerate_chkbx.addEventListener('change', function() {
+    if(this.checked) {
+        degenerateRow.style.backgroundColor = "rgb(1, 32, 53)";
+    } else {
+        degenerateRow.style.backgroundColor = "initial";
+        degen.value = 0;
+        degenSlider.value = 0;
     }
 });
