@@ -316,7 +316,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 #background_seq_list td:hover {
-  cursor:no-drop;
+  cursor:pointer;
   border: 1px solid red;
 }
 
