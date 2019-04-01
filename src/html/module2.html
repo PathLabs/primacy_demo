@@ -15,7 +15,11 @@
         <div class="input">
           <table class="input_table">
             <tr>
-              <td>Optimal Melting Temperature for Reaction: </td>
+              <td>
+                <div class="tooltip setting_title">Optimal Melting Temperature for Reaction:
+                  <span class="tooltiptext">The desired temperature for current computation</span>
+                </div>
+              </td>
               <td>
                 <input id="tm_optSlider" type="range" min="40" max="80" value = "55"
                       oninput="tm_opt.value=tm_optSlider.value" class = "slider">
@@ -36,7 +40,11 @@
           <div class="input">
             <table class="input_table">
               <tr>
-                <td>GC Content Min</td>
+                <td>
+                  <div class="tooltip setting_title">GC Content Min:
+                    <span class="tooltiptext">Lowest range desired for guanine-cytosine content</span>
+                  </div>
+                </td>
                 <td>
                   <input id="gcMinSlider" type="range" min="0" max="100" value = 0
                         oninput="gcMin.value=gcMinSlider.value" class = "slider">
@@ -48,7 +56,11 @@
               </tr>
 
               <tr>
-                <td>GC Content Max</td>
+                <td>
+                  <div class="tooltip setting_title">GC Content Max:
+                    <span class="tooltiptext">Highest range desired for guanine-cytosine content</span>
+                  </div>
+                </td>
                 <td>
                   <input id="gcMaxSlider" type="range" min="0" max="100" value = 0
                         oninput="gcMax.value=gcMaxSlider.value" class = "slider">
@@ -70,11 +82,14 @@
 
     <div class="mod2_importance">
       <div class="box mod2_importance"><h1>RELATIVE IMPORTANCE OF FEATURES</h1>
-        <h3> If a feature is left unchecked it will not be considered in the process
-                                (Default Value is 1) </h3>
+        <h3> If a feature is left unchecked it will not be considered in the process</h3>
         <table class="input_table">
           <tr>
-            <td>Tm</td>
+            <td>
+              <div class="tooltip setting_title">Tm
+                <span class="tooltiptext">Minimize the distance of primers from optimal melting temperature</span>
+              </div>
+            </td>
             <td>
               <input id="tmSlider" type="range" min="0" max="100" value = "1"
                         oninput="tm.value=tmSlider.value" class="slider">
@@ -89,7 +104,11 @@
           </tr>
 
           <tr>
-            <td>GC</td>
+            <td>
+              <div class="tooltip setting_title">GC
+                <span class="tooltiptext">Minimize distance of primer GC% out of optimal range</span>
+              </div>
+            </td>
             <td>
               <input id="gcfSlider" type="range" min="0" max="100" value = "1"
                         oninput="gcf.value=gcfSlider.value" class="slider">
@@ -102,7 +121,11 @@
           </tr>
 
           <tr>
-            <td>Homopolymers</td>
+            <td>
+              <div class="tooltip setting_title">Homopolymers
+                <span class="tooltiptext">Minimize the amount of homopolymer in primer</span>
+              </div>
+            </td>
             <td>
               <input id="hpolySlider" type="range" min="0" max="100" value = "1"
                         oninput="hpoly.value=hpolySlider.value" class = "slider">
@@ -117,7 +140,11 @@
           </tr>
 
           <tr>
-            <td>Dimerization</td>
+            <td>
+              <div class="tooltip setting_title">Dimerization
+                <span class="tooltiptext">Minimize the amount of self-dimerization in primer</span>
+              </div>
+            </td>
             <td>
               <input id="dimerzSlider" type="range" min="0" max="100" value = "1"
                         oninput="dimerz.value=dimerzSlider.value" class = "slider">
@@ -132,7 +159,11 @@
           </tr>
 
           <tr>
-            <td>Specifity</td>
+            <td>
+              <div class="tooltip setting_title">Specificity
+                <span class="tooltiptext">Minimize the number of times primers appear in background</span>
+              </div>
+            </td>
             <td>
               <input id="specifSlider" type="range" min="0" max="100" value = "1"
                         oninput="specif.value=specifSlider.value" class = "slider">
@@ -142,12 +173,16 @@
                         oninput="specifSlider.value=specif.value">
             </td>
             <td>
-              <input type="checkbox" name="specifCheckbox" id="specifCheckbox" value="Specifity">
+              <input type="checkbox" name="specifCheckbox" id="specifCheckbox" value="Specificity">
             </td>
           </tr>
 
           <tr>
-            <td>Degenerate</td>
+            <td>
+              <div class="tooltip setting_title">Degenerate
+                <span class="tooltiptext">Minimize the number of degenerate / ambiguous bases in the primer</span>
+              </div>
+            </td>
             <td>
               <input id="degenSlider" type="range" min="0" max="100" value = "1"
                         oninput="degen.value=degenSlider.value" class = "slider">

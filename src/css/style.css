@@ -18,7 +18,7 @@ body {
   background: #2f475f;
   font-size: 30px;
   text-align: center;
-  text-shadow:4px 4px 0 rgba(0,0,0,0.1);
+  text-shadow:2px 4px 0 rgba(0,0,0,0.1);
   padding:10px;
   flex-basis:250px;
   border: 1px solid #35506b;
@@ -153,6 +153,10 @@ hr{
 
 .box4 {
   flex-basis:100px;
+}
+
+img {
+  opacity: 0.8;
 }
 
 .input_table td {
