@@ -117,6 +117,7 @@ hr{
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent black transparent;
+  font-weight: normal;
 }
 
 .tooltip:hover .tooltiptext {
@@ -125,6 +126,10 @@ hr{
 
 .setting_title {
   float:left;
+}
+
+.setting_title:hover {
+  text-decoration: underline;
 }
 
 .setting_input {
