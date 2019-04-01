@@ -36,7 +36,7 @@ const degenerate_chkbx  = document.getElementById('degenCheckbox');
 
 
 
-const submit_button = document.getElementById("submitButton");
+const submit_button = document.getElementById("nextModule");
 
 
 var last_module_results = {};
@@ -157,7 +157,7 @@ degenerate_chkbx.addEventListener('change', function(){
 
 
 
-submitButton.addEventListener('click', function () {
+nextModule.addEventListener('click', function () {
     try {
         json_string = JSON.stringify(current_module_args);
         sendMessage('EXECUTE', ['primacy2.py', json_string]);

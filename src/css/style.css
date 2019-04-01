@@ -268,6 +268,22 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -7px;
 }
 
+#nextModule {
+  font-size: 16px;
+  text-transform: uppercase;
+  text-shadow:2px 2px 0 rgba(0,0,0,0.1);
+  font-weight: bold;
+  background-color: rgb(10, 130, 100);
+  padding: 5px;
+  border: 1px solid rgb(1, 32, 53);
+  border-radius: 5px;
+}
+
+#nextModule:hover {
+  font-weight: normal;
+  transform: scale(1.1);
+}
+
 #ampliconSlider {
   width:72%;
 }
@@ -357,6 +373,7 @@ input[type=range]::-webkit-slider-thumb {
 .tab:hover{
   background-color:gray;
   font-size: 19px;
+  border: 1px solid rgb(10, 160, 70);
 }
 
 .labels {

@@ -25,7 +25,7 @@ const manual_submit = document.getElementById('manual_submit');
 const bulk_upload = document.getElementById('fasta_file_upload');
 const module_3 = document.getElementById('module3');
 const module_4 = document.getElementById('module4');
-const submit = document.getElementById('submit');
+const submit = document.getElementById('nextModule');
 
 
 /**
