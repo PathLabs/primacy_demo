@@ -100,7 +100,6 @@ function goToModule(module_number) {
 
     if(module_number < current_module) {
         response = require('electron').dialog.showMessageBox(null, options,(response) => {
-          console.log(response);
           if (response == 0){
               win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
           }
