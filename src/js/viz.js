@@ -136,15 +136,21 @@ function create_viz_spec(direction, field, div) {
     showlegend: false
   };
 
-
   var myPlot = document.getElementById(div);
+  var table = document.getElementById("table");
+  var selected_labels = [];
   Plotly.newPlot(div, data, layout);
-  myPlot.on('plotly_afterplot', function(){
-    Plotly.d3.selectAll(".xaxislayer-above").selectAll('text')
-          .on("click", function(d) {
-            alert("Hello, I am " + d.text);
-          });
-});
+  myPlot.on("plotly_afterplot", function() {
+    Plotly.d3
+      .selectAll(".xaxislayer-above")
+      .selectAll("text")
+      .on("click", function(d) {
+        selected_labels.push(d.text);
+
+        console.log(selected_labels);
+
+      });
+  });
 }
 
 function sendMessage(channel, message) {
