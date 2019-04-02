@@ -65,7 +65,7 @@ function init(json) {
         specificity.value = current_module_args['specificity'];
         degenerate.value = current_module_args['specificity'];
     }
-    
+
     tm_opt.value = 55;
     gc_min.value= 40;
     gc_max.value= 60;
@@ -188,6 +188,8 @@ nextModule.addEventListener('click', function () {
 tmCheckbox.addEventListener('change', function() {
     if(this.checked) {
         tmRow.style.backgroundColor = "rgb(1, 32, 53)";
+        tm.value = 1;
+        tm_slider.value = 1;
     } else {
         tmRow.style.backgroundColor = "initial";
         tm.value = 0;
@@ -198,6 +200,8 @@ tmCheckbox.addEventListener('change', function() {
 gcCheckbox.addEventListener('change', function() {
     if(this.checked) {
         gcRow.style.backgroundColor = "rgb(1, 32, 53)";
+        gc.value = 1;
+        gc_slider.value = 1;
     } else {
         gcRow.style.backgroundColor = "initial";
         gc.value = 0;
@@ -208,6 +212,8 @@ gcCheckbox.addEventListener('change', function() {
 homopolymer_chkbx.addEventListener('change', function() {
     if(this.checked) {
         hpolyRow.style.backgroundColor = "rgb(1, 32, 53)";
+        homopolymer.value = 1;
+        hpolySlider.value = 1;
     } else {
         hpolyRow.style.backgroundColor = "initial";
         homopolymer.value = 0;
@@ -218,6 +224,8 @@ homopolymer_chkbx.addEventListener('change', function() {
 dimer_chkbx.addEventListener('change', function() {
     if(this.checked) {
         dimerizationRow.style.backgroundColor = "rgb(1, 32, 53)";
+        dimerz.value = 1;
+        dimerz_slider.value = 1;
     } else {
         dimerizationRow.style.backgroundColor = "initial";
         dimerz.value = 0;
@@ -228,6 +236,8 @@ dimer_chkbx.addEventListener('change', function() {
 specificity_chkbx.addEventListener('change', function() {
     if(this.checked) {
         specificityRow.style.backgroundColor = "rgb(1, 32, 53)";
+        specif.value = 1;
+        specifSlider.value = 1;
     } else {
         specificityRow.style.backgroundColor = "initial";
         specif.value = 0;
@@ -238,6 +248,8 @@ specificity_chkbx.addEventListener('change', function() {
 degenerate_chkbx.addEventListener('change', function() {
     if(this.checked) {
         degenerateRow.style.backgroundColor = "rgb(1, 32, 53)";
+        degen.value = 1;
+        degenSlider.value = 1;
     } else {
         degenerateRow.style.backgroundColor = "initial";
         degen.value = 0;
