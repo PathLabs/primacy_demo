@@ -71,7 +71,6 @@ function initial() {
         if(choice == 1){
             e.preventDefault();
         }
-        win = null;
     });
 }
 
