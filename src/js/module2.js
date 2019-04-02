@@ -65,6 +65,7 @@ function init(json) {
         specificity.value = current_module_args['specificity'];
         degenerate.value = current_module_args['specificity'];
     }
+    
     tm_opt.value = 55;
     gc_min.value= 40;
     gc_max.value= 60;
