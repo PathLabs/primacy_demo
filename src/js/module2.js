@@ -16,6 +16,9 @@ const module1 = document.getElementById("module1");
 const module3 = document.getElementById("module3");
 
 const tm_opt = document.getElementById('tm_opt');
+const tm = document.getElementById('tm')
+const gc = document.getElementById('gc')
+
 const gc_min_val  = document.getElementById('gcMinSlider');
 const gc_max_val  = document.getElementById('gcMaxSlider');
 
@@ -60,6 +63,15 @@ function init(json) {
         specificity.value = current_module_args['specificity'];
         degenerate.value = current_module_args['specificity'];
     }
+
+    tm.value = 1;
+    gc.value = 1;
+    hpoly.value = 1;
+    dimerz.value = 1;
+    specif.value = 1;
+    specifSlider.value = 1;
+    degen.value = 1;
+    degenSlider.value = 1;
 }
 
 //listening
@@ -165,13 +177,6 @@ nextModule.addEventListener('click', function () {
         console.log(e);
     }
 });
-
-tm.value = 1;
-gc.value = 1;
-hpoly.value = 1;
-dimerz.value = 1;
-specif.value = 1;
-degen.value = 1;
 
 tmCheckbox.addEventListener('change', function() {
     if(this.checked) {
