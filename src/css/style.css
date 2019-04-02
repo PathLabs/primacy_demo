@@ -346,7 +346,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 
 #background_seq_list td:hover {
   cursor:pointer;
-  border: 1px solid red;
+  border: 1px solid rgb(255,0,0,0.6);
 }
 
 .input_table td {
@@ -354,7 +354,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 
 #sequence_identifiers {
-  background: rgb(128,128,128,0.3);
+  background: rgb(128,128,128,0.4);
   min-height: 90px;
 }
 
@@ -394,7 +394,7 @@ input[type=range]::-webkit-slider-thumb:hover {
 .tab:hover{
   background-color:gray;
   font-size: 19px;
-  border: 1px solid rgb(10, 160, 70);
+  border: 1px solid rgb(10, 160, 70, 0.7);
 }
 
 .labels {
