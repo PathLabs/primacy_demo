@@ -384,3 +384,8 @@ input[type=range]::-webkit-slider-thumb {
 #loading_screen_container {
   height: 100vh;
 }
+
+.xaxislayer-above {
+  cursor: pointer;
+  pointer-events: all;
+}
