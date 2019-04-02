@@ -19,8 +19,10 @@ const tm_opt = document.getElementById('tm_opt');
 const tm = document.getElementById('tm')
 const gc = document.getElementById('gc')
 
-const gc_min_val  = document.getElementById('gcMinSlider');
-const gc_max_val  = document.getElementById('gcMaxSlider');
+const gc_min_slider  = document.getElementById('gcMinSlider');
+const gc_max_slider  = document.getElementById('gcMaxSlider');
+const gc_min  = document.getElementById('gcMin');
+const gc_max  = document.getElementById('gcMax');
 
 const tm_slider  = document.getElementById('tmSlider');
 const gc_slider  = document.getElementById('gcSlider');
@@ -55,15 +57,19 @@ function init(json) {
 
     if(current_module_args) {
         tm_opt.value = current_module_args['tm_opt'];
-        gc_min_val.value = current_module_args['gc_min'];
-        gc_max_val.value = current_module_args['gc_max'];
+        gc_min_slider.value = current_module_args['gc_min'];
+        gc_max_slider.value = current_module_args['gc_max'];
         tm.value = current_module_args['tm'];
         gc.value = current_module_args['gc'];
         homopolymer.value = current_module_args['homopolymer'];
         specificity.value = current_module_args['specificity'];
         degenerate.value = current_module_args['specificity'];
     }
-
+    tm_opt.value = 55;
+    gc_min.value= 40;
+    gc_max.value= 60;
+    gc_min_slider.value = 40;
+    gc_max_slider.value = 60;
     tm.value = 1;
     gc.value = 1;
     hpoly.value = 1;
@@ -109,12 +115,12 @@ tm_opt.addEventListener('change', function(){
   current_module_args['tm_opt'] = parseInt(tm_opt.value);
 });
 
-gc_min_val.addEventListener('change', function(){
-  current_module_args['gc_min'] = parseInt(gc_min_val.value);
+gc_min_slider.addEventListener('change', function(){
+  current_module_args['gc_min'] = parseInt(gc_min_slider.value);
 });
 
-gc_max_val.addEventListener('change', function(){
-  current_module_args['gc_max'] = parseInt(gc_max_val.value);
+gc_max_slider.addEventListener('change', function(){
+  current_module_args['gc_max'] = parseInt(gc_max_slider.value);
 });
 
 
