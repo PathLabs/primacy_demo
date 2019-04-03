@@ -2,9 +2,22 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const { ipcRenderer } = require("electron");
+var selected_labels = [];
 
 // pipeline output after running module 1
 var pipeline_mod_1_output = "Sa_50_collection_out.json";
+
+
+/**
+* Desc: This function extracts paths for every single sequence JSON file created after module 1
+*
+* Args:
+*     Path to the module 1 output JSON
+*
+* Returns:
+*      Array containing paths for every single sequence JSON created by module 1
+*/
+
 
 function get_paths(json_file_path) {
   var collection_out = JSON.parse(
@@ -23,7 +36,21 @@ function get_paths(json_file_path) {
   return json_paths;
 }
 
-function parse_json(direction, field) {
+/**
+* Desc: This function parses information for the viz from every single sequence JSON
+*       created by module 1.
+*
+* Args:
+*     direction (string): this is either 'reverse' or 'forward' and is used to find
+*                         respective directional information from the JSON
+*     field (string):  e.g. gc, tm, specificy etc
+*
+* Returns:
+*      Array containing two arrays with x and y values where x is the sequence names and y is the values for the
+*      respective fields (x and y must be the same length and every x value must match the y value)
+*/
+
+function parse_data(direction, field) {
   paths_array = get_paths(pipeline_mod_1_output);
   var xData = [];
   var yData = [];
@@ -72,8 +99,20 @@ function parse_json(direction, field) {
   return [xData, yData];
 }
 
+/**
+* Desc: This function creates the d3 based plotly spec which will render the viz
+*
+* Args:
+*     Since this function will be called from within the HTML, the arguments
+*     are direction, field and div (direction and field to be passed to parse_data())
+*
+* Returns:
+*      None
+*/
+
+
 function create_viz_spec(direction, field, div) {
-  data = parse_json(direction, field);
+  data = parse_data(direction, field);
   var xData = data[0];
   var yData = data[1];
   var colors = [
@@ -138,7 +177,6 @@ function create_viz_spec(direction, field, div) {
 
   var myPlot = document.getElementById(div);
   var table = document.getElementById("table");
-  var selected_labels = [];
   Plotly.newPlot(div, data, layout);
   myPlot.on("plotly_afterplot", function() {
     Plotly.d3
@@ -152,20 +190,3 @@ function create_viz_spec(direction, field, div) {
       });
   });
 }
-
-function sendMessage(channel, message) {
-  ipcRenderer.send(channel, message);
-}
-
-const module_1 = document.getElementById("module1");
-module_1.addEventListener("click", function() {
-  console.log("clicked");
-  sendMessage("LOADMODULE", 1);
-  console.log("attempting to load module 1");
-});
-
-const module_2 = document.getElementById("module2");
-module_2.addEventListener("click", function() {
-  sendMessage("LOADMODULE", 2);
-  console.log("attempting to load module 2");
-});
