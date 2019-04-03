@@ -18,7 +18,7 @@ body {
   background: #2f475f;
   font-size: 30px;
   text-align: center;
-  text-shadow:4px 4px 0 rgba(0,0,0,0.1);
+  text-shadow:2px 4px 0 rgba(0,0,0,0.1);
   padding:10px;
   flex-basis:250px;
   border: 1px solid #35506b;
@@ -117,6 +117,7 @@ hr{
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent black transparent;
+  font-weight: normal;
 }
 
 .tooltip:hover .tooltiptext {
@@ -125,6 +126,10 @@ hr{
 
 .setting_title {
   float:left;
+}
+
+.setting_title:hover {
+  text-decoration: underline;
 }
 
 .setting_input {
@@ -150,6 +155,10 @@ hr{
   flex-basis:100px;
 }
 
+img {
+  opacity: 0.8;
+}
+
 .input_table td {
   text-align: center;
 }
@@ -163,7 +172,7 @@ hr{
 }
 
 h1{
-  font-size: 14px;
+  font-size: 15px;
   font-family: sans-serif;
   font-weight: bold;
 }
@@ -268,6 +277,26 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -7px;
 }
 
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+#nextModule {
+  font-size: 16px;
+  text-transform: uppercase;
+  text-shadow:2px 2px 0 rgba(0,0,0,0.1);
+  font-weight: bold;
+  background-color: rgb(10, 130, 100);
+  padding: 5px;
+  border: 1px solid rgb(1, 32, 53);
+  border-radius: 5px;
+}
+
+#nextModule:hover {
+  font-weight: normal;
+  transform: scale(1.1);
+}
+
 #ampliconSlider {
   width:72%;
 }
@@ -316,14 +345,22 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 #background_seq_list td:hover {
-  cursor:no-drop;
-  border: 1px solid red;
+  cursor:pointer;
+  border: 1px solid rgb(255,0,0,0.6);
 }
 
 .input_table td {
   text-align:left;
 }
 
+#sequence_identifiers {
+  background: rgb(128,128,128,0.4);
+  min-height: 90px;
+}
+
+#sequence_identifiers .input_table td{
+  width:100%;
+}
 
 .sequence_item:hover{
   transform:scale(1.8);
@@ -357,6 +394,7 @@ input[type=range]::-webkit-slider-thumb {
 .tab:hover{
   background-color:gray;
   font-size: 19px;
+  border: 1px solid rgb(10, 160, 70, 0.7);
 }
 
 .labels {

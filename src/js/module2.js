@@ -16,13 +16,18 @@ const module1 = document.getElementById("module1");
 const module3 = document.getElementById("module3");
 
 const tm_opt = document.getElementById('tm_opt');
-const gc_min_val  = document.getElementById('gcMinSlider');
-const gc_max_val  = document.getElementById('gcMaxSlider');
+const tm = document.getElementById('tm')
+const gc = document.getElementById('gc')
+
+const gc_min_slider  = document.getElementById('gcMinSlider');
+const gc_max_slider  = document.getElementById('gcMaxSlider');
+const gc_min  = document.getElementById('gcMin');
+const gc_max  = document.getElementById('gcMax');
 
 const tm_slider  = document.getElementById('tmSlider');
-const gc  = document.getElementById('gcfSlider');
-const homopolymer  = document.getElementById('hpolySlider');
-const dimer  = document.getElementById('dimerzSlider');
+const gc_slider  = document.getElementById('gcSlider');
+const homopolymer  = document.getElementById('hpoly');
+const dimerz_slider = document.getElementById('dimerzSlider');
 const specificity  = document.getElementById('specifSlider');
 const degenerate  = document.getElementById('degenSlider');
 
@@ -34,9 +39,7 @@ const dimer_chkbx  = document.getElementById('dimerzCheckbox');
 const specificity_chkbx  = document.getElementById('specifCheckbox');
 const degenerate_chkbx  = document.getElementById('degenCheckbox');
 
-
-
-const submit_button = document.getElementById("submitButton");
+const submit_button = document.getElementById("nextModule");
 
 
 var last_module_results = {};
@@ -54,14 +57,28 @@ function init(json) {
 
     if(current_module_args) {
         tm_opt.value = current_module_args['tm_opt'];
-        gc_min_val.value = current_module_args['gc_min'];
-        gc_max_val.value = current_module_args['gc_max'];
+        gc_min_slider.value = current_module_args['gc_min'];
+        gc_max_slider.value = current_module_args['gc_max'];
         tm.value = current_module_args['tm'];
         gc.value = current_module_args['gc'];
         homopolymer.value = current_module_args['homopolymer'];
         specificity.value = current_module_args['specificity'];
         degenerate.value = current_module_args['specificity'];
     }
+
+    tm_opt.value = 55;
+    gc_min.value= 40;
+    gc_max.value= 60;
+    gc_min_slider.value = 40;
+    gc_max_slider.value = 60;
+    tm.value = 1;
+    gc.value = 1;
+    hpoly.value = 1;
+    dimerz.value = 1;
+    specif.value = 1;
+    specifSlider.value = 1;
+    degen.value = 1;
+    degenSlider.value = 1;
 }
 
 //listening
@@ -99,12 +116,12 @@ tm_opt.addEventListener('change', function(){
   current_module_args['tm_opt'] = parseInt(tm_opt.value);
 });
 
-gc_min_val.addEventListener('change', function(){
-  current_module_args['gc_min'] = parseInt(gc_min_val.value);
+gc_min_slider.addEventListener('change', function(){
+  current_module_args['gc_min'] = parseInt(gc_min_slider.value);
 });
 
-gc_max_val.addEventListener('change', function(){
-  current_module_args['gc_max'] = parseInt(gc_max_val.value);
+gc_max_slider.addEventListener('change', function(){
+  current_module_args['gc_max'] = parseInt(gc_max_slider.value);
 });
 
 
@@ -157,7 +174,7 @@ degenerate_chkbx.addEventListener('change', function(){
 
 
 
-submitButton.addEventListener('click', function () {
+nextModule.addEventListener('click', function () {
     try {
         json_string = JSON.stringify(current_module_args);
         sendMessage('EXECUTE', ['primacy2.py', json_string]);
@@ -165,5 +182,77 @@ submitButton.addEventListener('click', function () {
         console.log("message sent");
     } catch(e) {
         console.log(e);
+    }
+});
+
+tmCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+        tmRow.style.backgroundColor = "rgb(1, 32, 53)";
+        tm.value = 1;
+        tm_slider.value = 1;
+    } else {
+        tmRow.style.backgroundColor = "initial";
+        tm.value = 0;
+        tm_slider.value = 0;
+    }
+});
+
+gcCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+        gcRow.style.backgroundColor = "rgb(1, 32, 53)";
+        gc.value = 1;
+        gc_slider.value = 1;
+    } else {
+        gcRow.style.backgroundColor = "initial";
+        gc.value = 0;
+        gc_slider.value = 0;
+    }
+});
+
+homopolymer_chkbx.addEventListener('change', function() {
+    if(this.checked) {
+        hpolyRow.style.backgroundColor = "rgb(1, 32, 53)";
+        homopolymer.value = 1;
+        hpolySlider.value = 1;
+    } else {
+        hpolyRow.style.backgroundColor = "initial";
+        homopolymer.value = 0;
+        hpolySlider.value = 0;
+    }
+});
+
+dimer_chkbx.addEventListener('change', function() {
+    if(this.checked) {
+        dimerizationRow.style.backgroundColor = "rgb(1, 32, 53)";
+        dimerz.value = 1;
+        dimerz_slider.value = 1;
+    } else {
+        dimerizationRow.style.backgroundColor = "initial";
+        dimerz.value = 0;
+        dimerz_slider.value = 0;
+    }
+});
+
+specificity_chkbx.addEventListener('change', function() {
+    if(this.checked) {
+        specificityRow.style.backgroundColor = "rgb(1, 32, 53)";
+        specif.value = 1;
+        specifSlider.value = 1;
+    } else {
+        specificityRow.style.backgroundColor = "initial";
+        specif.value = 0;
+        specifSlider.value = 0;
+    }
+});
+
+degenerate_chkbx.addEventListener('change', function() {
+    if(this.checked) {
+        degenerateRow.style.backgroundColor = "rgb(1, 32, 53)";
+        degen.value = 1;
+        degenSlider.value = 1;
+    } else {
+        degenerateRow.style.backgroundColor = "initial";
+        degen.value = 0;
+        degenSlider.value = 0;
     }
 });

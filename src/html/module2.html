@@ -9,12 +9,17 @@
 <body>
   <div class="mod2_overall_container">
     <div class="mod2_optimization_settings">
-      <div class="box box2"><h1>OPTIMAL MELTING TEMPERATURE (°C)</h1>
+      <div class="box box2">
+        <h1>OPTIMAL MELTING TEMPERATURE</h1>
         <hr>
         <div class="input">
           <table class="input_table">
             <tr>
-              <td>Optimal Melting Temperature for Reaction: </td>
+              <td>
+                <div class="tooltip setting_title">Optimal Melting Temperature for Reaction:
+                  <span class="tooltiptext">The desired temperature for current computation</span>
+                </div>
+              </td>
               <td>
                 <input id="tm_optSlider" type="range" min="40" max="80" value = "55"
                       oninput="tm_opt.value=tm_optSlider.value" class = "slider">
@@ -26,15 +31,20 @@
             </tr>
           </table>
           </br>
+          <img src="../img/temp.png">
         </div>
       </div>
-      <div class="box box2"><h1>OPTIMAL RANGE FOR GC CONTENT (%)</h1>
+      <div class="box box2"><h1>OPTIMAL RANGE FOR GC CONTENT</h1>
         <hr>
         <div class="input_box">
           <div class="input">
             <table class="input_table">
               <tr>
-                <td>GC Content Min</td>
+                <td>
+                  <div class="tooltip setting_title">GC Content Min:
+                    <span class="tooltiptext">Lowest range desired for guanine-cytosine content</span>
+                  </div>
+                </td>
                 <td>
                   <input id="gcMinSlider" type="range" min="0" max="100" value = 0
                         oninput="gcMin.value=gcMinSlider.value" class = "slider">
@@ -46,7 +56,11 @@
               </tr>
 
               <tr>
-                <td>GC Content Max</td>
+                <td>
+                  <div class="tooltip setting_title">GC Content Max:
+                    <span class="tooltiptext">Highest range desired for guanine-cytosine content</span>
+                  </div>
+                </td>
                 <td>
                   <input id="gcMaxSlider" type="range" min="0" max="100" value = 0
                         oninput="gcMax.value=gcMaxSlider.value" class = "slider">
@@ -68,11 +82,15 @@
 
     <div class="mod2_importance">
       <div class="box mod2_importance"><h1>RELATIVE IMPORTANCE OF FEATURES</h1>
-        <h3> If a feature is left unchecked it will not be considered in the process
-                                (Default Value is 1) </h3>
+        <h3>Rank each feature out of an importance score of 100.<br>If a feature is left
+                        unchecked it will not be considered in the process.</h3>
         <table class="input_table">
-          <tr>
-            <td>Tm</td>
+          <tr id="tmRow">
+            <td>
+              <div class="tooltip setting_title">Tm
+                <span class="tooltiptext">Minimize the distance of primers from optimal melting temperature</span>
+              </div>
+            </td>
             <td>
               <input id="tmSlider" type="range" min="0" max="100" value = "1"
                         oninput="tm.value=tmSlider.value" class="slider">
@@ -82,25 +100,33 @@
                         oninput="tmSlider.value=tm.value">
             </td>
             <td>
-              <input type="checkbox" name="tmCheckbox" id="tmCheckbox" value="TM">
+              <input type="checkbox" name="tmCheckbox" id="tmCheckbox" value="TM" checked>
             </td>
           </tr>
 
-          <tr>
-            <td>GC</td>
+          <tr id="gcRow">
             <td>
-              <input id="gcfSlider" type="range" min="0" max="100" value = "1"
-                        oninput="gcf.value=gcfSlider.value" class="slider">
+              <div class="tooltip setting_title">GC
+                <span class="tooltiptext">Minimize distance of primer GC% out of optimal range</span>
+              </div>
             </td>
             <td>
-              <input type="number" name="gcf" id="gcf" for="gcfSlider"
-                        oninput="gcfSlider.value=gcf.value">
+              <input id="gcSlider" type="range" min="0" max="100" value = "1"
+                        oninput="gc.value=gcSlider.value" class="slider">
             </td>
-            <td><input type="checkbox" name="gcCheckbox" id="gcCheckbox" value="GC"></td>
+            <td>
+              <input type="number" name="gc" id="gc" for="gcSlider" value = "1"
+                        oninput="gcSlider.value=gc.value">
+            </td>
+            <td><input type="checkbox" name="gcCheckbox" id="gcCheckbox" value="GC" checked></td>
           </tr>
 
-          <tr>
-            <td>Homopolymers</td>
+          <tr id="hpolyRow">
+            <td>
+              <div class="tooltip setting_title">Homopolymers
+                <span class="tooltiptext">Minimize the amount of homopolymer in primer</span>
+              </div>
+            </td>
             <td>
               <input id="hpolySlider" type="range" min="0" max="100" value = "1"
                         oninput="hpoly.value=hpolySlider.value" class = "slider">
@@ -110,12 +136,16 @@
                         oninput="hpolySlider.value=hpoly.value">
             </td>
             <td>
-              <input type="checkbox" name="hpolyCheckbox" id="hpolyCheckbox" value="Homopolymers">
+              <input type="checkbox" name="hpolyCheckbox" id="hpolyCheckbox" value="Homopolymers" checked>
             </td>
           </tr>
 
-          <tr>
-            <td>Dimerization</td>
+          <tr id="dimerizationRow">
+            <td>
+              <div class="tooltip setting_title">Dimerization
+                <span class="tooltiptext">Minimize the amount of self-dimerization in primer</span>
+              </div>
+            </td>
             <td>
               <input id="dimerzSlider" type="range" min="0" max="100" value = "1"
                         oninput="dimerz.value=dimerzSlider.value" class = "slider">
@@ -125,29 +155,37 @@
                         oninput="dimerzSlider.value=dimerz.value">
             </td>
             <td>
-              <input type="checkbox" name="dimerzCheckbox" id="dimerzCheckbox" value="Dimerization">
+              <input type="checkbox" name="dimerzCheckbox" id="dimerzCheckbox" value="Dimerization" checked>
             </td>
           </tr>
 
-          <tr>
-            <td>Specifity</td>
+          <tr id="specificityRow">
             <td>
-              <input id="specifSlider" type="range" min="0" max="100" value = "1"
-                        oninput="specif.value=specifSlider.value" class = "slider">
+              <div class="tooltip setting_title">Specificity
+                <span class="tooltiptext">Minimize the number of times primers appear in background</span>
+              </div>
+            </td>
+            <td>
+              <input id="specifSlider" type="range" min="0" max="100" value="1"
+                        oninput="specif.value=specifSlider.value" class="slider">
             </td>
             <td>
               <input type= "number" name="specif" id="specif" for="specifSlider"
                         oninput="specifSlider.value=specif.value">
             </td>
             <td>
-              <input type="checkbox" name="specifCheckbox" id="specifCheckbox" value="Specifity">
+              <input type="checkbox" name="specifCheckbox" id="specifCheckbox" value="Specificity" checked>
             </td>
           </tr>
 
-          <tr>
-            <td>Degenerate</td>
+          <tr id="degenerateRow">
             <td>
-              <input id="degenSlider" type="range" min="0" max="100" value = "1"
+              <div class="tooltip setting_title">Degenerate
+                <span class="tooltiptext">Minimize the number of degenerate / ambiguous bases in the primer</span>
+              </div>
+            </td>
+            <td>
+              <input id="degenSlider" type="range" min="0" max="100"
                         oninput="degen.value=degenSlider.value" class = "slider">
             </td>
             <td>
@@ -155,19 +193,20 @@
                         oninput="degenSlider.value=degen.value">
             </td>
             <td>
-              <input type="checkbox" name="degenCheckbox" id="degenCheckbox" value="Degenerate">
+              <input type="checkbox" name="degenCheckbox" id="degenCheckbox" value="Degenerate" checked>
             </td>
           </tr>
 
         </table>
-        <input id="submitButton" type="submit" value="Next Module">
+        <input id="nextModule" type="submit" value="Next Module">
       </div>
     </div>
   </div>
 
   <div class="tab_container">
     <button class="tab tab1" id="module1">PRIMER COLLECTION</button>
-    <button class="tab tab2" id="module2" style="background-color: #012035;">PRIMER SCORING</button>
+    <button class="tab tab2" id="module2" style="background-color: #012035;
+                             border: 1px solid rgb(10, 160, 70);">PRIMER SCORING</button>
     <button class="tab tab3" id="module3">OPTIMIZATION</button>
     <button class="tab tab4" id="module4">OVERVIEW</button>
   </div>
