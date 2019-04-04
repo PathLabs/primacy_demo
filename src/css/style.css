@@ -356,7 +356,10 @@ input[type=range]::-webkit-slider-thumb:hover {
 #sequence_identifiers {
   background: rgb(128,128,128,0.4);
   min-height: 90px;
+  max-height: 50%;
+  overflow-y: scroll;
 }
+
 
 #sequence_identifiers .input_table td{
   width:100%;
