@@ -20,7 +20,7 @@
                 <span class="tooltiptext">Sodium</span>
               </div>
             </td>
-            <td><input id="pcr_na" type="number" size="1" value="50"></td>
+            <td><input id="pcr_na" type="number" size="1" value="50" min="0"></td>
           </tr>
 
           <tr>
@@ -30,7 +30,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_k" type="number" size="1" value="0">
+              <input id="pcr_k" type="number" size="1" value="0" min="0">
             </td>
           </tr>
           <tr>
@@ -40,7 +40,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_tris" type="number" size="1" value="0">
+              <input id="pcr_tris" type="number" size="1" value="0" min="0">
             </td>
           </tr>
 
@@ -51,7 +51,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_mg" type="number" size="1" value="0">
+              <input id="pcr_mg" type="number" size="1" value="0" min="0">
             </td>
           </tr>
 
@@ -62,7 +62,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_dntps" type="number" size="1" value="0">
+              <input id="pcr_dntps" type="number" size="1" value="0" min="0">
             </td>
           </tr>
         </table>
@@ -96,7 +96,7 @@
           <tr>
             <td>FASTA Sequence:</td>
             <td>
-              <textarea rows="4" cols="50" id="manual_sequence" class="input">
+              <textarea rows="2" cols="50" id="manual_sequence" class="input">
               </textarea>
             </td>
           </tr>
@@ -107,16 +107,16 @@
           <tbody>
             <tr>
               <td>
-                <div>Target Start:</div><input type="number" id="default_target_start" class="target_start">
+                <div>Target Start:</div><input type="number" min="0" id="default_target_start" class="target_start">
               </td>
               <td>
-                <div>Target End:</div><input type="number" id="default_target_end" class="target_end">
+                <div>Target End:</div><input type="number" min="0" id="default_target_end" class="target_end">
               </td>
               <td>
-                <div>Min Length:</div><input type="number" id="default_min_length" class="length_min">
+                <div>Min Length:</div><input type="number" min="0" id="default_min_length" class="length_min">
               </td>
               <td>
-                <div>Max Length:</div><input type="number" id="default_max_length" class="length_max">
+                <div>Max Length:</div><input type="number" min="0" id="default_max_length" class="length_max">
               </td>
             </tr>
           </tbody>
