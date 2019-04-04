@@ -26,6 +26,10 @@ const bulk_upload = document.getElementById('fasta_file_upload');
 const module_3 = document.getElementById('module3');
 const module_4 = document.getElementById('module4');
 const submit = document.getElementById('nextModule');
+const default_target_start = document.getElementById('default_target_start');
+const default_target_end = document.getElementById('default_target_end');
+const default_min_length = document.getElementById('default_min_length');
+const default_max_length = document.getElementById('default_max_length');
 
 
 /**
@@ -329,6 +333,24 @@ function removeTargetRegionIdentifier(identifier) {
  * @return false identifier was not added
  */
 function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=null, target_end=null, min_length=null, max_length=null) {
+    // For all null values, replace with the values in the defaults section
+    if(!target_start) {
+        target_start = parseInt(default_target_start.value);
+    }
+
+    if(!target_end) {
+        target_end = parseInt(default_target_end.value);
+    }
+
+    if(!min_length) {
+        min_length = parseInt(default_min_length.value);
+    }
+    
+    if(!max_length) {
+        max_length = parseInt(default_max_length.value);
+    }
+    
+    // Add the data to the Module1 class instance. If there's a problem (eg label already exists), abort
     if(!state.addTargetRegionIdentifier(identifier_label, sequence, target_start, target_end, min_length, max_length)) {
         return false;
     }
