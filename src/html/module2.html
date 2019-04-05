@@ -25,7 +25,7 @@
                       oninput="tm_opt.value=tm_optSlider.value" class = "slider">
               </td>
               <td>
-                <input type="number" name="tm_opt" id="tm_opt" for="tm_optSlider"
+                <input type="number" name="tm_opt" id="tm_opt" for="tm_optSlider" min="1" max="100"
                       oninput="tm_optSlider.value=tm_opt.value">°C
               </td>
             </tr>
@@ -46,11 +46,11 @@
                   </div>
                 </td>
                 <td>
-                  <input id="gcMinSlider" type="range" min="0" max="100" value = 0
+                  <input id="gcMinSlider" type="range" min="1" max="100" value"40"
                         oninput="gcMin.value=gcMinSlider.value" class = "slider">
                 </td>
                 <td>
-                  <input type="number" name="gcMin" id="gcMin" for="gcMinSlider"
+                  <input type="number" name="gcMin" id="gcMin" for="gcMinSlider" min="1" max="100" value="60"
                         oninput="gcMinSlider.value=gcMin.value">%
                 </td>
               </tr>
@@ -62,11 +62,11 @@
                   </div>
                 </td>
                 <td>
-                  <input id="gcMaxSlider" type="range" min="0" max="100" value = 0
+                  <input id="gcMaxSlider" type="range" min="1" max="100" value="1"
                         oninput="gcMax.value=gcMaxSlider.value" class = "slider">
                 </td>
                 <td>
-                  <input type="number" name="gcMax" id="gcMax" for="gcMaxSlider"
+                  <input type="number" name="gcMax" id="gcMax" for="gcMaxSlider" min="1" max="100" value="1"
                         oninput="gcMaxSlider.value=gcMax.value">%
                 </td>
               </tr>
@@ -92,11 +92,11 @@
               </div>
             </td>
             <td>
-              <input id="tmSlider" type="range" min="0" max="100" value = "1"
+              <input id="tmSlider" type="range" min="1" max="100" value = "1"
                         oninput="tm.value=tmSlider.value" class="slider">
             </td>
             <td>
-              <input type="number" name="tm" id="tm" for="tmSlider"
+              <input type="number" name="tm" id="tm" for="tmSlider" min="1" max="100" value="1"
                         oninput="tmSlider.value=tm.value">
             </td>
             <td>
@@ -111,11 +111,11 @@
               </div>
             </td>
             <td>
-              <input id="gcSlider" type="range" min="0" max="100" value = "1"
+              <input id="gcSlider" type="range" min="1" max="100" value = "1"
                         oninput="gc.value=gcSlider.value" class="slider">
             </td>
             <td>
-              <input type="number" name="gc" id="gc" for="gcSlider" value = "1"
+              <input type="number" name="gc" id="gc" for="gcSlider" value = "1" min="1" max="100" value="1"
                         oninput="gcSlider.value=gc.value">
             </td>
             <td><input type="checkbox" name="gcCheckbox" id="gcCheckbox" value="GC" checked></td>
@@ -128,11 +128,11 @@
               </div>
             </td>
             <td>
-              <input id="hpolySlider" type="range" min="0" max="100" value = "1"
+              <input id="hpolySlider" type="range" min="1" max="100" value = "1"
                         oninput="hpoly.value=hpolySlider.value" class = "slider">
             </td>
             <td>
-              <input type="number" name="hpoly" id="hpoly" for="hpolySlider"
+              <input type="number" name="hpoly" id="hpoly" for="hpolySlider" min="1" max="100" value="1"
                         oninput="hpolySlider.value=hpoly.value">
             </td>
             <td>
@@ -147,11 +147,11 @@
               </div>
             </td>
             <td>
-              <input id="dimerzSlider" type="range" min="0" max="100" value = "1"
+              <input id="dimerzSlider" type="range" min="1" max="100" value = "1"
                         oninput="dimerz.value=dimerzSlider.value" class = "slider">
             </td>
             <td>
-              <input type=number name="dimerz" id="dimerz" for="dimerzSlider"
+              <input type=number name="dimerz" id="dimerz" for="dimerzSlider" min="1" max="100" value="1"
                         oninput="dimerzSlider.value=dimerz.value">
             </td>
             <td>
@@ -166,11 +166,11 @@
               </div>
             </td>
             <td>
-              <input id="specifSlider" type="range" min="0" max="100" value="1"
+              <input id="specifSlider" type="range" min="1" max="100" value="1"
                         oninput="specif.value=specifSlider.value" class="slider">
             </td>
             <td>
-              <input type= "number" name="specif" id="specif" for="specifSlider"
+              <input type= "number" name="specif" id="specif" for="specifSlider" min="1" max="100" value="1"
                         oninput="specifSlider.value=specif.value">
             </td>
             <td>
@@ -185,11 +185,11 @@
               </div>
             </td>
             <td>
-              <input id="degenSlider" type="range" min="0" max="100"
+              <input id="degenSlider" type="range" min="1" max="100"
                         oninput="degen.value=degenSlider.value" class = "slider">
             </td>
             <td>
-              <input type="number" name="degen" id="degen" for="degenSlider"
+              <input type="number" name="degen" id="degen" for="degenSlider" min="1" max="100" value="1"
                         oninput="degenSlider.value=degen.value">
             </td>
             <td>
