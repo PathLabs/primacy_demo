@@ -1,0 +1,21 @@
+<html lang="en">
+  <head>
+    <!-- Plotly.js -->
+    <script src="../js/plotly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/viz2.js"></script>
+  </head>
+  <body bgcolor="#fffff">
+  <div class="row" id="main">
+    <h2> Testing Viz 2 Production </h2>
+    <script>
+    var forward_ranks = parse_rank_values('forward');
+    var reverse_ranks = parse_rank_values("reverse");
+    // console.log(reverse_ranks)
+    for (var i=0; i<Object.keys(reverse_ranks).length; i++){
+      create_viz_spec(forward_ranks, reverse_ranks, i);
+    }
+    </script>
+  </div>
+  </body>
+  </html>
