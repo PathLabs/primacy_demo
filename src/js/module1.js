@@ -153,6 +153,19 @@ class Module1 {
     }
 
     /**
+     * @brief Get a target region identifier, if applicable
+     *
+     * @param label label of the target region
+     */
+    getTargetRegionIdentifier(label) {
+        if(label in this.target_regions) {
+            return this.target_regions[label];
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @brief Add a new target region identifier
      *
      * @param label Label of the target region
@@ -348,8 +361,18 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     let label = document.createElement('div');
     label.className = 'sequence_name';
     label.innerHTML = identifier_label;
-
     cell.appendChild(label);
+    
+    // create target region label
+    let target_region = document.createElement('div');
+    target_region.className = 'target_region';
+
+    // attempt to populate the target region, if applicable
+    if(target_start && target_end) {
+        target_region.innerHTML = sequence.substring(target_start, target_end);
+    }
+
+    cell.appendChild(target_region);
 
     // create target start label
     cell = row.insertCell();
@@ -365,8 +388,17 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
         target_start_input.value = target_start;
     }
 
-    target_start_input.addEventListener('change', function() {
+    target_start_input.addEventListener('change', function(event) {
         state.alterTargetRegionIdentifier(identifier_label, target_start=parseInt(this.value), null, null, null);
+
+        let target_region = state.getTargetRegionIdentifier(identifier_label);
+
+        let seq   = target_region['seq'];
+        let start = target_region['target_start'];
+        let end   = target_region['target_end'];
+
+        // change the target region label
+        event.target.parentElement.parentElement.querySelector('.target_region').innerHTML = seq.substring(start, end);
     });
 
     cell.appendChild(target_start_label);
@@ -388,6 +420,15 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
 
     target_end_input.addEventListener('change', function() {
         state.alterTargetRegionIdentifier(identifier_label, null, target_end=parseInt(this.value), null, null);
+
+        let target_region = state.getTargetRegionIdentifier(identifier_label);
+
+        let seq   = target_region['seq'];
+        let start = target_region['target_start'];
+        let end   = target_region['target_end'];
+
+        // change the target region label
+        event.target.parentElement.parentElement.querySelector('.target_region').innerHTML = seq.substring(start, end);
     });
 
     cell.appendChild(target_end_label);
