@@ -522,17 +522,21 @@ function search(search_str) {
     // get a list of target sequences
     target_sequences = document.querySelectorAll('#sequence_identifiers > table');
 
-    // clear any previous selections, and check for a hit
-    for(let i = 0; i < target_sequences.length; i++) {
-        let element = target_sequences[i];
-        
-        element.classList.remove('selected');
+    search_str = search_str.split(';');
 
-        let sequence = element.querySelector('.target_region').innerHTML;
-        let label    = element.querySelector('.sequence_name').innerHTML;
+    for(let query = 0; query < search_str.length; query++) {
+        // clear any previous selections, and check for a hit
+        for(let i = 0; i < target_sequences.length; i++) {
+            let element = target_sequences[i];
+            
+            let sequence = element.querySelector('.target_region').innerHTML;
+            let label    = element.querySelector('.sequence_name').innerHTML;
 
-        if(sequence.search(search_str) >= 0 || label.search(search_str) >= 0) {
-            element.classList.add('selected');
+            if(sequence.search(search_str[query]) >= 0 || label.search(search_str[query]) >= 0) {
+                element.classList.add('selected');
+            } else {
+                element.classList.remove('selected');
+            }
         }
     }
 }
