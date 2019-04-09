@@ -385,8 +385,8 @@ input[type=range]::-webkit-slider-thumb:hover {
 
 #sequence_identifiers {
   background: rgb(128,128,128,0.4);
-  min-height: 30vh;
-  max-height: 30vh;
+  min-height: 35vh;
+  max-height: 35vh;
   overflow-y: scroll;
 }
 
