@@ -10,7 +10,7 @@
 //gets users home directory
 const os = require('os');
 const fs = require('fs');
-
+const papa = require('papaparse');
 const validate = require('../js/input_validation.js');
 
 const {ipcRenderer} = require('electron');
@@ -24,6 +24,7 @@ const pcr_salts_inputs = document.querySelectorAll('#pcr > tbody > tr > td > inp
 const background_seq_fp = document.querySelector('#background_seq_fp');
 const manual_submit = document.getElementById('manual_submit');
 const bulk_upload = document.getElementById('fasta_file_upload');
+const metadata_upload = document.getElementById('metadata_upload');
 const module_3 = document.getElementById('module3');
 const module_4 = document.getElementById('module4');
 const submit = document.getElementById('nextModule');
@@ -606,6 +607,72 @@ bulk_upload.addEventListener('change', function() {
     });
 
     bulk_upload.value = '';
+});
+
+
+metadata_upload.addEventListener('change', function() {
+    console.log('new metadata');
+
+    // attempt to parse the metadata
+    papa.parse(metadata_upload.files[0], {
+	    complete: function(results) {
+            let keys = results.data[0];
+            for(let i = 1; i < results.data.length; i++) {
+                if(results.data[i].length != keys.length) {
+                    continue;
+                }
+
+                let values = {
+                    'label': null,
+                    'target_start': null,
+                    'target_end': null,
+                    'min_length': null,
+                    'max_length': null
+                }
+
+                for(let j = 0; j < results.data[i].length; j++) {
+                    values[keys[j]] = results.data[i][j];
+                }
+
+                // check if current metadata is complete
+                let good = true;
+                for(key in values) {
+                    if(!values[key]) {
+                        good = false;
+                        break;
+                    }
+                }
+
+                if(!good) {
+                    continue;
+                }
+
+                // check if target region exists in the current state
+                if(!state.getTargetRegionIdentifier(values['label'])) {
+                    continue;
+                } 
+
+
+                // alter the values in the needed target sequence inputs
+                let elements = document.querySelectorAll('#sequence_identifiers > .input_table');
+
+                // scan through the target region identifiers, find the corrent one, and inject the values
+                for(let j = 0; j < elements.length; j++) {
+                    let label = elements[j].querySelector('.sequence_name');
+                    if(label.innerHTML == values['label']) {
+                        let inputs = elements[j].querySelectorAll('input');
+                       
+                        console.log(inputs)
+
+                        inputs[0].value = values['target_start'];
+                        inputs[1].value = values['target_end'];
+                        inputs[2].value = values['min_length'];
+                        inputs[3].value = values['max_length'];
+                    }
+                }
+            }
+        }
+    });
 });
 
 
