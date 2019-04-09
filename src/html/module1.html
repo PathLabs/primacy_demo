@@ -76,60 +76,68 @@
     </div>
 
     <div class="box box1">
-      <div class="box box1">
-        <h1>BULK UPLOAD</h1>
+      <table class="input_table" style="width: 100%;">
+        <tr>
+          <td>Bulk Upload</td>
+          <td><input type="file" id="fasta_file_upload" class="input"></td>
+        </tr>
 
-        <table class="input_table">
-          <tr>
-            <td>Upload FASTA File</td>
-            <td><input type="file" id="fasta_file_upload" class="input"></td>
-          </tr>
-        </table>
+        <tr>
+          <td>MANUAL ENTRY</td>
+          <td>
+            <table class="input_table">
+              <tr>
+                <td>Label:</td>
+                <td><input type="text" id="manual_label" class="input"></td>
+              </tr>
 
-        <h1>MANUAL ENTRY</h1>
-        <table class="input_table">
-          <tr>
-            <td>Label:</td>
-            <td><input type="text" id="manual_label" class="input"></td>
-          </tr>
+              <tr>
+                <td>FASTA Sequence:</td>
+                <td>
+                  <textarea rows="2" cols="50" id="manual_sequence" class="input">
+                  </textarea>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
 
-          <tr>
-            <td>FASTA Sequence:</td>
-            <td>
-              <textarea rows="2" cols="50" id="manual_sequence" class="input">
-              </textarea>
-            </td>
-          </tr>
-        </table>
-
-        <h1>DEFAULT VALUES</h1>
-        <table class="input_table">
-          <tbody>
-            <tr>
-              <td>
-                <div>Target Start:</div><input type="number" min="0" id="default_target_start" class="target_start">
-              </td>
-              <td>
-                <div>Target End:</div><input type="number" min="0" id="default_target_end" class="target_end">
-              </td>
-              <td>
-                <div>Min Length:</div><input type="number" min="0" id="default_min_length" class="length_min">
-              </td>
-              <td>
-                <div>Max Length:</div><input type="number" min="0" id="default_max_length" class="length_max">
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <tr>
+          <td>Default Values</td>
+            
+          <td>
+            <table class="input_table">
+              <tbody>
+                <tr>
+                  <td>
+                    <div>Target Start:</div><input type="number" min="0" id="default_target_start" class="target_start">
+                  </td>
+            
+                  <td>
+                    <div>Target End:</div><input type="number" min="0" id="default_target_end" class="target_end">
+                  </td>
+                  
+                  <td>
+                    <div>Min Length:</div><input type="number" min="0" id="default_min_length" class="length_min">
+                  </td>
+                  
+                  <td>
+                    <div>Max Length:</div><input type="number" min="0" id="default_max_length" class="length_max">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </table>
 
       <input type="submit" id="manual_submit" class="input">
-      </div>
 
       <div id="sequence_identifiers" class="box">
         <div id="sequence_picker_template">
-
         </div>
       </div>
+
       <div id="container">
         <input type="submit" class="input" id="nextModule" value="Next Module">
       </div>
