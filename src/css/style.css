@@ -195,12 +195,14 @@ h1{
   font-size: 15px;
   font-family: sans-serif;
   font-weight: bold;
+  cursor:default;
 }
 
 h3 {
   font-size: 12px;
   font-family: sans-serif;
   font-weight: lighter;
+  cursor: default;
 }
 
 table, th, td {
