@@ -31,6 +31,7 @@ const default_target_start = document.getElementById('default_target_start');
 const default_target_end = document.getElementById('default_target_end');
 const default_min_length = document.getElementById('default_min_length');
 const default_max_length = document.getElementById('default_max_length');
+const search_box = document.getElementById('search_box');
 
 
 /**
@@ -359,11 +360,11 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     if(!min_length) {
         min_length = parseInt(default_min_length.value);
     }
-    
+
     if(!max_length) {
         max_length = parseInt(default_max_length.value);
     }
-    
+
     // Add the data to the Module1 class instance. If there's a problem (eg label already exists), abort
     if(!state.addTargetRegionIdentifier(identifier_label, sequence, target_start, target_end, min_length, max_length)) {
         return false;
@@ -385,7 +386,7 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     label.className = 'sequence_name';
     label.innerHTML = identifier_label;
     cell.appendChild(label);
-    
+
     // create target region label
     let target_region = document.createElement('div');
     target_region.className = 'target_region';
@@ -525,7 +526,7 @@ function search(search_str) {
     // clear any previous selections, and check for a hit
     for(let i = 0; i < target_sequences.length; i++) {
         let element = target_sequences[i];
-        
+
         element.classList.remove('selected');
 
         let sequence = element.querySelector('.target_region').innerHTML;
@@ -607,6 +608,11 @@ bulk_upload.addEventListener('change', function() {
 function sendMessage(channel, message) {
     ipcRenderer.send(channel, message);
 }
+
+search_box.addEventListener('change', function() {
+    search(search_box.value);
+    console.log("searching for "+search_box.value)
+});
 
 
 module_2.addEventListener('click', function() {
