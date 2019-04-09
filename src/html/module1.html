@@ -78,26 +78,47 @@
     <div class="box box1" id="mod1_table">
       <table class="input_table" style="width: 100%;">
         <tr class="smaller_row">
-          <td>Bulk Upload</td>
+
+          <td>
+            <div class="tooltip setting_title">Bulk Upload
+              <span class="tooltiptext">Upload a FASTA sequence containing multiple primers</span>
+            </div>
+          </td>
           <td><input type="file" id="fasta_file_upload" class="input"></td>
         </tr>
 
         <tr class="smaller_row">
-          <td>Metadata Upload</td>
+          <td>
+            <div class="tooltip setting_title">Metadata Upload
+              <span class="tooltiptext">Populate values using a metadata file</span>
+            </div>
+          </td>
           <td><input type="file" id="metadata_upload" class="input"></td>
         </tr>
 
         <tr class="smaller_row">
-          <td>Manual Entry</td>
+          <td>
+            <div class="tooltip setting_title">Manual Entry
+              <span class="tooltiptext">Add label and paste in sequence manually</span>
+            </div>
+          </td>
           <td>
             <table class="input_table" id="mod1_sub_table">
               <tr class="smaller_row">
-                <td>Label:</td>
+                <td>
+                  <div class="tooltip setting_title">Label:
+                    <span class="tooltiptext">Set the title of the primer</span>
+                  </div>
+                </td>
                 <td><input type="text" id="manual_label" class="input"></td>
               </tr>
 
               <tr class="smaller_row">
-                <td>FASTA Sequence:</td>
+                <td>
+                  <div class="tooltip setting_title">FASTA Sequence:
+                    <span class="tooltiptext">Paste in a copied sequence or enter manually</span>
+                  </div>
+                </td>
                 <td>
                   <textarea rows="2" cols="50" id="manual_sequence" class="input">
                   </textarea>
@@ -108,7 +129,11 @@
         </tr>
 
         <tr class="smaller_row">
-          <td>Default Values</td>
+          <td>
+            <div class="tooltip setting_title">Default Values
+              <span class="tooltiptext">Select settings to be applied for all future submissions</span>
+            </div>
+          </td>
 
           <td>
             <table class="input_table" id="default_values">
