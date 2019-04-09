@@ -387,6 +387,13 @@ input[type=range]::-webkit-slider-thumb:hover {
   cursor:crosshair;
 }
 
+.target_region {
+  max-width: 22vw;
+  overflow-x: auto;
+  background-color: black;
+}
+
+
 /* Tabs */
 
 .tab_container {

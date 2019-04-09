@@ -3,7 +3,8 @@
  *
  * @brief JS for Primacy GUI Module 1: Primer Collection
  *
- * @author Chance Nelson <chance-nelson@nau.edu>
+ * @authors Chance Nelson <chance-nelson@nau.edu>
+            Austin Kelly  <ak678@nau.edu>
  */
 
 
@@ -510,6 +511,12 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     });
 
     cell.appendChild(remove_button);
+
+    target_region.innerHTML= target_region.innerHTML.replace('A','<span style="color: blue">A</span>');
+    target_region.innerHTML= target_region.innerHTML.replace('G','<span style="color: red">G</span>');
+    target_region.innerHTML= target_region.innerHTML.replace('C','<span style="color: yellow">C</span>');
+    target_region.innerHTML= target_region.innerHTML.replace('T','<span style="color: green">T</span>');
+
     return true;
 }
 
@@ -536,13 +543,13 @@ function search(search_str) {
     for(let query = 0; query < search_str.length; query++) {
         for(let i = 0; i < target_sequences.length; i++) {
             let element = target_sequences[i];
-            
+
             let sequence = element.querySelector('.target_region').innerHTML;
             let label    = element.querySelector('.sequence_name').innerHTML;
 
             if(sequence.search(search_str[query]) >= 0 || label.search(search_str[query]) >= 0) {
                 element.classList.add('selected');
-            } 
+            }
         }
     }
 }
@@ -651,7 +658,7 @@ metadata_upload.addEventListener('change', function() {
                 // check if target region exists in the current state
                 if(!state.getTargetRegionIdentifier(values['label'])) {
                     continue;
-                } 
+                }
 
 
                 // alter the values in the needed target sequence inputs
@@ -662,7 +669,7 @@ metadata_upload.addEventListener('change', function() {
                     let label = elements[j].querySelector('.sequence_name');
                     if(label.innerHTML == values['label']) {
                         let inputs = elements[j].querySelectorAll('input');
-                       
+
                         console.log(inputs)
 
                         inputs[0].value = values['target_start'];
