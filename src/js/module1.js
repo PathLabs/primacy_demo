@@ -35,6 +35,8 @@ const default_min_length = document.getElementById('default_min_length');
 const default_max_length = document.getElementById('default_max_length');
 const search_box = document.getElementById('search_box');
 
+var manual_sequence = document.getElementById('manual_sequence');
+
 
 /**
  * @brief object for the state of module 1
@@ -48,6 +50,9 @@ class Module1 {
      *        a run of Primacy module 1.
      */
     constructor(state=null) {
+
+        manual_sequence.value = "";
+
         this.target_regions = {};
 
         this.background_sequences = [];
