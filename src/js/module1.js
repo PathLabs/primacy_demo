@@ -18,6 +18,7 @@ const {ipcRenderer} = require('electron');
 
 var state;
 
+
 const module_2 = document.getElementById('module2');
 const pcr_salts_inputs = document.querySelectorAll('#pcr > tbody > tr > td > input');
 const background_seq_fp = document.querySelector('#background_seq_fp');
@@ -508,6 +509,32 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
 
     cell.appendChild(remove_button);
     return true;
+}
+
+
+/**
+ * @brief search the target sequence identifiers for any matches, and highlight
+ *        any hits
+ *
+ * @param search_str string to search both the labels and FASTA sequences
+ */
+function search(search_str) {
+    // get a list of target sequences
+    target_sequences = document.querySelectorAll('#sequence_identifiers > table');
+
+    // clear any previous selections, and check for a hit
+    for(let i = 0; i < target_sequences.length; i++) {
+        let element = target_sequences[i];
+        
+        element.classList.remove('selected');
+
+        let sequence = element.querySelector('.target_region').innerHTML;
+        let label    = element.querySelector('.sequence_name').innerHTML;
+
+        if(sequence.search(search_str) >= 0 || label.search(search_str) >= 0) {
+            element.classList.add('selected');
+        }
+    }
 }
 
 
