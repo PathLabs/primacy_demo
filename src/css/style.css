@@ -75,6 +75,21 @@ body {
   width:100vw;
 }
 
+#search_box {
+  font-size: 14px;
+  height: 1.5em;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+
+.selected tr {
+  border: 1px solid white;
+}
+
+.selected td {
+  background-color: rgb(10, 130, 100);
+}
+
 #sequence_title{
   margin-left: auto;
   margin-right: auto;
