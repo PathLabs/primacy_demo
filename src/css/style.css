@@ -388,7 +388,8 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 
 .target_region {
-  max-width: 22vw;
+  min-width: 25vw;
+  max-width: 25vw;
   overflow-x: auto;
   background-color: black;
 }
