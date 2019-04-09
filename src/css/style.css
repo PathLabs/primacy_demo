@@ -75,6 +75,11 @@ body {
   width:100vw;
 }
 
+#sequence_search {
+  padding-bottom: 8px;
+  background: rgb(128,128,128,0.25);
+}
+
 #search_box {
   font-size: 14px;
   height: 1.5em;
@@ -368,6 +373,15 @@ input[type=range]::-webkit-slider-thumb:hover {
   border: 1px solid rgb(255,0,0,0.6);
 }
 
+#default_values td{
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.smaller_row td{
+  padding: 8px;
+}
+
 
 #sequence_identifiers {
   background: rgb(128,128,128,0.4);
@@ -379,6 +393,18 @@ input[type=range]::-webkit-slider-thumb:hover {
 
 #sequence_identifiers .input_table td{
   width:100%;
+}
+
+#manual_submit {
+  background-color: rgb(10, 130, 100);
+  width:100%;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+#manual_submit:hover {
+  font-weight: bold;
+  border: 1px solid rgb(1, 32, 53);
 }
 
 .sequence_item:hover{

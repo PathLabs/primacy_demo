@@ -77,26 +77,26 @@
 
     <div class="box box1" id="mod1_table">
       <table class="input_table" style="width: 100%;">
-        <tr>
+        <tr class="smaller_row">
           <td>Bulk Upload</td>
           <td><input type="file" id="fasta_file_upload" class="input"></td>
         </tr>
 
-        <tr>
+        <tr class="smaller_row">
           <td>Metadata Upload</td>
           <td><input type="file" id="metadata_upload" class="input"></td>
         </tr>
 
-        <tr>
+        <tr class="smaller_row">
           <td>Manual Entry</td>
           <td>
             <table class="input_table" id="mod1_sub_table">
-              <tr>
+              <tr class="smaller_row">
                 <td>Label:</td>
                 <td><input type="text" id="manual_label" class="input"></td>
               </tr>
 
-              <tr>
+              <tr class="smaller_row">
                 <td>FASTA Sequence:</td>
                 <td>
                   <textarea rows="2" cols="50" id="manual_sequence" class="input">
@@ -107,11 +107,11 @@
           </td>
         </tr>
 
-        <tr>
+        <tr class="smaller_row">
           <td>Default Values</td>
 
           <td>
-            <table class="input_table">
+            <table class="input_table" id="default_values">
               <tbody>
                 <tr>
                   <td>
@@ -138,11 +138,11 @@
 
       <input type="submit" id="manual_submit" class="input">
 
+      <div id="sequence_search">
+        <img src="../img/search.png" width="20px" height="20px" id="search_icon">
+        <input type="text" id="search_box">
+      </div>
       <div id="sequence_identifiers" class="box">
-        <div id="sequence_search">
-          <img src="../img/search.png" width="20px" height="20px" id="search_icon">
-          <input type="text" id="search_box">
-        </div>
         <div id="sequence_picker_template">
         </div>
       </div>
