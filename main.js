@@ -150,24 +150,17 @@ function execPipeline(cmd, args, callback) {
 
     fs.writeFileSync(__dirname + '/args.json', JSON.stringify(current_json));
 
-    child_process.exec('python ' + __dirname + '/src/pipeline/' + cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
-        console.log(stdout);
+    child_process.exec(cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
+        // Read back in file
+        data = fs.readFileSync(__dirname + '/args.json', 'utf-8');
 
-        if(stdout) {
-            console.log("Encountered error:", stdout);
-            callback(stdout);
+        console.log(data.toString());
 
-        } else {
-            // Read back in file
-            data = fs.readFileSync(__dirname + '/args.json', 'utf-8');
+        current_json = JSON.parse(data.toString());
 
-            current_json = JSON.parse(data.toString());
-            console.log(current_json);
+        visited_modules[current_module]['executed'] = true;
 
-            visited_modules[current_module]['executed'] = true;
-
-            callback(null);
-        }
+        callback(null);
     });
 }
 
