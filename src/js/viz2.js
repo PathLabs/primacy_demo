@@ -26,147 +26,100 @@ function get_paths(json_file_path) {
 
 function parse_rank_values(direction) {
   paths_array = get_paths("Sa_50_collection_out.json");
+  var xValues = [];
   var yValues = [];
-  var dict_keys_values = {};
 
   if (direction === "forward") {
     for (var i = 0; i < paths_array.length; i++) {
       var json_data = JSON.parse(
         fs.readFileSync(path.resolve(paths_array[i]), "UTF-8")
       );
-      for (var j = 0; j<Object.keys(json_data).length; j++){
-      var sequence_id = Object.keys(json_data)[0];
+
+      sequence_id = Object.keys(json_data)[0];
       forward_primers = Object.keys(json_data[sequence_id].forward);
+
       for (var k = 0; k < forward_primers.length; k++) {
-        yValues.push(json_data[sequence_id].forward[forward_primers[k]]["rank"]);
-      }
-      dict_keys_values[sequence_id] = yValues;
-    }
-
-
-  }
-}
-
-  if (direction === "reverse") {
-    for (var i = 0; i < paths_array.length; i++) {
-      var json_data = JSON.parse(
-        fs.readFileSync(path.resolve(paths_array[i]), "UTF-8")
-      );
-    for (var j = 0; j<Object.keys(json_data).length; j++){
-      var sequence_id = Object.keys(json_data)[j];
-      console.log(sequence_id);
-      if (json_data[sequence_id].hasOwnProperty("reverse")) {
-        reverse_primers = Object.keys(json_data[sequence_id].reverse);
-
-        for (var k = 0; k < reverse_primers.length; k++) {
-          yValues.push(
-            json_data[sequence_id].reverse[reverse_primers[k]]["rank"]
-          );
-        }
-        dict_keys_values[sequence_id] = yValues;
-      }
-
-             else {
-              continue;
+              xValues.push(sequence_id);
+              yValues.push(
+                json_data[sequence_id].forward[forward_primers[k]]["score"]
+              );
             }
 
-    }
-
-
-
-    }
   }
 
-  return dict_keys_values;
-  }
+}
+
+if (direction == "reverse"){
+  for (var i = 0; i < paths_array.length; i++) {
+    var json_data = JSON.parse(
+      fs.readFileSync(path.resolve(paths_array[i]), "UTF-8")
+    );
+
+    sequence_id = Object.keys(json_data)[0];
+
+        if (json_data[sequence_id].hasOwnProperty("reverse")) {
+          reverse_primers = Object.keys(json_data[sequence_id].reverse);
+          for (var k = 0; k < reverse_primers.length; k++) {
+                  xValues.push(sequence_id);
+                  yValues.push(
+                    json_data[sequence_id].reverse[reverse_primers[k]]["score"]
+                  );
+                }
+
+        }
+
+        else {
+          continue
+        }
 
 
+}
 
 
-
-function create_viz_spec(forward, reverse, iter) {
-
-  var forward_key= Object.keys(forward)[iter];
-  var reverse_key = forward_key;
-
-  var xValuesFor = [];
-  var xValuesRev = [];
+}
+return [xValues, yValues];
+}
 
 
-  for (var i=0; i<Object.keys(forward).length; i++)
-  {
-    xValuesFor.unshift(forward_key);
-  }
+function create_viz_spec(direction){
 
-  for (var i=0; i<Object.keys(reverse).length; i++)
-  {
-    xValuesRev.unshift(reverse_key);
-  }
+  var data = [{
+  type: 'violin',
+  x: parse_rank_values(direction)[0],
+  y: parse_rank_values(direction)[1],
+  points: 'none',
+  box: {
+    visible: true
+  },
+  line: {
+    color: 'cls',
+  },
+  meanline: {
+    visible: true
+  },
+  transforms: [{
+  	 type: 'groupby',
+	 groups: parse_rank_values(direction)[0]
+	}]
+}]
 
+var layout = {
+  title: "Violin Plot " + direction + " Primer Ranks",
+  yaxis: {
+    zeroline: false
+  },
+	showlegend: false
+}
 
-  var json_data = [
-    {
-      type: "violin",
-      x: xValuesFor,
-      y: forward[forward_key],
-      legendgroup: "Yes",
-      scalegroup: "Yes",
-      name: "Forward",
-      side: "negative",
-      box: {
-        visible: true
-      },
-      line: {
-        color: "blue",
-        width: 2
-      },
-      meanline: {
-        visible: true
-      }
-    },
-    {
-      type: "violin",
-      x: xValuesRev,
-      y: reverse[reverse_key],
-      legendgroup: "No",
-      scalegroup: "No",
-      name: "Reverse",
-      side: "positive",
-      box: {
-        visible: true
-      },
-      line: {
-        color: "green",
-        width: 2
-      },
-      meanline: {
-        visible: true
-      }
-    }
-  ];
+Plotly.plot(direction, data, layout);
 
-  var layout = {
-    title: "Split Violin Plot",
-    yaxis: {
-      zeroline: false,
-    },
-    autoresize: false,
-    xaxis: {range:[-1,1]},
-    width: 600,
-    violingap: 0,
-    violingroupgap: 0,
-    violinmode: "overlay",
-
-  };
+}
 
 
+function update_forward_count(){
 
-  var divElement = document.createElement("Div");
-  var br = document.createElement("br");
-  divElement.id = "graph"+ iter.toString(10);
-  document.getElementById("main").appendChild(divElement);
-  document.getElementById("main").appendChild(br);
+}
 
+function update_reverse_count(){
 
-  Plotly.plot("graph"+ iter.toString(10), json_data, layout,{responsive: true} );
 }

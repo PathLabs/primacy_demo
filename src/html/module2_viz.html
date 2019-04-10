@@ -1,21 +1,70 @@
 <html lang="en">
-  <head>
-    <!-- Plotly.js -->
-    <script src="../js/plotly/plotly-latest.min.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/viz2.js"></script>
-  </head>
-  <body bgcolor="#fffff">
-  <div class="row" id="main">
-    <h2> Testing Viz 2 Production </h2>
-    <script>
-    var forward_ranks = parse_rank_values('forward');
-    var reverse_ranks = parse_rank_values("reverse");
-    // console.log(reverse_ranks)
-    for (var i=0; i<Object.keys(reverse_ranks).length; i++){
-      create_viz_spec(forward_ranks, reverse_ranks, i);
-    }
-    </script>
+
+<head>
+  <!-- Plotly.js -->
+  <script src="../js/plotly/plotly-latest.min.js"></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/viz2.js"></script>
+</head>
+
+<body style="background: grey;">
+
+  <div class="row">
+    <center>
+      <div id="forward">
+
+        <script>
+          create_viz_spec('forward');
+        </script>
+        <br>
+        <center>
+          <div>
+
+
+            <label>Percent</label>
+            <input type="number" id="forward_percent" min="0" max="100" value="0" onchange="update_forward_count()" />
+
+
+
+            <label>Count</label>
+            <input type="number" id="forward_count" value="" />
+            <input type="submit" value="Submit Primers">
+
+
+          </div>
+
+      </div>
   </div>
-  </body>
-  </html>
+
+  <br>
+  <div class="row">
+    <center>
+      <div id="reverse">
+
+        <script>
+          create_viz_spec('reverse');
+        </script>
+        <br>
+        <center>
+
+          <div>
+
+            <label>Percent</label>
+            <input type="number" id="reverse_percent" min="0" max="100" value="0" onchange="update_reverse_count()" />
+
+
+
+            <label>Count</label>
+            <input type="number" id="reverse_count" value="" />
+
+            <input type="submit" value="Submit Primers">
+
+          </div>
+      </div>
+
+  </div>
+  </div>
+
+</body>
+
+</html>
