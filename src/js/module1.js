@@ -516,12 +516,6 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     });
 
     cell.appendChild(remove_button);
-
-    target_region.innerHTML= target_region.innerHTML.replace('A','<span style="color: blue">A</span>');
-    target_region.innerHTML= target_region.innerHTML.replace('G','<span style="color: red">G</span>');
-    target_region.innerHTML= target_region.innerHTML.replace('C','<span style="color: yellow">C</span>');
-    target_region.innerHTML= target_region.innerHTML.replace('T','<span style="color: green">T</span>');
-
     return true;
 }
 
