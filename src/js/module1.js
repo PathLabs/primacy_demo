@@ -3,14 +3,15 @@
  *
  * @brief JS for Primacy GUI Module 1: Primer Collection
  *
- * @author Chance Nelson <chance-nelson@nau.edu>
+ * @authors Chance Nelson <chance-nelson@nau.edu>
+            Austin Kelly  <ak678@nau.edu>
  */
 
 
 //gets users home directory
 const os = require('os');
 const fs = require('fs');
-
+const papa = require('papaparse');
 const validate = require('../js/input_validation.js');
 
 const {ipcRenderer} = require('electron');
@@ -18,11 +19,13 @@ const {ipcRenderer} = require('electron');
 
 var state;
 
+
 const module_2 = document.getElementById('module2');
 const pcr_salts_inputs = document.querySelectorAll('#pcr > tbody > tr > td > input');
 const background_seq_fp = document.querySelector('#background_seq_fp');
 const manual_submit = document.getElementById('manual_submit');
 const bulk_upload = document.getElementById('fasta_file_upload');
+const metadata_upload = document.getElementById('metadata_upload');
 const module_3 = document.getElementById('module3');
 const module_4 = document.getElementById('module4');
 const submit = document.getElementById('nextModule');
@@ -30,6 +33,9 @@ const default_target_start = document.getElementById('default_target_start');
 const default_target_end = document.getElementById('default_target_end');
 const default_min_length = document.getElementById('default_min_length');
 const default_max_length = document.getElementById('default_max_length');
+const search_box = document.getElementById('search_box');
+
+var manual_sequence = document.getElementById('manual_sequence');
 
 
 /**
@@ -44,6 +50,9 @@ class Module1 {
      *        a run of Primacy module 1.
      */
     constructor(state=null) {
+
+        manual_sequence.value = "";
+
         this.target_regions = {};
 
         this.background_sequences = [];
@@ -358,11 +367,11 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     if(!min_length) {
         min_length = parseInt(default_min_length.value);
     }
-    
+
     if(!max_length) {
         max_length = parseInt(default_max_length.value);
     }
-    
+
     // Add the data to the Module1 class instance. If there's a problem (eg label already exists), abort
     if(!state.addTargetRegionIdentifier(identifier_label, sequence, target_start, target_end, min_length, max_length)) {
         return false;
@@ -384,7 +393,7 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     label.className = 'sequence_name';
     label.innerHTML = identifier_label;
     cell.appendChild(label);
-    
+
     // create target region label
     let target_region = document.createElement('div');
     target_region.className = 'target_region';
@@ -507,7 +516,47 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     });
 
     cell.appendChild(remove_button);
+
+    target_region.innerHTML= target_region.innerHTML.replace('A','<span style="color: blue">A</span>');
+    target_region.innerHTML= target_region.innerHTML.replace('G','<span style="color: red">G</span>');
+    target_region.innerHTML= target_region.innerHTML.replace('C','<span style="color: yellow">C</span>');
+    target_region.innerHTML= target_region.innerHTML.replace('T','<span style="color: green">T</span>');
+
     return true;
+}
+
+
+/**
+ * @brief search the target sequence identifiers for any matches, and highlight
+ *        any hits
+ *
+ * @param search_str string to search both the labels and FASTA sequences
+ */
+function search(search_str) {
+    // get a list of target sequences
+    target_sequences = document.querySelectorAll('#sequence_identifiers > table');
+
+    search_str = search_str.split(';');
+
+    // clear out previous searches
+    for(let i = 0; i < target_sequences.length; i++) {
+        let element = target_sequences[i];
+        element.classList.remove('selected');
+    }
+
+    // for each query, highlight any matches
+    for(let query = 0; query < search_str.length; query++) {
+        for(let i = 0; i < target_sequences.length; i++) {
+            let element = target_sequences[i];
+
+            let sequence = element.querySelector('.target_region').innerHTML;
+            let label    = element.querySelector('.sequence_name').innerHTML;
+
+            if(sequence.search(search_str[query]) >= 0 || label.search(search_str[query]) >= 0) {
+                element.classList.add('selected');
+            }
+        }
+    }
 }
 
 
@@ -574,12 +623,83 @@ bulk_upload.addEventListener('change', function() {
 });
 
 
+metadata_upload.addEventListener('change', function() {
+    console.log('new metadata');
+
+    // attempt to parse the metadata
+    papa.parse(metadata_upload.files[0], {
+	    complete: function(results) {
+            let keys = results.data[0];
+            for(let i = 1; i < results.data.length; i++) {
+                if(results.data[i].length != keys.length) {
+                    continue;
+                }
+
+                let values = {
+                    'label': null,
+                    'target_start': null,
+                    'target_end': null,
+                    'min_length': null,
+                    'max_length': null
+                }
+
+                for(let j = 0; j < results.data[i].length; j++) {
+                    values[keys[j]] = results.data[i][j];
+                }
+
+                // check if current metadata is complete
+                let good = true;
+                for(key in values) {
+                    if(!values[key]) {
+                        good = false;
+                        break;
+                    }
+                }
+
+                if(!good) {
+                    continue;
+                }
+
+                // check if target region exists in the current state
+                if(!state.getTargetRegionIdentifier(values['label'])) {
+                    continue;
+                }
+
+                // alter the values in the needed target sequence inputs
+                let elements = document.querySelectorAll('#sequence_identifiers > .input_table');
+
+                // scan through the target region identifiers, find the corrent one, and inject the values
+                for(let j = 0; j < elements.length; j++) {
+                    let label = elements[j].querySelector('.sequence_name');
+                    if(label.innerHTML == values['label']) {
+                        let inputs = elements[j].querySelectorAll('input');
+
+                        console.log(inputs)
+
+                        inputs[0].value = values['target_start'];
+                        inputs[1].value = values['target_end'];
+                        inputs[2].value = values['min_length'];
+                        inputs[3].value = values['max_length'];
+                    }
+                }
+            }
+        }
+    });
+});
+
+
 /**
  * @brief helper function for sending IPC messages
  */
 function sendMessage(channel, message) {
     ipcRenderer.send(channel, message);
 }
+
+
+search_box.addEventListener('change', function() {
+    search(search_box.value);
+    console.log("searching for "+search_box.value)
+});
 
 
 module_2.addEventListener('click', function() {
@@ -601,7 +721,7 @@ module_4.addEventListener('click', function() {
 
 
 submit.addEventListener('click', function() {
-    sendMessage('EXECUTE', ['primacy1.py', JSON.stringify(state.toJSON())]);
+    sendMessage('EXECUTE', ['primacy primer-collection', JSON.stringify(state.toJSON())]);
     console.log('attempting execution');
 })
 

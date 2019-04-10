@@ -20,7 +20,7 @@
                 <span class="tooltiptext">Amount of times to run</span>
               </div>
             </td>
-            <td><td><input class=setting_input type="number" id="iterations" size=2 value=100></td></td>
+            <td><td><input class=setting_input onClick="this.select();" type="number" id="iterations" size=2 value=100></td></td>
             <td>
             </td>
           </tr>
@@ -34,7 +34,7 @@
             <td>
               <td class=setting_input><input id="ampliconSlider" type="range" min="0" max="100" value = 50
                         class = "slider">
-                <input type="number" name="amplicon_value" class="sliderValue" id="optimumAmpliconSize" value = 50>
+                <input onClick="this.select();" type="number" name="amplicon_value" class="sliderValue" id="optimumAmpliconSize" value = 50>
               </td>
             </td>
             <td>
@@ -70,7 +70,7 @@
                 <span class="tooltiptext">Percentage of primers to keep</span>
               </div>
             </td>
-            <td><td class=setting_input><input type="number" id="moveForward" size=1 value=0>%</td></td>
+            <td><td class=setting_input><input onClick="this.select();" type="number" id="moveForward" size=1 value=0>%</td></td>
             <td>
             </td>
           </tr>
@@ -102,7 +102,7 @@
           <td><td><input id="simMeltTempSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
           <td class="sliderValue">
-            <input type="number" name="sim_melt_temp" class="sliderValue" id="simMeltTemp">
+            <input onClick="this.select();" type="number" name="sim_melt_temp" class="sliderValue" id="simMeltTemp">
           </td>
           <td>
           </td>
@@ -117,7 +117,7 @@
           <td><td><input id="primerScoresSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
           <td class="sliderValue">
-            <input type="number" name="primer_scores" class="sliderValue" id="primerScores">
+            <input onClick="this.select();" type="number" name="primer_scores" class="sliderValue" id="primerScores">
           </td>
           <td>
           </td>
@@ -132,7 +132,7 @@
           <td><td><input id="crossDimerizationSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
           <td class="sliderValue">
-            <input type="number" name="cross_dimerization" class="sliderValue" id="crossDimerization">
+            <input onClick="this.select();" type="number" name="cross_dimerization" class="sliderValue" id="crossDimerization">
           </td>
           <td>
           </td>
@@ -147,7 +147,7 @@
           <td><td><input id="ampliconSizeSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
           <td class="sliderValue">
-            <input type="number" name="amplicon_size" class="sliderValue" id=ampliconSize>
+            <input onClick="this.select();" type="number" name="amplicon_size" class="sliderValue" id=ampliconSize>
           </td>
           <td>
             <input type="checkbox" id="ampliconCheck" checked>
@@ -163,7 +163,7 @@
           <td><td><input id="targetDistanceSlider" type="range" min="0" max="100" value = 1
             class = "slider"></td></td>
           <td class="sliderValue">
-            <input type="number" name="target_distance" class="sliderValue" id=targetDistance>
+            <input onClick="this.select();" type="number" name="target_distance" class="sliderValue" id=targetDistance>
           </td>
           <td>
             <input type="checkbox" id=targetDistanceCheck checked>

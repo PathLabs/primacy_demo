@@ -20,7 +20,7 @@
                 <span class="tooltiptext">Sodium</span>
               </div>
             </td>
-            <td><input id="pcr_na" type="number" size="1" value="50" min="0"></td>
+            <td><input id="pcr_na" onClick="this.select();" type="number" size="1" value="50" min="0"></td>
           </tr>
 
           <tr>
@@ -30,7 +30,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_k" type="number" size="1" value="0" min="0">
+              <input id="pcr_k" onClick="this.select();" type="number" size="1" value="0" min="0">
             </td>
           </tr>
           <tr>
@@ -40,7 +40,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_tris" type="number" size="1" value="0" min="0">
+              <input id="pcr_tris" onClick="this.select();" type="number" size="1" value="0" min="0">
             </td>
           </tr>
 
@@ -51,7 +51,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_mg" type="number" size="1" value="0" min="0">
+              <input id="pcr_mg" onClick="this.select();" type="number" size="1" value="0" min="0">
             </td>
           </tr>
 
@@ -62,7 +62,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_dntps" type="number" size="1" value="0" min="0">
+              <input id="pcr_dntps" onClick="this.select();" type="number" size="1" value="0" min="0">
             </td>
           </tr>
         </table>
@@ -75,61 +75,103 @@
       </div>
     </div>
 
-    <div class="box box1">
-      <div class="box box1">
-        <h1>BULK UPLOAD</h1>
+    <div class="box box1" id="mod1_table">
+      <table class="input_table" style="width: 100%;">
+        <tr class="smaller_row">
 
-        <table class="input_table">
-          <tr>
-            <td>Upload FASTA File</td>
-            <td><input type="file" id="fasta_file_upload" class="input"></td>
-          </tr>
-        </table>
+          <td>
+            <div class="tooltip setting_title">Bulk Upload
+              <span class="tooltiptext">Upload a FASTA sequence containing multiple primers</span>
+            </div>
+          </td>
+          <td><input type="file" id="fasta_file_upload" class="input"></td>
+        </tr>
 
-        <h1>MANUAL ENTRY</h1>
-        <table class="input_table">
-          <tr>
-            <td>Label:</td>
-            <td><input type="text" id="manual_label" class="input"></td>
-          </tr>
+        <tr class="smaller_row">
+          <td>
+            <div class="tooltip setting_title">Metadata Upload
+              <span class="tooltiptext">Populate values using a metadata file</span>
+            </div>
+          </td>
+          <td><input type="file" id="metadata_upload" class="input"></td>
+        </tr>
 
-          <tr>
-            <td>FASTA Sequence:</td>
-            <td>
-              <textarea rows="2" cols="50" id="manual_sequence" class="input">
-              </textarea>
-            </td>
-          </tr>
-        </table>
+        <tr class="smaller_row">
+          <td>
+            <div class="tooltip setting_title">Manual Entry
+              <span class="tooltiptext">Add label and paste in sequence manually</span>
+            </div>
+          </td>
+          <td>
+            <table class="input_table" id="mod1_sub_table">
+              <tr class="smaller_row">
+                <td>
+                  <div class="tooltip setting_title">Label:
+                    <span class="tooltiptext">Set the title of the primer</span>
+                  </div>
+                </td>
+                <td><input type="text" id="manual_label" class="input" onClick="this.select();"></td>
+              </tr>
 
-        <h1>DEFAULT VALUES</h1>
-        <table class="input_table">
-          <tbody>
-            <tr>
-              <td>
-                <div>Target Start:</div><input type="number" min="0" id="default_target_start" class="target_start">
-              </td>
-              <td>
-                <div>Target End:</div><input type="number" min="0" id="default_target_end" class="target_end">
-              </td>
-              <td>
-                <div>Min Length:</div><input type="number" min="0" id="default_min_length" class="length_min">
-              </td>
-              <td>
-                <div>Max Length:</div><input type="number" min="0" id="default_max_length" class="length_max">
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              <tr class="smaller_row">
+                <td>
+                  <div class="tooltip setting_title">FASTA Sequence:
+                    <span class="tooltiptext">Paste in a copied sequence or enter manually</span>
+                  </div>
+                </td>
+                <td>
+                  <textarea rows="2" cols="50" id="manual_sequence" class="input">
+                  </textarea>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="smaller_row">
+          <td>
+            <div class="tooltip setting_title">Default Values
+              <span class="tooltiptext">Select settings to be applied for all future submissions</span>
+            </div>
+          </td>
+
+          <td>
+            <table class="input_table" id="default_values">
+              <tbody>
+                <tr>
+                  <td>
+                    <div>Target Start:</div><input onClick="this.select();" type="number" min="0" id="default_target_start" class="target_start">
+                  </td>
+
+                  <td>
+                    <div>Target End:</div><input onClick="this.select();" type="number" min="0" id="default_target_end" class="target_end">
+                  </td>
+
+                  <td>
+                    <div>Min Length:</div><input onClick="this.select();" type="number" min="0" id="default_min_length" class="length_min">
+                  </td>
+
+                  <td>
+                    <div>Max Length:</div><input onClick="this.select();" type="number" min="0" id="default_max_length" class="length_max">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </table>
 
       <input type="submit" id="manual_submit" class="input">
-      </div>
 
+      <div id="sequence_search">
+        <img src="../img/search.png" width="20px" height="20px" id="search_icon">
+        <input type="text" id="search_box" onClick="this.select();">
+      </div>
       <div id="sequence_identifiers" class="box">
         <div id="sequence_picker_template">
-
         </div>
       </div>
+
       <div id="container">
         <input type="submit" class="input" id="nextModule" value="Next Module">
       </div>
