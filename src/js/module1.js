@@ -653,7 +653,6 @@ metadata_upload.addEventListener('change', function() {
                     continue;
                 } 
 
-
                 // alter the values in the needed target sequence inputs
                 let elements = document.querySelectorAll('#sequence_identifiers > .input_table');
 
@@ -684,6 +683,7 @@ function sendMessage(channel, message) {
     ipcRenderer.send(channel, message);
 }
 
+
 search_box.addEventListener('change', function() {
     search(search_box.value);
     console.log("searching for "+search_box.value)
@@ -709,7 +709,7 @@ module_4.addEventListener('click', function() {
 
 
 submit.addEventListener('click', function() {
-    sendMessage('EXECUTE', ['primacy1.py', JSON.stringify(state.toJSON())]);
+    sendMessage('EXECUTE', ['primacy primer-collection', JSON.stringify(state.toJSON())]);
     console.log('attempting execution');
 })
 
