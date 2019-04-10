@@ -75,11 +75,20 @@ body {
   width:100vw;
 }
 
+#sequence_search {
+  padding-bottom: 8px;
+  background: rgb(128,128,128,0.25);
+}
+
 #search_box {
   font-size: 14px;
   height: 1.5em;
   border-radius: 10px;
   padding-left: 10px;
+}
+
+#search_icon {
+  transform: translateY(5px);
 }
 
 .selected tr {
@@ -174,10 +183,6 @@ img {
   opacity: 0.8;
 }
 
-.input_table td {
-  text-align: center;
-}
-
 .sliderValue {
   width: 3em;
 }
@@ -190,12 +195,14 @@ h1{
   font-size: 15px;
   font-family: sans-serif;
   font-weight: bold;
+  cursor:default;
 }
 
 h3 {
   font-size: 12px;
   font-family: sans-serif;
   font-weight: lighter;
+  cursor: default;
 }
 
 table, th, td {
@@ -248,6 +255,10 @@ input{
 input[type=file]{
   font-size: 12px;
   color:#ffe8e1;
+}
+
+input[type=file]:hover{
+  transform: scale(1.01);
 }
 
 input[type=submit]{
@@ -364,14 +375,22 @@ input[type=range]::-webkit-slider-thumb:hover {
   border: 1px solid rgb(255,0,0,0.6);
 }
 
-.input_table td {
-  text-align:left;
+#default_values td{
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
+
+.smaller_row td{
+  padding: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 
 #sequence_identifiers {
   background: rgb(128,128,128,0.4);
-  min-height: 30vh;
-  max-height: 30vh;
+  min-height: 35vh;
+  max-height: 35vh;
   overflow-y: scroll;
 }
 
@@ -380,12 +399,32 @@ input[type=range]::-webkit-slider-thumb:hover {
   width:100%;
 }
 
+#manual_submit {
+  background-color: rgb(10, 130, 100);
+  width:100%;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+#manual_submit:hover {
+  font-weight: bold;
+  border: 1px solid rgb(1, 32, 53);
+}
+
 .sequence_item:hover{
   transform:scale(1.8);
   transform-style: preserve-3d;
   transition: all .4s ease;
   cursor:crosshair;
 }
+
+.target_region {
+  min-width: 25vw;
+  max-width: 25vw;
+  overflow-x: auto;
+  background-color: black;
+}
+
 
 /* Tabs */
 
@@ -447,6 +486,14 @@ input[type=range]::-webkit-slider-thumb:hover {
 .input_table {
   color: white;
   margin: 0 auto;
+}
+
+.input_table td {
+  text-align:left;
+}
+
+#mod1_sub_table {
+  border: 1px solid #2f475f;
 }
 
  #loading_logo {

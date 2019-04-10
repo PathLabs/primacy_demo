@@ -25,7 +25,7 @@
                       oninput="tm_opt.value=tm_optSlider.value" class = "slider">
               </td>
               <td>
-                <input type="number" name="tm_opt" id="tm_opt" for="tm_optSlider" min="1" max="100"
+                <input onClick="this.select();" type="number" name="tm_opt" id="tm_opt" for="tm_optSlider" min="1" max="100"
                       oninput="tm_optSlider.value=tm_opt.value">°C
               </td>
             </tr>
@@ -50,7 +50,7 @@
                         oninput="gcMin.value=gcMinSlider.value" class = "slider">
                 </td>
                 <td>
-                  <input type="number" name="gcMin" id="gcMin" for="gcMinSlider" min="1" max="100" value="60"
+                  <input onClick="this.select();" type="number" name="gcMin" id="gcMin" for="gcMinSlider" min="1" max="100" value="60"
                         oninput="gcMinSlider.value=gcMin.value">%
                 </td>
               </tr>
@@ -66,7 +66,7 @@
                         oninput="gcMax.value=gcMaxSlider.value" class = "slider">
                 </td>
                 <td>
-                  <input type="number" name="gcMax" id="gcMax" for="gcMaxSlider" min="1" max="100" value="1"
+                  <input onClick="this.select();" type="number" name="gcMax" id="gcMax" for="gcMaxSlider" min="1" max="100" value="1"
                         oninput="gcMaxSlider.value=gcMax.value">%
                 </td>
               </tr>
@@ -96,7 +96,7 @@
                         oninput="tm.value=tmSlider.value" class="slider">
             </td>
             <td>
-              <input type="number" name="tm" id="tm" for="tmSlider" min="1" max="100" value="1"
+              <input onClick="this.select();" type="number" name="tm" id="tm" for="tmSlider" min="1" max="100" value="1"
                         oninput="tmSlider.value=tm.value">
             </td>
             <td>
@@ -115,7 +115,7 @@
                         oninput="gc.value=gcSlider.value" class="slider">
             </td>
             <td>
-              <input type="number" name="gc" id="gc" for="gcSlider" value = "1" min="1" max="100" value="1"
+              <input onClick="this.select();" type="number" name="gc" id="gc" for="gcSlider" value = "1" min="1" max="100" value="1"
                         oninput="gcSlider.value=gc.value">
             </td>
             <td><input type="checkbox" name="gcCheckbox" id="gcCheckbox" value="GC" checked></td>
@@ -132,7 +132,7 @@
                         oninput="hpoly.value=hpolySlider.value" class = "slider">
             </td>
             <td>
-              <input type="number" name="hpoly" id="hpoly" for="hpolySlider" min="1" max="100" value="1"
+              <input onClick="this.select();" type="number" name="hpoly" id="hpoly" for="hpolySlider" min="1" max="100" value="1"
                         oninput="hpolySlider.value=hpoly.value">
             </td>
             <td>
@@ -147,11 +147,11 @@
               </div>
             </td>
             <td>
-              <input id="dimerzSlider" type="range" min="1" max="100" value = "1"
-                        oninput="dimerz.value=dimerzSlider.value" class = "slider">
+              <input id="dimerzSlider" type="range" min="1" max="100" value="1"
+                        oninput="dimerz.value=dimerzSlider.value" class="slider">
             </td>
             <td>
-              <input type=number name="dimerz" id="dimerz" for="dimerzSlider" min="1" max="100" value="1"
+              <input onClick="this.select();" type="number" name="dimerz" id="dimerz" for="dimerzSlider" min="1" max="100" value="1"
                         oninput="dimerzSlider.value=dimerz.value">
             </td>
             <td>
@@ -170,7 +170,7 @@
                         oninput="specif.value=specifSlider.value" class="slider">
             </td>
             <td>
-              <input type= "number" name="specif" id="specif" for="specifSlider" min="1" max="100" value="1"
+              <input onClick="this.select();" type="number" name="specif" id="specif" for="specifSlider" min="1" max="100" value="1"
                         oninput="specifSlider.value=specif.value">
             </td>
             <td>
@@ -189,7 +189,7 @@
                         oninput="degen.value=degenSlider.value" class = "slider">
             </td>
             <td>
-              <input type="number" name="degen" id="degen" for="degenSlider" min="1" max="100" value="1"
+              <input onClick="this.select();" type="number" name="degen" id="degen" for="degenSlider" min="1" max="100" value="1"
                         oninput="degenSlider.value=degen.value">
             </td>
             <td>
@@ -198,6 +198,7 @@
           </tr>
 
         </table>
+        </br>
         <input id="nextModule" type="submit" value="Next Module">
       </div>
     </div>
