@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const { ipcRenderer } = require("electron");
-var selected_labels = [];
+var selected_labels = {};
+var table = document.getElementById("atRiskSeqs");
 
 // pipeline output after running module 1
 var pipeline_mod_1_output = "Sa_50_collection_out.json";
@@ -176,16 +177,39 @@ function create_viz_spec(direction, field, div) {
   };
 
   var myPlot = document.getElementById(div);
-  var table = document.getElementById("table");
+
   Plotly.newPlot(div, data, layout);
   myPlot.on("plotly_afterplot", function() {
     Plotly.d3
       .selectAll(".xaxislayer-above")
       .selectAll("text")
       .on("click", function(d) {
-        selected_labels.push(d.text);
 
-        console.log(selected_labels);
+        if (!selected_labels.hasOwnProperty(d.text)) {
+          selected_labels[d.text]  = 1;
+          var trow = table.insertRow(1);
+          // unique id to help find it if the sequence already exists
+          trow.id = d.text + 'trow';
+
+
+          var seq = trow.insertCell(0);
+          var count = trow.insertCell(1);
+
+          seq.innerHTML = d.text;
+          count.innerHTML = selected_labels[d.text];
+
+
+
+        }
+        else {
+          var value = selected_labels[d.text];
+          selected_labels[d.text] = value + 1;
+
+
+          var tr_to_update = document.getElementById(d.text + 'trow');
+          tr_to_update.cells[1].innerHTML = selected_labels[d.text];
+
+        }
 
       });
   });
