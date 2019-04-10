@@ -20,24 +20,25 @@ for (element in result){
   var f_sequence = row_f.insertCell(4);
 
 
+
   f_seq_id.innerHTML = result[element]['forward'][Object.keys(result[element]['forward'])[0]]['seq_id'];
   f_flank.innerHTML = 'forward';
-  f_primer_id.innertHTML = Object.keys(result[element]['forward'])[0];
+  f_primer_id.innerHTML = Object.keys(result[element]['forward'])[0];
   f_start.innerHTML = result[element]['forward'][Object.keys(result[element]['forward'])[0]]['start'];
   f_sequence.innerHTML = result[element]['forward'][Object.keys(result[element]['forward'])[0]]['seq'];
 
 
   var row_r = table.insertRow(2);
 
-  var r_seq_id = row_f.insertCell(0);
-  var r_flank = row_f.insertCell(1)
-  var r_primer_id = row_f.insertCell(2);
-  var r_start = row_f.insertCell(3);
-  var r_sequence = row_f.insertCell(4);
+  var r_seq_id = row_r.insertCell(0);
+  var r_flank = row_r.insertCell(1)
+  var r_primer_id = row_r.insertCell(2);
+  var r_start = row_r.insertCell(3);
+  var r_sequence = row_r.insertCell(4);
 
   r_seq_id.innerHTML = result[element]['reverse'][Object.keys(result[element]['reverse'])[0]]['seq_id'];
   r_flank.innerHTML = 'reverse';
-  r_primer_id.innertHTML = Object.keys(result[element]['reverse'])[0];
+  r_primer_id.innerHTML = Object.keys(result[element]['reverse'])[0];
   r_start.innerHTML = result[element]['reverse'][Object.keys(result[element]['reverse'])[0]]['start'];
   r_sequence.innerHTML = result[element]['reverse'][Object.keys(result[element]['reverse'])[0]]['seq'];
 
