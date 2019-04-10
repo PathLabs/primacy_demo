@@ -20,7 +20,7 @@
                 <span class="tooltiptext">Sodium</span>
               </div>
             </td>
-            <td><input id="pcr_na" type="number" size="1" value="50" min="0"></td>
+            <td><input id="pcr_na" onClick="this.select();" type="number" size="1" value="50" min="0"></td>
           </tr>
 
           <tr>
@@ -30,7 +30,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_k" type="number" size="1" value="0" min="0">
+              <input id="pcr_k" onClick="this.select();" type="number" size="1" value="0" min="0">
             </td>
           </tr>
           <tr>
@@ -40,7 +40,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_tris" type="number" size="1" value="0" min="0">
+              <input id="pcr_tris" onClick="this.select();" type="number" size="1" value="0" min="0">
             </td>
           </tr>
 
@@ -51,7 +51,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_mg" type="number" size="1" value="0" min="0">
+              <input id="pcr_mg" onClick="this.select();" type="number" size="1" value="0" min="0">
             </td>
           </tr>
 
@@ -62,7 +62,7 @@
               </div>
             </td>
             <td>
-              <input id="pcr_dntps" type="number" size="1" value="0" min="0">
+              <input id="pcr_dntps" onClick="this.select();" type="number" size="1" value="0" min="0">
             </td>
           </tr>
         </table>
@@ -110,7 +110,7 @@
                     <span class="tooltiptext">Set the title of the primer</span>
                   </div>
                 </td>
-                <td><input type="text" id="manual_label" class="input"></td>
+                <td><input type="text" id="manual_label" class="input" onClick="this.select();"></td>
               </tr>
 
               <tr class="smaller_row">
@@ -140,19 +140,19 @@
               <tbody>
                 <tr>
                   <td>
-                    <div>Target Start:</div><input type="number" min="0" id="default_target_start" class="target_start">
+                    <div>Target Start:</div><input onClick="this.select();" type="number" min="0" id="default_target_start" class="target_start">
                   </td>
 
                   <td>
-                    <div>Target End:</div><input type="number" min="0" id="default_target_end" class="target_end">
+                    <div>Target End:</div><input onClick="this.select();" type="number" min="0" id="default_target_end" class="target_end">
                   </td>
 
                   <td>
-                    <div>Min Length:</div><input type="number" min="0" id="default_min_length" class="length_min">
+                    <div>Min Length:</div><input onClick="this.select();" type="number" min="0" id="default_min_length" class="length_min">
                   </td>
 
                   <td>
-                    <div>Max Length:</div><input type="number" min="0" id="default_max_length" class="length_max">
+                    <div>Max Length:</div><input onClick="this.select();" type="number" min="0" id="default_max_length" class="length_max">
                   </td>
                 </tr>
               </tbody>
@@ -165,7 +165,7 @@
 
       <div id="sequence_search">
         <img src="../img/search.png" width="20px" height="20px" id="search_icon">
-        <input type="text" id="search_box">
+        <input type="text" id="search_box" onClick="this.select();">
       </div>
       <div id="sequence_identifiers" class="box">
         <div id="sequence_picker_template">
