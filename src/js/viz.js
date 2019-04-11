@@ -57,17 +57,17 @@ function parse_data(direction, field) {
   var yData = [];
 
   if (direction === "forward") {
-    for (var i = 0; i < paths_array.length; i++) {
-      var data = JSON.parse(
+    for (let i = 0; i < paths_array.length; i++) {
+      let data = JSON.parse(
         fs.readFileSync(path.resolve(paths_array[i]), "UTF-8")
       );
 
       for (var j = 0; j < Object.keys(data).length; j++) {
-        var sequence_id = Object.keys(data)[j];
-        var values = [];
+        let sequence_id = Object.keys(data)[j];
+        let values = [];
         xData.unshift(sequence_id);
         forward_primers = Object.keys(data[sequence_id].forward);
-        for (var k = 0; k < forward_primers.length; k++) {
+        for (let k = 0; k < forward_primers.length; k++) {
           values.push(data[sequence_id].forward[forward_primers[k]][field]);
         }
         yData.unshift(values);
@@ -76,18 +76,18 @@ function parse_data(direction, field) {
   }
 
   if (direction === "reverse") {
-    for (var i = 0; i < paths_array.length; i++) {
-      var data = JSON.parse(
+    for (let i = 0; i < paths_array.length; i++) {
+      let data = JSON.parse(
         fs.readFileSync(path.resolve(paths_array[i]), "UTF-8")
       );
 
-      for (var j = 0; j < Object.keys(data).length; j++) {
+      for (let j = 0; j < Object.keys(data).length; j++) {
         var sequence_id = Object.keys(data)[j];
         if (data[sequence_id].hasOwnProperty("reverse")) {
-          var values = [];
+          let values = [];
           xData.unshift(sequence_id);
           reverse_primers = Object.keys(data[sequence_id].reverse);
-          for (var k = 0; k < forward_primers.length; k++) {
+          for (let k = 0; k < forward_primers.length; k++) {
             values.push(data[sequence_id].reverse[reverse_primers[k]][field]);
           }
           yData.unshift(values);
