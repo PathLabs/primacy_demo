@@ -7,6 +7,15 @@
 
   </head>
   <body>
+    <div class="row" style="background-color:lightblue">
+    
+      <table id="atRiskSeqs" style="width:75%">
+  <tr>
+    <th>Sequence ID</th>
+    <th>Count</th>
+  </tr>
+</table>
+    </div>
     <div class="row">
       <center><div id="tm_f_div"></div>
         <br>
@@ -16,15 +25,7 @@
           <br>
         <center><div id="gc_r_div"></div>
 
-          <br>
-          <center><div id="start_f_div"></div>
-            <br>
-          <center><div id="start_r_div"></div>
 
-            <br>
-            <center><div id="rank_f_div"></div>
-              <br>
-            <center><div id="rank_r_div"></div>
     </div>
 
     <div class="tab_container">
@@ -39,10 +40,7 @@
   <script> create_viz_spec('reverse', 'tm', "tm_r_div")</script>
   <script> create_viz_spec('forward', 'gc', "gc_f_div")</script>
   <script> create_viz_spec('reverse', 'gc', "gc_r_div")</script>
-  <script> create_viz_spec('forward', 'start', "start_f_div")</script>
-  <script> create_viz_spec('reverse', 'start', "start_r_div")</script>
-  <script> create_viz_spec('forward', 'rank', "rank_f_div")</script>
-  <script> create_viz_spec('reverse', 'rank', "rank_r_div")</script>
+
 
 
 
