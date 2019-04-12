@@ -9,7 +9,7 @@
 
 
 const { app, BrowserWindow, Menu } = require('electron');
-const child_process               = require('child_process');
+const child_process                = require('child_process');
 
 const ipcMain = require('electron').ipcMain;
 
@@ -19,6 +19,7 @@ var fs = require('fs');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected
 let win;
+let viz;
 
 var current_json = {};
 var visited_modules  = {
@@ -165,6 +166,36 @@ function execPipeline(cmd, args, callback) {
 }
 
 
+function showViz(viz_num) { 
+    switch(viz_num) {
+        case 1: 
+            if(!visited_modules[1].executed) return false;
+            break;
+        
+        case 2: 
+            if(!visited_modules[2].executed) return false;
+            break;
+        
+        default: 
+            return false;
+    }
+
+    viz = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
+
+    viz.on('closed', function() {
+        viz = null;
+    })
+
+    viz.loadURL('file:///' + __dirname + '/src/html/module' + viz_num.toString() + '_viz.html');
+    
+    viz.webContents.once('dom-ready', () => {
+        viz.webContents.send('NEW', JSON.stringify(current_json));
+    });
+
+    return true;
+}
+
+
 /* CORE WINDOW EVENTS */
 
 app.on('ready', initial);
@@ -187,10 +218,13 @@ app.on('activate', () => {
 });
 
 
-
-
-
 /* IPC EVENTS */
+
+ipcMain.on('LOADVIZ', (event, viz_num) => {
+    if(showViz(viz_num)) {
+        console.log('opening viz number:', viz_num);
+    }
+}); 
 
 // Attempt to load a page
 ipcMain.on('LOADMODULE', (event, module_number) =>  {
