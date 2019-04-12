@@ -29,6 +29,7 @@ const metadata_upload = document.getElementById('metadata_upload');
 const module_3 = document.getElementById('module3');
 const module_4 = document.getElementById('module4');
 const submit = document.getElementById('nextModule');
+const execute = document.getElementById('execute');
 const default_target_start = document.getElementById('default_target_start');
 const default_target_end = document.getElementById('default_target_end');
 const default_min_length = document.getElementById('default_min_length');
@@ -714,11 +715,16 @@ module_4.addEventListener('click', function() {
 });
 
 
-submit.addEventListener('click', function() {
+execute.addEventListener('click', function() {
     sendMessage('EXECUTE', ['primacy primer-collection', JSON.stringify(state.toJSON())]);
     console.log('attempting execution');
 })
 
+
+submit.addEventListener('click', function() {
+    sendMessage('LOADMODULE', 2);
+    console.log('attempting execution');
+})
 
 // Intercept NEW message and bootstrap the page
 ipcRenderer.on('NEW', (event, arg) => {
@@ -733,7 +739,7 @@ ipcRenderer.on('EXECUTE', (event, arg) => {
         console.log('Error during pipeline execution:');
         console.log(arg);
     } else {
-        sendMessage('LOADMODULE', 2);
+        sendMessage('LOADVIZ', 1);
     }
 });
 
