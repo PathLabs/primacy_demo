@@ -184,7 +184,7 @@ function showViz(viz_num) {
 
     viz.on('closed', function() {
         viz = null;
-    })
+    });
 
     viz.loadURL('file:///' + __dirname + '/src/html/module' + viz_num.toString() + '_viz.html');
     

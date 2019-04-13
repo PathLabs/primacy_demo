@@ -35,6 +35,7 @@ const default_min_length = document.getElementById('default_min_length');
 const default_max_length = document.getElementById('default_max_length');
 const search_box = document.getElementById('search_box');
 
+
 var manual_sequence = document.getElementById('manual_sequence');
 
 
@@ -390,12 +391,22 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
 
     // create label
     let label = document.createElement('div');
+    let target_region = document.createElement('div');
+    let target_start_label = document.createElement('div');
+    let target_start_input = document.createElement('input');
+    let target_end_label = document.createElement('div');
+    let target_end_input = document.createElement('input');
+    let length_min_label = document.createElement('div');
+    let length_min_input = document.createElement('input');
+    let length_max_label = document.createElement('div');
+    let length_max_input = document.createElement('input');
+    let remove_button = document.createElement('input');
+    
     label.className = 'sequence_name';
     label.innerHTML = identifier_label;
     cell.appendChild(label);
 
     // create target region label
-    let target_region = document.createElement('div');
     target_region.className = 'target_region';
 
     // attempt to populate the target region, if applicable
@@ -408,10 +419,8 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     // create target start label
     cell = row.insertCell();
 
-    let target_start_label = document.createElement('div');
     target_start_label.innerHTML = 'Target Start:';
 
-    let target_start_input = document.createElement('input');
     target_start_input.setAttribute('type', 'number');
     target_start_input.className = 'target_start';
 
@@ -420,6 +429,14 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     target_start_input.addEventListener('change', function(event) {
+        if(this.value < 0) {
+            this.value = 0;
+        }
+
+        if(parseInt(target_end_input.value) - parseInt(this.value) < 50) {
+            target_end_input.value = parseInt(this.value) + 50;
+        }
+
         state.alterTargetRegionIdentifier(identifier_label, target_start=parseInt(this.value), null, null, null);
 
         let target_region = state.getTargetRegionIdentifier(identifier_label);
@@ -438,10 +455,8 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     // create target end label
     cell = row.insertCell();
 
-    let target_end_label = document.createElement('div');
     target_end_label.innerHTML = 'Target End:';
 
-    let target_end_input = document.createElement('input');
     target_end_input.setAttribute('type', 'number');
     target_end_input.className = 'target_end';
 
@@ -450,6 +465,14 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     target_end_input.addEventListener('change', function() {
+        if(parseInt(this.value) < 0) {
+            this.value = 0;
+        }
+
+        if(parseInt(this.value) - parseInt(target_start_input.value) < 50) {
+            target_start_input.value = parseInt(this.value) - 50;
+        }
+
         state.alterTargetRegionIdentifier(identifier_label, null, target_end=parseInt(this.value), null, null);
 
         let target_region = state.getTargetRegionIdentifier(identifier_label);
@@ -468,10 +491,8 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     // create min length
     cell = row.insertCell();
 
-    let length_min_label = document.createElement('div');
     length_min_label.innerHTML = 'Min Length:';
 
-    let length_min_input = document.createElement('input');
     length_min_input.setAttribute('type', 'number');
     length_min_input.className = 'length_min';
 
@@ -480,6 +501,14 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     length_min_input.addEventListener('change', function() {
+        if(parseInt(this.value) < 18) {
+            this.value = 18;
+        }
+
+        if(parseInt(length_max_input.value) <= parseInt(this.value)) {
+            length_max_input.value = parseInt(this.value) + 1;
+        }
+
         state.alterTargetRegionIdentifier(identifier_label, null, null, length_min=parseInt(this.value), null);
     });
 
@@ -489,10 +518,8 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     // create max length
     cell = row.insertCell();
 
-    let length_max_label = document.createElement('div');
     length_max_label.innerHTML = 'Max Length:';
 
-    let length_max_input = document.createElement('input');
     length_max_input.setAttribute('type', 'number');
     length_max_input.className = 'length_max';
 
@@ -501,6 +528,14 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     length_max_input.addEventListener('change', function() {
+        if(parseInt(this.value) < 22) {
+            this.value = 22;
+        }
+
+        if(length_min_input.value > this.value) {
+            length_min_input.value = parseInt(this.value) - 1;
+        }
+
         state.alterTargetRegionIdentifier(identifier_label, null, null, null, length_max=parseInt(this.value));
     });
 
@@ -508,7 +543,6 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     cell.appendChild(length_max_input);
 
     cell = row.insertCell();
-    let remove_button = document.createElement('input');
     remove_button.setAttribute('type', 'submit');
     remove_button.setAttribute('value', 'Remove');
     remove_button.addEventListener('click', function() {
