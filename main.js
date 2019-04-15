@@ -21,6 +21,13 @@ var fs = require('fs');
 let win;
 let viz;
 
+// get the PID of our current process, for sandboxing uses
+let pid = process.pid;
+
+// create a run prefix directory
+let prefix = __dirname + '/pipeline/' + pid.toString()
+fs.mkdirSync(prefix);
+
 var current_json = {};
 var visited_modules  = {
     1: {
@@ -149,11 +156,14 @@ function execPipeline(cmd, args, callback) {
         current_json[key] = args_json[key];
     }
 
-    fs.writeFileSync(__dirname + '/args.json', JSON.stringify(current_json));
+    fs.writeFileSync(prefix + '/args.json', JSON.stringify(current_json));
 
-    child_process.exec(cmd + ' ' + __dirname + '/args.json', (error, stdout, stderr) => {
+
+    console.log(cmd + ' ' + prefix + '/args.json' + ' ' + prefix);
+
+    child_process.exec(cmd + ' ' + prefix + '/args.json' + ' ' + prefix, (error, stdout, stderr) => {
         // Read back in file
-        data = fs.readFileSync(__dirname + '/args.json', 'utf-8');
+        data = fs.readFileSync(prefix + '/args.json', 'utf-8');
 
         console.log(data.toString());
 
