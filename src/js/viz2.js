@@ -2,13 +2,17 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const { ipcRenderer } = require("electron");
+// store score values for updating primer counts in the viz
+var scores = {'forward': {},
+              'reverse': {}
+};
 
-// pipeline output after running module 1
+// pipeline output after running module 2
 var pipeline_mod_2_output = "Sa_50_collection_out.json";
 
 
 /**
-* Desc: This function extracts paths for every single sequence JSON file created after module 1
+* Desc: This function extracts paths for every single sequence JSON file created after module 2
 *
 * Args:
 *     Path to the module 2 output JSON
@@ -45,7 +49,7 @@ function get_paths(json_file_path) {
 *
 * Returns:
 *      Array containing two arrays with x and y values where x is the sequence names and y is the values for the
-*      respective fields (x and y must be the same length and every x value must match the y value)
+*      score values (x and y must be the same length and every x value must match the y value)
 */
 
 function parse_data(direction) {
@@ -53,22 +57,25 @@ function parse_data(direction) {
   var xData = [];
   var yData = [];
 
+
   if (direction === "forward") {
     for (let i = 0; i < paths_array.length; i++) {
       let data = JSON.parse(
         fs.readFileSync(path.resolve(paths_array[i]), "UTF-8")
       );
-
-      for (var j = 0; j < Object.keys(data).length; j++) {
-        let sequence_id = Object.keys(data)[j];
+        let sequence_id = Object.keys(data)[0];
         let values = [];
+        scores.forward[sequence_id] = {};
         xData.unshift(sequence_id);
         forward_primers = Object.keys(data[sequence_id].forward);
         for (let k = 0; k < forward_primers.length; k++) {
-          values.push(data[sequence_id].forward[forward_primers[k]]['score']);
+          score = data[sequence_id].forward[forward_primers[k]]['score'];
+          primer_id = forward_primers[k];
+          values.push(score);
+          scores.forward[sequence_id][primer_id] = score;
         }
         yData.unshift(values);
-      }
+
     }
   }
 
@@ -78,22 +85,27 @@ function parse_data(direction) {
         fs.readFileSync(path.resolve(paths_array[i]), "UTF-8")
       );
 
-      for (let j = 0; j < Object.keys(data).length; j++) {
-        var sequence_id = Object.keys(data)[j];
+
+        var sequence_id = Object.keys(data)[0];
         if (data[sequence_id].hasOwnProperty("reverse")) {
           let values = [];
+          scores.reverse[sequence_id] = {};
           xData.unshift(sequence_id);
           reverse_primers = Object.keys(data[sequence_id].reverse);
-          for (let k = 0; k < forward_primers.length; k++) {
-            values.push(data[sequence_id].reverse[reverse_primers[k]]['score']);
+          for (let k = 0; k < reverse_primers.length; k++) {
+            score = data[sequence_id].reverse[reverse_primers[k]]['score'];
+            primer_id = reverse_primers[k];
+            values.push(score);
+            scores.reverse[sequence_id][primer_id] = score;
           }
           yData.unshift(values);
         } else {
           continue;
         }
-      }
+
     }
   }
+
   return [xData, yData];
 }
 
@@ -184,10 +196,11 @@ function create_viz_spec(direction, div) {
   Plotly.newPlot(div, data, layout);
 }
 
-function update_forward_count(){
+function update_count(direction, percent_val){
   // TODO
 }
 
-function update_reverse_count(){
+
+function submit_primers(direction){
   // TODO
 }
