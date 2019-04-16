@@ -195,9 +195,25 @@ function create_viz_spec(direction, div) {
 
   Plotly.newPlot(div, data, layout);
 }
+function update_count_all(direction, percent_val){
+    // store all score values in an array
+    scores_arr = []
 
-function update_count(direction, percent_val){
-  // TODO
+    for (let i = 0; i < Object.keys(scores[direction]).length; i++) {
+      sequence_id = Object.keys(scores[direction])[i]
+      for (let j = 0; j < Object.keys(scores[direction][sequence_id]).length; j++){
+
+        // push every single score value in this array
+        primer_ids = Object.keys(scores[direction][sequence_id])
+        scores_arr.unshift(scores[direction][sequence_id][primer_id[j]]);
+      }
+    }
+
+    console.log(scores_arr.length);
+}
+
+function update_count_individual(direction, seq_id, percent_val){
+
 }
 
 
