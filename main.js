@@ -15,6 +15,8 @@ const ipcMain = require('electron').ipcMain;
 
 var fs = require('fs');
 
+const tar = require('tar');
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected
@@ -25,7 +27,7 @@ let viz;
 let pid = process.pid;
 
 // create a run prefix directory
-let prefix = __dirname + '/pipeline/' + pid.toString()
+let prefix = __dirname + '/pipeline/' + pid.toString();
 fs.mkdirSync(prefix);
 
 var current_json = {};
@@ -206,6 +208,43 @@ function showViz(viz_num) {
 }
 
 
+/**
+ * @brief create a save of the current pipeline state
+ *
+ * @param save_state_path file path to the tarball to save
+ */
+function createSaveState(save_state_path) {
+    // save the current state to args.json
+    fs.writeFileSync(prefix + '/args.json', JSON.stringify(current_json));
+    fs.writeFileSync(prefix + '/state.json', JSON.stringify(visited_modules));
+
+    // get a list of all files and directories making up the current state
+    let state_files = fs.readdirSync(prefix);
+
+    tar.c({gzip: true, file: save_state_path}, state_files);
+}
+
+
+/**
+ * @brief load a save state into the current pipeline state
+ *
+ * @param save_state_path file path to the saved tarball
+ */
+function loadSaveState(save_state_path) {
+    // clear out all files in the current state
+    let state_files = fs.readdirSync(prefix);
+    
+    for(let file of state_files) {
+        fs.unlink(prefix + file.toString(), err => {
+            if(err) console.log(err);
+        });
+    }
+
+    // 
+    tar.x({cwd: prefix, file: save_state_path});
+}
+
+
 /* CORE WINDOW EVENTS */
 
 app.on('ready', initial);
@@ -247,6 +286,8 @@ ipcMain.on('LOADMODULE', (event, module_number) =>  {
     } else {
         event.sender.send('LOADMODULE', 'DENIED');
     }
+
+    createSaveState('/home/chance/haha_poop.tar.gz');
 });
 
 // Attempt to execute pipeline with args
