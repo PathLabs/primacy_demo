@@ -22,7 +22,7 @@
 
 
             <label>Percent</label>
-            <input type="number" id="forward_percent" min="0" max="100" value="0" oninput="update_count_all('forward', this.value)" />
+            <input type="number" id="forward_percent" min="0" max="100" value="0" oninput="update_count_all('forward', this.value);" />
 
 
 
@@ -32,6 +32,13 @@
 
 
           </div>
+
+
+          <div>
+            <select id="forward_primers_select">
+          </select>
+          </div>
+
 
       </div>
   </div>
@@ -50,7 +57,7 @@
           <div>
 
             <label>Percent</label>
-            <input type="number" id="reverse_percent" min="0" max="100" value="0" onchange="update_reverse_count()" />
+            <input type="number" id="reverse_percent" min="0" max="100" value="0" oninput="update_count_all('reverse', this.value);" />
 
 
 
