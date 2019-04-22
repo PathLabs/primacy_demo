@@ -3,7 +3,7 @@ const path = require("path");
 const os = require("os");
 const { ipcRenderer } = require("electron");
 
-var table = document.getElementById("feature-table");
+var tableRef = document.getElementById("feature-table").getElementsByTagName('tbody')[0];;
 var optimize_out_json = JSON.parse(
   fs.readFileSync(
     path.resolve("src/assets/test_targets", "Sa_50_optimize_out.json"),
@@ -13,7 +13,7 @@ var optimize_out_json = JSON.parse(
 var result = optimize_out_json.set_optimization.result;
 
 for (element in result) {
-  var row_f = table.insertRow(1);
+  var row_f = tableRef.insertRow(0);
 
   var f_seq_id = row_f.insertCell(0);
   var f_flank = row_f.insertCell(1);
@@ -50,26 +50,26 @@ for (element in result) {
   f_mm2.innerHTML = result[element]["forward"][primer_id]["specificity"]["mm2"];
   f_mm3.innerHTML = result[element]["forward"][primer_id]["specificity"]["mm3"];
   f_degenerate.innerHTML = result[element]["forward"][primer_id]["degenerate"];
-  f_gc.innerHTML = result[element]["forward"][primer_id]["gc"];
+  f_gc.innerHTML = result[element]["forward"][primer_id]["gc"].toFixed(2);
   f_gc_clamp.innerHTML = result[element]["forward"][primer_id]["gc_clamp"];
-  f_tm.innerHTML = result[element]["forward"][primer_id]["tm"];
+  f_tm.innerHTML = result[element]["forward"][primer_id]["tm"].toFixed(2);
   f_homopolymers_percent.innerHTML =
-    result[element]["forward"][primer_id]["homopolymers"]["percent"];
+    result[element]["forward"][primer_id]["homopolymers"]["percent"].toFixed(2);
   f_homopolymers_run.innerHTML =
-    result[element]["forward"][primer_id]["homopolymers"]["run"];
+    result[element]["forward"][primer_id]["homopolymers"]["run"].toFixed(2);
   f_dimerization_percent.innerHTML =
-    result[element]["forward"][primer_id]["dimerization"]["percent"];
+    result[element]["forward"][primer_id]["dimerization"]["percent"].toFixed(2);
   f_dimerization_run.innerHTML =
-    result[element]["forward"][primer_id]["dimerization"]["run"];
+    result[element]["forward"][primer_id]["dimerization"]["run"].toFixed(2);
   f_dimerization_median.innerHTML =
-    result[element]["forward"][primer_id]["dimerization"]["median"];
+    result[element]["forward"][primer_id]["dimerization"]["median"].toFixed(2);
   f_dimerization_hairpin.innerHTML =
-    result[element]["forward"][primer_id]["dimerization"]["hairpin"];
-  f_rank.innerHTML = result[element]["forward"][primer_id]["rank"];
-  f_score.innerHTML = result[element]["forward"][primer_id]["score"];
+    result[element]["forward"][primer_id]["dimerization"]["hairpin"].toFixed(2);
+  f_rank.innerHTML = result[element]["forward"][primer_id]["rank"].toFixed(2);
+  f_score.innerHTML = result[element]["forward"][primer_id]["score"].toFixed(2);
   f_sequence.innerHTML = result[element]["forward"][primer_id]["seq"];
 
-  var row_r = table.insertRow(2);
+  var row_r = tableRef.insertRow(1);
 
   var r_seq_id = row_r.insertCell(0);
   var r_flank = row_r.insertCell(1);
@@ -105,23 +105,77 @@ for (element in result) {
   r_mm1.innerHTML = result[element]["reverse"][primer_id]["specificity"]["mm1"];
   r_mm2.innerHTML = result[element]["reverse"][primer_id]["specificity"]["mm2"];
   r_mm3.innerHTML = result[element]["reverse"][primer_id]["specificity"]["mm3"];
-  r_degenerate.innerHTML = result[element]["reverse"][primer_id]["degenerate"];
-  r_gc.innerHTML = result[element]["reverse"][primer_id]["gc"];
-  r_gc_clamp.innerHTML = result[element]["reverse"][primer_id]["gc_clamp"];
-  r_tm.innerHTML = result[element]["reverse"][primer_id]["tm"];
+  r_degenerate.innerHTML = result[element]["reverse"][primer_id]["degenerate"].toFixed(2);
+  r_gc.innerHTML = result[element]["reverse"][primer_id]["gc"].toFixed(2);
+  r_gc_clamp.innerHTML = result[element]["reverse"][primer_id]["gc_clamp"].toFixed(2);
+  r_tm.innerHTML = result[element]["reverse"][primer_id]["tm"].toFixed(2);
   r_homopolymers_percent.innerHTML =
-    result[element]["reverse"][primer_id]["homopolymers"]["percent"];
+    result[element]["reverse"][primer_id]["homopolymers"]["percent"].toFixed(2);
   r_homopolymers_run.innerHTML =
-    result[element]["reverse"][primer_id]["homopolymers"]["run"];
+    result[element]["reverse"][primer_id]["homopolymers"]["run"].toFixed(2);
   r_dimerization_percent.innerHTML =
-    result[element]["reverse"][primer_id]["dimerization"]["percent"];
+    result[element]["reverse"][primer_id]["dimerization"]["percent"].toFixed(2);
   r_dimerization_run.innerHTML =
-    result[element]["reverse"][primer_id]["dimerization"]["run"];
+    result[element]["reverse"][primer_id]["dimerization"]["run"].toFixed(2);
   r_dimerization_median.innerHTML =
-    result[element]["reverse"][primer_id]["dimerization"]["median"];
+    result[element]["reverse"][primer_id]["dimerization"]["median"].toFixed(2);
   r_dimerization_hairpin.innerHTML =
-    result[element]["reverse"][primer_id]["dimerization"]["hairpin"];
-  r_rank.innerHTML = result[element]["reverse"][primer_id]["rank"];
-  r_score.innerHTML = result[element]["reverse"][primer_id]["score"];
+    result[element]["reverse"][primer_id]["dimerization"]["hairpin"].toFixed(2);
+  r_rank.innerHTML = result[element]["reverse"][primer_id]["rank"].toFixed(2);
+  r_score.innerHTML = result[element]["reverse"][primer_id]["score"].toFixed(2);
   r_sequence.innerHTML = result[element]["reverse"][primer_id]["seq"];
 }
+
+function download_csv(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    // CSV FILE
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // We have to create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Make sure that the link is not displayed
+    downloadLink.style.display = "none";
+
+    // Add the link to your DOM
+    document.body.appendChild(downloadLink);
+
+    // Lanzamos
+    downloadLink.click();
+}
+
+function export_table_to_csv(html, filename) {
+	var csv = [];
+	var rows = document.querySelectorAll("table tr");
+
+    for (var i = 0; i < rows.length; i++) {
+		var row = [], cols = rows[i].querySelectorAll("td, th");
+
+        for (var j = 0; j < cols.length; j++)
+            row.push(cols[j].innerText);
+
+		csv.push(row.join(","));
+	}
+
+    // Download CSV
+    download_csv(csv.join("\n"), filename);
+}
+
+document.querySelector("button").addEventListener("click", function () {
+    var html = document.querySelector("table").outerHTML;
+	export_table_to_csv(html, "table.csv");
+});
+
+
+$(document).ready(function () {
+$('#feature-table').DataTable();
+$('.dataTables_length').addClass('bs-select');
+});

@@ -705,27 +705,3 @@ input[type="range"]::-webkit-slider-thumb:hover {
   cursor: pointer;
   pointer-events: all;
 }
-
-#feature-table {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#feature-table td,
-#feature-table th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#feature-table tr:hover {
-  background-color: grey;
-}
-
-#feature-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4caf50;
-  color: white;
-}

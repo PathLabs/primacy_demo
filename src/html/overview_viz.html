@@ -2,11 +2,16 @@
   <head>
     <meta charset="UTF-8" />
     <title>Overview</title>
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/dataTables.bootstrap4.min.css">
+    <!-- <link rel="stylesheet" href="../css/style.css" /> -->
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script type="text/javascript" src="../js/addons/datatables.min.js"></script>
   </head>
 
   <body style="background:white;">
-    <table id="feature-table">
+    <table id="feature-table" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+      <thead>
       <tr>
         <th>Sequence</th>
         <th>Flank</th>
@@ -31,7 +36,12 @@
         <th>Score</th>
         <th>Primer Sequence</th>
       </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
     </table>
+    <button>Export to CSV</button>
   </body>
   <script src="../js/overview.js"></script>
 </html>
