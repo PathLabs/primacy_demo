@@ -150,11 +150,12 @@ function create_viz_spec(direction, field, div) {
   }
 
   layout = {
-    title: field + " Box Plot Chart for " + direction + " primers",
+    title: field + " values for " + direction + " primers",
     autosize: false,
     width: 800,
     height: 450,
     yaxis: {
+      title: field + " value",
       autorange: true,
       showgrid: true,
       zeroline: true,
@@ -163,6 +164,11 @@ function create_viz_spec(direction, field, div) {
       gridwidth: 1,
       zerolinecolor: "rgb(255, 255, 255)",
       zerolinewidth: 2
+    },
+    xaxis: {
+      title: "Sequence",
+      autorange: true,
+      tickmode: "linear"
     },
     margin: {
       l: 50,

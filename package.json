@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "electron-tabs": "^0.9.4",
+    "jquery": "^3.4.0",
     "papaparse": "^4.6.3"
   },
   "build": {
