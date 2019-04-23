@@ -2,10 +2,12 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const { ipcRenderer } = require("electron");
+const jsonq = require("jsonq");
+
 // store score values for updating primer counts in the viz
 var scores = {
-  forward: { values: [] },
-  reverse: { values: [] }
+  forward: {},
+  reverse: {}
 };
 
 // pipeline output after running module 2
@@ -69,10 +71,10 @@ function parse_data(direction) {
       for (let k = 0; k < forward_primers.length; k++) {
         score = data[sequence_id].forward[forward_primers[k]]["score"];
         primer_id = forward_primers[k];
-        scores.forward.values.push(score);
         values.push(score);
         scores.forward[sequence_id][primer_id] = score;
       }
+      scores.forward[sequence_id].score_values = values;
       yData.unshift(values);
     }
   }
@@ -92,10 +94,10 @@ function parse_data(direction) {
         for (let k = 0; k < reverse_primers.length; k++) {
           score = data[sequence_id].reverse[reverse_primers[k]]["score"];
           primer_id = reverse_primers[k];
-          scores.reverse.values.push(score);
           values.push(score);
           scores.reverse[sequence_id][primer_id] = score;
         }
+        scores.reverse[sequence_id].score_values = values;
         yData.unshift(values);
       } else {
         continue;
@@ -155,7 +157,7 @@ function create_viz_spec(direction, div) {
   }
 
   layout = {
-    title: "Score" + " Box Plot Chart for " + direction + " primers",
+    title: direction + " primer scores",
     autosize: false,
     width: 800,
     height: 450,
@@ -194,23 +196,6 @@ function create_viz_spec(direction, div) {
 
 
 function update_count_all(direction, percent_val) {
-  score_values = scores[direction].values;
-  // sort the array of values
-  score_values.sort(function(a, b) {
-  return a - b;
-  });
-
-  count = Math.round(score_values.length/percent_val)
-  if (direction === 'forward'){
-      htmlCount = document.getElementById('forward_count');
-  }
-  else{
-    htmlCount = document.getElementById('reverse_count');
-  }
-
-  htmlCount.value = count;
-
-
 
 }
 
@@ -219,3 +204,5 @@ function update_count_individual(direction, seq_id, percent_val) {}
 function submit_primers(direction) {
   // TODO
 }
+
+console.log(scores);
