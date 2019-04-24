@@ -574,7 +574,6 @@ function search(search_str) {
     }
 
     // for each query, highlight any matches
-    var search_tally = 0;
     for(let query = 0; query < search_str.length; query++) {
         for(let i = 0; i < target_sequences.length; i++) {
             let element = target_sequences[i];
@@ -584,11 +583,9 @@ function search(search_str) {
 
             if(sequence.search(search_str[query]) >= 0 || label.search(search_str[query]) >= 0) {
                 element.classList.add('selected');
-                search_tally++;
             }
         }
     }
-    return search_tally;
 }
 
 
@@ -729,13 +726,8 @@ function sendMessage(channel, message) {
 
 
 search_box.addEventListener('change', function() {
-    search_box.style.border = "none";
     search(search_box.value);
     console.log("searching for "+search_box.value)
-    if(search(search_box.value)==0) {
-        console.log("no results found");
-        search_box.style.border = "2px solid red";
-    }
 });
 
 
