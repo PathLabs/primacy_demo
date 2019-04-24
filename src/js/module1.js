@@ -402,7 +402,7 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     let length_max_label = document.createElement('div');
     let length_max_input = document.createElement('input');
     let remove_button = document.createElement('input');
-    
+
     label.className = 'sequence_name';
     label.innerHTML = identifier_label;
     cell.appendChild(label);
@@ -781,6 +781,11 @@ ipcRenderer.on('EXECUTE', (event, arg) => {
 // Intercept module load denials
 ipcRenderer.on('LOADMODULE', (event, arg) => {
     console.log('Module load denied');
+    submit.style.borderColor = "red";
+    setTimeout(function(){
+      submit.style.borderColor = "black";
+    }, 150);
+
 });
 
 
