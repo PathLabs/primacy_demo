@@ -25,6 +25,7 @@ const gc_max  = document.getElementById('gcMax');
 const tm_slider  = document.getElementById('tmSlider');
 const gc_slider  = document.getElementById('gcSlider');
 const homopolymer  = document.getElementById('hpoly');
+const hpolySlider  = document.getElementById('hpolySlider');
 const dimerz_slider = document.getElementById('dimerzSlider');
 const specificity  = document.getElementById('specifSlider');
 const degenerate  = document.getElementById('degenSlider');
