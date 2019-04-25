@@ -1,5 +1,5 @@
 {
-  "name": "primacy_demo",
+  "name": "primacy_gui",
   "version": "0.0.1",
   "description": "This is a demo for the Primacy GUI which will be later implemented with complete functionality. The goal of this demo is to showcase the capabilities of Electron JS and also give our client a good idea of how the completed product might look. ",
   "main": "main.js",
@@ -14,8 +14,9 @@
   },
   "dependencies": {
     "electron-tabs": "^0.9.4",
-    "papaparse": "^4.6.3",
-    "tar": "^4.4.8"
+    "tar": "^4.4.8",
+    "jquery": "^3.4.0",
+    "papaparse": "^4.6.3"
   },
   "build": {
     "win": {

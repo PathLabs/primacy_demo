@@ -18,20 +18,16 @@ const module3 = document.getElementById("module3");
 const tm_opt = document.getElementById('tm_opt');
 const tm = document.getElementById('tm')
 const gc = document.getElementById('gc')
-
 const gc_min_slider  = document.getElementById('gcMinSlider');
 const gc_max_slider  = document.getElementById('gcMaxSlider');
 const gc_min  = document.getElementById('gcMin');
 const gc_max  = document.getElementById('gcMax');
-
 const tm_slider  = document.getElementById('tmSlider');
 const gc_slider  = document.getElementById('gcSlider');
 const homopolymer  = document.getElementById('hpoly');
 const dimerz_slider = document.getElementById('dimerzSlider');
 const specificity  = document.getElementById('specifSlider');
 const degenerate  = document.getElementById('degenSlider');
-
-
 const tm_chkbx  = document.getElementById('tmCheckbox');
 const gc_chkbx  = document.getElementById('gcCheckbox');
 const homopolymer_chkbx  = document.getElementById('hpolyCheckbox');
@@ -40,7 +36,7 @@ const specificity_chkbx  = document.getElementById('specifCheckbox');
 const degenerate_chkbx  = document.getElementById('degenCheckbox');
 
 const submit_button = document.getElementById("nextModule");
-
+const execute_button = document.getElementById('execute');
 
 var last_module_results = {};
 var current_module_args = {};
@@ -80,36 +76,6 @@ function init(json) {
     degen.value = 1;
     degenSlider.value = 1;
 }
-
-//listening
-ipcRenderer.on('EXECUTE', (event, arg) =>{
-    if(arg != null){
-        console.log("error received");
-    } else {
-        console.log("sending load message");
-        sendMessage('LOADMODULE', 3);
-    }
-});
-
-ipcRenderer.on('NEW', (event, arg) =>{
-    console.log("NEW received");
-    init(arg);
-});
-
-ipcRenderer.on('LOADMODULE', (event, arg) =>{
-    console.log("DENIED");
-});
-
-//loads tab on click
-module1.addEventListener('click', function (){
-    console.log("click");
-    sendMessage('LOADMODULE', 1);
-});
-
-module3.addEventListener('click', function (){
-    console.log("click");
-    sendMessage('LOADMODULE', 3);
-});
 
 
 tm_opt.addEventListener('change', function(){
@@ -255,4 +221,56 @@ degenerate_chkbx.addEventListener('change', function() {
         degen.value = 0;
         degenSlider.value = 0;
     }
+});
+
+
+//listening
+ipcRenderer.on('EXECUTE', (event, arg) =>{
+    if(arg != null){
+        console.log("error received");
+    } else {
+        console.log("sending load message");
+        sendMessage('LOADMODULE', 3);
+    }
+});
+
+ipcRenderer.on('NEW', (event, arg) =>{
+    console.log("NEW received");
+    init(arg);
+});
+
+ipcRenderer.on('LOADMODULE', (event, arg) =>{
+    console.log("DENIED");
+});
+
+//loads tab on click
+module1.addEventListener('click', function (){
+    console.log("click");
+    sendMessage('LOADMODULE', 1);
+});
+
+module3.addEventListener('click', function (){
+    console.log("click");
+    sendMessage('LOADMODULE', 3);
+});
+
+
+// Intercept response to EXECUTE request
+ipcRenderer.on('EXECUTE', (event, arg) => {
+    if(arg != null) {
+        console.log('Error during pipeline execution:');
+        console.log(arg);
+    } else {
+        sendMessage('LOADVIZ', 2);
+    }
+});
+
+
+// Intercept module load denials
+ipcRenderer.on('LOADMODULE', (event, arg) => {
+    console.log('Module load denied');
+    submit_button.style.borderColor = "red";
+    setTimeout(function(){
+      submit_button.style.borderColor = "black";
+    }, 150);
 });
