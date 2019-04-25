@@ -38,16 +38,104 @@ const degenerate_chkbx  = document.getElementById('degenCheckbox');
 const submit_button = document.getElementById("nextModule");
 const execute_button = document.getElementById('execute');
 
-var last_module_results = {};
-var current_module_args = {};
+var state = null;
 
 function sendMessage(channel, message){
   ipcRenderer.send(channel, message);
 }
 
-
+/*
+{...
+    primer_scores: {
+        params: {
+            tm_opt: {
+                type: number,
+                default: 55
+            },
+            gc_opt: {
+                min: {
+                    type: number,
+                    default: 40
+                },
+                max: {
+                    type: number,
+                    default: 60
+                }
+            },
+            weights: {
+                tm: {
+                    type: number,
+                    default: 1
+                },
+                gc: {
+                    type: number,
+                    default: 1
+                },
+                homopolymer: {
+                    type: number,
+                    default: 1
+                },
+                dimer: {
+                    type: number,
+                    default: 1
+                },
+                specificity: {
+                    type: number,
+                    default: 1
+                },
+                degenerate: {
+                    type: number,
+                    default: 1
+                }
+            }
+        }
+    }
+}
+ */
 
 function init(json) {
+    // save current state
+    state = json;
+
+    // check for previous state
+    if(json['primer-scoring']) {
+        // bootstrap current inputs
+        
+        // tm's
+        let tm = json['primer-scoring']['params'];
+
+        // tm_opt
+        let val = parseInt(tm['tm_opt']);
+        tm_opt.value = val; 
+        tm.value = val;
+
+        // gc_opt
+        val = parseInt(tm['gc_opt']['min'])
+        gc_min.value = val;
+        gc_min_slider.value = val;
+
+        val = parseInt(tm['gc_opt']['max'])
+        gc_max.value = val;
+        gc_max_slider.value = val;
+
+        // weights
+        let weights = json['primer-scoring']['params']['weights'];
+
+        // tm
+        val = weights['tm'];
+        tm_slider.value = val;
+
+        // gc
+        val = weights['gc'];
+        gc_slider.value = gc;
+
+        val = weights['homopolymer'];
+        homopolymer
+
+        return;
+    }
+
+
     current_module_args = json[0];
     last_module_results = json[1]
 
@@ -236,7 +324,7 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
 
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
-    init(arg);
+    init(JSON.parse(arg));
 });
 
 ipcRenderer.on('LOADMODULE', (event, arg) =>{
