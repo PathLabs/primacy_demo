@@ -39,29 +39,86 @@ const degenerate_chkbx  = document.getElementById('degenCheckbox');
 const submit_button = document.getElementById("nextModule");
 const execute_button = document.getElementById('execute');
 
-var last_module_results = {};
-var current_module_args = {};
 
 function sendMessage(channel, message){
   ipcRenderer.send(channel, message);
 }
 
-
+var state = {primer_scores: {}};
 
 function init(json) {
-    current_module_args = json[0];
-    last_module_results = json[1]
+    state = json;
 
-    if(current_module_args) {
-        tm_opt.value = current_module_args['tm_opt'];
-        gc_min_slider.value = current_module_args['gc_min'];
-        gc_max_slider.value = current_module_args['gc_max'];
-        tm.value = current_module_args['tm'];
-        gc.value = current_module_args['gc'];
-        homopolymer.value = current_module_args['homopolymer'];
-        specificity.value = current_module_args['specificity'];
-        degenerate.value = current_module_args['specificity'];
+    // check for previous state
+    if(json['primer_scores']) {
+        console.log(json['primer_scores'])
+        // bootstrap current inputs
+        
+        // tm's
+        let tm = json['primer_scores']['params'];
+
+        // tm_opt
+        let val = parseInt(tm['tm_opt']);
+        tm_opt.value = val; 
+        tm.value = val;
+
+        // gc_opt
+        val = parseInt(tm['gc_opt']['min'])
+        gc_min.value = val;
+        gc_min_slider.value = val;
+
+        val = parseInt(tm['gc_opt']['max'])
+        gc_max.value = val;
+        gc_max_slider.value = val;
+
+        // weights
+        let weights = json['primer_scores']['params']['weights'];
+
+        // tm
+        val = weights['tm'];
+        tm_slider.value = val;
+
+        // gc
+        val = weights['gc'];
+        gc_slider.value = gc;
+
+        // homopolymer
+        val = weights['homopolymer'];
+        hpolySlider.value = val;
+
+        // dimer
+        val = weights['dimer'];
+        dimerz_slider.value = val;
+
+        // specificity
+        val = weights['specificity'];
+        specificity.value = val;
+
+        // degenerate
+        val = weights['degenerate'];
+        degenerate.value = val;
+
+        return;
     }
+
+    // no past state. Init JSON and inputs
+    state.primer_scores = {
+        params: {
+            tm_opt: 55,
+            gc_opt: {
+                min: 40,
+                max: 60
+            },
+            weights: {
+                tm: 1,
+                gc: 1,
+                homopolymer: 1,
+                dimer: 1,
+                specificity: 1,
+                degenerate: 1
+            }
+        }
+    };
 
     tm_opt.value = 55;
     gc_min.value= 40;
@@ -78,73 +135,70 @@ function init(json) {
     degenSlider.value = 1;
 }
 
-
 tm_opt.addEventListener('change', function(){
-  current_module_args['tm_opt'] = parseInt(tm_opt.value);
+    state['primer_scores']['params']['tm_opt'] = parseInt(tm_opt.value);
 });
 
 gc_min_slider.addEventListener('change', function(){
-  current_module_args['gc_min'] = parseInt(gc_min_slider.value);
+    state['primer_scores']['params']['gc_min'] = parseInt(gc_min_slider.value);
 });
 
 gc_max_slider.addEventListener('change', function(){
-  current_module_args['gc_max'] = parseInt(gc_max_slider.value);
+    state['primer_scores']['params']['gc_max'] = parseInt(gc_max_slider.value);
 });
 
 
 tm_chkbx.addEventListener('change', function(){
   if (tm_chkbx.checked){
-    current_module_args['tm'] = parseInt(tm.value);
+    state['primer_scores']['params']['tm'] = parseInt(tm.value);
   }
   else{
-    current_module_args['tm'] = 0;
+    state['primer_scores']['params']['tm'] = 0;
   }
 });
 
 gc_chkbx.addEventListener('change', function(){
     if (gc_chkbx.checked){
-      current_module_args['gc'] = parseInt(gc.value);
+      state['primer_scores']['params']['gc'] = parseInt(gc.value);
     }
     else{
-      current_module_args['gc'] = 0;
+      state['primer_scores']['params']['gc'] = 0;
     }
   });
 
 homopolymer_chkbx.addEventListener('change', function(){
       if (homopolymer_chkbx.checked){
-        current_module_args['homopolymer'] = parseInt(homopolymer.value);
+        state['primer_scores']['params']['homopolymer'] = parseInt(homopolymer.value);
       }
       else{
-        current_module_args['homopolymer'] = 0;
+        state['primer_scores']['params']['homopolymer'] = 0;
       }
     });
 
 specificity_chkbx.addEventListener('change', function(){
       if (specificity_chkbx.checked){
-        current_module_args['specificity'] = parseInt(specificity.value);
+        state['primer_scores']['params']['specificity'] = parseInt(specificity.value);
       }
       else{
-        current_module_args['specificity'] = 0;
+        state['primer_scores']['params']['specificity'] = 0;
       }
     });
 
 degenerate_chkbx.addEventListener('change', function(){
       if (degenerate_chkbx.checked){
-        current_module_args['degenerate'] = parseInt(degenerate.value);
+        state['primer_scores']['params']['degenerate'] = parseInt(degenerate.value);
       }
 
       else{
-        current_module_args['degenerate'] = 0;
+        state['primer_scores']['params']['degenerate'] = 0;
       }
 
 });
 
-
-
 nextModule.addEventListener('click', function () {
     try {
-        json_string = JSON.stringify(current_module_args);
-        sendMessage('EXECUTE', ['primacy2.py', json_string]);
+        json_string = JSON.stringify(state);
+        sendMessage('EXECUTE', ['primacy primer-score', json_string]);
 
         console.log("message sent");
     } catch(e) {
@@ -224,7 +278,6 @@ degenerate_chkbx.addEventListener('change', function() {
     }
 });
 
-
 //listening
 ipcRenderer.on('EXECUTE', (event, arg) =>{
     if(arg != null){
@@ -237,7 +290,8 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
 
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
-    init(arg);
+    console.log(arg);
+    init(JSON.parse(arg));
 });
 
 ipcRenderer.on('LOADMODULE', (event, arg) =>{
@@ -255,7 +309,6 @@ module3.addEventListener('click', function (){
     sendMessage('LOADMODULE', 3);
 });
 
-
 // Intercept response to EXECUTE request
 ipcRenderer.on('EXECUTE', (event, arg) => {
     if(arg != null) {
@@ -265,7 +318,6 @@ ipcRenderer.on('EXECUTE', (event, arg) => {
         sendMessage('LOADVIZ', 2);
     }
 });
-
 
 // Intercept module load denials
 ipcRenderer.on('LOADMODULE', (event, arg) => {
