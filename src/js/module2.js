@@ -269,4 +269,8 @@ ipcRenderer.on('EXECUTE', (event, arg) => {
 // Intercept module load denials
 ipcRenderer.on('LOADMODULE', (event, arg) => {
     console.log('Module load denied');
+    submit_button.style.borderColor = "red";
+    setTimeout(function(){
+      submit_button.style.borderColor = "black";
+    }, 150);
 });
