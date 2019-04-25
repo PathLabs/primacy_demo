@@ -13,6 +13,8 @@ const child_process                = require('child_process');
 
 const ipcMain = require('electron').ipcMain;
 
+const {dialog} = require('electron');
+
 var fs = require('fs');
 
 const tar = require('tar');
@@ -107,7 +109,7 @@ function goToModule(module_number) {
         detail: 'Progress on current module will be lost.'
     };
 
-    if(module_number < current_module) {
+    if(module_number <= current_module) {
         response = require('electron').dialog.showMessageBox(null, options,(response) => {
           if (response == 0){
               win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
@@ -221,7 +223,12 @@ function createSaveState(save_state_path) {
     // get a list of all files and directories making up the current state
     let state_files = fs.readdirSync(prefix);
 
-    tar.c({gzip: true, file: save_state_path}, state_files);
+    //for(let i = 0; i < state_files.length; i++) {
+    //    state_files[i] = 'pipeline/' + pid.toString() + '/' + state_files[i];
+    //}
+
+    tar.c({gzip: true, file: save_state_path, cwd: prefix}, state_files);
+    console.log(state_files, 'done')
 }
 
 
@@ -240,8 +247,27 @@ function loadSaveState(save_state_path) {
         });
     }
 
-    // 
-    tar.x({cwd: prefix, file: save_state_path});
+    // extract the state files 
+    tar.x({file: save_state_path, cwd: prefix, sync: true});
+
+    // Load in the args and state json files
+    current_json = JSON.parse(fs.readFileSync(prefix + '/args.json'));
+    visited_modules = JSON.parse(fs.readFileSync(prefix + '/state.json'));
+
+    // Find the most recently visited module
+    current_module = 1;
+
+    while(visited_modules[current_module['executed']]) {
+        current_module++;
+    }
+
+    // Jump to the most recent module
+    goToModule(current_module);
+    
+    // Send IPC message with the arguments to the current module
+    win.webContents.once('dom-ready', () => {
+        win.webContents.send('NEW', JSON.stringify(current_json));
+    });
 }
 
 
@@ -301,6 +327,17 @@ ipcMain.on('EXECUTE', (event, data) => {
 
 const template = [
   {
+    label: 'File',
+    submenu: [
+      {label: 'Save', click () {
+            createSaveState(dialog.showSaveDialog());
+      }},
+      {label: 'Load', click () {
+            loadSaveState(dialog.showOpenDialog()[0]);
+      }},
+    ]
+  },
+  {
     label: 'Edit',
     submenu: [
       { role: 'undo' },
@@ -313,7 +350,6 @@ const template = [
       { role: 'selectall' },
       { type: 'separator' },
       { label: 'Restore Defaults', role: 'reload'}
-
     ]
   },
   {
