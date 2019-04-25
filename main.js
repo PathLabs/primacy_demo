@@ -223,12 +223,7 @@ function createSaveState(save_state_path) {
     // get a list of all files and directories making up the current state
     let state_files = fs.readdirSync(prefix);
 
-    //for(let i = 0; i < state_files.length; i++) {
-    //    state_files[i] = 'pipeline/' + pid.toString() + '/' + state_files[i];
-    //}
-
     tar.c({gzip: true, file: save_state_path, cwd: prefix}, state_files);
-    console.log(state_files, 'done')
 }
 
 
@@ -312,8 +307,6 @@ ipcMain.on('LOADMODULE', (event, module_number) =>  {
     } else {
         event.sender.send('LOADMODULE', 'DENIED');
     }
-
-    createSaveState('/home/chance/haha_poop.tar.gz');
 });
 
 // Attempt to execute pipeline with args
