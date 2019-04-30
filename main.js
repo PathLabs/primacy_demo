@@ -13,7 +13,11 @@ const child_process                = require('child_process');
 
 const ipcMain = require('electron').ipcMain;
 
+const {dialog} = require('electron');
+
 var fs = require('fs');
+
+const tar = require('tar');
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -25,7 +29,7 @@ let viz;
 let pid = process.pid;
 
 // create a run prefix directory
-let prefix = __dirname + '/pipeline/' + pid.toString()
+let prefix = __dirname + '/pipeline/' + pid.toString();
 fs.mkdirSync(prefix);
 
 var current_json = {};
@@ -105,7 +109,7 @@ function goToModule(module_number) {
         detail: 'Progress on current module will be lost.'
     };
 
-    if(module_number < current_module) {
+    if(module_number <= current_module) {
         response = require('electron').dialog.showMessageBox(null, options,(response) => {
           if (response == 0){
               win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
@@ -206,6 +210,62 @@ function showViz(viz_num) {
 }
 
 
+/**
+ * @brief create a save of the current pipeline state
+ *
+ * @param save_state_path file path to the tarball to save
+ */
+function createSaveState(save_state_path) {
+    // save the current state to args.json
+    fs.writeFileSync(prefix + '/args.json', JSON.stringify(current_json));
+    fs.writeFileSync(prefix + '/state.json', JSON.stringify(visited_modules));
+
+    // get a list of all files and directories making up the current state
+    let state_files = fs.readdirSync(prefix);
+
+    tar.c({gzip: true, file: save_state_path, cwd: prefix}, state_files);
+}
+
+
+/**
+ * @brief load a save state into the current pipeline state
+ *
+ * @param save_state_path file path to the saved tarball
+ */
+function loadSaveState(save_state_path) {
+    // clear out all files in the current state
+    let state_files = fs.readdirSync(prefix);
+    
+    for(let file of state_files) {
+        fs.unlink(prefix + file.toString(), err => {
+            if(err) console.log(err);
+        });
+    }
+
+    // extract the state files 
+    tar.x({file: save_state_path, cwd: prefix, sync: true});
+
+    // Load in the args and state json files
+    current_json = JSON.parse(fs.readFileSync(prefix + '/args.json'));
+    visited_modules = JSON.parse(fs.readFileSync(prefix + '/state.json'));
+
+    // Find the most recently visited module
+    current_module = 1;
+
+    while(visited_modules[current_module['executed']]) {
+        current_module++;
+    }
+
+    // Jump to the most recent module
+    goToModule(current_module);
+    
+    // Send IPC message with the arguments to the current module
+    win.webContents.once('dom-ready', () => {
+        win.webContents.send('NEW', JSON.stringify(current_json));
+    });
+}
+
+
 /* CORE WINDOW EVENTS */
 
 app.on('ready', initial);
@@ -260,6 +320,17 @@ ipcMain.on('EXECUTE', (event, data) => {
 
 const template = [
   {
+    label: 'File',
+    submenu: [
+      {label: 'Save', click () {
+            createSaveState(dialog.showSaveDialog());
+      }},
+      {label: 'Load', click () {
+            loadSaveState(dialog.showOpenDialog()[0]);
+      }},
+    ]
+  },
+  {
     label: 'Edit',
     submenu: [
       { role: 'undo' },
@@ -272,7 +343,6 @@ const template = [
       { role: 'selectall' },
       { type: 'separator' },
       { label: 'Restore Defaults', role: 'reload'}
-
     ]
   },
   {
