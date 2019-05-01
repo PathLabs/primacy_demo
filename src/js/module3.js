@@ -44,8 +44,8 @@ var max_distance_row     = document.getElementById("maxDistanceRow");
 var amplicon_size_row    = document.getElementById("ampliconSizeRow");
 var target_distance_row  = document.getElementById("targetDistanceRow");
 
-var last_module_results = {};
-var current_module_args = {};
+// Current pipeline state
+var state = {};
 
 
 function sendMessage(channel, message){
@@ -53,12 +53,67 @@ function sendMessage(channel, message){
 }
 
 
+/**
+ * @brief Initialize the page state
+ *
+ * @param json JSON object indicating current pipeline state
+ */
 function init(json) {
-    console.log(json);
-    current_module_args = json[0];
-    last_module_results = json[1];
+    state = json;
 
-    module_1_sum.innerHTML = last_module_results['temperature'];
+    // check if this has already been submitted
+    if(state['set_optimization']) {
+        // TODO: bootstrap page
+        return;
+    }
+
+    // TODO: Bootstrap page with defaults
+    state['primer_optimization'] = {
+        params: {
+            iter: 100,
+            amp_size: {
+                min: null,
+                max: null
+            },
+            target_distance: {
+                forward: null,
+                reverse: null
+                any: null,
+                both: null
+            },
+            background: {
+                //primer_id: {
+                //    seq: {
+                //}
+            },
+            weights: {
+                tm: 1,
+                scores: 1,
+                cross_dimerization: 1,
+                size: 1,
+                target_dist: 1
+            },
+            include: {
+                //seq_id: {
+                //    forward: {
+                //        primer_ids: [
+                //            type: array
+                //            description: array of primer ids that should be included
+                //        ]},
+                //    reverse: {
+                //        ...
+                //    }
+                //},
+            }
+        }
+    };
+
+    iterations.value = 100;
+    sim_melt_temp.value = 1;
+    primer_scores.value = 1;
+    cross_dimerization.value = 1;
+    amplicon_size.value = 1;
+    target_distance.value = 1;
 }
 
 
@@ -130,13 +185,6 @@ targetDistanceCheck.addEventListener('change', function() {
         target_dist_slider.value = 0;
     }
 });
-
-iterations.value = 100;
-sim_melt_temp.value = 1;
-primer_scores.value = 1;
-cross_dimerization.value = 1;
-amplicon_size.value = 1;
-target_distance.value = 1;
 
 amplicon_slider.oninput = function() {
     opt_amplicon_size.value = this.value;
