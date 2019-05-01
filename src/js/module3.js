@@ -44,8 +44,9 @@ var max_distance_row     = document.getElementById("maxDistanceRow");
 var amplicon_size_row    = document.getElementById("ampliconSizeRow");
 var target_distance_row  = document.getElementById("targetDistanceRow");
 
-// Current pipeline state
-var state = {};
+
+// Current module state
+var state = null;
 
 
 function sendMessage(channel, message){
@@ -53,67 +54,68 @@ function sendMessage(channel, message){
 }
 
 
-/**
- * @brief Initialize the page state
- *
- * @param json JSON object indicating current pipeline state
- */
-function init(json) {
-    state = json;
-
-    // check if this has already been submitted
-    if(state['set_optimization']) {
-        // TODO: bootstrap page
-        return;
-    }
-
-    // TODO: Bootstrap page with defaults
-    state['primer_optimization'] = {
-        params: {
-            iter: 100,
-            amp_size: {
-                min: null,
-                max: null
-            },
-            target_distance: {
-                forward: null,
-                reverse: null
-                any: null,
-                both: null
-            },
-            background: {
-                //primer_id: {
-                //    seq: {
-                //}
-            },
-            weights: {
-                tm: 1,
-                scores: 1,
-                cross_dimerization: 1,
-                size: 1,
-                target_dist: 1
-            },
-            include: {
-                //seq_id: {
-                //    forward: {
-                //        primer_ids: [
-                //            type: array
-                //            description: array of primer ids that should be included
-                //        ]},
-                //    reverse: {
-                //        ...
-                //    }
-                //},
-            }
+class Module3 {
+    /**
+     * @brief Initialize the page state
+     *
+     * @param json JSON object indicating current pipeline state
+     */
+    constructor(json=null) {
+        // set the defaults
+        this.json = json;
+        this.iter = 100;
+        this.amp_size = {
+            min: null,
+            max: null;
+        };
+        this.target_sequence = {
+            forward: null,
+            reverse: null,
+            any: null,
+            both: null
+        };
+        this.background = {
+            //primer_id: {seq: ''}
+        };
+        this.weights = {
+            tm: 1,
+            scores: 1,
+            cross_dimerization: 1,
+            size: 1,
+            target_dist: 1
         }
-    };
+        this.include = {
+            //seq_id: {
+            //    forward: {
+            //        primer_ids: [
+            //            type: array
+            //            description: array of primer ids that should be included
+            //        ]},
+            //    reverse: {
+            //        ...
+            //    }
+            //},
+        }
 
-    iterations.value = 100;
-    sim_melt_temp.value = 1;
-    primer_scores.value = 1;
-    cross_dimerization.value = 1;
-    amplicon_size.value = 1;
-    target_distance.value = 1;
+        // If a previous state is available, bootstrap our internal state to 
+        // match
+        if(json && json['set_optimization']) {
+            let set_optimization = json['set_optimization'];
+            this.iter            = set_optimization['iter'];
+            this.amp_size        = set_optimization['amp_size'];
+            this.target_sequence = set_optimization['target_sequence'];
+            this.background      = set_optimization['background'];
+            this.weights         = set_optimization['weights'];
+            this.include         = set_optimization['include'];
+        }
+
+        iterations.value = 100;
+        sim_melt_temp.value = 1;
+        primer_scores.value = 1;
+        cross_dimerization.value = 1;
+        amplicon_size.value = 1;
+        target_distance.value = 1;
+    }
 }
 
 
@@ -129,7 +131,7 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
 
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
-    init(arg);
+    state = new Module3(JSON.parse(arg));
 });
 
 ipcRenderer.on('LOADMODULE', (event, arg) =>{
