@@ -21,7 +21,7 @@ const amplicon_slider      = document.getElementById("ampliconSlider");
 const opt_amplicon_size    = document.getElementById("optimumAmpliconSize");
 const optimum_check        = document.getElementById("optimumAmpliconCheck");
 const max_distance         = document.getElementById("maxDistance");
-const max_distance_check   = document.getElementById("maxDistanceCheck");
+const max_distance_number  = document.getElementById("maxDistanceNumber");
 const move_forward         = document.getElementById("moveForward");
 const background_primers   = document.getElementById("backgroundPrimers");
 
@@ -117,7 +117,7 @@ class Module3 {
         sim_melt_temp.value = this.weights.tm;
         primer_scores.value = this.weights.scores;
         cross_dimerization.value = this.weights.cross_dimerization;
-        amplicon_size.value = this.weights.amplicon_size;
+        amplicon_size.value = this.weights.size;
         target_distance.value = this.weights.target_dist;
     }
 
@@ -187,19 +187,40 @@ optimumAmpliconCheck.addEventListener('change', function() {
     }
 });
 
-maxDistanceCheck.addEventListener('change', function() {
-    if(this.checked) {
-        max_distance_row.style.backgroundColor = "rgb(1, 32, 53)";
-    } else {
-        max_distance_row.style.backgroundColor = "initial";
-        max_distance.value = "None";
-        state.target_distance = {
-            forward: null,
-            reverse: null,
-            any: null,
-            both: null
-        };
+max_distance.addEventListener('change', function() {
+    let new_json = {
+        forward: null,
+        reverse: null,
+        any: null,
+        both: null
+    };
+
+    switch(this.value) {
+        case 'None':
+            break; 
+        case 'Distance from forward primer':
+            new_json.forward = parseInt(max_distance_number.value);
+            break;
+        case 'Distance from reverse primer':
+            new_json.reverse = parseInt(max_distance_number.value);
+            break;
+        case 'Distance from at least one primer':
+            new_json.any = parseInt(max_distance_number.value);
+            break;
+        case 'Distance from both primers':
+            new_json.both = parseInt(max_distance_number.value);
     }
+
+    state.target_distance = new_json;
+});
+
+max_distance_number.addEventListener('change', function() {
+    console.log(this.value);
+    if(parseInt(this.value) < 0) {
+        this.value = 0;
+    }
+
+    max_distance.dispatchEvent(new Event('change'));
 });
 
 ampliconCheck.addEventListener('change', function() {
@@ -225,7 +246,7 @@ targetDistanceCheck.addEventListener('change', function() {
     }
 
     // fire the change event to finilize changes in the state
-    target_distance_slider.dispatchEvent(new Event('change'));
+    target_dist_slider.dispatchEvent(new Event('change'));
 });
 
 amplicon_slider.addEventListener('change', function() {
@@ -236,7 +257,6 @@ amplicon_slider.addEventListener('change', function() {
 });
 
 opt_amplicon_size.addEventListener('change', function() {
-    console.log('nigger')
     amplicon_slider.value = this.value;
     // TODO: set amplicon size
 });
@@ -259,7 +279,7 @@ primer_scores_slider.addEventListener('change', function() {
     primer_scores.value = this.value;
 
     // fire the change event on the primer scores element
-    sim_melt_temp.dispatchEvent(new Event('change'));
+    primer_scores.dispatchEvent(new Event('change'));
 });
 
 primer_scores.addEventListener('change', function() {
@@ -290,7 +310,7 @@ amplicon_size_slider.addEventListener('change', function() {
 
 amplicon_size.addEventListener('change', function() {
     amplicon_size_slider.value = this.value;
-    state.weights.amplicon_size = parseInt(this.value);
+    state.weights.size = parseInt(this.value);
 });
 
 
@@ -308,6 +328,19 @@ target_distance.addEventListener('change', function() {
         target_dist_slider.value = this.value;
         state.weights.target_dist = parseInt(this.value);
     }
+});
+
+iterations.addEventListener('change', function() {
+    let val = parseInt(this.value);
+    if(val < 0) {
+        this.value = 1;
+        val = 1;
+    } else if(val > 100) {
+        this.value = 100;
+        val = 100;
+    }
+
+    state.iter = val;
 });
 
 if(!state) {
