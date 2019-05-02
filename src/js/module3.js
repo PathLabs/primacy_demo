@@ -7,7 +7,6 @@
  *      - Chance Nelson <chance-nelson@nau.edu>
  */
 const os            = require('os');
-// const validate      = require('input_validation.js');
 const {ipcRenderer} = require('electron');
 
 
@@ -181,7 +180,10 @@ optimumAmpliconCheck.addEventListener('change', function() {
         opt_amp_row.style.backgroundColor = "initial";
         opt_amplicon_size.value = 0;
         amplicon_slider.value = 0;
-        state.amp_size = {min: null, max: null};
+        state.amp_size = {
+            min: null, 
+            max: null
+        };
     }
 });
 
@@ -218,15 +220,19 @@ targetDistanceCheck.addEventListener('change', function() {
         target_distance_row.style.backgroundColor = "initial";
         target_distance.value = 0;
         target_dist_slider.value = 0;
-        state.wieghts.target_dist = null;
+        state.weights.target_dist = null;
     }
 });
 
 amplicon_slider.addEventListener('change', function() {
     opt_amplicon_size.value = this.value;
+
+    // fire the change event on the amplicon size element
+    opt_amplicon_size.dispatchEvent(new Event('change'));
 });
 
 opt_amplicon_size.addEventListener('change', function() {
+    console.log('nigger')
     amplicon_slider.value = this.value;
     // TODO: set amplicon size
 });
@@ -234,6 +240,9 @@ opt_amplicon_size.addEventListener('change', function() {
 
 sim_melt_temp_slider.addEventListener('change', function() {
     sim_melt_temp.value = this.value;
+
+    // fire the change event on the temperature element
+    sim_melt_temp.dispatchEvent(new Event('change'));
 });
 
 sim_melt_temp.addEventListener('change', function() {
@@ -244,6 +253,9 @@ sim_melt_temp.addEventListener('change', function() {
 
 primer_scores_slider.addEventListener('change', function() {
     primer_scores.value = this.value;
+
+    // fire the change event on the primer scores element
+    sim_melt_temp.dispatchEvent(new Event('change'));
 });
 
 primer_scores.addEventListener('change', function() {
@@ -254,6 +266,9 @@ primer_scores.addEventListener('change', function() {
 
 cross_dim_slider.addEventListener('change', function() {
     cross_dimerization.value = this.value;
+
+    // fire the change event on the cross-dimerization element 
+    cross_dimerization.dispatchEvent(new Event('change'));
 });
 
 cross_dimerization.addEventListener('change', function() {
@@ -264,6 +279,9 @@ cross_dimerization.addEventListener('change', function() {
 
 amplicon_size_slider.addEventListener('change', function() {
     amplicon_size.value = this.value;
+
+    // fire the change event on the amplicon size event 
+    amplicon_size.dispatchEvent(new Event('change'));
 });
 
 amplicon_size.addEventListener('change', function() {
@@ -275,6 +293,9 @@ amplicon_size.addEventListener('change', function() {
 target_dist_slider.addEventListener('change', function() {
     if(targetDistanceCheck.checked) {
         target_distance.value = this.value;
+
+        // fire the change event on the target distance event 
+        target_distance.dispatchEvent(new Event('change'));
     }
 });
 
