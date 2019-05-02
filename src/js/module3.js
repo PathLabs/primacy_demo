@@ -66,7 +66,7 @@ class Module3 {
         this.iter = 100;
         this.amp_size = {
             min: null,
-            max: null;
+            max: null
         };
         this.target_sequence = {
             forward: null,
@@ -116,6 +116,26 @@ class Module3 {
         cross_dimerization.value = this.weights.cross_dimerization;
         amplicon_size.value = this.weights.amplicon_size;
         target_distance.value = this.weights.target_dist;
+    }
+
+    /**
+     * @brief generate a json args string based on the current args and
+     *        previous pipeline state.
+     */
+    toJSON() {
+        let out = this.jsob;
+        out['set_optimization'] = {};
+        out['set_optimization']['params'] = {};
+
+        let params = out['set_optimization']['params'];
+        params['iter'] = this.iter;
+        params['amp_size'] = this.amp_size;
+        params['target_distance'] = this.target_distance;
+        params['background'] = this.background;
+        params['weights'] = this.weights;
+        params['include'] = this.include;
+
+        return out;
     }
 }
 
@@ -191,22 +211,22 @@ targetDistanceCheck.addEventListener('change', function() {
 
 amplicon_slider.addEventListener('change', function() {
     opt_amplicon_size.value = this.value;
-};
+});
 
 opt_amplicon_size.addEventListener('change', function() {
     amplicon_slider.value = this.value;
     // TODO: set amplicon size
-};
+});
 
 
 sim_melt_temp_slider.addEventListener('change', function() {
     sim_melt_temp.value = this.value;
-};
+});
 
 sim_melt_temp.addEventListener('change', function() {
     sim_melt_temp_slider.value = this.value;
     state.weights.tm = parseInt(this.value);
-};
+});
 
 
 primer_scores_slider.addEventListener('change', function() {
@@ -247,3 +267,7 @@ target_distance.addEventListener('change', function() {
     target_dist_slider.value = this.value;
     state.weights.target_dist = parseInt(this.value);
 });
+
+if(!state) {
+    state = new Module3();
+}
