@@ -273,12 +273,16 @@ amplicon_size.addEventListener('change', function() {
 
 
 target_dist_slider.addEventListener('change', function() {
-    target_distance.value = this.value;
+    if(targetDistanceCheck.checked) {
+        target_distance.value = this.value;
+    }
 });
 
 target_distance.addEventListener('change', function() {
-    target_dist_slider.value = this.value;
-    state.weights.target_dist = parseInt(this.value);
+    if(targetDistanceCheck.checked) {
+        target_dist_slider.value = this.value;
+        state.weights.target_dist = parseInt(this.value);
+    }
 });
 
 if(!state) {
