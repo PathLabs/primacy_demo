@@ -8,6 +8,7 @@
  */
 const os            = require('os');
 const {ipcRenderer} = require('electron');
+const noUiSlider    = require('nouislider');
 
 
 const module1            = document.getElementById("module1");
@@ -17,8 +18,8 @@ const submit_button      = document.getElementById("submitButton");
 const module_1_sum       = document.getElementById('result');
 
 const iterations           = document.getElementById("iterations");
-const amplicon_slider      = document.getElementById("ampliconSlider");
-const opt_amplicon_size    = document.getElementById("optimumAmpliconSize");
+const opt_amplicon_min     = document.getElementById("optimumAmpliconMin");
+const opt_amplicon_max     = document.getElementById("optimumAmpliconMax")
 const optimum_check        = document.getElementById("optimumAmpliconCheck");
 const max_distance         = document.getElementById("maxDistance");
 const max_distance_number  = document.getElementById("maxDistanceNumber");
@@ -178,12 +179,48 @@ optimumAmpliconCheck.addEventListener('change', function() {
         opt_amp_row.style.backgroundColor = "rgb(0, 36, 56)";
     } else {
         opt_amp_row.style.backgroundColor = "initial";
-        opt_amplicon_size.value = 0;
-        amplicon_slider.value = 0;
+        opt_amplicon_min.value = 0;
+        opt_amplicon_max.value = 0;
         state.amp_size = {
             min: null, 
             max: null
         };
+    }
+});
+
+opt_amplicon_min.addEventListener('change', function() {
+    if(optimumAmpliconCheck.checked) {
+        let max = parseInt(opt_amplicon_max.value);
+        let min = parseInt(this.value);
+        
+        if(max < min) {
+            this.value = max;
+            opt_amplicon_max.value = min;
+
+            opt_amplicon_max.dispatchEvent(new Event('change'));
+        }
+
+        state.amp_size.min = parseInt(this.value);
+    } else {
+        this.value = 0;
+    }
+});
+
+opt_amplicon_max.addEventListener('change', function() {
+    if(optimumAmpliconCheck.checked) {
+        let min = parseInt(opt_amplicon_min.value);
+        let max = parseInt(this.value);
+        
+        if(max < min) {
+            this.value = min;
+            opt_amplicon_min.value = max;
+
+            opt_amplicon_min.dispatchEvent(new Event('change'));
+        }
+
+        state.amp_size.max = parseInt(this.value);
+    } else {
+        this.value = 0;
     }
 });
 
@@ -247,18 +284,6 @@ targetDistanceCheck.addEventListener('change', function() {
 
     // fire the change event to finilize changes in the state
     target_dist_slider.dispatchEvent(new Event('change'));
-});
-
-amplicon_slider.addEventListener('change', function() {
-    opt_amplicon_size.value = this.value;
-
-    // fire the change event on the amplicon size element
-    opt_amplicon_size.dispatchEvent(new Event('change'));
-});
-
-opt_amplicon_size.addEventListener('change', function() {
-    amplicon_slider.value = this.value;
-    // TODO: set amplicon size
 });
 
 
