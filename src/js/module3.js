@@ -68,22 +68,26 @@ class Module3 {
             min: null,
             max: null
         };
-        this.target_sequence = {
+
+        this.target_distance = {
             forward: null,
             reverse: null,
             any: null,
             both: null
         };
+
         this.background = {
             //primer_id: {seq: ''}
         };
+
         this.weights = {
             tm: 1,
             scores: 1,
             cross_dimerization: 1,
             size: 1,
             target_dist: 1
-        }
+        };
+
         this.include = {
             //seq_id: {
             //    forward: {
@@ -95,7 +99,7 @@ class Module3 {
             //        ...
             //    }
             //},
-        }
+        };
 
         // If a previous state is available, bootstrap our internal state to 
         // match
@@ -103,7 +107,7 @@ class Module3 {
             let set_optimization = json['set_optimization'];
             this.iter            = set_optimization['iter'];
             this.amp_size        = set_optimization['amp_size'];
-            this.target_sequence = set_optimization['target_sequence'];
+            this.target_distance = set_optimization['target_distance'];
             this.background      = set_optimization['background'];
             this.weights         = set_optimization['weights'];
             this.include         = set_optimization['include'];
@@ -177,6 +181,7 @@ optimumAmpliconCheck.addEventListener('change', function() {
         opt_amp_row.style.backgroundColor = "initial";
         opt_amplicon_size.value = 0;
         amplicon_slider.value = 0;
+        state.amp_size = {min: null, max: null};
     }
 });
 
@@ -186,6 +191,12 @@ maxDistanceCheck.addEventListener('change', function() {
     } else {
         max_distance_row.style.backgroundColor = "initial";
         max_distance.value = "None";
+        state.target_distance = {
+            forward: null,
+            reverse: null,
+            any: null,
+            both: null
+        };
     }
 });
 
@@ -196,6 +207,7 @@ ampliconCheck.addEventListener('change', function() {
         amplicon_size_row.style.backgroundColor = "initial";
         amplicon_size.value = 0;
         amplicon_size_slider.value = 0;
+        state.weights.size = null;
     }
 });
 
@@ -206,6 +218,7 @@ targetDistanceCheck.addEventListener('change', function() {
         target_distance_row.style.backgroundColor = "initial";
         target_distance.value = 0;
         target_dist_slider.value = 0;
+        state.wieghts.target_dist = null;
     }
 });
 
