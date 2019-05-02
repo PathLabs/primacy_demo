@@ -109,12 +109,13 @@ class Module3 {
             this.include         = set_optimization['include'];
         }
 
-        iterations.value = 100;
-        sim_melt_temp.value = 1;
-        primer_scores.value = 1;
-        cross_dimerization.value = 1;
-        amplicon_size.value = 1;
-        target_distance.value = 1;
+        // set all inputs to reflect the current module state
+        iterations.value = this.iter;
+        sim_melt_temp.value = this.weights.tm;
+        primer_scores.value = this.weights.scores;
+        cross_dimerization.value = this.weights.cross_dimerization;
+        amplicon_size.value = this.weights.amplicon_size;
+        target_distance.value = this.weights.target_dist;
     }
 }
 
@@ -194,6 +195,7 @@ amplicon_slider.addEventListener('change', function() {
 
 opt_amplicon_size.addEventListener('change', function() {
     amplicon_slider.value = this.value;
+    // TODO: set amplicon size
 };
 
 
@@ -203,6 +205,7 @@ sim_melt_temp_slider.addEventListener('change', function() {
 
 sim_melt_temp.addEventListener('change', function() {
     sim_melt_temp_slider.value = this.value;
+    state.weights.tm = parseInt(this.value);
 };
 
 
@@ -212,6 +215,7 @@ primer_scores_slider.addEventListener('change', function() {
 
 primer_scores.addEventListener('change', function() {
     primer_scores_slider.value = this.value;
+    state.weights.scores = parseInt(this.value);
 });
 
 
@@ -221,6 +225,7 @@ cross_dim_slider.addEventListener('change', function() {
 
 cross_dimerization.addEventListener('change', function() {
     cross_dim_slider.value = this.value;
+    state.weights.cross_dimerization = parseInt(this.value);
 });
 
 
@@ -230,6 +235,7 @@ amplicon_size_slider.addEventListener('change', function() {
 
 amplicon_size.addEventListener('change', function() {
     amplicon_size_slider.value = this.value;
+    state.weights.amplicon_size = parseInt(this.value);
 });
 
 
@@ -239,4 +245,5 @@ target_dist_slider.addEventListener('change', function() {
 
 target_distance.addEventListener('change', function() {
     target_dist_slider.value = this.value;
+    state.weights.target_dist = parseInt(this.value);
 });
