@@ -16,32 +16,32 @@ const module3            = document.getElementById("module3");
 const submit_button      = document.getElementById("submitButton");
 const module_1_sum       = document.getElementById('result');
 
-var iterations           = document.getElementById("iterations");
-var amplicon_slider      = document.getElementById("ampliconSlider");
-var opt_amplicon_size    = document.getElementById("optimumAmpliconSize");
-var optimum_check        = document.getElementById("optimumAmpliconCheck");
-var max_distance         = document.getElementById("maxDistance");
-var max_distance_check   = document.getElementById("maxDistanceCheck");
-var move_forward         = document.getElementById("moveForward");
-var background_primers   = document.getElementById("backgroundPrimers");
+const iterations           = document.getElementById("iterations");
+const amplicon_slider      = document.getElementById("ampliconSlider");
+const opt_amplicon_size    = document.getElementById("optimumAmpliconSize");
+const optimum_check        = document.getElementById("optimumAmpliconCheck");
+const max_distance         = document.getElementById("maxDistance");
+const max_distance_check   = document.getElementById("maxDistanceCheck");
+const move_forward         = document.getElementById("moveForward");
+const background_primers   = document.getElementById("backgroundPrimers");
 
-var sim_melt_temp_slider = document.getElementById("simMeltTempSlider");
-var sim_melt_temp        = document.getElementById("simMeltTemp");
-var primer_scores_slider = document.getElementById("primerScoresSlider");
-var primer_scores        = document.getElementById("primerScores");
-var cross_dim_slider     = document.getElementById("crossDimerizationSlider");
-var cross_dimerization   = document.getElementById("crossDimerization");
-var amplicon_size_slider = document.getElementById("ampliconSizeSlider");
-var amplicon_size        = document.getElementById("ampliconSize");
-var amplicon_check       = document.getElementById("ampliconCheck");
-var target_dist_slider   = document.getElementById("targetDistanceSlider");
-var target_distance      = document.getElementById("targetDistance");
-var target_dist_check    = document.getElementById("targetDistanceCheck");
+const sim_melt_temp_slider = document.getElementById("simMeltTempSlider");
+const sim_melt_temp        = document.getElementById("simMeltTemp");
+const primer_scores_slider = document.getElementById("primerScoresSlider");
+const primer_scores        = document.getElementById("primerScores");
+const cross_dim_slider     = document.getElementById("crossDimerizationSlider");
+const cross_dimerization   = document.getElementById("crossDimerization");
+const amplicon_size_slider = document.getElementById("ampliconSizeSlider");
+const amplicon_size        = document.getElementById("ampliconSize");
+const amplicon_check       = document.getElementById("ampliconCheck");
+const target_dist_slider   = document.getElementById("targetDistanceSlider");
+const target_distance      = document.getElementById("targetDistance");
+const target_dist_check    = document.getElementById("targetDistanceCheck");
 
-var opt_amp_row          = document.getElementById("optAmpRow");
-var max_distance_row     = document.getElementById("maxDistanceRow");
-var amplicon_size_row    = document.getElementById("ampliconSizeRow");
-var target_distance_row  = document.getElementById("targetDistanceRow");
+const opt_amp_row          = document.getElementById("optAmpRow");
+const max_distance_row     = document.getElementById("maxDistanceRow");
+const amplicon_size_row    = document.getElementById("ampliconSizeRow");
+const target_distance_row  = document.getElementById("targetDistanceRow");
 
 
 // Current module state
@@ -209,8 +209,10 @@ ampliconCheck.addEventListener('change', function() {
         amplicon_size_row.style.backgroundColor = "initial";
         amplicon_size.value = 0;
         amplicon_size_slider.value = 0;
-        state.weights.size = null;
     }
+
+    // fire the change event to finilize changes in the state
+    amplicon_size_slider.dispatchEvent(new Event('change'));
 });
 
 targetDistanceCheck.addEventListener('change', function() {
@@ -220,8 +222,10 @@ targetDistanceCheck.addEventListener('change', function() {
         target_distance_row.style.backgroundColor = "initial";
         target_distance.value = 0;
         target_dist_slider.value = 0;
-        state.weights.target_dist = null;
     }
+
+    // fire the change event to finilize changes in the state
+    target_distance_slider.dispatchEvent(new Event('change'));
 });
 
 amplicon_slider.addEventListener('change', function() {
