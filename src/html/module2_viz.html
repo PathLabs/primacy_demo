@@ -3,74 +3,73 @@
 <head>
   <!-- Plotly.js -->
   <script src="../js/plotly/plotly-latest.min.js"></script>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/bootstrap.css">
   <script src="../js/viz2.js"></script>
 </head>
 
-<body style="background: grey;">
-
+<body>
+  <div class="container">
   <div class="row">
-    <center>
-      <div id="forward_score">
-
+      <div class="row" id="forward_score">
         <script>
           create_viz_spec('forward', 'forward_score');
         </script>
-        <br>
-        <center>
-          <div>
 
-
-            <label>Percent</label>
-            <input type="number" id="forward_percent" min="0" max="100" value="0" oninput="update_count_all('forward', this.value);" />
-
-
-
-            <label>Count</label>
-            <input type="number" id="forward_count" value="" />
-            <input type="submit" value="Submit Primers">
-
-
+          <div class="col-lg-12">
+            <label>This slider lets you pick top x % of primers by score</label>
+            <input type="range" class="form-control" id="forward-percent" min="0" max="100" value="10" oninput="updatePercentTextBox('forward-percent-text',this.value); updatePrimerCount('forward', this.value);" />
+            <input type="number" class="form-control" id="forward-percent-text" min="0" max="100" value="10" oninput="updatePercentSlider('forward-percent', this.value);" />
+            <input type="submit" class="form-control" value="Submit Primers" onsubmit="submitPrimers('forward', this.forward-percent.value);">
           </div>
-
-
-          <div>
-            <select id="forward_primers_select">
-          </select>
-          </div>
-
-
       </div>
   </div>
-
-  <br>
   <div class="row">
-    <center>
-      <div id="reverse_score">
+    <table id="forward-primers-table" class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Sequence ID</th>
+          <th scope="col">Primer Count</th>
+        </tr>
+      </thead>
+      <tbody id="forward-table-body"></tbody>
+    </table>
+    <script>
+    create_table('forward');
+    </script>
 
+  </div>
+
+
+  <div class="row">
+      <div class="row" id="reverse_score">
         <script>
           create_viz_spec('reverse', 'reverse_score');
         </script>
-        <br>
-        <center>
 
-          <div>
-
-            <label>Percent</label>
-            <input type="number" id="reverse_percent" min="0" max="100" value="0" oninput="update_count_all('reverse', this.value);" />
-
-
-
-            <label>Count</label>
-            <input type="number" id="reverse_count" value="" />
-
-            <input type="submit" value="Submit Primers">
-
+          <div class="col-lg-12">
+            <label>This slider lets you pick top x % of primers by score</label>
+            <input type="range" class="form-control" id="reverse-percent" min="0" max="100" value="10" oninput="updatePercentTextBox('reverse-percent-text',this.value); updatePrimerCount('reverse', this.value);" />
+            <input type="number" class="form-control" id="reverse-percent-text" min="0" max="100" value="10" oninput="updatePercentSlider('reverse-percent', this.value);" />
+            <input type="submit" class="form-control" value="Submit Primers" onsubmit="submitPrimers('reverse', this.reverse-percent.value);">
           </div>
       </div>
+  </div>
+  <div class="row">
+    <table id="reverse-primers-table" class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Sequence ID</th>
+          <th scope="col">Primer Count</th>
+        </tr>
+      </thead>
+      <tbody id="reverse-table-body"></tbody>
+    </table>
+    <script>
+    create_table('reverse');
+    </script>
 
   </div>
-  </div>
+</div>
 
 </body>
 

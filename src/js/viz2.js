@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const { ipcRenderer } = require("electron");
-const jsonq = require("jsonq");
 
 // store score values for updating primer counts in the viz
 var scores = {
@@ -108,6 +107,29 @@ function parse_data(direction) {
   return [xData, yData];
 }
 
+function calculatePrimerCount(direction, sequence_id, val){
+  var values = scores[direction][sequence_id].score_values;
+  var count = values.length;
+  var newCount = Math.round(count/val);
+  return newCount;
+}
+
+function create_table(direction){
+  var table_body = document.getElementById("forward-table-body");
+  if (direction == 'reverse'){
+    table_body = document.getElementById("reverse-table-body");
+  }
+  directional_array = Object.keys(scores[direction]);
+  directional_array.forEach(function(element) {
+    var row = table_body.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = element;
+    cell2.innerHTML = calculatePrimerCount(direction, element, 10);
+
+  });
+}
+
 /**
  * Desc: This function creates the d3 based plotly spec which will render the viz
  *
@@ -159,8 +181,8 @@ function create_viz_spec(direction, div) {
   layout = {
     title: direction + " primer scores",
     autosize: false,
-    width: 800,
-    height: 450,
+    width: 1250,
+    height: 750,
     yaxis: {
       title: "Score",
       autorange: true,
@@ -194,15 +216,37 @@ function create_viz_spec(direction, div) {
   Plotly.newPlot(div, data, layout);
 }
 
+function updatePercentTextBox(elementId,val) {
+          document.getElementById(elementId).value=val;
+        }
 
-function update_count_all(direction, percent_val) {
-
+function updatePercentSlider(elementId,val){
+  document.getElementById(elementId).value = val;
 }
 
-function update_count_individual(direction, seq_id, percent_val) {}
 
-function submit_primers(direction) {
-  // TODO
+
+
+function updatePrimerCount(direction, val){
+  var tableBody = document.getElementById('forward-table-body');
+  if (direction == 'reverse'){
+    tableBody = document.getElementById('reverse-table-body');
+  }
+  var tRows = tableBody.rows;
+
+  for (var i=0; i < tRows.length; i++){
+    var sequence_id = tRows[i].cells[0].innerHTML;
+    var count = calculatePrimerCount(direction, sequence_id, val);
+    tRows[i].cells[1].innerHTML = count;
 }
 
-console.log(scores);
+function submitPrimers(direction, val){
+  var primers = [];
+  for (sequence in scores[direction]){
+    // TODO
+  }
+}
+
+
+
+}
