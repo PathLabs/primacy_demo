@@ -32,9 +32,6 @@ const max_distance        = document.getElementById("maxDistance");
 const max_distance_number = document.getElementById("maxDistanceNumber");
 const max_distance_row    = document.getElementById("maxDistanceRow");
 
-// Primer move forward percentage
-const move_forward = document.getElementById("moveForward");
-
 // Background primers
 const background_primers      = document.getElementById("backgroundPrimers");
 const background_primers_list = document.getElementById('backgroundPrimersList')
@@ -85,7 +82,6 @@ class Module3 {
         // set the defaults
         this.json = json;
         this.iter = 100;
-        this.move_forward_percent = 10;
         this.amp_size = {
             min: null,
             max: null
@@ -119,7 +115,10 @@ class Module3 {
             this.target_distance = set_optimization['target_distance'];
             this.background      = set_optimization['background'];
             this.weights         = set_optimization['weights'];
-            this.include         = set_optimization['include'];
+        }
+
+        if(json['set_optimization']['include']) {
+            this.include = set_optimization['include'];
         }
 
         // set all inputs to reflect the current module state
@@ -246,25 +245,6 @@ background_primers_list.addEventListener('change', function() {
 
         cell.appendChild(remove_btn);
     }
-});
-
-
-/**
- * @brief update the percentage of primers allowed to move forward
- */
-move_forward.addEventListener('change', function() {
-    let percent = parseInt(this.value);
-
-    // Assert value is in appropriate range
-    if(percent < 1) {
-        this.value = 1;
-        percent    = 1;
-    } else if(percent > 100) {
-        this.value = 100;
-        percent    = 100;
-    }
-
-    state.move_forward_percent = percent;
 });
 
 
