@@ -139,48 +139,51 @@ function init(json) {
         val = weights['degenerate'];
         degenerateSlider.value = val;
         degenerateBox.value = val;
+    }
+    else{
+      // no past state. Init JSON and inputs
+      state.primer_scores = {
+          params: {
+              tm_opt: 55,
+              gc_opt: {
+                  min: 40,
+                  max: 60
+              },
+              weights: {
+                  tm: 1,
+                  gc: 1,
+                  homopolymer: 1,
+                  dimer: 1,
+                  specificity: 1,
+                  degenerate: 1
+              }
+          }
+      };
 
-        return;
+      tmOptSlider.value = 55;
+      tmOptBox.value = 55;
+      gcMinSlider.value = 40;
+      gcMinBox.value = 40;
+      gcMaxSlider.value = 60;
+      gcMaxBox.value = 60;
+      tmSlider.value = 1;
+      tmBox.value = 1;
+      gcSlider.value = 1;
+      gcBox.value = 1;
+      hpolySlider.value = 1;
+      hpolyBox.value = 1;
+      dimerzSlider.value = 1;
+      dimerzBox.value = 1;
+      specificitySlider.value = 1;
+      specificityBox.value = 1;
+      degenerateSlider.value = 1;
+      degenerateBox.value = 1;
+
     }
 
-    // no past state. Init JSON and inputs
-    state.primer_scores = {
-        params: {
-            tm_opt: 55,
-            gc_opt: {
-                min: 40,
-                max: 60
-            },
-            weights: {
-                tm: 1,
-                gc: 1,
-                homopolymer: 1,
-                dimer: 1,
-                specificity: 1,
-                degenerate: 1
-            }
-        }
-    };
 
 
-    tmOptSlider.value = 55;
-    tmOptBox.value = 55;
-    gcMinSlider.value = 40;
-    gcMinBox.value = 40;
-    gcMaxSlider.value = 60;
-    gcMaxBox.value = 60;
-    tmSlider.value = 1;
-    tmBox.value = 1;
-    gcSlider.value = 1;
-    gcBox.value = 1;
-    hpolySlider.value = 1;
-    hpolyBox.value = 1;
-    dimerzSlider.value = 1;
-    dimerzBox.value = 1;
-    specificitySlider.value = 1;
-    specificityBox.value = 1;
-    degenerateSlider.value = 1;
-    degenerateBox.value = 1;
+
 
 }
 
@@ -189,57 +192,90 @@ tmOptSlider.addEventListener('change', function(){
 });
 
 gcMinSlider.addEventListener('change', function(){
-    state['primer_scores']['params']['gc_min'] = parseInt(gcMinSlider.value);
+    state['primer_scores']['params']['gc_opt']['min'] = parseInt(gcMinSlider.value);
 });
 
 gcMaxSlider.addEventListener('change', function(){
-    state['primer_scores']['params']['gc_max'] = parseInt(gcMaxSlider.value);
+    state['primer_scores']['params']['gc_opt']['max'] = parseInt(gcMaxSlider.value);
+});
+
+tmSlider.addEventListener('change', function(){
+    state['primer_scores']['params']['weights']['tm'] = parseInt(tmSlider.value);
+});
+
+gcSlider.addEventListener('change', function(){
+    state['primer_scores']['params']['weights']['gc'] = parseInt(gcSlider.value);
+});
+
+hpolySlider.addEventListener('change', function(){
+    state['primer_scores']['params']['weights']['homopolymer'] = parseInt(hpolySlider.value);
+});
+
+dimerzSlider.addEventListener('change', function(){
+    state['primer_scores']['params']['weights']['dimer'] = parseInt(dimerzSlider.value);
+});
+
+specificitySlider.addEventListener('change', function(){
+    state['primer_scores']['params']['weights']['specificity'] = parseInt(specificitySlider.value);
 });
 
 
+degenerateSlider.addEventListener('change', function(){
+    state['primer_scores']['params']['weights']['degenerate'] = parseInt(degenerateSlider.value);
+});
+
 tmCheckbox.addEventListener('change', function(){
   if (tmCheckbox.checked){
-    state['primer_scores']['params']['tm'] = parseInt(tmSlider.value);
+    state['primer_scores']['params']['weights']['tm'] = 1;
   }
   else{
-    state['primer_scores']['params']['tm'] = 0;
+    state['primer_scores']['params']['weights']['tm'] = 0;
   }
 });
 
 gcCheckbox.addEventListener('change', function(){
     if (gcCheckbox.checked){
-      state['primer_scores']['params']['gc'] = parseInt(gcSlider.value);
+      state['primer_scores']['params']['weights']['gc'] = 1;
     }
     else{
-      state['primer_scores']['params']['gc'] = 0;
+      state['primer_scores']['params']['weights']['gc'] = 0;
     }
   });
 
 hpolyCheckbox.addEventListener('change', function(){
       if (hpolyCheckbox.checked){
-        state['primer_scores']['params']['homopolymer'] = parseInt(hpolySlider.value);
+        state['primer_scores']['params']['weights']['homopolymer'] = 1;
       }
       else{
-        state['primer_scores']['params']['homopolymer'] = 0;
+        state['primer_scores']['params']['weights']['homopolymer'] = 0;
       }
+    });
+
+dimerzCheckbox.addEventListener('change', function(){
+          if (dimerzCheckbox.checked){
+            state['primer_scores']['params']['weights']['homopolymer'] = 1;
+          }
+          else{
+            state['primer_scores']['params']['weights']['homopolymer'] = 0;
+          }
     });
 
 specificityCheckbox.addEventListener('change', function(){
       if (specificityCheckbox.checked){
-        state['primer_scores']['params']['specificity'] = parseInt(specificitySlider.value);
+        state['primer_scores']['params']['weights']['specificity'] = 1;
       }
       else{
-        state['primer_scores']['params']['specificity'] = 0;
+        state['primer_scores']['params']['weights']['specificity'] = 0;
       }
     });
 
 degenerateCheckbox.addEventListener('change', function(){
       if (degenerateCheckbox.checked){
-        state['primer_scores']['params']['degenerate'] = parseInt(degenerateSlider.value);
+        state['primer_scores']['params']['weights']['degenerate'] = 1;
       }
 
       else{
-        state['primer_scores']['params']['degenerate'] = 0;
+        state['primer_scores']['params']['weights']['degenerate'] = 0;
       }
 
 });
