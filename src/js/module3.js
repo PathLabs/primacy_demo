@@ -4,8 +4,7 @@
  * @brief Front end Javascript for controlling user input and communicating
  *        with the back end
  *
- * Authors:
- *      - Chance Nelson <chance-nelson@nau.edu>
+ * @author Chance Nelson <chance-nelson@nau.edu>
  */
 
 const os            = require('os');
