@@ -613,7 +613,7 @@ manual_submit.addEventListener('click', function() {
     let label    = manual_label.value;
     let sequence = manual_sequence.value;
 
-    if(!validate.validateFasta(sequence)) {
+    if(!validate.validateFasta(sequence) || label.value == '' || sequence.value == '') {
         return;
     }
 
