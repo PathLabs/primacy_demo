@@ -5,8 +5,16 @@ const { ipcRenderer } = require("electron");
 var selected_labels = {};
 var table = document.getElementById("atRiskSeqs");
 
+var pipeline_mod_1_output = null;
+
 // pipeline output after running module 1
-var pipeline_mod_1_output = "Sa_50_collection_out.json";
+ipcRenderer.on('NEW', function(event, arg) {
+    pipeline_mod_1_output = JSON.parse(arg);
+    create_viz_spec('forward', 'tm', "tm_f_div")
+    create_viz_spec('reverse', 'tm', "tm_r_div")
+    create_viz_spec('forward', 'gc', "gc_f_div")
+    create_viz_spec('reverse', 'gc', "gc_r_div")
+});
 
 
 /**
@@ -21,12 +29,7 @@ var pipeline_mod_1_output = "Sa_50_collection_out.json";
 
 
 function get_paths(json_file_path) {
-  var collection_out = JSON.parse(
-    fs.readFileSync(
-      path.resolve("src/assets/test_targets", pipeline_mod_1_output),
-      "UTF-8"
-    )
-  );
+  var collection_out = pipeline_mod_1_output;
   collection_out_sequence_ids = Object.keys(collection_out.sequences);
   json_paths = [];
   for (var i = 0; i < collection_out_sequence_ids.length; i++) {
@@ -34,6 +37,7 @@ function get_paths(json_file_path) {
       collection_out.sequences[collection_out_sequence_ids[i]]["outfile"]
     );
   }
+  console.log(json_paths);
   return json_paths;
 }
 
@@ -97,6 +101,8 @@ function parse_data(direction, field) {
       }
     }
   }
+
+  console.log(xData, yData);
   return [xData, yData];
 }
 
