@@ -16,10 +16,10 @@
         </script>
 
           <div class="col-lg-12">
-            <label>This slider lets you pick top x % of primers by score</label>
+            <label>This slider lets you pick top x % of forward primers by score</label>
             <input type="range" class="form-control" id="forward-percent" min="0" max="100" value="10" oninput="updatePercentTextBox('forward-percent-text',this.value); updatePrimerCount('forward', this.value);" />
             <input type="number" class="form-control" id="forward-percent-text" min="0" max="100" value="10" oninput="updatePercentSlider('forward-percent', this.value); updatePrimerCount('forward', this.value);" />
-            <input type="submit" class="form-control" value="Submit Primers" onsubmit="submitPrimers('forward', this.forward-percent.value);">
+            <input type="submit" class="form-control" id="forward-submit" value="Submit Primers" onclick="submitPrimers('forward', getPercentSliderValue('forward-percent'));">
           </div>
       </div>
   </div>
@@ -47,10 +47,10 @@
         </script>
 
           <div class="col-lg-12">
-            <label>This slider lets you pick top x % of primers by score</label>
+            <label>This slider lets you pick top x % of reverse primers by score</label>
             <input type="range" class="form-control" id="reverse-percent" min="0" max="100" value="10" oninput="updatePercentTextBox('reverse-percent-text',this.value); updatePrimerCount('reverse', this.value);" />
             <input type="number" class="form-control" id="reverse-percent-text" min="0" max="100" value="10" oninput="updatePercentSlider('reverse-percent', this.value);  updatePrimerCount('reverse', this.value);" />
-            <input type="submit" class="form-control" value="Submit Primers" onsubmit="submitPrimers('reverse', this.reverse-percent.value);">
+            <input type="submit" class="form-control"  id="reverse-submit" value="Submit Primers" onclick="submitPrimers('reverse', getPercentSliderValue('reverse-percent'));">
           </div>
       </div>
   </div>

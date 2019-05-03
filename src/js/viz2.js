@@ -9,6 +9,9 @@ var scores = {
   reverse: {}
 };
 
+var viz2_output = {};
+var primersSubmited = false;
+
 // pipeline output after running module 2
 var pipeline_mod_2_output = "Sa_50_collection_out.json";
 
@@ -224,6 +227,10 @@ function updatePercentSlider(elementId,val){
   document.getElementById(elementId).value = val;
 }
 
+function getPercentSliderValue(elementId){
+  return document.getElementById(elementId).value;
+}
+
 
 
 
@@ -240,13 +247,44 @@ function updatePrimerCount(direction, val){
     tRows[i].cells[1].innerHTML = count;
 }
 
-function submitPrimers(direction, val){
-  var primers = [];
-  for (sequence in scores[direction]){
-    // TODO
-  }
 }
 
 
+function submitPrimers(direction, val){
+  for (sequence in scores[direction]){
+    var primerid_arr = [];
+    var slice_point = calculatePrimerCount(direction, sequence, val)
+    var values = scores[direction][sequence]['score_values'];
+    values.sort(function(a, b) {
+      return a - b;
+    });
+    values = values.slice(0,slice_point)
 
+    var min = values[0];
+    var max = values[values.length-1];
+
+    for (primer in scores[direction][sequence]){
+      var primer_score = scores[direction][sequence][primer]
+      if (primer_score <= max && primer_score >= min){
+        primerid_arr.unshift(primer);
+      }
+
+      else{
+        continue;
+      }
+    }
+
+    if (primersSubmited){
+      viz2_output[sequence][direction] = {}
+      viz2_output[sequence][direction].primer_ids = primerid_arr;
+    }
+    else{
+      viz2_output[sequence] = {};
+      viz2_output[sequence][direction] = {};
+      viz2_output[sequence][direction].primer_ids = primerid_arr;
+    }
+  }
+
+  primersSubmited = true;
+  alert('Primers were successfully submitted');
 }
