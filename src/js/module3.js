@@ -73,7 +73,9 @@ function sendMessage(channel, message){
     ipcRenderer.send(channel, message);
 }
 
-
+/**
+ * @brief Class structure for preserving and altering internal module 3 state
+ */
 class Module3 {
     /**
      * @brief Initialize the page state
@@ -97,9 +99,7 @@ class Module3 {
             both: null
         };
 
-        this.background = {
-            //primer_id: {seq: ''}
-        };
+        this.background = {};
 
         this.weights = {
             tm: 1,
@@ -109,9 +109,7 @@ class Module3 {
             target_dist: 1
         };
 
-        this.background_primers = {
-            // primer_id: {seq: ATGC...}
-        };
+        this.background_primers = {};
 
         // If a previous state is available, bootstrap our internal state to 
         // match
@@ -126,12 +124,12 @@ class Module3 {
         }
 
         // set all inputs to reflect the current module state
-        iterations.value = this.iter;
-        sim_melt_temp.value = this.weights.tm;
-        primer_scores.value = this.weights.scores;
+        iterations.value         = this.iter;
+        sim_melt_temp.value      = this.weights.tm;
+        primer_scores.value      = this.weights.scores;
         cross_dimerization.value = this.weights.cross_dimerization;
-        amplicon_size.value = this.weights.size;
-        target_distance.value = this.weights.target_dist;
+        amplicon_size.value      = this.weights.size;
+        target_distance.value    = this.weights.target_dist;
     }
 
     /**
@@ -155,7 +153,7 @@ class Module3 {
     }
 
     /**
-     * @brief add a series of background primers
+     * @brief add a series of background primers, parsed from a CSV
      *
      * @param file_path path to the file to parse out
      */
