@@ -7,7 +7,9 @@
  *      - Chance Nelson <chance-nelson@nau.edu>
  */
 const os            = require('os');
+const fs            = require('fs');
 const {ipcRenderer} = require('electron');
+const papa          = require('papaparse');
 
 
 const module1            = document.getElementById("module1");
@@ -24,6 +26,7 @@ const max_distance         = document.getElementById("maxDistance");
 const max_distance_number  = document.getElementById("maxDistanceNumber");
 const move_forward         = document.getElementById("moveForward");
 const background_primers   = document.getElementById("backgroundPrimers");
+const background_primers_list = document.getElementById('backgroundPrimersList')
 
 const sim_melt_temp_slider = document.getElementById("simMeltTempSlider");
 const sim_melt_temp        = document.getElementById("simMeltTemp");
@@ -101,6 +104,10 @@ class Module3 {
             //},
         };
 
+        this.background_primers = {
+            // primer_id: {seq: ATGC...}
+        };
+
         // If a previous state is available, bootstrap our internal state to 
         // match
         if(json && json['set_optimization']) {
@@ -141,6 +148,54 @@ class Module3 {
 
         return out;
     }
+
+    /**
+     * @brief add a series of background primers
+     *
+     * @param file_path path to the file to parse out
+     */
+    addBackgroundPrimers(file_path) {
+        papa.parse(file_path, {
+            complete: function(results) {
+                let keys = results.data[0];
+                for(let i = 1; i < results.data.length; i++) {
+                    if(results.data[i].length != keys.length) {
+                        continue;
+                    }
+
+                    let values = {
+                        id: null,
+                        seq: null
+                    };
+
+                    for(let j = 0; j < results.data[i].length; j++) {
+                        console.log(results.data[i][j]);
+                        values[keys[j]] = results.data[i][j];
+                    }
+
+                    console.log(values);
+
+                    let good = true;
+                    for(let key in values) {
+                        if(!values[key]) {
+                            good = false;
+                            break;
+                        }
+                    }
+
+                    if(!good) {
+                        continue;
+                    }
+                    
+                    // add the background primer to the member
+                    state.background[values.id] = {seq: values.seq};
+                }
+
+                // fire the event listener for the background sequence list
+                background_primers_list.dispatchEvent(new Event('change'));
+            }
+        });
+    }
 }
 
 
@@ -174,6 +229,52 @@ module2.addEventListener('click', function (){
     sendMessage('LOADMODULE', 2);
 });
 
+/**
+ * @brief recieve a new CSV of packground primers to add into the list
+ */
+background_primers.addEventListener('change', function() {
+    let file_path = background_primers.files[0];
+    state.addBackgroundPrimers(file_path);
+
+    background_primers.files = null;
+});
+
+/**
+ * @brief refresh the primers list table
+ */
+background_primers_list.addEventListener('change', function() {
+    console.log("updating table")
+    // Clear out the table
+    while (this.firstChild) {
+        this.removeChild(this.firstChild);
+    }
+
+    // Add a new row for each background primer
+    for(seq in state.background) {
+        console.log(seq);
+        let row = this.insertRow();
+
+        let cell = row.insertCell(0);
+        cell.innerHTML = seq;
+        
+        cell = row.insertCell(1);
+        cell.innerHTML = state.background[seq]['seq'];
+
+        cell = row.insertCell(2);
+        let remove_btn = document.createElement('BUTTON');
+        remove_btn.innerHTML = 'Remove';
+
+        /**
+         * @brief remove this sequence from the internal sequence list and refresh the list
+         */
+        remove_btn.addEventListener('click', function() {
+            delete state.background[seq];
+            background_primers_list.dispatchEvent(new Event('change'));
+        });
+
+        cell.appendChild(remove_btn);
+    }
+});
 
 move_forward.addEventListener('change', function() {
     let percent = parseInt(this.value);
