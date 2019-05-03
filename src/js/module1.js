@@ -228,7 +228,7 @@ class Module1 {
      */
     removeTargetRegionIdentifier(label) {
         if(label in this.target_regions) {
-            delete this.target_regions.label;
+            delete this.target_regions[label];
             return true;
 
         } else {
