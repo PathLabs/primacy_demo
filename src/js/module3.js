@@ -15,7 +15,7 @@ const papa          = require('papaparse');
 const module1            = document.getElementById("module1");
 const module2            = document.getElementById("module2");
 const module3            = document.getElementById("module3");
-const submit_button      = document.getElementById("submitButton");
+const submit_button      = document.getElementById("nextModule");
 const module_1_sum       = document.getElementById('result');
 
 const iterations           = document.getElementById("iterations");
@@ -62,7 +62,7 @@ class Module3 {
      *
      * @param json JSON object indicating current pipeline state
      */
-    constructor(json=null) {
+    constructor(json={}) {
         // set the defaults
         this.json = json;
         this.iter = 100;
@@ -91,27 +91,14 @@ class Module3 {
             target_dist: 1
         };
 
-        this.include = {
-            //seq_id: {
-            //    forward: {
-            //        primer_ids: [
-            //            type: array
-            //            description: array of primer ids that should be included
-            //        ]},
-            //    reverse: {
-            //        ...
-            //    }
-            //},
-        };
-
         this.background_primers = {
             // primer_id: {seq: ATGC...}
         };
 
         // If a previous state is available, bootstrap our internal state to 
         // match
-        if(json && json['set_optimization']) {
-            let set_optimization = json['set_optimization'];
+        if(json && json['set_optimization'] && json['set_optimization']['iter']) {
+            let set_optimization = this.json['set_optimization'];
             this.iter            = set_optimization['iter'];
             this.amp_size        = set_optimization['amp_size'];
             this.target_distance = set_optimization['target_distance'];
@@ -134,8 +121,8 @@ class Module3 {
      *        previous pipeline state.
      */
     toJSON() {
-        let out = this.json;
-        out['set_optimization'] = {};
+        let out = {};
+        out['set_optimization'] = {}
         out['set_optimization']['params'] = {};
 
         let params = out['set_optimization']['params'];
@@ -227,6 +214,12 @@ module1.addEventListener('click', function (){
 module2.addEventListener('click', function (){
     console.log("click");
     sendMessage('LOADMODULE', 2);
+});
+
+
+submit_button.addEventListener('click', function() {
+    console.log(state.toJSON());
+    sendMessage('EXECUTE', ['primacy set-optimization', JSON.stringify(state.toJSON())])
 });
 
 /**
