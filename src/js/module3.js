@@ -117,7 +117,7 @@ class Module3 {
             this.weights         = set_optimization['weights'];
         }
 
-        if(json['set_optimization']['include']) {
+        if(json['set_optimization'] && json['set_optimization']['include']) {
             this.include = set_optimization['include'];
         }
 
@@ -507,7 +507,7 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
         console.log("error received");
     } else {
         console.log("sending load message");
-        sendMessage('LOADMODULE', 3);
+        sendMessage('LOADVIZ', 3);
     }
 });
 
