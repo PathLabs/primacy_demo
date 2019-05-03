@@ -188,10 +188,14 @@ function execPipeline(cmd, args, callback) {
 
 function updateArgs(new_args) {
     let new_args_json = JSON.parse(new_args);
+    console.log(new_args_json);
 
-    for(key in args_json) {
-        current_json[key] = args_json[key];
+    for(key in new_args_json) {
+        console.log(key)
+        current_json[key] = new_args_json[key];
     }
+
+    console.log(current_json)
 }
 
 function showViz(viz_num) { 
@@ -330,7 +334,7 @@ ipcMain.on('EXECUTE', (event, data) => {
 // Update the current pipeline args and refresh any open windows
 ipcMain.on('UPDATE', (event, args) => {
     console.log("Updating args");
-    updateArgs(data);
+    updateArgs(args);
     console.log('Sending NEW')
     win.webContents.send('NEW', JSON.stringify(current_json));
 });

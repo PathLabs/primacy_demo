@@ -108,8 +108,8 @@ class Module3 {
 
         // If a previous state is available, bootstrap our internal state to 
         // match
-        if(json && json['set_optimization'] && json['set_optimization']['iter']) {
-            let set_optimization = this.json['set_optimization'];
+        if(json && json['set_optimization'] && json['set_optimization']['params']['iter']) {
+            let set_optimization = this.json['set_optimization']['params'];
             this.iter            = set_optimization['iter'];
             this.amp_size        = set_optimization['amp_size'];
             this.target_distance = set_optimization['target_distance'];
@@ -117,8 +117,11 @@ class Module3 {
             this.weights         = set_optimization['weights'];
         }
 
-        if(json['set_optimization'] && json['set_optimization']['include']) {
-            this.include = set_optimization['include'];
+        if(json['set_optimization'] && json['set_optimization']['params']['include']) {
+            this.include = json['set_optimization']['params']['include'];
+            console.log("input");
+            console.log(this.include);
+            console.log(json);
         }
 
         // set all inputs to reflect the current module state
@@ -147,6 +150,7 @@ class Module3 {
         params['weights'] = this.weights;
         params['include'] = this.include;
 
+        console.log(out)
         return out;
     }
 
