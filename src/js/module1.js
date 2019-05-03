@@ -442,6 +442,11 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
 
         if(parseInt(target_end_input.value) - parseInt(this.value) < 50) {
             target_end_input.value = parseInt(this.value) + 50;
+            target_end_input.dispatchEvent(new Event('change'));
+        }
+
+        if(parseInt(this.value) > state.getTargetRegionIdentifier(identifier_label).seq.length) {
+            this.value = state.getTargetRegionIdentifier(identifier_label).seq.length - 50;
         }
 
         state.alterTargetRegionIdentifier(identifier_label, target_start=parseInt(this.value), null, null, null);
@@ -478,6 +483,11 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
 
         if(parseInt(this.value) - parseInt(target_start_input.value) < 50) {
             target_start_input.value = parseInt(this.value) - 50;
+            target_start_input.dispatchEvent(new Event('change'));
+        }
+
+        if(parseInt(this.value) > state.getTargetRegionIdentifier(identifier_label).seq.length) {
+            this.value = state.getTargetRegionIdentifier(identifier_label).seq.length;
         }
 
         state.alterTargetRegionIdentifier(identifier_label, null, target_end=parseInt(this.value), null, null);
