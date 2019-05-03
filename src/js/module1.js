@@ -640,6 +640,7 @@ bulk_upload.addEventListener('change', function() {
                 }
             } else {
                 current_sequence += line;
+                current_sequence = current_sequence.replace(/\s/g, '');
             }
         }
 
