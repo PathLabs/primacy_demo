@@ -202,16 +202,6 @@ class Module3 {
 }
 
 
-//listening
-ipcRenderer.on('EXECUTE', (event, arg) =>{
-    if(arg != null){
-        console.log("error received");
-    } else {
-        console.log("sending load message");
-        sendMessage('LOADMODULE', 3);
-    }
-});
-
 
 /**
  * @brief recieve a new CSV of packground primers to add into the list
@@ -227,7 +217,6 @@ background_primers.addEventListener('change', function() {
  * @brief refresh the primers list table
  */
 background_primers_list.addEventListener('change', function() {
-    console.log("updating table")
     // Clear out the table
     while (this.firstChild) {
         this.removeChild(this.firstChild);
@@ -260,6 +249,10 @@ background_primers_list.addEventListener('change', function() {
     }
 });
 
+
+/**
+ * @brief update the percentage of primers allowed to move forward
+ */
 move_forward.addEventListener('change', function() {
     let percent = parseInt(this.value);
 
@@ -275,6 +268,10 @@ move_forward.addEventListener('change', function() {
     state.move_forward_percent = percent;
 });
 
+
+/**
+ * @brief enable or disable optimum amplicon input
+ */
 optimumAmpliconCheck.addEventListener('change', function() {
     if(this.checked) {
         opt_amp_row.style.backgroundColor = "rgb(0, 36, 56)";
@@ -289,6 +286,9 @@ optimumAmpliconCheck.addEventListener('change', function() {
     }
 });
 
+/**
+ * @brief set the minimum amplicon value input
+ */
 opt_amplicon_min.addEventListener('change', function() {
     if(optimumAmpliconCheck.checked) {
         let max = parseInt(opt_amplicon_max.value);
@@ -307,6 +307,9 @@ opt_amplicon_min.addEventListener('change', function() {
     }
 });
 
+/**
+ * @brief set the maximum amplicon value input
+ */
 opt_amplicon_max.addEventListener('change', function() {
     if(optimumAmpliconCheck.checked) {
         let min = parseInt(opt_amplicon_min.value);
@@ -325,6 +328,10 @@ opt_amplicon_max.addEventListener('change', function() {
     }
 });
 
+
+/**
+ * @brief set the max distance type input
+ */
 max_distance.addEventListener('change', function() {
     let new_json = {
         forward: null,
@@ -352,6 +359,9 @@ max_distance.addEventListener('change', function() {
     state.target_distance = new_json;
 });
 
+/**
+ * @brief set the number for max distance
+ */
 max_distance_number.addEventListener('change', function() {
     console.log(this.value);
     if(parseInt(this.value) < 0) {
@@ -361,6 +371,10 @@ max_distance_number.addEventListener('change', function() {
     max_distance.dispatchEvent(new Event('change'));
 });
 
+
+/**
+ * @brief enable or disable the amplicon input
+ */
 ampliconCheck.addEventListener('change', function() {
     if(this.checked) {
         amplicon_size_row.style.backgroundColor = "rgb(0, 36, 56)";
@@ -374,6 +388,10 @@ ampliconCheck.addEventListener('change', function() {
     amplicon_size_slider.dispatchEvent(new Event('change'));
 });
 
+
+/**
+ * @brief enable or disable the target distance input
+ */
 targetDistanceCheck.addEventListener('change', function() {
     if(this.checked) {
         target_distance_row.style.backgroundColor = "rgb(1, 32, 53)";
@@ -388,6 +406,9 @@ targetDistanceCheck.addEventListener('change', function() {
 });
 
 
+/**
+ * @brief set the melting temperature input slider value
+ */
 sim_melt_temp_slider.addEventListener('change', function() {
     sim_melt_temp.value = this.value;
 
@@ -395,12 +416,18 @@ sim_melt_temp_slider.addEventListener('change', function() {
     sim_melt_temp.dispatchEvent(new Event('change'));
 });
 
+/**
+ * @brief set the melting temperature text value
+ */
 sim_melt_temp.addEventListener('change', function() {
     sim_melt_temp_slider.value = this.value;
     state.weights.tm = parseInt(this.value);
 });
 
 
+/**
+ * @brief set the primer score slider value
+ */
 primer_scores_slider.addEventListener('change', function() {
     primer_scores.value = this.value;
 
@@ -408,12 +435,18 @@ primer_scores_slider.addEventListener('change', function() {
     primer_scores.dispatchEvent(new Event('change'));
 });
 
+/**
+ * @brief set the primer scores text value
+ */
 primer_scores.addEventListener('change', function() {
     primer_scores_slider.value = this.value;
     state.weights.scores = parseInt(this.value);
 });
 
 
+/**
+ * @brief set the cross-dimerization slider value
+ */
 cross_dim_slider.addEventListener('change', function() {
     cross_dimerization.value = this.value;
 
@@ -421,12 +454,18 @@ cross_dim_slider.addEventListener('change', function() {
     cross_dimerization.dispatchEvent(new Event('change'));
 });
 
+/**
+ * @brief set the corss-dimerization text value 
+ */
 cross_dimerization.addEventListener('change', function() {
     cross_dim_slider.value = this.value;
     state.weights.cross_dimerization = parseInt(this.value);
 });
 
 
+/**
+ * @brief set the amplicon size slider value
+ */
 amplicon_size_slider.addEventListener('change', function() {
     amplicon_size.value = this.value;
 
@@ -434,12 +473,18 @@ amplicon_size_slider.addEventListener('change', function() {
     amplicon_size.dispatchEvent(new Event('change'));
 });
 
+/**
+ * @brief set the amplicon size text value
+ */
 amplicon_size.addEventListener('change', function() {
     amplicon_size_slider.value = this.value;
     state.weights.size = parseInt(this.value);
 });
 
 
+/**
+ * @brief set the target distance slider value
+ */
 target_dist_slider.addEventListener('change', function() {
     if(targetDistanceCheck.checked) {
         target_distance.value = this.value;
@@ -449,6 +494,9 @@ target_dist_slider.addEventListener('change', function() {
     }
 });
 
+/**
+ * @brief set the target distance text value
+ */
 target_distance.addEventListener('change', function() {
     if(targetDistanceCheck.checked) {
         target_dist_slider.value = this.value;
@@ -456,6 +504,10 @@ target_distance.addEventListener('change', function() {
     }
 });
 
+
+/**
+ * @brief set the iterations text value
+ */
 iterations.addEventListener('change', function() {
     let val = parseInt(this.value);
     if(val < 0) {
@@ -469,6 +521,16 @@ iterations.addEventListener('change', function() {
     state.iter = val;
 });
 
+
+//listening
+ipcRenderer.on('EXECUTE', (event, arg) =>{
+    if(arg != null){
+        console.log("error received");
+    } else {
+        console.log("sending load message");
+        sendMessage('LOADMODULE', 3);
+    }
+});
 
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
@@ -489,7 +551,6 @@ module2.addEventListener('click', function (){
     console.log("click");
     sendMessage('LOADMODULE', 2);
 });
-
 
 submit_button.addEventListener('click', function() {
     console.log(state.toJSON());
