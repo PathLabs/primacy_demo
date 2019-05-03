@@ -1,50 +1,68 @@
 /**
- * Desc: Listens to replys from main.js
- * Acts as a Library of helper functions for executing primacy pipeline commands
+ * @file module3.js
+ *
+ * @brief Front end Javascript for controlling user input and communicating
+ *        with the back end
  *
  * Authors:
- *      - Austin Kelly <ak678@nau.edu>
  *      - Chance Nelson <chance-nelson@nau.edu>
  */
+
 const os            = require('os');
 const fs            = require('fs');
 const {ipcRenderer} = require('electron');
 const papa          = require('papaparse');
 
 
-const module1            = document.getElementById("module1");
-const module2            = document.getElementById("module2");
-const module3            = document.getElementById("module3");
-const submit_button      = document.getElementById("nextModule");
-const module_1_sum       = document.getElementById('result');
+const module1       = document.getElementById("module1");
+const module2       = document.getElementById("module2");
+const module3       = document.getElementById("module3");
+const submit_button = document.getElementById("nextModule");
+const module_1_sum  = document.getElementById('result');
 
-const iterations           = document.getElementById("iterations");
-const opt_amplicon_min     = document.getElementById("optimumAmpliconMin");
-const opt_amplicon_max     = document.getElementById("optimumAmpliconMax")
-const optimum_check        = document.getElementById("optimumAmpliconCheck");
-const max_distance         = document.getElementById("maxDistance");
-const max_distance_number  = document.getElementById("maxDistanceNumber");
-const move_forward         = document.getElementById("moveForward");
-const background_primers   = document.getElementById("backgroundPrimers");
+const iterations = document.getElementById("iterations");
+
+// Optimal amplicon min/max
+const opt_amplicon_min = document.getElementById("optimumAmpliconMin");
+const opt_amplicon_max = document.getElementById("optimumAmpliconMax");
+const optimum_check    = document.getElementById("optimumAmpliconCheck");
+const opt_amp_row      = document.getElementById("optAmpRow");
+
+// Max distance
+const max_distance        = document.getElementById("maxDistance");
+const max_distance_number = document.getElementById("maxDistanceNumber");
+const max_distance_row    = document.getElementById("maxDistanceRow");
+
+// Primer move forward percentage
+const move_forward = document.getElementById("moveForward");
+
+// Background primers
+const background_primers      = document.getElementById("backgroundPrimers");
 const background_primers_list = document.getElementById('backgroundPrimersList')
 
+// Melting temperature priority
 const sim_melt_temp_slider = document.getElementById("simMeltTempSlider");
 const sim_melt_temp        = document.getElementById("simMeltTemp");
+
+// Primer score priority
 const primer_scores_slider = document.getElementById("primerScoresSlider");
 const primer_scores        = document.getElementById("primerScores");
+
+// Cross-dimerization priority
 const cross_dim_slider     = document.getElementById("crossDimerizationSlider");
 const cross_dimerization   = document.getElementById("crossDimerization");
+
+// Amplicon size priority
 const amplicon_size_slider = document.getElementById("ampliconSizeSlider");
 const amplicon_size        = document.getElementById("ampliconSize");
 const amplicon_check       = document.getElementById("ampliconCheck");
-const target_dist_slider   = document.getElementById("targetDistanceSlider");
-const target_distance      = document.getElementById("targetDistance");
-const target_dist_check    = document.getElementById("targetDistanceCheck");
-
-const opt_amp_row          = document.getElementById("optAmpRow");
-const max_distance_row     = document.getElementById("maxDistanceRow");
 const amplicon_size_row    = document.getElementById("ampliconSizeRow");
-const target_distance_row  = document.getElementById("targetDistanceRow");
+
+// Target distance priority
+const target_dist_slider  = document.getElementById("targetDistanceSlider");
+const target_distance     = document.getElementById("targetDistance");
+const target_dist_check   = document.getElementById("targetDistanceCheck");
+const target_distance_row = document.getElementById("targetDistanceRow");
 
 
 // Current module state
