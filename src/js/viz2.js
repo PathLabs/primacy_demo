@@ -9,7 +9,7 @@ var scores = {
   reverse: {}
 };
 
-var viz2_output = {};
+var viz2_output = {'set_optimization': {'params': {'include': {}}}};
 var primersSubmited = false;
 
 var pipeline_mod_2_output = null;
@@ -278,17 +278,18 @@ function submitPrimers(direction, val){
     }
 
     if (primersSubmited){
-      viz2_output[sequence][direction] = {}
-      viz2_output[sequence][direction].primer_ids = primerid_arr;
+      viz2_output['set_optimization']['params']['include'][sequence][direction] = {}
+      viz2_output['set_optimization']['params']['include'][sequence][direction].primer_ids = primerid_arr;
     }
     else{
-      viz2_output[sequence] = {};
-      viz2_output[sequence][direction] = {};
-      viz2_output[sequence][direction].primer_ids = primerid_arr;
+      viz2_output['set_optimization']['params']['include'][sequence] = {};
+      viz2_output['set_optimization']['params']['include'][sequence][direction] = {};
+      viz2_output['set_optimization']['params']['include'][sequence][direction].primer_ids = primerid_arr;
     }
   }
 
   primersSubmited = true;
+  console.log(viz2_output);
   ipcRenderer.send('UPDATE', JSON.stringify(viz2_output));
   alert('Primers were successfully submitted');
 }
