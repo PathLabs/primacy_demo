@@ -12,8 +12,16 @@ var scores = {
 var viz2_output = {};
 var primersSubmited = false;
 
+var pipeline_mod_2_output = null;
+
 // pipeline output after running module 2
-var pipeline_mod_2_output = "Sa_50_collection_out.json";
+ipcRenderer.on('NEW', function(event, arg) {
+    pipeline_mod_2_output = JSON.parse(arg);
+    create_viz_spec('forward', 'forward_score');
+    create_table('forward');
+    create_viz_spec('reverse', 'reverse_score');
+    create_table('reverse');
+});
 
 /**
  * Desc: This function extracts paths for every single sequence JSON file created after module 2
@@ -26,12 +34,7 @@ var pipeline_mod_2_output = "Sa_50_collection_out.json";
  */
 
 function get_paths(json_file_path) {
-  var collection_out = JSON.parse(
-    fs.readFileSync(
-      path.resolve("src/assets/test_targets", pipeline_mod_2_output),
-      "UTF-8"
-    )
-  );
+  var collection_out = pipeline_mod_2_output;
   collection_out_sequence_ids = Object.keys(collection_out.sequences);
   json_paths = [];
   for (var i = 0; i < collection_out_sequence_ids.length; i++) {
@@ -286,5 +289,6 @@ function submitPrimers(direction, val){
   }
 
   primersSubmited = true;
+  ipcRenderer.send('UPDATE', JSON.stringify(viz2_output));
   alert('Primers were successfully submitted');
 }
