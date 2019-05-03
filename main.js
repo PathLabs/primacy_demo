@@ -13,7 +13,11 @@ const child_process                = require('child_process');
 
 const ipcMain = require('electron').ipcMain;
 
+const {dialog} = require('electron');
+
 var fs = require('fs');
+
+const tar = require('tar');
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -25,7 +29,7 @@ let viz;
 let pid = process.pid;
 
 // create a run prefix directory
-let prefix = __dirname + '/pipeline/' + pid.toString()
+let prefix = __dirname + '/pipeline/' + pid.toString();
 fs.mkdirSync(prefix);
 
 var current_json = {};
@@ -105,7 +109,7 @@ function goToModule(module_number) {
         detail: 'Progress on current module will be lost.'
     };
 
-    if(module_number < current_module) {
+    if(module_number <= current_module) {
         response = require('electron').dialog.showMessageBox(null, options,(response) => {
           if (response == 0){
               win.loadURL('file:///' + __dirname + '/src/html/module' + module_number.toString() + '.html');
@@ -159,9 +163,16 @@ function execPipeline(cmd, args, callback) {
     fs.writeFileSync(prefix + '/args.json', JSON.stringify(current_json));
 
 
-    console.log(cmd + ' ' + prefix + '/args.json' + ' ' + prefix);
+    cmd = cmd + ' ' + prefix + '/args.json'
+    console.log('lo');
+    console.log(cmd.includes('primer-score'));
+    if(!cmd.includes('primer-score')) {
+        cmd += ' ' + prefix;
+    }
 
-    child_process.exec(cmd + ' ' + prefix + '/args.json' + ' ' + prefix, (error, stdout, stderr) => {
+    console.log(cmd);
+
+    child_process.exec(cmd, (error, stdout, stderr) => {
         // Read back in file
         data = fs.readFileSync(prefix + '/args.json', 'utf-8');
 
@@ -175,6 +186,13 @@ function execPipeline(cmd, args, callback) {
     });
 }
 
+function updateArgs(new_args) {
+    let new_args_json = JSON.parse(new_args);
+
+    for(key in args_json) {
+        current_json[key] = args_json[key];
+    }
+}
 
 function showViz(viz_num) { 
     switch(viz_num) {
@@ -185,9 +203,6 @@ function showViz(viz_num) {
         case 2: 
             if(!visited_modules[2].executed) return false;
             break;
-        
-        default: 
-            return false;
     }
 
     viz = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
@@ -203,6 +218,62 @@ function showViz(viz_num) {
     });
 
     return true;
+}
+
+
+/**
+ * @brief create a save of the current pipeline state
+ *
+ * @param save_state_path file path to the tarball to save
+ */
+function createSaveState(save_state_path) {
+    // save the current state to args.json
+    fs.writeFileSync(prefix + '/args.json', JSON.stringify(current_json));
+    fs.writeFileSync(prefix + '/state.json', JSON.stringify(visited_modules));
+
+    // get a list of all files and directories making up the current state
+    let state_files = fs.readdirSync(prefix);
+
+    tar.c({gzip: true, file: save_state_path, cwd: prefix}, state_files);
+}
+
+
+/**
+ * @brief load a save state into the current pipeline state
+ *
+ * @param save_state_path file path to the saved tarball
+ */
+function loadSaveState(save_state_path) {
+    // clear out all files in the current state
+    let state_files = fs.readdirSync(prefix);
+    
+    for(let file of state_files) {
+        fs.unlink(prefix + file.toString(), err => {
+            if(err) console.log(err);
+        });
+    }
+
+    // extract the state files 
+    tar.x({file: save_state_path, cwd: prefix, sync: true});
+
+    // Load in the args and state json files
+    current_json = JSON.parse(fs.readFileSync(prefix + '/args.json'));
+    visited_modules = JSON.parse(fs.readFileSync(prefix + '/state.json'));
+
+    // Find the most recently visited module
+    current_module = 1;
+
+    while(visited_modules[current_module['executed']]) {
+        current_module++;
+    }
+
+    // Jump to the most recent module
+    goToModule(current_module);
+    
+    // Send IPC message with the arguments to the current module
+    win.webContents.once('dom-ready', () => {
+        win.webContents.send('NEW', JSON.stringify(current_json));
+    });
 }
 
 
@@ -254,11 +325,30 @@ ipcMain.on('EXECUTE', (event, data) => {
     execPipeline(data[0], data[1], (result) => {
         event.sender.send('EXECUTE', result);
     });
-})
+});
+
+// Update the current pipeline args and refresh any open windows
+ipcMain.on('UPDATE', (event, args) => {
+    console.log("Updating args");
+    updateArgs(data);
+    console.log('Sending NEW')
+    win.webContents.send('NEW', JSON.stringify(current_json));
+});
 
 // Menu Setup and Customization
 
 const template = [
+  {
+    label: 'File',
+    submenu: [
+      {label: 'Save', click () {
+            createSaveState(dialog.showSaveDialog());
+      }},
+      {label: 'Load', click () {
+            loadSaveState(dialog.showOpenDialog()[0]);
+      }},
+    ]
+  },
   {
     label: 'Edit',
     submenu: [
@@ -272,7 +362,6 @@ const template = [
       { role: 'selectall' },
       { type: 'separator' },
       { label: 'Restore Defaults', role: 'reload'}
-
     ]
   },
   {

@@ -138,6 +138,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+td {
+  text-align: center;
+}
 body,
 figure {
   margin: 0;
@@ -165,7 +168,7 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   color: #ffe8e1;
-  background: #2f475f;
+  background: #334c66;
   font-size: 30px;
   text-align: center;
   text-shadow: 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -659,7 +662,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 #mod1_sub_table {
-  border: 1px solid #2f475f;
+  border: 1px solid #334c66;
 }
 
 #loading_logo {

@@ -1,65 +1,504 @@
 /**
- * Desc: Listens to replys from main.js
- * Acts as a Library of helper functions for executing primacy pipeline commands
+ * @file module3.js
  *
- * Authors:
- *      - Austin Kelly <ak678@nau.edu>
- *      - Chance Nelson <chance-nelson@nau.edu>
+ * @brief Front end Javascript for controlling user input and communicating
+ *        with the back end
+ *
+ * @author Chance Nelson <chance-nelson@nau.edu>
  */
+
 const os            = require('os');
-// const validate      = require('input_validation.js');
+const fs            = require('fs');
 const {ipcRenderer} = require('electron');
+const papa          = require('papaparse');
 
 
-const module1            = document.getElementById("module1");
-const module2            = document.getElementById("module2");
-const module3            = document.getElementById("module3");
-const submit_button      = document.getElementById("submitButton");
-const module_1_sum       = document.getElementById('result');
+const module1       = document.getElementById("module1");
+const module2       = document.getElementById("module2");
+const module3       = document.getElementById("module3");
+const submit_button = document.getElementById("nextModule");
+const module_1_sum  = document.getElementById('result');
 
-var iterations           = document.getElementById("iterations");
-var amplicon_slider      = document.getElementById("ampliconSlider");
-var opt_amplicon_size    = document.getElementById("optimumAmpliconSize");
-var optimum_check        = document.getElementById("optimumAmpliconCheck");
-var max_distance         = document.getElementById("maxDistance");
-var max_distance_check   = document.getElementById("maxDistanceCheck");
-var move_forward         = document.getElementById("moveForward");
-var background_primers   = document.getElementById("backgroundPrimers");
+const iterations = document.getElementById("iterations");
 
-var sim_melt_temp_slider = document.getElementById("simMeltTempSlider");
-var sim_melt_temp        = document.getElementById("simMeltTemp");
-var primer_scores_slider = document.getElementById("primerScoresSlider");
-var primer_scores        = document.getElementById("primerScores");
-var cross_dim_slider     = document.getElementById("crossDimerizationSlider");
-var cross_dimerization   = document.getElementById("crossDimerization");
-var amplicon_size_slider = document.getElementById("ampliconSizeSlider");
-var amplicon_size        = document.getElementById("ampliconSize");
-var amplicon_check       = document.getElementById("ampliconCheck");
-var target_dist_slider   = document.getElementById("targetDistanceSlider");
-var target_distance      = document.getElementById("targetDistance");
-var target_dist_check    = document.getElementById("targetDistanceCheck");
+// Optimal amplicon min/max
+const opt_amplicon_min = document.getElementById("optimumAmpliconMin");
+const opt_amplicon_max = document.getElementById("optimumAmpliconMax");
+const optimum_check    = document.getElementById("optimumAmpliconCheck");
+const opt_amp_row      = document.getElementById("optAmpRow");
 
-var opt_amp_row          = document.getElementById("optAmpRow");
-var max_distance_row     = document.getElementById("maxDistanceRow");
-var amplicon_size_row    = document.getElementById("ampliconSizeRow");
-var target_distance_row  = document.getElementById("targetDistanceRow");
+// Max distance
+const max_distance        = document.getElementById("maxDistance");
+const max_distance_number = document.getElementById("maxDistanceNumber");
+const max_distance_row    = document.getElementById("maxDistanceRow");
 
-var last_module_results = {};
-var current_module_args = {};
+// Background primers
+const background_primers      = document.getElementById("backgroundPrimers");
+const background_primers_list = document.getElementById('backgroundPrimersList')
+
+// Melting temperature priority
+const sim_melt_temp_slider = document.getElementById("simMeltTempSlider");
+const sim_melt_temp        = document.getElementById("simMeltTemp");
+
+// Primer score priority
+const primer_scores_slider = document.getElementById("primerScoresSlider");
+const primer_scores        = document.getElementById("primerScores");
+
+// Cross-dimerization priority
+const cross_dim_slider     = document.getElementById("crossDimerizationSlider");
+const cross_dimerization   = document.getElementById("crossDimerization");
+
+// Amplicon size priority
+const amplicon_size_slider = document.getElementById("ampliconSizeSlider");
+const amplicon_size        = document.getElementById("ampliconSize");
+const amplicon_check       = document.getElementById("ampliconCheck");
+const amplicon_size_row    = document.getElementById("ampliconSizeRow");
+
+// Target distance priority
+const target_dist_slider  = document.getElementById("targetDistanceSlider");
+const target_distance     = document.getElementById("targetDistance");
+const target_dist_check   = document.getElementById("targetDistanceCheck");
+const target_distance_row = document.getElementById("targetDistanceRow");
+
+
+// Current module state
+var state = null;
 
 
 function sendMessage(channel, message){
     ipcRenderer.send(channel, message);
 }
 
+/**
+ * @brief Class structure for preserving and altering internal module 3 state
+ */
+class Module3 {
+    /**
+     * @brief Initialize the page state
+     *
+     * @param json JSON object indicating current pipeline state
+     */
+    constructor(json={}) {
+        // set the defaults
+        this.json = json;
+        this.iter = 100;
+        this.amp_size = {
+            min: null,
+            max: null
+        };
 
-function init(json) {
-    console.log(json);
-    current_module_args = json[0];
-    last_module_results = json[1];
+        this.target_distance = {
+            forward: null,
+            reverse: null,
+            any: null,
+            both: null
+        };
 
-    module_1_sum.innerHTML = last_module_results['temperature'];
+        this.background = {};
+
+        this.weights = {
+            tm: 1,
+            scores: 1,
+            cross_dimerization: 1,
+            size: 1,
+            target_dist: 1
+        };
+
+        this.background_primers = {};
+
+        // If a previous state is available, bootstrap our internal state to 
+        // match
+        if(json && json['set_optimization'] && json['set_optimization']['iter']) {
+            let set_optimization = this.json['set_optimization'];
+            this.iter            = set_optimization['iter'];
+            this.amp_size        = set_optimization['amp_size'];
+            this.target_distance = set_optimization['target_distance'];
+            this.background      = set_optimization['background'];
+            this.weights         = set_optimization['weights'];
+        }
+
+        if(json['set_optimization'] && json['set_optimization']['include']) {
+            this.include = set_optimization['include'];
+        }
+
+        // set all inputs to reflect the current module state
+        iterations.value         = this.iter;
+        sim_melt_temp.value      = this.weights.tm;
+        primer_scores.value      = this.weights.scores;
+        cross_dimerization.value = this.weights.cross_dimerization;
+        amplicon_size.value      = this.weights.size;
+        target_distance.value    = this.weights.target_dist;
+    }
+
+    /**
+     * @brief generate a json args string based on the current args and
+     *        previous pipeline state.
+     */
+    toJSON() {
+        let out = {};
+        out['set_optimization'] = {}
+        out['set_optimization']['params'] = {};
+
+        let params = out['set_optimization']['params'];
+        params['iter'] = this.iter;
+        params['amp_size'] = this.amp_size;
+        params['target_distance'] = this.target_distance;
+        params['background'] = this.background;
+        params['weights'] = this.weights;
+        params['include'] = this.include;
+
+        return out;
+    }
+
+    /**
+     * @brief add a series of background primers, parsed from a CSV
+     *
+     * @param file_path path to the file to parse out
+     */
+    addBackgroundPrimers(file_path) {
+        papa.parse(file_path, {
+            complete: function(results) {
+                let keys = results.data[0];
+                for(let i = 1; i < results.data.length; i++) {
+                    if(results.data[i].length != keys.length) {
+                        continue;
+                    }
+
+                    let values = {
+                        id: null,
+                        seq: null
+                    };
+
+                    for(let j = 0; j < results.data[i].length; j++) {
+                        console.log(results.data[i][j]);
+                        values[keys[j]] = results.data[i][j];
+                    }
+
+                    console.log(values);
+
+                    let good = true;
+                    for(let key in values) {
+                        if(!values[key]) {
+                            good = false;
+                            break;
+                        }
+                    }
+
+                    if(!good) {
+                        continue;
+                    }
+                    
+                    // add the background primer to the member
+                    state.background[values.id] = {seq: values.seq};
+                }
+
+                // fire the event listener for the background sequence list
+                background_primers_list.dispatchEvent(new Event('change'));
+            }
+        });
+    }
 }
+
+
+
+/**
+ * @brief recieve a new CSV of packground primers to add into the list
+ */
+background_primers.addEventListener('change', function() {
+    let file_path = background_primers.files[0];
+    state.addBackgroundPrimers(file_path);
+
+    background_primers.files = null;
+});
+
+/**
+ * @brief refresh the primers list table
+ */
+background_primers_list.addEventListener('change', function() {
+    // Clear out the table
+    while (this.firstChild) {
+        this.removeChild(this.firstChild);
+    }
+
+    // Add a new row for each background primer
+    for(seq in state.background) {
+        console.log(seq);
+        let row = this.insertRow();
+
+        let cell = row.insertCell(0);
+        cell.innerHTML = seq;
+        
+        cell = row.insertCell(1);
+        cell.innerHTML = state.background[seq]['seq'];
+
+        cell = row.insertCell(2);
+        let remove_btn = document.createElement('BUTTON');
+        remove_btn.innerHTML = 'Remove';
+
+        /**
+         * @brief remove this sequence from the internal sequence list and refresh the list
+         */
+        remove_btn.addEventListener('click', function() {
+            delete state.background[seq];
+            background_primers_list.dispatchEvent(new Event('change'));
+        });
+
+        cell.appendChild(remove_btn);
+    }
+});
+
+
+/**
+ * @brief enable or disable optimum amplicon input
+ */
+optimumAmpliconCheck.addEventListener('change', function() {
+    if(this.checked) {
+        opt_amp_row.style.backgroundColor = "rgb(0, 36, 56)";
+    } else {
+        opt_amp_row.style.backgroundColor = "initial";
+        opt_amplicon_min.value = 0;
+        opt_amplicon_max.value = 0;
+        state.amp_size = {
+            min: null, 
+            max: null
+        };
+    }
+});
+
+/**
+ * @brief set the minimum amplicon value input
+ */
+opt_amplicon_min.addEventListener('change', function() {
+    if(optimumAmpliconCheck.checked) {
+        let max = parseInt(opt_amplicon_max.value);
+        let min = parseInt(this.value);
+        
+        if(max < min) {
+            this.value = max;
+            opt_amplicon_max.value = min;
+
+            opt_amplicon_max.dispatchEvent(new Event('change'));
+        }
+
+        state.amp_size.min = parseInt(this.value);
+    } else {
+        this.value = 0;
+    }
+});
+
+/**
+ * @brief set the maximum amplicon value input
+ */
+opt_amplicon_max.addEventListener('change', function() {
+    if(optimumAmpliconCheck.checked) {
+        let min = parseInt(opt_amplicon_min.value);
+        let max = parseInt(this.value);
+        
+        if(max < min) {
+            this.value = min;
+            opt_amplicon_min.value = max;
+
+            opt_amplicon_min.dispatchEvent(new Event('change'));
+        }
+
+        state.amp_size.max = parseInt(this.value);
+    } else {
+        this.value = 0;
+    }
+});
+
+
+/**
+ * @brief set the max distance type input
+ */
+max_distance.addEventListener('change', function() {
+    let new_json = {
+        forward: null,
+        reverse: null,
+        any: null,
+        both: null
+    };
+
+    switch(this.value) {
+        case 'None':
+            break; 
+        case 'Distance from forward primer':
+            new_json.forward = parseInt(max_distance_number.value);
+            break;
+        case 'Distance from reverse primer':
+            new_json.reverse = parseInt(max_distance_number.value);
+            break;
+        case 'Distance from at least one primer':
+            new_json.any = parseInt(max_distance_number.value);
+            break;
+        case 'Distance from both primers':
+            new_json.both = parseInt(max_distance_number.value);
+    }
+
+    state.target_distance = new_json;
+});
+
+/**
+ * @brief set the number for max distance
+ */
+max_distance_number.addEventListener('change', function() {
+    console.log(this.value);
+    if(parseInt(this.value) < 0) {
+        this.value = 0;
+    }
+
+    max_distance.dispatchEvent(new Event('change'));
+});
+
+
+/**
+ * @brief enable or disable the amplicon input
+ */
+ampliconCheck.addEventListener('change', function() {
+    if(this.checked) {
+        amplicon_size_row.style.backgroundColor = "rgb(0, 36, 56)";
+    } else {
+        amplicon_size_row.style.backgroundColor = "initial";
+        amplicon_size.value = 0;
+        amplicon_size_slider.value = 0;
+    }
+
+    // fire the change event to finilize changes in the state
+    amplicon_size_slider.dispatchEvent(new Event('change'));
+});
+
+
+/**
+ * @brief enable or disable the target distance input
+ */
+targetDistanceCheck.addEventListener('change', function() {
+    if(this.checked) {
+        target_distance_row.style.backgroundColor = "rgb(1, 32, 53)";
+    } else {
+        target_distance_row.style.backgroundColor = "initial";
+        target_distance.value = 0;
+        target_dist_slider.value = 0;
+    }
+
+    // fire the change event to finilize changes in the state
+    target_dist_slider.dispatchEvent(new Event('change'));
+});
+
+
+/**
+ * @brief set the melting temperature input slider value
+ */
+sim_melt_temp_slider.addEventListener('change', function() {
+    sim_melt_temp.value = this.value;
+
+    // fire the change event on the temperature element
+    sim_melt_temp.dispatchEvent(new Event('change'));
+});
+
+/**
+ * @brief set the melting temperature text value
+ */
+sim_melt_temp.addEventListener('change', function() {
+    sim_melt_temp_slider.value = this.value;
+    state.weights.tm = parseInt(this.value);
+});
+
+
+/**
+ * @brief set the primer score slider value
+ */
+primer_scores_slider.addEventListener('change', function() {
+    primer_scores.value = this.value;
+
+    // fire the change event on the primer scores element
+    primer_scores.dispatchEvent(new Event('change'));
+});
+
+/**
+ * @brief set the primer scores text value
+ */
+primer_scores.addEventListener('change', function() {
+    primer_scores_slider.value = this.value;
+    state.weights.scores = parseInt(this.value);
+});
+
+
+/**
+ * @brief set the cross-dimerization slider value
+ */
+cross_dim_slider.addEventListener('change', function() {
+    cross_dimerization.value = this.value;
+
+    // fire the change event on the cross-dimerization element 
+    cross_dimerization.dispatchEvent(new Event('change'));
+});
+
+/**
+ * @brief set the corss-dimerization text value 
+ */
+cross_dimerization.addEventListener('change', function() {
+    cross_dim_slider.value = this.value;
+    state.weights.cross_dimerization = parseInt(this.value);
+});
+
+
+/**
+ * @brief set the amplicon size slider value
+ */
+amplicon_size_slider.addEventListener('change', function() {
+    amplicon_size.value = this.value;
+
+    // fire the change event on the amplicon size event 
+    amplicon_size.dispatchEvent(new Event('change'));
+});
+
+/**
+ * @brief set the amplicon size text value
+ */
+amplicon_size.addEventListener('change', function() {
+    amplicon_size_slider.value = this.value;
+    state.weights.size = parseInt(this.value);
+});
+
+
+/**
+ * @brief set the target distance slider value
+ */
+target_dist_slider.addEventListener('change', function() {
+    if(targetDistanceCheck.checked) {
+        target_distance.value = this.value;
+
+        // fire the change event on the target distance event 
+        target_distance.dispatchEvent(new Event('change'));
+    }
+});
+
+/**
+ * @brief set the target distance text value
+ */
+target_distance.addEventListener('change', function() {
+    if(targetDistanceCheck.checked) {
+        target_dist_slider.value = this.value;
+        state.weights.target_dist = parseInt(this.value);
+    }
+});
+
+
+/**
+ * @brief set the iterations text value
+ */
+iterations.addEventListener('change', function() {
+    let val = parseInt(this.value);
+    if(val < 0) {
+        this.value = 1;
+        val = 1;
+    } else if(val > 100) {
+        this.value = 100;
+        val = 100;
+    }
+
+    state.iter = val;
+});
 
 
 //listening
@@ -68,13 +507,13 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
         console.log("error received");
     } else {
         console.log("sending load message");
-        sendMessage('LOADMODULE', 3);
+        sendMessage('LOADVIZ', 3);
     }
 });
 
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
-    init(arg);
+    state = new Module3(JSON.parse(arg));
 });
 
 ipcRenderer.on('LOADMODULE', (event, arg) =>{
@@ -92,101 +531,12 @@ module2.addEventListener('click', function (){
     sendMessage('LOADMODULE', 2);
 });
 
-optimumAmpliconCheck.addEventListener('change', function() {
-    if(this.checked) {
-        opt_amp_row.style.backgroundColor = "rgb(0, 36, 56)";
-    } else {
-        opt_amp_row.style.backgroundColor = "initial";
-        opt_amplicon_size.value = 0;
-        amplicon_slider.value = 0;
-    }
+submit_button.addEventListener('click', function() {
+    console.log(state.toJSON());
+    sendMessage('EXECUTE', ['primacy set-optimization', JSON.stringify(state.toJSON())])
 });
 
-maxDistanceCheck.addEventListener('change', function() {
-    if(this.checked) {
-        max_distance_row.style.backgroundColor = "rgb(1, 32, 53)";
-    } else {
-        max_distance_row.style.backgroundColor = "initial";
-        max_distance.value = "None";
-    }
-});
 
-ampliconCheck.addEventListener('change', function() {
-    if(this.checked) {
-        amplicon_size_row.style.backgroundColor = "rgb(0, 36, 56)";
-    } else {
-        amplicon_size_row.style.backgroundColor = "initial";
-        amplicon_size.value = 0;
-        amplicon_size_slider.value = 0;
-    }
-});
-
-targetDistanceCheck.addEventListener('change', function() {
-    if(this.checked) {
-        target_distance_row.style.backgroundColor = "rgb(1, 32, 53)";
-    } else {
-        target_distance_row.style.backgroundColor = "initial";
-        target_distance.value = 0;
-        target_dist_slider.value = 0;
-    }
-});
-
-iterations.value = 100;
-sim_melt_temp.value = 1;
-primer_scores.value = 1;
-cross_dimerization.value = 1;
-amplicon_size.value = 1;
-target_distance.value = 1;
-
-amplicon_slider.oninput = function() {
-    opt_amplicon_size.value = this.value;
-};
-
-opt_amplicon_size.oninput = function() {
-    amplicon_slider.value = this.value;
-};
-
-
-sim_melt_temp_slider.oninput = function() {
-    sim_melt_temp.value = this.value;
-};
-
-sim_melt_temp.oninput = function() {
-    sim_melt_temp_slider.value = this.value;
-};
-
-
-primer_scores_slider.oninput = function() {
-    primer_scores.value = this.value;
-};
-
-primer_scores.oninput = function() {
-    primer_scores_slider.value = this.value;
-};
-
-
-cross_dim_slider.oninput = function() {
-    cross_dimerization.value = this.value;
-};
-
-cross_dimerization.oninput = function() {
-    cross_dim_slider.value = this.value;
-};
-
-
-amplicon_size_slider.oninput = function() {
-    amplicon_size.value = this.value;
-};
-
-amplicon_size.oninput = function() {
-    amplicon_size_slider.value = this.value;
-};
-
-
-target_dist_slider.oninput = function() {
-    target_distance.value = this.value;
-};
-
-target_distance.oninput = function() {
-    target_dist_slider.value = this.value;
-};
+if(!state) {
+    state = new Module3();
+}

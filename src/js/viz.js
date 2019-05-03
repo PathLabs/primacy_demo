@@ -5,8 +5,16 @@ const { ipcRenderer } = require("electron");
 var selected_labels = {};
 var table = document.getElementById("atRiskSeqs");
 
+var pipeline_mod_1_output = null;
+
 // pipeline output after running module 1
-var pipeline_mod_1_output = "Sa_50_collection_out.json";
+ipcRenderer.on('NEW', function(event, arg) {
+    pipeline_mod_1_output = JSON.parse(arg);
+    create_viz_spec('forward', 'tm', "tm_f_div")
+    create_viz_spec('reverse', 'tm', "tm_r_div")
+    create_viz_spec('forward', 'gc', "gc_f_div")
+    create_viz_spec('reverse', 'gc', "gc_r_div")
+});
 
 
 /**
@@ -21,12 +29,7 @@ var pipeline_mod_1_output = "Sa_50_collection_out.json";
 
 
 function get_paths(json_file_path) {
-  var collection_out = JSON.parse(
-    fs.readFileSync(
-      path.resolve("src/assets/test_targets", pipeline_mod_1_output),
-      "UTF-8"
-    )
-  );
+  var collection_out = pipeline_mod_1_output;
   collection_out_sequence_ids = Object.keys(collection_out.sequences);
   json_paths = [];
   for (var i = 0; i < collection_out_sequence_ids.length; i++) {
@@ -34,6 +37,7 @@ function get_paths(json_file_path) {
       collection_out.sequences[collection_out_sequence_ids[i]]["outfile"]
     );
   }
+  console.log(json_paths);
   return json_paths;
 }
 
@@ -97,6 +101,8 @@ function parse_data(direction, field) {
       }
     }
   }
+
+  console.log(xData, yData);
   return [xData, yData];
 }
 
@@ -110,7 +116,33 @@ function parse_data(direction, field) {
 * Returns:
 *      None
 */
+function deleteRow(r) {
+  var i = r.parentNode.parentNode.rowIndex;
+  table.deleteRow(i);
+}
 
+function copyTableData(){
+  var sequenceIDs = "";
+  var tRows = table.rows;
+
+  for (var i=1; i < tRows.length; i++){
+    var sequence_id = tRows[i].cells[0].innerHTML;
+    if (sequenceIDs == ""){
+      sequenceIDs = sequenceIDs + sequence_id;
+    }
+    else{
+      sequenceIDs = sequenceIDs+ ";" + sequence_id;
+    }
+}
+  console.log(sequenceIDs);
+  var clipboardText = document.createElement('input');
+  document.body.appendChild(clipboardText);
+  clipboardText.value = sequenceIDs;
+  clipboardText.select();
+  document.execCommand("copy");
+  document.body.removeChild(clipboardText);
+  alert('Sequence IDs copied to the clipboard!');
+}
 
 function create_viz_spec(direction, field, div) {
   data = parse_data(direction, field);
@@ -152,8 +184,8 @@ function create_viz_spec(direction, field, div) {
   layout = {
     title: field + " values for " + direction + " primers",
     autosize: false,
-    width: 800,
-    height: 450,
+    width: 1250,
+    height: 750,
     yaxis: {
       title: field + " value",
       autorange: true,
@@ -200,10 +232,11 @@ function create_viz_spec(direction, field, div) {
 
           var seq = trow.insertCell(0);
           var count = trow.insertCell(1);
+          var remove = trow.insertCell(2);
 
           seq.innerHTML = d.text;
           count.innerHTML = selected_labels[d.text];
-
+          remove.innerHTML = '<input type="button" value="Delete" onclick="deleteRow(this)">';
 
 
         }

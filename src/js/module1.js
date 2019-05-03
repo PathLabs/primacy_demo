@@ -35,6 +35,7 @@ const default_target_end = document.getElementById('default_target_end');
 const default_min_length = document.getElementById('default_min_length');
 const default_max_length = document.getElementById('default_max_length');
 const search_box = document.getElementById('search_box');
+const change_all = document.getElementById('change_all');
 
 
 var manual_sequence = document.getElementById('manual_sequence');
@@ -103,6 +104,12 @@ class Module1 {
         pcr_salts_inputs[2].value = this.pcr_salts['Tris'];
         pcr_salts_inputs[3].value = this.pcr_salts['Mg'];
         pcr_salts_inputs[4].value = this.pcr_salts['dNTPs'];
+
+        // Init defaults in Target Regions to sane values
+        default_target_start.value = 1;
+        default_target_end.value = 50;
+        default_min_length.value = 18;
+        default_max_length.value = 22;
     }
 
     /**
@@ -201,8 +208,8 @@ class Module1 {
 
         this.target_regions[label] = {
             'seq': sequence.toString(),
-            'target_start': target_start,
-            'target_end': target_end,
+            'target_start': target_start-1,
+            'target_end': target_end-1,
             'primer_len_range': {
                 'min': min_length,
                 'max': max_length
@@ -222,7 +229,7 @@ class Module1 {
      */
     removeTargetRegionIdentifier(label) {
         if(label in this.target_regions) {
-            delete this.target_regions.label;
+            delete this.target_regions[label];
             return true;
 
         } else {
@@ -249,11 +256,11 @@ class Module1 {
         }
 
         if(target_start) {
-            this.target_regions[label]['target_start'] = target_start;
+            this.target_regions[label]['target_start'] = target_start-1;
         }
 
         if(target_end) {
-            this.target_regions[label]['target_end'] = target_end;
+            this.target_regions[label]['target_end'] = target_end-1;
         }
 
         if(min_length) {
@@ -402,7 +409,7 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     let length_max_label = document.createElement('div');
     let length_max_input = document.createElement('input');
     let remove_button = document.createElement('input');
-    
+
     label.className = 'sequence_name';
     label.innerHTML = identifier_label;
     cell.appendChild(label);
@@ -430,12 +437,17 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     target_start_input.addEventListener('change', function(event) {
-        if(this.value < 0) {
-            this.value = 0;
+        if(this.value < 1) {
+            this.value = 1;
         }
 
         if(parseInt(target_end_input.value) - parseInt(this.value) < 50) {
             target_end_input.value = parseInt(this.value) + 50;
+            target_end_input.dispatchEvent(new Event('change'));
+        }
+
+        if(parseInt(this.value) > state.getTargetRegionIdentifier(identifier_label).seq.length) {
+            this.value = state.getTargetRegionIdentifier(identifier_label).seq.length - 50;
         }
 
         state.alterTargetRegionIdentifier(identifier_label, target_start=parseInt(this.value), null, null, null);
@@ -466,12 +478,17 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     target_end_input.addEventListener('change', function() {
-        if(parseInt(this.value) < 0) {
-            this.value = 0;
+        if(parseInt(this.value) < 1) {
+            this.value = 1;
         }
 
         if(parseInt(this.value) - parseInt(target_start_input.value) < 50) {
             target_start_input.value = parseInt(this.value) - 50;
+            target_start_input.dispatchEvent(new Event('change'));
+        }
+
+        if(parseInt(this.value) > state.getTargetRegionIdentifier(identifier_label).seq.length) {
+            this.value = state.getTargetRegionIdentifier(identifier_label).seq.length;
         }
 
         state.alterTargetRegionIdentifier(identifier_label, null, target_end=parseInt(this.value), null, null);
@@ -589,6 +606,32 @@ function search(search_str) {
 }
 
 
+// bulk change all current target region identifiers to have the values in the defaults
+change_all.addEventListener('click', function() {
+    // alter the values in the needed target sequence inputs
+    let elements = document.querySelectorAll('#sequence_identifiers > .input_table');
+
+    let target_start = parseInt(default_target_start.value);
+    let target_end = parseInt(default_target_end.value);
+    let min_length = parseInt(default_min_length.value);
+    let max_length = parseInt(default_max_length.value);
+    
+    // scan through the target region identifiers, find the corrent one, and inject the values
+    for(let j = 0; j < elements.length; j++) {
+        let inputs = elements[j].querySelectorAll('input');
+
+        inputs[0].value = target_start;
+        inputs[1].value = target_end;
+        inputs[2].value = min_length;
+        inputs[3].value = max_length;
+
+        for(let j = 0; j < 4; j++) {
+            inputs[i].dispatchEvent(new Event('change'));
+        }
+    }
+});
+
+
 // Event listener for sequence identifier manual entry
 manual_submit.addEventListener('click', function() {
     let manual_label    = document.getElementById('manual_label');
@@ -597,7 +640,7 @@ manual_submit.addEventListener('click', function() {
     let label    = manual_label.value;
     let sequence = manual_sequence.value;
 
-    if(!validate.validateFasta(sequence)) {
+    if(!validate.validateFasta(sequence) || label.value == '' || sequence.value == '') {
         return;
     }
 
@@ -640,6 +683,7 @@ bulk_upload.addEventListener('change', function() {
                 }
             } else {
                 current_sequence += line;
+                current_sequence = current_sequence.replace(/\s/g, '');
             }
         }
 
@@ -781,6 +825,11 @@ ipcRenderer.on('EXECUTE', (event, arg) => {
 // Intercept module load denials
 ipcRenderer.on('LOADMODULE', (event, arg) => {
     console.log('Module load denied');
+    submit.style.borderColor = "red";
+    setTimeout(function(){
+      submit.style.borderColor = "black";
+    }, 150);
+
 });
 
 

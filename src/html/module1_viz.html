@@ -1,21 +1,17 @@
 <html lang="en">
   <head>
-    <!-- Plotly.js -->
     <script src="../js/plotly/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
-
-
   </head>
   <body>
-    <div class="row" style="background-color:lightblue;position: fixed">
-<center>
-<table id="atRiskSeqs" style="width:80%">
-  <tr>
-    <th>Sequence ID</th>
-    <th>Count</th>
-  </tr>
-</table>
-</center>
+    <div class="row" style="position:sticky;text-align:-webkit-center;">
+    <table id="atRiskSeqs" style="width: 87.3%;text-align:-webkit-center; ">
+      <tr>
+        <th>Sequence ID</th>
+        <th>Count</th>
+        <th><button onclick="copyTableData();">Copy sequence ids to clipboard </button></th>
+      </tr>
+    </table>
     </div>
     <div class="row">
       <center><div id="tm_f_div"></div>
@@ -25,24 +21,7 @@
         <center><div id="gc_f_div"></div>
           <br>
         <center><div id="gc_r_div"></div>
-
-
-    </div>
-
-    <div class="tab_container">
-      <button class="tab tab1" id=module1>GO BACK TO MODULE 1</button>
-      <button class="tab tab3" id="module1_Viz" style="background-color: #012035;">COLLECTION OVERVIEW</button>
-      <button class="tab tab2" id="module2">CONTINUE TO MODULE 2</button>
     </div>
   </body>
   <script src="../js/viz.js"></script>
-
-  <script> create_viz_spec('forward', 'tm', "tm_f_div")</script>
-  <script> create_viz_spec('reverse', 'tm', "tm_r_div")</script>
-  <script> create_viz_spec('forward', 'gc', "gc_f_div")</script>
-  <script> create_viz_spec('reverse', 'gc', "gc_r_div")</script>
-
-
-
-
 </html>

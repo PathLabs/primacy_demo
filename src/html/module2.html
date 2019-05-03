@@ -21,17 +21,17 @@
                 </div>
               </td>
               <td>
-                <input id="tm_optSlider" type="range" min="40" max="80" value = "55"
-                      oninput="tm_opt.value=tm_optSlider.value" class = "slider">
+                <input id="tm-opt-slider" type="range" min="40" max="80" value = "55"
+                      oninput="updateBox('tm-opt-box', this.value);" class = "slider">
               </td>
+
               <td>
-                <input onClick="this.select();" type="number" name="tm_opt" id="tm_opt" for="tm_optSlider" min="1" max="100"
-                      oninput="tm_optSlider.value=tm_opt.value">°C
+                <input id="tm-opt-box" type="number" value="55" min="1" max="100"
+                      oninput="updateSlider('tm-opt-slider', this.value);">°C
               </td>
             </tr>
           </table>
           </br>
-          <img src="../img/temp.png">
         </div>
       </div>
       <div class="box box2"><h1>OPTIMAL RANGE FOR GC CONTENT</h1>
@@ -46,12 +46,12 @@
                   </div>
                 </td>
                 <td>
-                  <input id="gcMinSlider" type="range" min="1" max="100" value"40"
-                        oninput="gcMin.value=gcMinSlider.value" class = "slider">
+                  <input id="gc-min-slider" type="range" min="1" max="100" value"40"
+                        oninput="updateBox('gc-min-box', this.value);" class = "slider">
                 </td>
                 <td>
-                  <input onClick="this.select();" type="number" name="gcMin" id="gcMin" for="gcMinSlider" min="1" max="100" value="60"
-                        oninput="gcMinSlider.value=gcMin.value">%
+                  <input id="gc-min-box" type="number" min="1" max="100" value="40"
+                        oninput="updateSlider('gc-min-slider', this.value);">%
                 </td>
               </tr>
 
@@ -62,12 +62,12 @@
                   </div>
                 </td>
                 <td>
-                  <input id="gcMaxSlider" type="range" min="1" max="100" value="1"
-                        oninput="gcMax.value=gcMaxSlider.value" class = "slider">
+                  <input id="gc-max-slider" type="range" min="1" max="100" value="60"
+                        oninput="updateBox('gc-max-box', this.value);" class = "slider">
                 </td>
                 <td>
-                  <input onClick="this.select();" type="number" name="gcMax" id="gcMax" for="gcMaxSlider" min="1" max="100" value="1"
-                        oninput="gcMaxSlider.value=gcMax.value">%
+                  <input id="gc-max-box" type="number" min="1" max="100" value="60"
+                        oninput="updateSlider('gc-max-slider', this.value);">%
                 </td>
               </tr>
             </table>
@@ -92,15 +92,15 @@
               </div>
             </td>
             <td>
-              <input id="tmSlider" type="range" min="1" max="100" value = "1"
-                        oninput="tm.value=tmSlider.value" class="slider">
+              <input id="tm-slider" type="range" min="1" max="100" value = "1"
+                        oninput="updateBox('tm-box', this.value);" class="slider">
             </td>
             <td>
-              <input onClick="this.select();" type="number" name="tm" id="tm" for="tmSlider" min="1" max="100" value="1"
-                        oninput="tmSlider.value=tm.value">
+              <input id="tm-box" type="number" for="tm-slider" min="1" max="100" value="1"
+                        oninput="updateSlider('tm-slider', this.value);">
             </td>
             <td>
-              <input type="checkbox" name="tmCheckbox" id="tmCheckbox" value="TM" checked>
+              <input id="tm-checkbox" type="checkbox" onchange="checkBoxUpdate('tm-slider', 'tm-box', 'tm-checkbox');" checked>
             </td>
           </tr>
 
@@ -111,14 +111,14 @@
               </div>
             </td>
             <td>
-              <input id="gcSlider" type="range" min="1" max="100" value = "1"
-                        oninput="gc.value=gcSlider.value" class="slider">
+              <input id="gc-slider" type="range" min="1" max="100" value = "1"
+                        oninput="updateBox('gc-box', this.value);" class="slider">
             </td>
             <td>
-              <input onClick="this.select();" type="number" name="gc" id="gc" for="gcSlider" value = "1" min="1" max="100" value="1"
-                        oninput="gcSlider.value=gc.value">
+              <input id="gc-box" type="number" value = "1" min="1" max="100"
+                        oninput="updateSlider('gc-slider', this.value);">
             </td>
-            <td><input type="checkbox" name="gcCheckbox" id="gcCheckbox" value="GC" checked></td>
+            <td><input type="checkbox" id="gc-checkbox" onchange="checkBoxUpdate('gc-slider', 'gc-box', 'gc-checkbox');" checked></td>
           </tr>
 
           <tr id="hpolyRow">
@@ -128,16 +128,14 @@
               </div>
             </td>
             <td>
-              <input id="hpolySlider" type="range" min="1" max="100" value = "1"
-                        oninput="hpoly.value=hpolySlider.value" class = "slider">
+              <input id="hpoly-slider" type="range" min="1" max="100" value = "1"
+                        oninput="updateBox('hpoly-box', this.value);" class="slider">
             </td>
             <td>
-              <input onClick="this.select();" type="number" name="hpoly" id="hpoly" for="hpolySlider" min="1" max="100" value="1"
-                        oninput="hpolySlider.value=hpoly.value">
+              <input id="hpoly-box" type="number" value = "1" min="1" max="100"
+                        oninput="updateSlider('hpoly-slider', this.value);">
             </td>
-            <td>
-              <input type="checkbox" name="hpolyCheckbox" id="hpolyCheckbox" value="Homopolymers" checked>
-            </td>
+            <td><input type="checkbox" id="hpoly-checkbox" onchange="checkBoxUpdate('hpoly-slider', 'hpoly-box', 'hpoly-checkbox');" checked></td>
           </tr>
 
           <tr id="dimerizationRow">
@@ -147,16 +145,14 @@
               </div>
             </td>
             <td>
-              <input id="dimerzSlider" type="range" min="1" max="100" value="1"
-                        oninput="dimerz.value=dimerzSlider.value" class="slider">
+              <input id="dimerz-slider" type="range" min="1" max="100" value = "1"
+                        oninput="updateBox('dimerz-box', this.value);" class="slider">
             </td>
             <td>
-              <input onClick="this.select();" type="number" name="dimerz" id="dimerz" for="dimerzSlider" min="1" max="100" value="1"
-                        oninput="dimerzSlider.value=dimerz.value">
+              <input id="dimerz-box" type="number" value = "1" min="1" max="100"
+                        oninput="updateSlider('dimerz-slider', this.value);">
             </td>
-            <td>
-              <input type="checkbox" name="dimerzCheckbox" id="dimerzCheckbox" value="Dimerization" checked>
-            </td>
+            <td><input type="checkbox" id="dimerz-checkbox" onchange="checkBoxUpdate('dimerz-slider', 'dimerz-box', 'dimerz-checkbox');" checked></td>
           </tr>
 
           <tr id="specificityRow">
@@ -166,15 +162,14 @@
               </div>
             </td>
             <td>
-              <input id="specifSlider" type="range" min="1" max="100" value="1"
-                        oninput="specif.value=specifSlider.value" class="slider">
+              <input id="specificity-slider" type="range" min="1" max="100" value = "1"
+                        oninput="updateBox('specificity-box', this.value);" class="slider">
             </td>
             <td>
-              <input onClick="this.select();" type="number" name="specif" id="specif" for="specifSlider" min="1" max="100" value="1"
-                        oninput="specifSlider.value=specif.value">
+              <input id="specificity-box" type="number" value = "1" min="1" max="100"
+                        oninput="updateSlider('specificity-slider', this.value);">
             </td>
-            <td>
-              <input type="checkbox" name="specifCheckbox" id="specifCheckbox" value="Specificity" checked>
+            <td><input type="checkbox" id="specificity-checkbox" onchange="checkBoxUpdate('specificity-slider', 'specificity-box', 'specificity-checkbox');" checked></td>
             </td>
           </tr>
 
@@ -185,15 +180,14 @@
               </div>
             </td>
             <td>
-              <input id="degenSlider" type="range" min="1" max="100"
-                        oninput="degen.value=degenSlider.value" class = "slider">
+              <input id="degenerate-slider" type="range" min="1" max="100" value = "1"
+                        oninput="updateBox('degenerate-box', this.value);" class="slider">
             </td>
             <td>
-              <input onClick="this.select();" type="number" name="degen" id="degen" for="degenSlider" min="1" max="100" value="1"
-                        oninput="degenSlider.value=degen.value">
+              <input id="degenerate-box" type="number" value = "1" min="1" max="100"
+                        oninput="updateSlider('degenerate-slider', this.value);">
             </td>
-            <td>
-              <input type="checkbox" name="degenCheckbox" id="degenCheckbox" value="Degenerate" checked>
+            <td><input type="checkbox" id="degenerate-checkbox" onchange="checkBoxUpdate('degenerate-slider', 'degenerate-box', 'degenerate-checkbox');" checked></td>
             </td>
           </tr>
 
@@ -208,8 +202,9 @@
 
   <div class="tab_container">
     <button class="tab tab1" id="module1">PRIMER COLLECTION</button>
-    <button class="tab tab2" id="module2" style="background-color: #012035;
-                             border: 1px solid rgb(10, 160, 70);">PRIMER SCORING</button>
+    <button class="tab tab2" id="module2"
+                             style="background-color: #012035;border: 1px solid rgb(10, 160, 70);">
+                             PRIMER SCORING </button>
     <button class="tab tab3" id="module3">OPTIMIZATION</button>
     <button class="tab tab4" id="module4">OVERVIEW</button>
   </div>
