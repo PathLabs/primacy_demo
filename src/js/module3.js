@@ -8,7 +8,6 @@
  */
 const os            = require('os');
 const {ipcRenderer} = require('electron');
-const noUiSlider    = require('nouislider');
 
 
 const module1            = document.getElementById("module1");
