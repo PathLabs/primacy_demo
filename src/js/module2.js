@@ -50,6 +50,8 @@ const degenerateSlider = document.getElementById('degenerate-slider');
 const degenerateBox = document.getElementById('degenerate-box');
 const degenerateCheckbox = document.getElementById('degenerate-checkbox');
 
+var state = {primer_scores: {}};
+
 
 function updateSlider(sliderId, val){
   var slider = document.getElementById(sliderId);
@@ -80,23 +82,6 @@ function sendMessage(channel, message){
   ipcRenderer.send(channel, message);
 }
 
-/**
- * @brief object for the state of module 2
- */
-class Module2 {
-  /**
-   * @brief Constructor for module 1 state. Can accept a JSON object of a
-   *        previous state to bootstrap from.
-   *
-   * @param previous_state JSON object that contains the arguments for
-   *        a run of Primacy module 1.
-   */
-   constructor(state=null) {}
-   
-
-}
-
-var state = {primer_scores: {}};
 
 function init(json) {
     state = json;
@@ -109,44 +94,51 @@ function init(json) {
 
         // tm_opt
         let val = parseInt(tm['tm_opt']);
-        tm_opt.value = val;
-        tm.value = val;
+        tmOptSlider.value = val;
+        tmOptBox.value = val;
 
         // gc_opt
         val = parseInt(tm['gc_opt']['min'])
-        gc_min.value = val;
-        gc_min_slider.value = val;
+        gcMinSlider.value = val;
+        gcMinBox.value = val;
 
         val = parseInt(tm['gc_opt']['max'])
-        gc_max.value = val;
-        gc_max_slider.value = val;
+        gcMaxSlider.value = val;
+        gcMaxBox.value = val;
 
         // weights
         let weights = json['primer_scores']['params']['weights'];
 
         // tm
         val = weights['tm'];
-        tm_slider.value = val;
+        tmSlider.value = val;
+        tmBox.value = val;
 
         // gc
         val = weights['gc'];
-        gc_slider.value = gc;
+        gcSlider.value = val;
+        gcBox.value = val;
+
 
         // homopolymer
         val = weights['homopolymer'];
         hpolySlider.value = val;
+        hpolyBox.value = val;
 
         // dimer
         val = weights['dimer'];
-        dimerz_slider.value = val;
+        dimerzSlider.value = val;
+        dimerzBox.value = val;
 
         // specificity
         val = weights['specificity'];
-        specificity.value = val;
+        specificitySlider.value = val;
+        specificityBox.value = val;
 
         // degenerate
         val = weights['degenerate'];
-        degenerate.value = val;
+        degenerateSlider.value = val;
+        degenerateBox.value = val;
 
         return;
     }
@@ -170,79 +162,159 @@ function init(json) {
         }
     };
 
-    tm_opt.value = 55;
-    gc_min.value= 40;
-    gc_max.value= 60;
-    gc_min_slider.value = 40;
-    gc_max_slider.value = 60;
-    tm.value = 1;
-    gc.value = 1;
-    hpoly.value = 1;
-    dimerz.value = 1;
-    specif.value = 1;
-    specifSlider.value = 1;
-    degen.value = 1;
-    degenSlider.value = 1;
+
+    tmOptSlider.value = 55;
+    tmOptBox.value = 55;
+    gcMinSlider.value = 40;
+    gcMinBox.value = 40;
+    gcMaxSlider.value = 60;
+    gcMaxBox.value = 60;
+    tmSlider.value = 1;
+    tmBox.value = 1;
+    gcSlider.value = 1;
+    gcBox.value = 1;
+    hpolySlider.value = 1;
+    hpolyBox.value = 1;
+    dimerzSlider.value = 1;
+    dimerzBox.value = 1;
+    specificitySlider.value = 1;
+    specificityBox.value = 1;
+    degenerateSlider.value = 1;
+    degenerateBox.value = 1;
+
 }
 
-tm_opt.addEventListener('change', function(){
-    state['primer_scores']['params']['tm_opt'] = parseInt(tm_opt.value);
+tmOptSlider.addEventListener('change', function(){
+    state['primer_scores']['params']['tm_opt'] = parseInt(tmOptSlider.value);
 });
 
-gc_min_slider.addEventListener('change', function(){
-    state['primer_scores']['params']['gc_min'] = parseInt(gc_min_slider.value);
+gcMinSlider.addEventListener('change', function(){
+    state['primer_scores']['params']['gc_min'] = parseInt(gcMinSlider.value);
 });
 
-gc_max_slider.addEventListener('change', function(){
-    state['primer_scores']['params']['gc_max'] = parseInt(gc_max_slider.value);
+gcMaxSlider.addEventListener('change', function(){
+    state['primer_scores']['params']['gc_max'] = parseInt(gcMaxSlider.value);
 });
 
 
-tm_chkbx.addEventListener('change', function(){
-  if (tm_chkbx.checked){
-    state['primer_scores']['params']['tm'] = parseInt(tm.value);
+tmCheckbox.addEventListener('change', function(){
+  if (tmCheckbox.checked){
+    state['primer_scores']['params']['tm'] = parseInt(tmSlider.value);
   }
   else{
     state['primer_scores']['params']['tm'] = 0;
   }
 });
 
-gc_chkbx.addEventListener('change', function(){
-    if (gc_chkbx.checked){
-      state['primer_scores']['params']['gc'] = parseInt(gc.value);
+gcCheckbox.addEventListener('change', function(){
+    if (gcCheckbox.checked){
+      state['primer_scores']['params']['gc'] = parseInt(gcSlider.value);
     }
     else{
       state['primer_scores']['params']['gc'] = 0;
     }
   });
 
-homopolymer_chkbx.addEventListener('change', function(){
-      if (homopolymer_chkbx.checked){
-        state['primer_scores']['params']['homopolymer'] = parseInt(homopolymer.value);
+hpolyCheckbox.addEventListener('change', function(){
+      if (hpolyCheckbox.checked){
+        state['primer_scores']['params']['homopolymer'] = parseInt(hpolySlider.value);
       }
       else{
         state['primer_scores']['params']['homopolymer'] = 0;
       }
     });
 
-specificity_chkbx.addEventListener('change', function(){
-      if (specificity_chkbx.checked){
-        state['primer_scores']['params']['specificity'] = parseInt(specificity.value);
+specificityCheckbox.addEventListener('change', function(){
+      if (specificityCheckbox.checked){
+        state['primer_scores']['params']['specificity'] = parseInt(specificitySlider.value);
       }
       else{
         state['primer_scores']['params']['specificity'] = 0;
       }
     });
 
-degenerate_chkbx.addEventListener('change', function(){
-      if (degenerate_chkbx.checked){
-        state['primer_scores']['params']['degenerate'] = parseInt(degenerate.value);
+degenerateCheckbox.addEventListener('change', function(){
+      if (degenerateCheckbox.checked){
+        state['primer_scores']['params']['degenerate'] = parseInt(degenerateSlider.value);
       }
 
       else{
         state['primer_scores']['params']['degenerate'] = 0;
       }
 
+});
+
+
+tmCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+        tmRow.style.backgroundColor = "rgb(1, 32, 53)";
+        tmSlider.value = 1;
+        tmBox.value = 1;
+    } else {
+        tmRow.style.backgroundColor = "initial";
+        tmSlider.value = 0;
+        tmBox.value = 0;
+    }
+});
+
+gcCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+        gcRow.style.backgroundColor = "rgb(1, 32, 53)";
+        gcSlider.value = 1;
+        gcBox.value = 1;
+    } else {
+        gcRow.style.backgroundColor = "initial";
+        gcSlider.value = 0;
+        gcBox.value = 0;
+    }
+});
+
+hpolyCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+        hpolyRow.style.backgroundColor = "rgb(1, 32, 53)";
+        hpolySlider.value = 1;
+        hpolyBox.value = 1;
+    } else {
+        hpolyRow.style.backgroundColor = "initial";
+        hpolySlider.value = 0;
+        hpolyBox.value = 0;
+    }
+});
+
+dimerzCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+        dimerizationRow.style.backgroundColor = "rgb(1, 32, 53)";
+        dimerzSlider.value = 1;
+        dimerzBox.value = 1;
+    } else {
+        dimerizationRow.style.backgroundColor = "initial";
+        dimerzSlider.value = 0;
+        dimerzBox.value = 0;
+    }
+});
+
+specificityCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+        specificityRow.style.backgroundColor = "rgb(1, 32, 53)";
+        specificitySlider.value = 1;
+        specificityBox.value = 1;
+    } else {
+        specificityRow.style.backgroundColor = "initial";
+        specificitySlider.value = 0;
+        specificityBox.value = 0;
+    }
+});
+
+degenerateCheckbox.addEventListener('change', function() {
+    if(this.checked) {
+        degenerateRow.style.backgroundColor = "rgb(1, 32, 53)";
+        degenerateSlider.value = 1;
+        degenerateBox.value = 1;
+    } else {
+        degenerateRow.style.backgroundColor = "initial";
+        degenerateSlider.value = 0;
+        degenerateBox.value = 0;
+    }
 });
 
 nextModule.addEventListener('click', function () {
@@ -253,78 +325,6 @@ nextModule.addEventListener('click', function () {
         console.log("message sent");
     } catch(e) {
         console.log(e);
-    }
-});
-
-tmCheckbox.addEventListener('change', function() {
-    if(this.checked) {
-        tmRow.style.backgroundColor = "rgb(1, 32, 53)";
-        tm.value = 1;
-        tm_slider.value = 1;
-    } else {
-        tmRow.style.backgroundColor = "initial";
-        tm.value = 0;
-        tm_slider.value = 0;
-    }
-});
-
-gcCheckbox.addEventListener('change', function() {
-    if(this.checked) {
-        gcRow.style.backgroundColor = "rgb(1, 32, 53)";
-        gc.value = 1;
-        gc_slider.value = 1;
-    } else {
-        gcRow.style.backgroundColor = "initial";
-        gc.value = 0;
-        gc_slider.value = 0;
-    }
-});
-
-homopolymer_chkbx.addEventListener('change', function() {
-    if(this.checked) {
-        hpolyRow.style.backgroundColor = "rgb(1, 32, 53)";
-        homopolymer.value = 1;
-        hpolySlider.value = 1;
-    } else {
-        hpolyRow.style.backgroundColor = "initial";
-        homopolymer.value = 0;
-        hpolySlider.value = 0;
-    }
-});
-
-dimer_chkbx.addEventListener('change', function() {
-    if(this.checked) {
-        dimerizationRow.style.backgroundColor = "rgb(1, 32, 53)";
-        dimerz.value = 1;
-        dimerz_slider.value = 1;
-    } else {
-        dimerizationRow.style.backgroundColor = "initial";
-        dimerz.value = 0;
-        dimerz_slider.value = 0;
-    }
-});
-
-specificity_chkbx.addEventListener('change', function() {
-    if(this.checked) {
-        specificityRow.style.backgroundColor = "rgb(1, 32, 53)";
-        specif.value = 1;
-        specifSlider.value = 1;
-    } else {
-        specificityRow.style.backgroundColor = "initial";
-        specif.value = 0;
-        specifSlider.value = 0;
-    }
-});
-
-degenerate_chkbx.addEventListener('change', function() {
-    if(this.checked) {
-        degenerateRow.style.backgroundColor = "rgb(1, 32, 53)";
-        degen.value = 1;
-        degenSlider.value = 1;
-    } else {
-        degenerateRow.style.backgroundColor = "initial";
-        degen.value = 0;
-        degenSlider.value = 0;
     }
 });
 
