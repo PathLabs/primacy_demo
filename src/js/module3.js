@@ -63,6 +63,7 @@ class Module3 {
         // set the defaults
         this.json = json;
         this.iter = 100;
+        this.move_forward_percent = 10;
         this.amp_size = {
             min: null,
             max: null
@@ -126,7 +127,7 @@ class Module3 {
      *        previous pipeline state.
      */
     toJSON() {
-        let out = this.jsob;
+        let out = this.json;
         out['set_optimization'] = {};
         out['set_optimization']['params'] = {};
 
@@ -171,6 +172,22 @@ module1.addEventListener('click', function (){
 module2.addEventListener('click', function (){
     console.log("click");
     sendMessage('LOADMODULE', 2);
+});
+
+
+move_forward.addEventListener('change', function() {
+    let percent = parseInt(this.value);
+
+    // Assert value is in appropriate range
+    if(percent < 1) {
+        this.value = 1;
+        percent    = 1;
+    } else if(percent > 100) {
+        this.value = 100;
+        percent    = 100;
+    }
+
+    state.move_forward_percent = percent;
 });
 
 optimumAmpliconCheck.addEventListener('change', function() {
