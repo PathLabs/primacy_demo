@@ -8,40 +8,92 @@
  *      - Alex Lacy <al2428@nau.edu>
  */
 const os            = require('os');
-// const validate      = require('./input_validation.js');
 const {ipcRenderer} = require('electron');
-
 
 const module1 = document.getElementById("module1");
 const module3 = document.getElementById("module3");
 
-const tm_opt = document.getElementById('tm_opt');
-const tm = document.getElementById('tm')
-const gc = document.getElementById('gc')
-const gc_min_slider  = document.getElementById('gcMinSlider');
-const gc_max_slider  = document.getElementById('gcMaxSlider');
-const gc_min  = document.getElementById('gcMin');
-const gc_max  = document.getElementById('gcMax');
-const tm_slider  = document.getElementById('tmSlider');
-const gc_slider  = document.getElementById('gcSlider');
-const homopolymer  = document.getElementById('hpoly');
-const hpolySlider  = document.getElementById('hpolySlider');
-const dimerz_slider = document.getElementById('dimerzSlider');
-const specificity  = document.getElementById('specifSlider');
-const degenerate  = document.getElementById('degenSlider');
-const tm_chkbx  = document.getElementById('tmCheckbox');
-const gc_chkbx  = document.getElementById('gcCheckbox');
-const homopolymer_chkbx  = document.getElementById('hpolyCheckbox');
-const dimer_chkbx  = document.getElementById('dimerzCheckbox');
-const specificity_chkbx  = document.getElementById('specifCheckbox');
-const degenerate_chkbx  = document.getElementById('degenCheckbox');
+const tmOptSlider = document.getElementById('tm-opt-slider');
+const tmOptBox = document.getElementById('tm-opt-box');
 
-const submit_button = document.getElementById("nextModule");
-const execute_button = document.getElementById('execute');
 
+const gcMinSlider = document.getElementById('gc-min-slider');
+const gcMinBox = document.getElementById('gc-min-box');
+
+const gcMaxSlider = document.getElementById('gc-max-slider');
+const gcMaxBox = document.getElementById('gc-max-box');
+
+const tmSlider = document.getElementById('tm-slider');
+const tmBox = document.getElementById('tm-box');
+const tmCheckbox = document.getElementById('tm-checkbox');
+
+const gcSlider = document.getElementById('gc-slider');
+const gcBox = document.getElementById('gc-box');
+const gcCheckbox = document.getElementById('gc-checkbox');
+
+
+const hpolySlider = document.getElementById('hpoly-slider');
+const hpolyBox = document.getElementById('hpoly-box');
+const hpolyCheckbox = document.getElementById('hpoly-checkbox');
+
+
+const dimerzSlider = document.getElementById('dimerz-slider');
+const dimerzBox = document.getElementById('dimerz-box');
+const dimerzCheckbox = document.getElementById('dimerz-checkbox');
+
+const specificitySlider = document.getElementById('specificity-slider');
+const specificityBox = document.getElementById('specificity-box');
+const specificityCheckbox = document.getElementById('specificity-checkbox');
+
+
+const degenerateSlider = document.getElementById('degenerate-slider');
+const degenerateBox = document.getElementById('degenerate-box');
+const degenerateCheckbox = document.getElementById('degenerate-checkbox');
+
+
+function updateSlider(sliderId, val){
+  var slider = document.getElementById(sliderId);
+  slider.value = val;
+}
+
+function updateBox(boxId, val){
+  var box = document.getElementById(boxId);
+  box.value = val;
+}
+
+function checkBoxUpdate(sliderId, boxId, checkBoxId){
+  var checkbox = document.getElementById(checkBoxId);
+  var slider = document.getElementById(sliderId);
+  var box = document.getElementById(boxId);
+
+  if (checkbox.checked == true) {
+      slider.value = 1;
+      box.value = 1;
+    }
+  else{
+    slider.value = 0;
+    box.value = 0;
+  }
+}
 
 function sendMessage(channel, message){
   ipcRenderer.send(channel, message);
+}
+
+/**
+ * @brief object for the state of module 2
+ */
+class Module2 {
+  /**
+   * @brief Constructor for module 1 state. Can accept a JSON object of a
+   *        previous state to bootstrap from.
+   *
+   * @param previous_state JSON object that contains the arguments for
+   *        a run of Primacy module 1.
+   */
+   constructor(state=null) {}
+   
+
 }
 
 var state = {primer_scores: {}};
@@ -51,15 +103,13 @@ function init(json) {
 
     // check for previous state
     if(json['primer_scores']) {
-        console.log(json['primer_scores'])
-        // bootstrap current inputs
-        
+
         // tm's
         let tm = json['primer_scores']['params'];
 
         // tm_opt
         let val = parseInt(tm['tm_opt']);
-        tm_opt.value = val; 
+        tm_opt.value = val;
         tm.value = val;
 
         // gc_opt
