@@ -110,7 +110,7 @@ function parse_data(direction) {
 function calculatePrimerCount(direction, sequence_id, val){
   var values = scores[direction][sequence_id].score_values;
   var count = values.length;
-  var newCount = Math.round(count/val);
+  var newCount = Math.round(count*(val/100));
   return newCount;
 }
 
