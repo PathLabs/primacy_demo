@@ -207,8 +207,8 @@ class Module1 {
 
         this.target_regions[label] = {
             'seq': sequence.toString(),
-            'target_start': target_start,
-            'target_end': target_end,
+            'target_start': target_start-1,
+            'target_end': target_end-1,
             'primer_len_range': {
                 'min': min_length,
                 'max': max_length
@@ -255,11 +255,11 @@ class Module1 {
         }
 
         if(target_start) {
-            this.target_regions[label]['target_start'] = target_start;
+            this.target_regions[label]['target_start'] = target_start-1;
         }
 
         if(target_end) {
-            this.target_regions[label]['target_end'] = target_end;
+            this.target_regions[label]['target_end'] = target_end-1;
         }
 
         if(min_length) {
@@ -436,8 +436,8 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     target_start_input.addEventListener('change', function(event) {
-        if(this.value < 0) {
-            this.value = 0;
+        if(this.value < 1) {
+            this.value = 1;
         }
 
         if(parseInt(target_end_input.value) - parseInt(this.value) < 50) {
@@ -477,8 +477,8 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
     }
 
     target_end_input.addEventListener('change', function() {
-        if(parseInt(this.value) < 0) {
-            this.value = 0;
+        if(parseInt(this.value) < 1) {
+            this.value = 1;
         }
 
         if(parseInt(this.value) - parseInt(target_start_input.value) < 50) {
