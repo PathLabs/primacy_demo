@@ -35,6 +35,7 @@ const default_target_end = document.getElementById('default_target_end');
 const default_min_length = document.getElementById('default_min_length');
 const default_max_length = document.getElementById('default_max_length');
 const search_box = document.getElementById('search_box');
+const change_all = document.getElementById('change_all');
 
 
 var manual_sequence = document.getElementById('manual_sequence');
@@ -603,6 +604,32 @@ function search(search_str) {
         }
     }
 }
+
+
+// bulk change all current target region identifiers to have the values in the defaults
+change_all.addEventListener('click', function() {
+    // alter the values in the needed target sequence inputs
+    let elements = document.querySelectorAll('#sequence_identifiers > .input_table');
+
+    let target_start = parseInt(default_target_start.value);
+    let target_end = parseInt(default_target_end.value);
+    let min_length = parseInt(default_min_length.value);
+    let max_length = parseInt(default_max_length.value);
+    
+    // scan through the target region identifiers, find the corrent one, and inject the values
+    for(let j = 0; j < elements.length; j++) {
+        let inputs = elements[j].querySelectorAll('input');
+
+        inputs[0].value = target_start;
+        inputs[1].value = target_end;
+        inputs[2].value = min_length;
+        inputs[3].value = max_length;
+
+        for(let j = 0; j < 4; j++) {
+            inputs[i].dispatchEvent(new Event('change'));
+        }
+    }
+});
 
 
 // Event listener for sequence identifier manual entry
