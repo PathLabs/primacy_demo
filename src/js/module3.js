@@ -212,31 +212,6 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
     }
 });
 
-ipcRenderer.on('NEW', (event, arg) =>{
-    console.log("NEW received");
-    state = new Module3(JSON.parse(arg));
-});
-
-ipcRenderer.on('LOADMODULE', (event, arg) =>{
-    console.log("DENIED");
-});
-
-//loads tab on click
-module1.addEventListener('click', function (){
-    console.log("click");
-    sendMessage('LOADMODULE', 1);
-});
-
-module2.addEventListener('click', function (){
-    console.log("click");
-    sendMessage('LOADMODULE', 2);
-});
-
-
-submit_button.addEventListener('click', function() {
-    console.log(state.toJSON());
-    sendMessage('EXECUTE', ['primacy set-optimization', JSON.stringify(state.toJSON())])
-});
 
 /**
  * @brief recieve a new CSV of packground primers to add into the list
@@ -493,6 +468,34 @@ iterations.addEventListener('change', function() {
 
     state.iter = val;
 });
+
+
+ipcRenderer.on('NEW', (event, arg) =>{
+    console.log("NEW received");
+    state = new Module3(JSON.parse(arg));
+});
+
+ipcRenderer.on('LOADMODULE', (event, arg) =>{
+    console.log("DENIED");
+});
+
+//loads tab on click
+module1.addEventListener('click', function (){
+    console.log("click");
+    sendMessage('LOADMODULE', 1);
+});
+
+module2.addEventListener('click', function (){
+    console.log("click");
+    sendMessage('LOADMODULE', 2);
+});
+
+
+submit_button.addEventListener('click', function() {
+    console.log(state.toJSON());
+    sendMessage('EXECUTE', ['primacy set-optimization', JSON.stringify(state.toJSON())])
+});
+
 
 if(!state) {
     state = new Module3();
