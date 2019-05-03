@@ -103,6 +103,12 @@ class Module1 {
         pcr_salts_inputs[2].value = this.pcr_salts['Tris'];
         pcr_salts_inputs[3].value = this.pcr_salts['Mg'];
         pcr_salts_inputs[4].value = this.pcr_salts['dNTPs'];
+
+        // Init defaults in Target Regions to sane values
+        default_target_start.value = 1;
+        default_target_end.value = 50;
+        default_min_length.value = 18;
+        default_max_length.value = 22;
     }
 
     /**
