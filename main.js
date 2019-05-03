@@ -163,9 +163,16 @@ function execPipeline(cmd, args, callback) {
     fs.writeFileSync(prefix + '/args.json', JSON.stringify(current_json));
 
 
-    console.log(cmd + ' ' + prefix + '/args.json' + ' ' + prefix);
+    cmd = cmd + ' ' + prefix + '/args.json'
+    console.log('lo');
+    console.log(cmd.includes('primer-score'));
+    if(!cmd.includes('primer-score')) {
+        cmd += ' ' + prefix;
+    }
 
-    child_process.exec(cmd + ' ' + prefix + '/args.json' + ' ' + prefix, (error, stdout, stderr) => {
+    console.log(cmd);
+
+    child_process.exec(cmd, (error, stdout, stderr) => {
         // Read back in file
         data = fs.readFileSync(prefix + '/args.json', 'utf-8');
 
@@ -179,6 +186,13 @@ function execPipeline(cmd, args, callback) {
     });
 }
 
+function updateArgs(new_args) {
+    let new_args_json = JSON.parse(new_args);
+
+    for(key in args_json) {
+        current_json[key] = args_json[key];
+    }
+}
 
 function showViz(viz_num) { 
     switch(viz_num) {
@@ -189,9 +203,6 @@ function showViz(viz_num) {
         case 2: 
             if(!visited_modules[2].executed) return false;
             break;
-        
-        default: 
-            return false;
     }
 
     viz = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
@@ -314,7 +325,15 @@ ipcMain.on('EXECUTE', (event, data) => {
     execPipeline(data[0], data[1], (result) => {
         event.sender.send('EXECUTE', result);
     });
-})
+});
+
+// Update the current pipeline args and refresh any open windows
+ipcMain.on('UPDATE', (event, args) => {
+    console.log("Updating args");
+    updateArgs(data);
+    console.log('Sending NEW')
+    win.webContents.send('NEW', JSON.stringify(current_json));
+});
 
 // Menu Setup and Customization
 
