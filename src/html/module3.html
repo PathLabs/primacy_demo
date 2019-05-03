@@ -5,7 +5,6 @@
   <title>Primacy</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <script src="chart.js"></script>
 </head>
 
 <body>
@@ -32,9 +31,11 @@
               </div>
             </td>
             <td>
-              <td class=setting_input><input id="ampliconSlider" type="range" min="0" max="100" value = 50
-                        class = "slider">
-                <input onClick="this.select();" type="number" name="amplicon_value" class="sliderValue" id="optimumAmpliconSize" value = 50>
+              <td class=setting_input><!--<input id="ampliconSlider" type="range" value="50" 
+              class = "slider"/>-->
+                <input onClick="this.select();" type="number" name="amplicon_value" class="sliverValue" id="optimumAmpliconMin"/>
+                to
+                <input onClick="this.select();" type="number" name="amplicon_value" class="sliderValue" id="optimumAmpliconMax"/>
               </td>
             </td>
             <td>
@@ -60,7 +61,7 @@
               </td>
             </td>
             <td>
-              <input type="checkbox" id="maxDistanceCheck" checked>
+              <input class="form-control setting_input" id="maxDistanceNumber" type="number">
             </td>
           </tr>
           <tr>
@@ -85,6 +86,9 @@
             <td>
             </td>
           </tr>
+        </table>
+
+        <table id="backgroundPrimersList" class="input_table">
         </table>
         </br>
       </div>
@@ -144,7 +148,7 @@
               <span class="tooltiptext">Minimizes distance outside of range of optimal amplicon size</span>
             </div>
           </td>
-          <td><td><input id="ampliconSizeSlider" type="range" min="0" max="100" value = 1
+          <td><td><input id="ampliconSizeSlider" type="range" min="0" max="100" value=1 
             class = "slider"></td></td>
           <td class="sliderValue">
             <input onClick="this.select();" type="number" name="amplicon_size" class="sliderValue" id=ampliconSize>
