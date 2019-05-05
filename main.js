@@ -160,8 +160,60 @@ function execPipeline(cmd, args, callback) {
         current_json[key] = args_json[key];
     }
 
-    fs.writeFileSync(prefix + '/args.json', JSON.stringify(current_json));
+    // Upon execution, purge the current args of any information for future
+    // modules. We won't need them, since we're rerunning a previous segment
+    // Also, reset the state information in visited_modules to match
+    console.log("processing cmd:", cmd);
+    switch(cmd) {
+        case 'primacy primer-collection':
+            delete current_json['primer_scores'];
+            delete current_json['set_optimization'];
+            console.log('remove arguments:');
+            console.log(args)
+            visited_modules = {
+                1: {
+                    'visited': true,
+                    'executed': false
+                },
+                2: {
+                    'visited': false,
+                    'executed': false
+                },
+                3: {
+                    'visited': false,
+                    'executed': false
+                },
+                4: {
+                    'visited': false,
+                    'executed': false
+                }
+            };
 
+        case 'primacy primer-score':
+            delete current_json['set_optimization'];
+            visited_modules = {
+                1: {
+                    'visited': true,
+                    'executed': true
+                },
+                2: {
+                    'visited': true,
+                    'executed': false
+                },
+                3: {
+                    'visited': false,
+                    'executed': false
+                },
+                4: {
+                    'visited': false,
+                    'executed': false
+                }
+            };
+    }
+
+    console.log(visited_modules);
+
+    fs.writeFileSync(prefix + '/args.json', JSON.stringify(current_json));
 
     cmd = cmd + ' ' + prefix + '/args.json'
     if(!cmd.includes('primer-score')) {
