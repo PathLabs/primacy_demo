@@ -812,6 +812,7 @@ ipcRenderer.on('EXECUTE', (event, arg) => {
         console.log(arg);
     } else {
         sendMessage('LOADVIZ', 1);
+        submit.style.display = 'inline-block';
     }
 });
 
@@ -821,7 +822,7 @@ ipcRenderer.on('LOADMODULE', (event, arg) => {
     console.log('Module load denied');
     submit.style.borderColor = "red";
     setTimeout(function(){
-      submit.style.borderColor = "black";
+      submit.style.borderColor = "block";
     }, 150);
 
 });
@@ -830,4 +831,5 @@ ipcRenderer.on('LOADMODULE', (event, arg) => {
 // Clean init of state if nothing to bootstrap from
 if(!state) {
     state = new Module1();
+    submit.style.display = 'none';
 }
