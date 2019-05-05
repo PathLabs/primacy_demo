@@ -164,8 +164,6 @@ function execPipeline(cmd, args, callback) {
 
 
     cmd = cmd + ' ' + prefix + '/args.json'
-    console.log('lo');
-    console.log(cmd.includes('primer-score'));
     if(!cmd.includes('primer-score')) {
         cmd += ' ' + prefix;
     }
