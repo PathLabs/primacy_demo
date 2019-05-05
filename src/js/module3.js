@@ -106,7 +106,7 @@ class Module3 {
 
         this.background_primers = {};
 
-        // If a previous state is available, bootstrap our internal state to 
+        // If a previous state is available, bootstrap our internal state to
         // match
         if(json && json['set_optimization'] && json['set_optimization']['params']['iter']) {
             let set_optimization = this.json['set_optimization']['params'];
@@ -191,7 +191,7 @@ class Module3 {
                     if(!good) {
                         continue;
                     }
-                    
+
                     // add the background primer to the member
                     state.background[values.id] = {seq: values.seq};
                 }
@@ -231,7 +231,7 @@ background_primers_list.addEventListener('change', function() {
 
         let cell = row.insertCell(0);
         cell.innerHTML = seq;
-        
+
         cell = row.insertCell(1);
         cell.innerHTML = state.background[seq]['seq'];
 
@@ -263,7 +263,7 @@ optimumAmpliconCheck.addEventListener('change', function() {
         opt_amplicon_min.value = 0;
         opt_amplicon_max.value = 0;
         state.amp_size = {
-            min: null, 
+            min: null,
             max: null
         };
     }
@@ -276,7 +276,7 @@ opt_amplicon_min.addEventListener('change', function() {
     if(optimumAmpliconCheck.checked) {
         let max = parseInt(opt_amplicon_max.value);
         let min = parseInt(this.value);
-        
+
         if(max < min) {
             this.value = max;
             opt_amplicon_max.value = min;
@@ -297,7 +297,7 @@ opt_amplicon_max.addEventListener('change', function() {
     if(optimumAmpliconCheck.checked) {
         let min = parseInt(opt_amplicon_min.value);
         let max = parseInt(this.value);
-        
+
         if(max < min) {
             this.value = min;
             opt_amplicon_min.value = max;
@@ -325,7 +325,7 @@ max_distance.addEventListener('change', function() {
 
     switch(this.value) {
         case 'None':
-            break; 
+            break;
         case 'Distance from forward primer':
             new_json.forward = parseInt(max_distance_number.value);
             break;
@@ -433,12 +433,12 @@ primer_scores.addEventListener('change', function() {
 cross_dim_slider.addEventListener('change', function() {
     cross_dimerization.value = this.value;
 
-    // fire the change event on the cross-dimerization element 
+    // fire the change event on the cross-dimerization element
     cross_dimerization.dispatchEvent(new Event('change'));
 });
 
 /**
- * @brief set the corss-dimerization text value 
+ * @brief set the corss-dimerization text value
  */
 cross_dimerization.addEventListener('change', function() {
     cross_dim_slider.value = this.value;
@@ -452,7 +452,7 @@ cross_dimerization.addEventListener('change', function() {
 amplicon_size_slider.addEventListener('change', function() {
     amplicon_size.value = this.value;
 
-    // fire the change event on the amplicon size event 
+    // fire the change event on the amplicon size event
     amplicon_size.dispatchEvent(new Event('change'));
 });
 
@@ -472,7 +472,7 @@ target_dist_slider.addEventListener('change', function() {
     if(targetDistanceCheck.checked) {
         target_distance.value = this.value;
 
-        // fire the change event on the target distance event 
+        // fire the change event on the target distance event
         target_distance.dispatchEvent(new Event('change'));
     }
 });

@@ -615,7 +615,7 @@ change_all.addEventListener('click', function() {
     let target_end = parseInt(default_target_end.value);
     let min_length = parseInt(default_min_length.value);
     let max_length = parseInt(default_max_length.value);
-    
+
     // scan through the target region identifiers, find the corrent one, and inject the values
     for(let j = 0; j < elements.length; j++) {
         let inputs = elements[j].querySelectorAll('input');
@@ -784,12 +784,6 @@ module_2.addEventListener('click', function() {
 module_3.addEventListener('click', function() {
     sendMessage('LOADMODULE', 3);
     console.log('attempting to load module 3');
-});
-
-
-module_4.addEventListener('click', function() {
-    sendMessage('LOADMODULE', 4);
-    console.log('attempting to load module 4');
 });
 
 
