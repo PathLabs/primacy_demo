@@ -118,6 +118,7 @@ function goToModule(module_number) {
     }
 
     if(module_number == 1) {
+        current_module = module_number;
         return true;
     }
 
@@ -160,80 +161,115 @@ function execPipeline(cmd, args, callback) {
         current_json[key] = args_json[key];
     }
 
-    // Upon execution, purge the current args of any information for future
-    // modules. We won't need them, since we're rerunning a previous segment
-    // Also, reset the state information in visited_modules to match
-    console.log("processing cmd:", cmd);
-    switch(cmd) {
-        case 'primacy primer-collection':
-            delete current_json['primer_scores'];
-            delete current_json['set_optimization'];
-            console.log('remove arguments:');
-            console.log(args)
-            visited_modules = {
-                1: {
-                    'visited': true,
-                    'executed': false
-                },
-                2: {
-                    'visited': false,
-                    'executed': false
-                },
-                3: {
-                    'visited': false,
-                    'executed': false
-                },
-                4: {
-                    'visited': false,
-                    'executed': false
-                }
-            };
+    let response = 0;
 
-        case 'primacy primer-score':
-            delete current_json['set_optimization'];
-            visited_modules = {
-                1: {
-                    'visited': true,
-                    'executed': true
-                },
-                2: {
-                    'visited': true,
-                    'executed': false
-                },
-                3: {
-                    'visited': false,
-                    'executed': false
-                },
-                4: {
-                    'visited': false,
-                    'executed': false
-                }
-            };
+    const options = {
+        type: 'question',
+        buttons: ['Yes', 'No'],
+        defaultid: 1,
+        title: 'Question',
+        message: 'Executing will remove progress on future modules',
+        detail: 'Progress on future modules will be lost. Save your state in file->save'
+    };
+
+    let most_forward_exec = 1;
+    while(true) {
+        if(visited_modules[most_forward_exec]['executed']) {
+            if(most_forward_exec == 3) break;
+            most_forward_exec++;
+
+        } else {
+            most_forward_exec--;
+            break;
+        }
     }
 
-    console.log(visited_modules);
+    console.log("checking most forward exec");
+    console.log(most_forward_exec, current_module);
 
-    fs.writeFileSync(prefix + '/args.json', JSON.stringify(current_json));
+    if(most_forward_exec > current_module) {
+        response = require('electron').dialog.showMessageBox(null, options,(response) => {
+            if (response != 0){
+                return;
+            }
 
-    cmd = cmd + ' ' + prefix + '/args.json'
-    if(!cmd.includes('primer-score')) {
-        cmd += ' ' + prefix;
+            // Upon execution, purge the current args of any information for future
+            // modules. We won't need them, since we're rerunning a previous segment
+            // Also, reset the state information in visited_modules to match
+            console.log("processing cmd:", cmd);
+            switch(cmd) {
+                case 'primacy primer-collection':
+                    delete current_json['primer_scores'];
+                    delete current_json['set_optimization'];
+                    console.log('remove arguments:');
+                    console.log(args)
+                    visited_modules = {
+                        1: {
+                            'visited': true,
+                            'executed': false
+                        },
+                        2: {
+                            'visited': false,
+                            'executed': false
+                        },
+                        3: {
+                            'visited': false,
+                            'executed': false
+                        },
+                        4: {
+                            'visited': false,
+                            'executed': false
+                        }
+                    };
+
+                case 'primacy primer-score':
+                    delete current_json['set_optimization'];
+                    visited_modules = {
+                        1: {
+                            'visited': true,
+                            'executed': true
+                        },
+                        2: {
+                            'visited': true,
+                            'executed': false
+                        },
+                        3: {
+                            'visited': false,
+                            'executed': false
+                        },
+                        4: {
+                            'visited': false,
+                            'executed': false
+                        }
+                    };
+            }
+
+            // Re-enter execPipeline with new, cleaned state
+            execPipeline(cmd, args, callback);
+        });
+    } else {
+        fs.writeFileSync(prefix + '/args.json', JSON.stringify(current_json));
+
+        cmd = cmd + ' ' + prefix + '/args.json'
+        if(!cmd.includes('primer-score')) {
+            cmd += ' ' + prefix;
+        }
+
+        console.log(cmd);
+
+        child_process.exec(cmd, (error, stdout, stderr) => {
+            // Read back in file
+            data = fs.readFileSync(prefix + '/args.json', 'utf-8');
+
+            console.log(data.toString());
+
+            current_json = JSON.parse(data.toString());
+
+            visited_modules[current_module]['executed'] = true;
+
+            callback(null);
+        });
     }
-
-    console.log(cmd);
-
-    child_process.exec(cmd, (error, stdout, stderr) => {
-        // Read back in file
-        data = fs.readFileSync(prefix + '/args.json', 'utf-8');
-
-        console.log(data.toString());
-
-        current_json = JSON.parse(data.toString());
-
-        visited_modules[current_module]['executed'] = true;
-
-        callback(null);
-    });
 }
 
 function updateArgs(new_args) {
