@@ -50,6 +50,8 @@ const degenerateSlider = document.getElementById('degenerate-slider');
 const degenerateBox = document.getElementById('degenerate-box');
 const degenerateCheckbox = document.getElementById('degenerate-checkbox');
 
+const nextModule = document.getElementById('nextModule');
+const execute = document.getElementById('execute');
 const loading_logo = document.getElementById('loading_logo');
 
 var state = {primer_scores: {}};
@@ -356,6 +358,17 @@ degenerateCheckbox.addEventListener('change', function() {
 });
 
 nextModule.addEventListener('click', function () {
+    try {
+        json_string = JSON.stringify(state);
+        sendMessage('EXECUTE', ['primacy primer-score', json_string]);
+
+        console.log("message sent");
+    } catch(e) {
+        console.log(e);
+    }
+});
+
+execute.addEventListener('click', function () {
     try {
         json_string = JSON.stringify(state);
         sendMessage('EXECUTE', ['primacy primer-score', json_string]);
