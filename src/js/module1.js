@@ -36,6 +36,7 @@ const default_min_length = document.getElementById('default_min_length');
 const default_max_length = document.getElementById('default_max_length');
 const search_box = document.getElementById('search_box');
 const change_all = document.getElementById('change_all');
+const loading_logo = document.getElementById('loading_logo');
 
 
 var manual_sequence = document.getElementById('manual_sequence');
@@ -795,12 +796,14 @@ execute.addEventListener('click', function() {
 
 submit.addEventListener('click', function() {
     sendMessage('LOADMODULE', 2);
+    loading_logo.style.visibility = 'visible';
     console.log('attempting execution');
 })
 
 // Intercept NEW message and bootstrap the page
 ipcRenderer.on('NEW', (event, arg) => {
     console.log("NEW Recieved:");
+    loading_logo.style.visibility = 'invisible';
     state = new Module1(JSON.parse(arg));
 });
 
@@ -826,6 +829,24 @@ ipcRenderer.on('LOADMODULE', (event, arg) => {
     }, 150);
 
 });
+
+
+function move() {
+    var progress = document.getElementById("current_progress");
+    var width = 1;
+    var id = setInterval(frame, 700);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        }
+        else {
+            width++;
+            progress.style.width = width + '%';
+        }
+    }
+}
+
+move();
 
 
 // Clean init of state if nothing to bootstrap from
