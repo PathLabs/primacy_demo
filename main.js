@@ -284,25 +284,25 @@ function updateArgs(new_args) {
     console.log(current_json)
 }
 
-function showViz(viz_num) { 
+function showViz(viz_num) {
     switch(viz_num) {
-        case 1: 
+        case 1:
             if(!visited_modules[1].executed) return false;
             break;
-        
-        case 2: 
+
+        case 2:
             if(!visited_modules[2].executed) return false;
             break;
     }
 
-    viz = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
+    viz = new BrowserWindow({width: 800, height:600, backgroundColor: '#000'});
 
     viz.on('closed', function() {
         viz = null;
     });
 
     viz.loadURL('file:///' + __dirname + '/src/html/module' + viz_num.toString() + '_viz.html');
-    
+
     viz.webContents.once('dom-ready', () => {
         viz.webContents.send('NEW', JSON.stringify(current_json));
     });
@@ -336,14 +336,14 @@ function createSaveState(save_state_path) {
 function loadSaveState(save_state_path) {
     // clear out all files in the current state
     let state_files = fs.readdirSync(prefix);
-    
+
     for(let file of state_files) {
         fs.unlink(prefix + file.toString(), err => {
             if(err) console.log(err);
         });
     }
 
-    // extract the state files 
+    // extract the state files
     tar.x({file: save_state_path, cwd: prefix, sync: true});
 
     // Load in the args and state json files
@@ -359,7 +359,7 @@ function loadSaveState(save_state_path) {
 
     // Jump to the most recent module
     goToModule(current_module);
-    
+
     // Send IPC message with the arguments to the current module
     win.webContents.once('dom-ready', () => {
         win.webContents.send('NEW', JSON.stringify(current_json));
@@ -395,7 +395,7 @@ ipcMain.on('LOADVIZ', (event, viz_num) => {
     if(showViz(viz_num)) {
         console.log('opening viz number:', viz_num);
     }
-}); 
+});
 
 // Attempt to load a page
 ipcMain.on('LOADMODULE', (event, module_number) =>  {
