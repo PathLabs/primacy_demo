@@ -50,6 +50,8 @@ const degenerateSlider = document.getElementById('degenerate-slider');
 const degenerateBox = document.getElementById('degenerate-box');
 const degenerateCheckbox = document.getElementById('degenerate-checkbox');
 
+const loading_logo = document.getElementById('loading_logo');
+
 var state = {primer_scores: {}};
 
 
@@ -370,12 +372,14 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
         console.log("error received");
     } else {
         console.log("sending load message");
+        loading_logo.style.visibility = 'visible';
         sendMessage('LOADMODULE', 3);
     }
 });
 
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
+    loading_logo.style.visibility = 'invisible';
     console.log(arg);
     init(JSON.parse(arg));
 });
