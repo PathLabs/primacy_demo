@@ -1,7 +1,7 @@
 /**
  * @file main.js
  *
- * @brief Main file for controlling window rendering and backend pipeline communication.
+ * Main file for controlling window rendering and backend pipeline communication.
  *
  * @author Chance Nelson <chance-nelson@nau.edu>
  */
@@ -53,7 +53,7 @@ var visited_modules  = {
 var current_module   = 1;
 
 /**
- * @brief Create the initial window, and set the close handler
+ * Create the initial window, and set the close handler
  */
 function initial() {
      // Create the browser window.
@@ -85,7 +85,7 @@ function initial() {
 }
 
 /**
- * @brief Load and render a module page
+ *  Load and render a module page
  *
  * @param module_number module number to load. Also affects which html file is loaded.
  *
@@ -136,7 +136,7 @@ function goToModule(module_number) {
 
 
 /**
- * @briefExecute a pipeline command with some arguments.
+ * Execute a pipeline command with some arguments.
  *
  * @param cmd (string): name of the pipeline script to call
  * @param args (JSON): JSON object of what to throw at the command
@@ -257,7 +257,7 @@ function execPipeline(cmd, args, callback) {
 
 
 /**
- * @brief force an update to the current pipeline state in the JSON args
+ *  force an update to the current pipeline state in the JSON args
  *
  * @param new_args JSON object containing the new arguments
  */
@@ -271,7 +271,7 @@ function updateArgs(new_args) {
 
 
 /**
- * @brief Create a new window for, and display a vix
+ *  Create a new window for, and display a vix
  *
  * @param viz_num integer for what viz to load (1, 2, 3)
  */
@@ -303,7 +303,7 @@ function showViz(viz_num) {
 
 
 /**
- * @brief create a save of the current pipeline state
+ * create a save of the current pipeline state
  *
  * @param save_state_path file path to the tarball to save
  */
@@ -320,7 +320,7 @@ function createSaveState(save_state_path) {
 
 
 /**
- * @brief load a save state into the current pipeline state
+ * load a save state into the current pipeline state
  *
  * @param save_state_path file path to the saved tarball
  */
