@@ -5,6 +5,7 @@
  *      - Chance Nelson <chance-nelson@nau.edu>
  *      - Austin Kelly <ak678@nau.edu>
  *      - Alex Lacy <al2428@nau.edu>
+ *      - Ian Otto <dank@nau.edu>
  */
 
 
