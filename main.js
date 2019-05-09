@@ -29,8 +29,15 @@ let viz;
 let pid = process.pid;
 
 // create a run prefix directory
-let prefix = __dirname + '/pipeline/' + pid.toString();
+let prefix = require('os').tmpdir() + '/pipeline/';
+try {
+    fs.mkdirSync(prefix);
+} catch(err) {}
+
+prefix = require('os').tmpdir() + '/pipeline/' + pid.toString();
+try {
 fs.mkdirSync(prefix);
+} catch(err) {}
 
 var current_json = {};
 var visited_modules  = {
