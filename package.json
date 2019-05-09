@@ -4,13 +4,15 @@
   "description": "This is a demo for the Primacy GUI which will be later implemented with complete functionality. The goal of this demo is to showcase the capabilities of Electron JS and also give our client a good idea of how the completed product might look. ",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "docs": "jsdoc -r main.js src/js -d docs/"
   },
   "author": "Turan Naimey, Austin Kelly, Chance Nelson, Alex Lacy",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "electron": "^3.1.6",
-    "electron-react-devtools": "^0.5.3"
+    "electron-react-devtools": "^0.5.3",
+    "jsdoc": "^3.6.1"
   },
   "dependencies": {
     "electron-tabs": "^0.9.4",
