@@ -19,6 +19,7 @@ const module3       = document.getElementById("module3");
 const submit_button = document.getElementById("nextModule");
 const module_1_sum  = document.getElementById('result');
 
+
 const iterations = document.getElementById("iterations");
 
 // Optimal amplicon min/max
@@ -65,6 +66,12 @@ const target_distance_row = document.getElementById("targetDistanceRow");
 var state = null;
 
 
+/**
+ * @brief send an IPC message
+ *
+ * @param channel IPC channel
+ * @param message payload
+ */
 function sendMessage(channel, message){
     ipcRenderer.send(channel, message);
 }
@@ -541,6 +548,7 @@ submit_button.addEventListener('click', function() {
 });
 
 
+// initialize the default state until the NEW is recieved
 if(!state) {
     state = new Module3();
 }
