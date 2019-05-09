@@ -2,8 +2,10 @@
  * @file main.js
  *
  * Main file for controlling window rendering and backend pipeline communication.
- *
- * @author Chance Nelson <chance-nelson@nau.edu>
+ * Authors:
+ *      - Chance Nelson <chance-nelson@nau.edu>
+ *      - Austin Kelly <ak678@nau.edu>
+ *      - Alex Lacy <al2428@nau.edu>
  */
 
 
@@ -28,8 +30,15 @@ let viz;
 let pid = process.pid;
 
 // create a run prefix directory
-let prefix = __dirname + '/pipeline/' + pid.toString();
+let prefix = require('os').tmpdir() + '/pipeline/';
+try {
+    fs.mkdirSync(prefix);
+} catch(err) {}
+
+prefix = require('os').tmpdir() + '/pipeline/' + pid.toString();
+try {
 fs.mkdirSync(prefix);
+} catch(err) {}
 
 var current_json = {};
 var visited_modules  = {
