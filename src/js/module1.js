@@ -3,8 +3,7 @@
  *
  * @brief JS for Primacy GUI Module 1: Primer Collection
  *
- * @authors Chance Nelson <chance-nelson@nau.edu>
-            Austin Kelly  <ak678@nau.edu>
+ * @author Chance Nelson <chance-nelson@nau.edu>
  */
 
 
@@ -746,8 +745,6 @@ metadata_upload.addEventListener('change', function() {
                     let label = elements[j].querySelector('.sequence_name');
                     if(label.innerHTML == values['label']) {
                         let inputs = elements[j].querySelectorAll('input');
-
-                        console.log(inputs)
 
                         inputs[0].value = values['target_start'];
                         inputs[1].value = values['target_end'];
