@@ -1,7 +1,7 @@
 /**
  * @file module1.js
  *
- * @brief JS for Primacy GUI Module 1: Primer Collection
+ *  JS for Primacy GUI Module 1: Primer Collection
  *
  * @author Chance Nelson <chance-nelson@nau.edu>
  */
@@ -41,11 +41,11 @@ var manual_sequence = document.getElementById('manual_sequence');
 
 
 /**
- * @brief object for the state of module 1
+ *  object for the state of module 1
  */
 class Module1 {
     /**
-     * @brief Constructor for module 1 state. Can accept a JSON object of a
+     *  Constructor for module 1 state. Can accept a JSON object of a
      *        previous state to bootstrap from.
      *
      * @param previous_state JSON object that contains the arguments for
@@ -112,7 +112,7 @@ class Module1 {
     }
 
     /**
-     * @brief output a JSON object version of the current module state
+     *  output a JSON object version of the current module state
      */
     toJSON() {
         let out = {}
@@ -126,7 +126,7 @@ class Module1 {
     }
 
     /**
-     * @brief Update the value of a PCR salt
+     *  Update the value of a PCR salt
      *
      * @param salt PCR salt value to update
      * @param value number to change PCD salt value to
@@ -156,7 +156,7 @@ class Module1 {
     }
 
     /**
-     * @brief Add a background sequence to the list
+     *  Add a background sequence to the list
      *
      * @param sequence_path file path to background sequence file
      */
@@ -165,7 +165,7 @@ class Module1 {
     }
 
     /**
-     * @brief Remove a background sequence from the list
+     *  Remove a background sequence from the list
      *
      * @param sequence_path file path to background sequence file
      */
@@ -174,7 +174,7 @@ class Module1 {
     }
 
     /**
-     * @brief Get a target region identifier, if applicable
+     *  Get a target region identifier, if applicable
      *
      * @param label label of the target region
      */
@@ -187,7 +187,7 @@ class Module1 {
     }
 
     /**
-     * @brief Add a new target region identifier
+     * Add a new target region identifier
      *
      * @param label Label of the target region
      * @param sequence Neucleotide sequence
@@ -219,7 +219,7 @@ class Module1 {
     }
 
     /**
-     * @brief Remove a target region identifier
+     *  Remove a target region identifier
      *
      * @param label Label of the target region
      *
@@ -237,7 +237,7 @@ class Module1 {
     }
 
     /**
-     * @brief Alter a target region identifier
+     *  Alter a target region identifier
      *
      * @param label Label of the target region
      * @param sequence Neucleotide sequence
@@ -293,7 +293,7 @@ for(let i = 0; i < pcr_salts_inputs.length; i++) {
 
 
 /**
- * @brief Set up the background sequence list. Add a click remove event listener
+ *  Set up the background sequence list. Add a click remove event listener
  *        on each background sequence.
  */
 function updateBackgroundSequences() {
@@ -328,7 +328,7 @@ background_seq_fp.addEventListener('change', function() {
 
 
 /**
- * @brief Remove a target region from the list in the DOM
+ *  Remove a target region from the list in the DOM
  */
 function removeTargetRegionIdentifier(identifier) {
     if(!state.removeTargetRegionIdentifier(identifier)) {
@@ -350,7 +350,7 @@ function removeTargetRegionIdentifier(identifier) {
 
 
 /**
- * @brief Add a new target region identifier to the list on the DOM
+ *  Add a new target region identifier to the list on the DOM
  *
  * @param identifier_label
  * @param sequence
@@ -572,8 +572,8 @@ function addNewTargetRegionIdentifier(identifier_label, sequence, target_start=n
 
 
 /**
- * @brief search the target sequence identifiers for any matches, and highlight
- *        any hits
+ * search the target sequence identifiers for any matches, and highlight
+ * any hits
  *
  * @param search_str string to search both the labels and FASTA sequences
  */
@@ -695,6 +695,11 @@ bulk_upload.addEventListener('change', function() {
 });
 
 
+/**
+ * Parse and add incomming metadata to appropriate target region identifiers
+ *
+ * @listens change
+ */
 metadata_upload.addEventListener('change', function() {
     console.log('new metadata');
 
@@ -759,43 +764,73 @@ metadata_upload.addEventListener('change', function() {
 
 
 /**
- * @brief helper function for sending IPC messages
+ * helper function for sending IPC messages
+ *
+ * @param channel IPC channel
+ * @param message payload
  */
 function sendMessage(channel, message) {
     ipcRenderer.send(channel, message);
 }
 
 
+/**
+ * Listen for incoming searched
+ *
+ * @listens change
+ */
 search_box.addEventListener('change', function() {
     search(search_box.value);
-    console.log("searching for "+search_box.value)
+    console.log("searching for " + search_box.value);
 });
 
 
+/**
+ * Listen for loading module 2
+ *
+ * @listens click
+ */
 module_2.addEventListener('click', function() {
     sendMessage('LOADMODULE', 2);
     console.log('attempting to load module 2');
 });
 
 
+/**
+ * Listen for loading module 3
+ *
+ * @listens click
+ */
 module_3.addEventListener('click', function() {
     sendMessage('LOADMODULE', 3);
     console.log('attempting to load module 3');
 });
 
 
+/**
+ * Execute the primacy module on the command line
+ *
+ * @listens click
+ */
 execute.addEventListener('click', function() {
     sendMessage('EXECUTE', ['primacy primer-collection', JSON.stringify(state.toJSON())]);
     console.log('attempting execution');
 })
 
 
+/**
+ * Load the next module
+ *
+ * @listens click
+ */
 submit.addEventListener('click', function() {
     sendMessage('LOADMODULE', 2);
     console.log('attempting execution');
 })
 
-// Intercept NEW message and bootstrap the page
+/**
+ * Intercept NEW message and bootstrap the page
+ */
 ipcRenderer.on('NEW', (event, arg) => {
     console.log("NEW Recieved:");
     state = new Module1(JSON.parse(arg));
@@ -814,7 +849,9 @@ ipcRenderer.on('EXECUTE', (event, arg) => {
 });
 
 
-// Intercept module load denials
+/**
+ * Intercept module load denials
+ */
 ipcRenderer.on('LOADMODULE', (event, arg) => {
     console.log('Module load denied');
     submit.style.borderColor = "red";
@@ -825,7 +862,9 @@ ipcRenderer.on('LOADMODULE', (event, arg) => {
 });
 
 
-// Clean init of state if nothing to bootstrap from
+/**
+ * Clean init of state if nothing to bootstrap from
+ */
 if(!state) {
     state = new Module1();
     submit.style.display = 'none';
