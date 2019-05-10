@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "docs": "jsdoc -r main.js src/js -d docs/",
     "dist": "build -mwl",
     "pack": "build --dir"
   },
@@ -12,7 +13,8 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "electron": "^3.1.6",
-    "electron-react-devtools": "^0.5.3"
+    "electron-react-devtools": "^0.5.3",
+    "jsdoc": "^3.6.1"
   },
   "dependencies": {
     "electron-tabs": "^0.9.4",

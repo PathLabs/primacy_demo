@@ -1,12 +1,13 @@
 /**
- * Desc: Listens to replys from main.js
+ * @file module2.js
+ *
+ * Listens to replys from main.js
  * Acts as a Library of helper functions for executing primacy pipeline commands
  *
- * Authors:
- *      - Austin Kelly <ak678@nau.edu>
- *      - Chance Nelson <chance-nelson@nau.edu>
- *      - Alex Lacy <al2428@nau.edu>
+ * @author Turan Naimey <TuranNaimey@nau.edu>
+ * @author Chance Nelson <chance-nelson@nau.edu>
  */
+
 const os            = require('os');
 const {ipcRenderer} = require('electron');
 
@@ -52,17 +53,37 @@ const degenerateCheckbox = document.getElementById('degenerate-checkbox');
 
 var state = {primer_scores: {}};
 
-
+/**
+ * Update an HTML slider to a avlue
+ *
+ * @param sliderId HTML ID of slider element
+ * @param val value to set
+ */
 function updateSlider(sliderId, val){
   var slider = document.getElementById(sliderId);
   slider.value = val;
 }
 
+
+/**
+ * Update an HTML integer input box
+ *
+ * @param boxId HTML ID of box
+ * @param val value to set
+ */
 function updateBox(boxId, val){
   var box = document.getElementById(boxId);
   box.value = val;
 }
 
+
+/**
+ * Update an HTML checkbox
+ *
+ * @param sliderId HTML ID of slider
+ * @param boxId HTML ID of box
+ * @param checkBocId HTML id of checkbox
+ */
 function checkBoxUpdate(sliderId, boxId, checkBoxId){
   var checkbox = document.getElementById(checkBoxId);
   var slider = document.getElementById(sliderId);
@@ -78,11 +99,23 @@ function checkBoxUpdate(sliderId, boxId, checkBoxId){
   }
 }
 
+
+/**
+ * Send an IPC message to the back end
+ *
+ * @param channel IPC channel to send (EXECUTE, LOADMODULE, LOADVIZ, etc)
+ * @param message Payload. Normally a stringified JSON object or array
+ */
 function sendMessage(channel, message){
   ipcRenderer.send(channel, message);
 }
 
 
+/**
+ * Initialize the page
+ *
+ * @param json JSON object indicating current/past page state
+ */
 function init(json) {
     state = json;
 
@@ -180,11 +213,6 @@ function init(json) {
       degenerateBox.value = 1;
 
     }
-
-
-
-
-
 }
 
 tmOptSlider.addEventListener('change', function(){
