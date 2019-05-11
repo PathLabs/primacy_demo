@@ -1,16 +1,20 @@
 {
   "name": "primacy_gui",
-  "version": "0.0.1",
-  "description": "This is a demo for the Primacy GUI which will be later implemented with complete functionality. The goal of this demo is to showcase the capabilities of Electron JS and also give our client a good idea of how the completed product might look. ",
+  "version": "1.0.0",
+  "description": "GUI front end for the Primacy pipeline",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "docs": "jsdoc -r main.js src/js -d docs/",
+    "dist": "build -mwl",
+    "pack": "build --dir"
   },
   "author": "Turan Naimey, Austin Kelly, Chance Nelson, Alex Lacy",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "electron": "^3.1.6",
-    "electron-react-devtools": "^0.5.3"
+    "electron-react-devtools": "^0.5.3",
+    "jsdoc": "^3.6.1"
   },
   "dependencies": {
     "electron-tabs": "^0.9.4",
@@ -20,7 +24,22 @@
   },
   "build": {
     "win": {
-      "icon": "src/img/favicon.ico"
+      "target": "portable"
+    },
+    "linux": {},
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
     }
   }
 }

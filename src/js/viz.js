@@ -118,6 +118,7 @@ function parse_data(direction, field) {
 */
 function deleteRow(r) {
   var i = r.parentNode.parentNode.rowIndex;
+  delete selected_labels[r.parentNode.parentNode.id.replace('trow','')];
   table.deleteRow(i);
 }
 
@@ -243,7 +244,6 @@ function create_viz_spec(direction, field, div) {
         else {
           var value = selected_labels[d.text];
           selected_labels[d.text] = value + 1;
-
 
           var tr_to_update = document.getElementById(d.text + 'trow');
           tr_to_update.cells[1].innerHTML = selected_labels[d.text];

@@ -1,6 +1,7 @@
 /**
- * Desc: Main file for controlling window rendering and backend pipeline communication.
+ * @file main.js
  *
+ * Main file for controlling window rendering and backend pipeline communication.
  * Authors:
  *      - Chance Nelson <chance-nelson@nau.edu>
  *      - Austin Kelly <ak678@nau.edu>
@@ -29,8 +30,15 @@ let viz;
 let pid = process.pid;
 
 // create a run prefix directory
-let prefix = __dirname + '/pipeline/' + pid.toString();
+let prefix = require('os').tmpdir() + '/pipeline/';
+try {
+    fs.mkdirSync(prefix);
+} catch(err) {}
+
+prefix = require('os').tmpdir() + '/pipeline/' + pid.toString();
+try {
 fs.mkdirSync(prefix);
+} catch(err) {}
 
 var current_json = {};
 var visited_modules  = {
@@ -53,12 +61,11 @@ var visited_modules  = {
 };
 var current_module   = 1;
 
-
+/**
+ * Create the initial window, and set the close handler
+ */
 function initial() {
-    /**
-     * Desc: Create the initial window, and set the close handler
-     */
-    // Create the browser window.
+     // Create the browser window.
     win = new BrowserWindow({width: 1024, height:768, backgroundColor: '#000'});
 
     // and load the index.html of the app.
@@ -86,18 +93,14 @@ function initial() {
     });
 }
 
+/**
+ *  Load and render a module page
+ *
+ * @param module_number module number to load. Also affects which html file is loaded.
+ *
+ * @return If there is a problem rendering the page, False. Else, True.
+ */
 function goToModule(module_number) {
-    /**
-    * Desc: Load and render a module page
-    *
-    * Args:
-    *      module_number (int): module number to load. Also affects which html file is loaded.
-    *
-    * Returns:
-    *      - If there is a problem rendering the page, False.
-    *      - Else, True.
-    */
-
     let response = 0;
 
     const options = {
@@ -141,19 +144,16 @@ function goToModule(module_number) {
 }
 
 
+/**
+ * Execute a pipeline command with some arguments.
+ *
+ * @param cmd (string): name of the pipeline script to call
+ * @param args (JSON): JSON object of what to throw at the command
+ * @param callback (function (res)): callback function to get result, see Returns
+ *
+ * @return If pipeline returns an error string, return the error string. Else, return null
+ */
 function execPipeline(cmd, args, callback) {
-    /**
-     * Desc: Execute a pipeline command with some arguments.
-     *
-     * Args:
-     *      cmd (string): name of the pipeline script to call
-     *      args (JSON): JSON object of what to throw at the command
-     *      callback (function (res)): callback function to get result, see Returns
-     *
-     * Returns:
-     *      - If pipeline returns an error string, return the error string
-     *      - Else, return null
-     */
     args_json = JSON.parse(args);
 
     // Merge current args into current json
@@ -184,9 +184,6 @@ function execPipeline(cmd, args, callback) {
         }
     }
 
-    console.log("checking most forward exec");
-    console.log(most_forward_exec, current_module);
-
     if(most_forward_exec > current_module) {
         response = require('electron').dialog.showMessageBox(null, options,(response) => {
             if (response != 0){
@@ -196,13 +193,10 @@ function execPipeline(cmd, args, callback) {
             // Upon execution, purge the current args of any information for future
             // modules. We won't need them, since we're rerunning a previous segment
             // Also, reset the state information in visited_modules to match
-            console.log("processing cmd:", cmd);
             switch(cmd) {
                 case 'primacy primer-collection':
                     delete current_json['primer_scores'];
                     delete current_json['set_optimization'];
-                    console.log('remove arguments:');
-                    console.log(args)
                     visited_modules = {
                         1: {
                             'visited': true,
@@ -261,8 +255,6 @@ function execPipeline(cmd, args, callback) {
             // Read back in file
             data = fs.readFileSync(prefix + '/args.json', 'utf-8');
 
-            console.log(data.toString());
-
             current_json = JSON.parse(data.toString());
 
             visited_modules[current_module]['executed'] = true;
@@ -272,19 +264,27 @@ function execPipeline(cmd, args, callback) {
     }
 }
 
+
+/**
+ *  force an update to the current pipeline state in the JSON args
+ *
+ * @param new_args JSON object containing the new arguments
+ */
 function updateArgs(new_args) {
     let new_args_json = JSON.parse(new_args);
-    console.log(new_args_json);
 
     for(key in new_args_json) {
-        console.log(key)
         current_json[key] = new_args_json[key];
     }
-
-    console.log(current_json)
 }
 
-function showViz(viz_num) {
+/**
+ *  Create a new window for, and display a vix
+ *
+ * @param viz_num integer for what viz to load (1, 2, 3)
+ */
+function showViz(viz_num) { 
+
     switch(viz_num) {
         case 1:
             if(!visited_modules[1].executed) return false;
@@ -312,7 +312,7 @@ function showViz(viz_num) {
 
 
 /**
- * @brief create a save of the current pipeline state
+ * create a save of the current pipeline state
  *
  * @param save_state_path file path to the tarball to save
  */
@@ -329,7 +329,7 @@ function createSaveState(save_state_path) {
 
 
 /**
- * @brief load a save state into the current pipeline state
+ * load a save state into the current pipeline state
  *
  * @param save_state_path file path to the saved tarball
  */
