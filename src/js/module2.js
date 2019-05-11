@@ -51,6 +51,10 @@ const degenerateSlider = document.getElementById('degenerate-slider');
 const degenerateBox = document.getElementById('degenerate-box');
 const degenerateCheckbox = document.getElementById('degenerate-checkbox');
 
+const nextModule = document.getElementById('nextModule');
+const execute = document.getElementById('execute');
+const loading_logo = document.getElementById('loading_logo');
+
 var state = {primer_scores: {}};
 
 /**
@@ -392,18 +396,31 @@ nextModule.addEventListener('click', function () {
     }
 });
 
+execute.addEventListener('click', function () {
+    try {
+        json_string = JSON.stringify(state);
+        sendMessage('EXECUTE', ['primacy primer-score', json_string]);
+
+        console.log("message sent");
+    } catch(e) {
+        console.log(e);
+    }
+});
+
 //listening
 ipcRenderer.on('EXECUTE', (event, arg) =>{
     if(arg != null){
         console.log("error received");
     } else {
         console.log("sending load message");
+        loading_logo.style.visibility = 'visible';
         sendMessage('LOADMODULE', 3);
     }
 });
 
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
+    loading_logo.style.visibility = 'invisible';
     console.log(arg);
     init(JSON.parse(arg));
 });

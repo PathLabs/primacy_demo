@@ -668,13 +668,18 @@ input[type="range"]::-webkit-slider-thumb:hover {
 #loading_logo {
   height: 250px;
   width: 250px;
-  position: sticky;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -100px;
   -webkit-animation: spin 2s infinite;
   animation: spin 2s infinite;
   background-color: white;
   border-radius: 50%;
   border: 2px solid #000010;
   padding: 10px;
+  visibility: hidden;
 }
 
 @-webkit-keyframes spin {

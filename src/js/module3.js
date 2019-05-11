@@ -61,6 +61,8 @@ const target_distance     = document.getElementById("targetDistance");
 const target_dist_check   = document.getElementById("targetDistanceCheck");
 const target_distance_row = document.getElementById("targetDistanceRow");
 
+const loading_logo        = document.getElementById("loading_logo");
+
 
 // Current module state
 var state = null;
@@ -524,6 +526,7 @@ ipcRenderer.on('EXECUTE', (event, arg) =>{
 
 ipcRenderer.on('NEW', (event, arg) =>{
     console.log("NEW received");
+    loading_logo.style.visibility = 'invisible';
     state = new Module3(JSON.parse(arg));
 });
 
@@ -534,11 +537,13 @@ ipcRenderer.on('LOADMODULE', (event, arg) =>{
 //loads tab on click
 module1.addEventListener('click', function (){
     console.log("click");
+    loading_logo.style.visibility = 'visible';
     sendMessage('LOADMODULE', 1);
 });
 
 module2.addEventListener('click', function (){
     console.log("click");
+    loading_logo.style.visibility = 'visible';
     sendMessage('LOADMODULE', 2);
 });
 
